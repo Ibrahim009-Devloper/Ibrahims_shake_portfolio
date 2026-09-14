@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        /* Always open the website in dark mode. Reset any prior light mode selection */
+        (function() {
+            try {
+                localStorage.setItem('ibrahim-theme', 'dark');
+            } catch (e) {}
+            document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
+    <title>MD. Ibrahim Shake Shuvo | B2B Lead Generation & Web Scraping Specialist</title>
+    <meta name="description" content="B2B lead generation, web research, Google Maps lead generation, web scraping, and structured business data collection using Python, Playwright, and Selenium." />
+    <meta property="og:title" content="MD. Ibrahim Shake Shuvo | B2B Lead Generation & Web Scraping Specialist" />
+    <meta property="og:description" content="B2B lead generation, web research, Google Maps lead generation, web scraping, and structured business data collection using Python, Playwright, and Selenium." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css?v=2" />
+</head>
+
+<body>
+
+    <!-- ── NAVIGATION ── -->
+    <nav id="nav" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <span class="nav-logo-status" title="Available for projects"></span>
+                <span>MD. Ibrahim Shake Shuvo</span>
+            </a>
+            <div class="nav-actions">
+                <ul class="nav-links" role="list">
+                    <li><a href="#work"><span>Work</span></a></li>
+                    <li><a href="#leads-samples" id="nav-link-leads-samples"><span>Leads Sample</span></a></li>
+                    <li><a href="#motion"><span>Pipeline</span></a></li>
+                    <li><a href="#personal"><span>Services</span></a></li>
+                    <li><a href="#about"><span>About</span></a></li>
+                    <li><a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span></a></li>
+                    <li><a href="#contact" class="nav-cta"><span>Let's Talk</span> <span class="nav-cta-arrow" aria-hidden="true">→</span></a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M20.6 15A8.7 8.7 0 0 1 9 3.4 7.4 7.4 0 1 0 20.6 15Z" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4.1" />
+                        <path d="M12 2.8v2M12 19.2v2M4.8 12h-2M21.2 12h-2M6.9 6.9 5.5 5.5M18.5 18.5l-1.4-1.4M17.1 6.9l1.4-1.4M5.5 18.5l1.4-1.4" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── PORTFOLIO MAIN VIEW ── -->
+    <div id="portfolio-main-view">
+    <!-- ── HERO SECTION ── -->
+    <section id="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <p class="hero-badge">
+                    <span class="hero-badge-role">B2B Lead Generation</span>
+                    <span class="hero-badge-at">&amp;</span>
+                    <span class="hero-badge-role">Web Scraping</span>
+                    <span class="hero-badge-loc">Dhaka, Bangladesh</span>
+                </p>
+
+                <h1 class="hero-h1">
+                    <span class="hero-h1-line">Turning raw web data</span>
+                    <span class="hero-h1-line">into <span class="hero-mark">qualified leads<svg class="hero-mark-stroke" viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" vector-effect="non-scaling-stroke" d="M4 11.4c36-6.4 89-8.6 137-5.9 26 1.5 51 4.4 75 8.1" /></svg></span></span>
+                </h1>
+
+                <p class="hero-lead">
+                    Specialist in building targeted prospect lists, scraping local business directories, and delivering clean, ready-to-use B2B datasets powered by Python, Playwright, and Selenium.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="hero-cta hero-cta--samples" id="hero-btn-leads-sample" href="#leads-samples" aria-label="Explore verified Leads Sample datasets">
+                        <svg class="hero-sample-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>Leads Sample</span>
+                        <span class="hero-cta-arrow" aria-hidden="true">→</span>
+                    </a>
+                    <a class="hero-cta hero-cta--quiet" href="#contact">Get a custom lead list</a>
+                    <a class="hero-cta hero-cta--linkedin" href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" aria-label="See LinkedIn profile of MD. Ibrahim Shake Shuvo">
+                        <svg class="hero-linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45c-.9 0-1.63.73-1.63 1.63 0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63Z" />
+                        </svg>
+                        <span>See LinkedIn</span>
+                        <span class="hero-linkedin-arrow" aria-hidden="true">↗</span>
+                    </a>
+                </div>
+
+                <p class="hero-proof">
+                    <strong>Zero-bounce deliverability</strong> · Deduplicated records · Custom business fields
+                </p>
+            </div>
+
+            <!-- Gemini Generated Photo Interactive Puzzle Playground -->
+            <div class="hero-playground">
+                <div class="playground">
+                    <div class="puzzle-wrap" id="puzzle-wrap">
+                        <div class="puzzle-peek" aria-hidden="true"></div>
+                        <div class="puzzle-grid" id="puzzle-grid" role="group" aria-label="Interactive profile puzzle. Click or drag a piece onto another to swap."></div>
+                        <p class="playground-hint" id="puzzle-hint">
+                            <span>click to solve</span>
+                            <svg viewBox="0 0 82 42" aria-hidden="true">
+                                <path d="M4 7c22 0 42 8 58 24" />
+                                <path d="m55 29 9 3-2-9" />
+                            </svg>
+                        </p>
+                        <p class="puzzle-done" aria-hidden="true"><span>scroll to see work ↓</span></p>
+                    </div>
+                </div>
+                <div class="puzzle-chips" role="group" aria-label="Puzzle controls">
+                    <button class="pz-chip" id="puzzle-peek-btn" type="button" aria-pressed="false" aria-label="Show original photo">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+                            <circle cx="12" cy="12" r="3.1" />
+                        </svg>
+                        <span>Peek</span>
+                    </button>
+                    <button class="pz-chip" id="puzzle-shuffle" type="button" aria-label="Shuffle pieces">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 7h3.6c1 0 2 .5 2.6 1.4l5.6 7.2c.6.9 1.6 1.4 2.6 1.4H21" />
+                            <path d="M3 17h3.6c1 0 2-.5 2.6-1.4l1.5-1.9" />
+                            <path d="M14.2 9.7l.6-.8c.6-.9 1.6-1.4 2.6-1.4H21" />
+                            <path d="m18.4 4.6 2.6 2.5-2.6 2.5" />
+                            <path d="m18.4 14.4 2.6 2.6-2.6 2.5" />
+                        </svg>
+                        <span>Shuffle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CAPABILITIES STRIP ── -->
+    <div class="capabilities-strip">
+        <div class="strip-inner">
+            <div class="strip-item"><span class="strip-dot"></span> B2B Lead Generation</div>
+            <div class="strip-item"><span class="strip-dot"></span> Web Research</div>
+            <div class="strip-item"><span class="strip-dot"></span> Google Maps Extraction</div>
+            <div class="strip-item"><span class="strip-dot"></span> Web Scraping (Python / Playwright)</div>
+            <div class="strip-item"><span class="strip-dot"></span> Data Cleaning &amp; Deduplication</div>
+        </div>
+    </div>
+
+    <!-- ── WORK / SELECTED PROJECTS ── -->
+    <section id="work">
+        <div class="section-inner">
+            <p class="section-eyebrow reveal">Selected Work</p>
+            <p class="work-intro reveal">
+                High-intent prospect datasets, localized business directory extractions, and automated scrapers tailored for sales teams, marketing agencies, and founders.
+            </p>
+        </div>
+
+        <div class="project-list">
+
+            <!-- Project 1 -->
+            <div class="project-card reveal" data-case-study="b2b-leads" role="button" tabindex="0">
+                <div class="project-visual">
+                    <img class="project-visual-media" src="/assets/b2b_lead_gen_graphic.jpg" alt="High-Quality B2B Leads for Your Business Growth - Targeted Leads from LinkedIn, Google Maps, Yelp, Apollo, Bing delivered in Excel and CSV" loading="lazy" referrerPolicy="no-referrer" />
+                </div>
+                <div class="project-body">
+                    <div class="project-copy">
+                        <p class="project-meta">B2B Lead Generation · Decision Makers · 2026</p>
+                        <h2 class="project-title">Targeted B2B Decision-Maker Prospect List for Outbound Sales</h2>
+                        <p class="project-summary">
+                            Researched, verified, and structured high-intent decision-makers across B2B technology companies. Every email address is verified via SMTP ping to eliminate campaign bounces.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="project-metric">100% Deliverable</span>
+                            <span class="project-metric">Zero Duplicates</span>
+                            <span class="project-metric">Verified Work Emails</span>
+                            <span class="project-metric">Excel &amp; CSV</span>
+                        </div>
+                    </div>
+                    <span class="project-cta">Read Case Study</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card reveal" data-case-study="gmaps-leads" role="button" tabindex="0">
+                <div class="project-visual">
+                    <img class="project-visual-media" src="/assets/gmaps_scraping.jpg" alt="Google Maps Commercial Directory Scraping with Playwright" loading="lazy" />
+                </div>
+                <div class="project-body">
+                    <div class="project-copy">
+                        <p class="project-meta">Google Maps Research · Python &amp; Playwright · 2026</p>
+                        <h2 class="project-title">Automated Google Maps Local Business Directory Extraction</h2>
+                        <p class="project-summary">
+                            Deployed headless browser automation using Playwright to extract localized company profiles, phone numbers, ratings, and websites across commercial metropolitan centers.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="project-metric">Phone &amp; Address</span>
+                            <span class="project-metric">Rating &amp; Reviews</span>
+                            <span class="project-metric">Website &amp; Socials</span>
+                            <span class="project-metric">Playwright Automation</span>
+                        </div>
+                    </div>
+                    <span class="project-cta">Read Case Study</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card reveal" data-case-study="ecommerce-scraping" role="button" tabindex="0">
+                <div class="project-body">
+                    <div class="project-copy">
+                        <p class="project-meta">Web Scraping · Selenium &amp; Python · 2026</p>
+                        <h2 class="project-title">E-commerce Multi-Category Catalog &amp; Pricing Extraction</h2>
+                        <p class="project-summary">
+                            Automated deep pagination across dynamic JavaScript pages to scrape thousands of product SKUs, regular and discounted pricing, availability flags, and category hierarchies.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="project-metric">Dynamic JS Rendering</span>
+                            <span class="project-metric">Nested Category Paths</span>
+                            <span class="project-metric">Clean Schema</span>
+                            <span class="project-metric">Structured JSON</span>
+                        </div>
+                    </div>
+                    <span class="project-cta">Read Case Study</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── AUTOMATION PIPELINE (DARK BENTO) ── -->
+    <section id="motion">
+        <div class="section-inner">
+            <p class="section-eyebrow-light reveal">Automation &amp; Tooling</p>
+            <h2 class="motion-headline reveal">Robust Pipelines Built for Scale</h2>
+
+            <div class="motion-bento">
+                <!-- Tile 1: Python Scraper Engine -->
+                <div class="motion-card mc-tile--tall reveal">
+                    <div>
+                        <span class="mc-chip">Python Automation</span>
+                        <h3 class="mc-title">Custom Scraper Engine</h3>
+                        <p class="mc-sub">
+                            Custom scripts utilizing Playwright and Selenium to bypass bot detection, handle dynamic JavaScript hydration, and extract clean datasets at high speeds.
+                        </p>
+                    </div>
+                    <div class="mc-code-box">
+                        <span style="color:#64748b"># Python Extraction Loop</span><br/>
+                        async with async_playwright() as p:<br/>
+                        &nbsp;&nbsp;browser = await p.chromium.launch()<br/>
+                        &nbsp;&nbsp;page = await browser.new_page()<br/>
+                        &nbsp;&nbsp;await page.goto(target_url)<br/>
+                        &nbsp;&nbsp;leads = await parse_dom(page)<br/>
+                        &nbsp;&nbsp;clean_leads = dedupe(leads)
+                    </div>
+                </div>
+
+                <!-- Tile 2: Data Cleaning & Normalization -->
+                <div class="motion-card reveal">
+                    <span class="mc-chip">Quality Control</span>
+                    <h3 class="mc-title">Data Cleaning &amp; Deduplication</h3>
+                    <p class="mc-sub">
+                        Strict deduplication by domain and company name, standardizing phone numbers to international E.164 formats, and validating email syntax against live mail exchange records.
+                    </p>
+                </div>
+
+                <!-- Tile 3: Google Maps Specialist -->
+                <div class="motion-card reveal">
+                    <span class="mc-chip">Local Intelligence</span>
+                    <h3 class="mc-title">Google Maps Extraction</h3>
+                    <p class="mc-sub">
+                        Deep parsing of local business listings across specific regions, cities, and zip codes to discover direct phone numbers, business hours, and operational status.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SERVICES & METHODOLOGIES ── -->
+    <section id="personal">
+        <div class="section-inner">
+            <div class="pw-stack">
+                <section class="pw-group reveal">
+                    <header class="pw-group-head">
+                        <p class="pw-group-label">Core Specializations</p>
+                    </header>
+                    <div class="pw-board">
+                        <div class="pw-pin">
+                            <h3 class="pw-pin-title">B2B Lead Generation</h3>
+                            <p class="pw-pin-desc">Identifying ideal prospect accounts and high-intent decision-makers matched to your ICP criteria.</p>
+                            <p class="pw-pin-tags">Verified Emails · Targeted Personas · Zero Bounces</p>
+                        </div>
+
+                        <div class="pw-pin">
+                            <h3 class="pw-pin-title">Business &amp; Prospect List Building</h3>
+                            <p class="pw-pin-desc">Structured, organized contact lists tailored for cold email campaigns, outbound SDRs, and CRM imports.</p>
+                            <p class="pw-pin-tags">Custom Fields · Verified Contacts · CRM-Ready</p>
+                        </div>
+
+                        <div class="pw-pin">
+                            <h3 class="pw-pin-title">Web Research</h3>
+                            <p class="pw-pin-desc">In-depth manual and automated web research to collect accurate company data, competitor pricing, and market intelligence.</p>
+                            <p class="pw-pin-tags">Market Research · Competitor Pricing · Directory Mining</p>
+                        </div>
+
+                        <div class="pw-pin">
+                            <h3 class="pw-pin-title">Google Maps Lead Generation</h3>
+                            <p class="pw-pin-desc">Automated extraction of local service businesses, clinics, retail stores, and commercial venues across target areas.</p>
+                            <p class="pw-pin-tags">Local SEO · Phone Numbers · Ratings &amp; Reviews</p>
+                        </div>
+
+                        <div class="pw-pin">
+                            <h3 class="pw-pin-title">Web Scraping &amp; Data Extraction</h3>
+                            <p class="pw-pin-desc">Extracting data from directories, marketplaces, and websites using Python, Playwright, and Selenium.</p>
+                            <p class="pw-pin-tags">Python · Playwright · Selenium · Structured Output</p>
+                        </div>
+
+                        <div class="pw-pin">
+                            <h3 class="pw-pin-title">Data Cleaning &amp; Organization</h3>
+                            <p class="pw-pin-desc">Deduplication, formatting, phone number normalization, and verification into clean, readable Excel / CSV files.</p>
+                            <p class="pw-pin-tags">Deduplication · E.164 Formatting · Excel / CSV</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Professional Philosophy Quote Card -->
+                <section class="pw-group reveal">
+                    <div class="pw-pin-media--quote">
+                        <p class="pw-pin-quote">
+                            "Clean, verified data is the foundation of high-converting outbound sales. We eliminate bounce rates and bad contacts before they reach your CRM."
+                        </p>
+                        <p class="pw-pin-quote-author">MD. Ibrahim Shake Shuvo · Lead Generation &amp; Scraping Specialist</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ABOUT & BACKGROUND ── -->
+    <section id="about">
+        <div class="section-inner">
+            <p class="section-eyebrow reveal">About Me</p>
+            <div class="about-card reveal">
+                <p class="about-text">
+                    I help businesses collect targeted business and prospect data through web research, scraping, and structured data collection. I focus on delivering clean, organized, and practical datasets that can support sales and marketing research without bloated fluff or unverified contacts.
+                </p>
+                <div class="about-education">
+                    <div>
+                        <p class="about-degree">Diploma in Agriculture</p>
+                        <p class="about-inst">Agriculture Training Institute, Gaibandha</p>
+                    </div>
+                    <span class="about-year">2019 – 2023</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT SECTION ── -->
+    <section id="contact">
+        <div class="section-inner">
+            <p class="section-eyebrow reveal">Get In Touch</p>
+            <h2 class="personal-headline reveal">Let's Discuss Your Data Needs</h2>
+            <p class="personal-sub reveal">
+                Tell me about your target audience, required data fields, or the website you need extracted. I typically reply within 12 hours.
+            </p>
+
+            <div class="contact-grid reveal">
+                <div>
+                    <h3 style="font-size:18px; font-weight:700; color:var(--ink); margin-bottom:12px;">Contact Information</h3>
+                    <p style="font-size:14px; color:var(--ink-2); line-height:1.6;">
+                        Direct channels for quotes, sample requests, and project consultations.
+                    </p>
+                    <div class="contact-info-list">
+                        <!-- Email Card -->
+                        <a href="mailto:ibrahimshakeshuvo100@gmail.com" class="contact-info-card" id="contact-email-card" aria-label="Send email to ibrahimshakeshuvo100@gmail.com">
+                            <div class="contact-card-icon contact-card-icon--email">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <span class="contact-card-label">Email</span>
+                                <span class="contact-card-val">ibrahimshakeshuvo100@gmail.com</span>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <!-- LinkedIn Card (Don't show link, opens LinkedIn on click) -->
+                        <a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-linkedin-card" aria-label="Connect on LinkedIn with MD. Ibrahim Shake Shuvo">
+                            <div class="contact-card-icon contact-card-icon--linkedin">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <span class="contact-card-label">LinkedIn</span>
+                                <span class="contact-card-val">MD. Ibrahim Shake Shuvo</span>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <!-- WhatsApp Card -->
+                        <a href="https://wa.me/8801744868938" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-whatsapp-card" aria-label="Chat on WhatsApp with MD. Ibrahim Shake Shuvo at 01744868938">
+                            <div class="contact-card-icon contact-card-icon--whatsapp">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.01 2.58.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.16-.48-.28Z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <span class="contact-card-label">WhatsApp</span>
+                                <span class="contact-card-val">+880 1744-868938 (BD)</span>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <!-- GitHub Card -->
+                        <a href="https://github.com/Ibrahim009-Devloper" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-github-card" aria-label="Visit GitHub profile of Ibrahim009-Devloper">
+                            <div class="contact-card-icon contact-card-icon--github">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <span class="contact-card-label">GitHub</span>
+                                <span class="contact-card-val">Ibrahim009-Devloper</span>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <!-- Facebook Card -->
+                        <a href="https://www.facebook.com/profile.php?id=61588549130311" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-facebook-card" aria-label="Visit Facebook profile of MD. Ibrahim Shake Shuvo">
+                            <div class="contact-card-icon contact-card-icon--facebook">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12Z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <span class="contact-card-label">Facebook</span>
+                                <span class="contact-card-val">MD. Ibrahim Shake Shuvo</span>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <!-- Location Card -->
+                        <div class="contact-info-card" id="contact-location-card">
+                            <div class="contact-card-icon contact-card-icon--location">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-text">
+                                <span class="contact-card-label">Location</span>
+                                <span class="contact-card-val">Dhaka, Bangladesh (Serving Global Clients)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label class="form-label" for="form-name">Your Name / Company</label>
+                        <input type="text" id="form-name" class="form-input" placeholder="e.g. David Vance, Acme Media" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="form-email">Work Email</label>
+                        <input type="email" id="form-email" class="form-input" placeholder="e.g. david@acmemedia.com" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="form-type">Service Required</label>
+                        <select id="form-type" class="form-select">
+                            <option value="B2B Lead Generation">B2B Lead Generation</option>
+                            <option value="Google Maps Lead Extraction">Google Maps Lead Extraction</option>
+                            <option value="Web Scraping & Extraction">Web Scraping &amp; Extraction</option>
+                            <option value="Business & Prospect List Building">Business &amp; Prospect List Building</option>
+                            <option value="Data Cleaning & Deduplication">Data Cleaning &amp; Deduplication</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="form-message">Project Description</label>
+                        <textarea id="form-message" class="form-textarea" rows="4" placeholder="Describe your target niche, location, fields required, or target site URL..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Send Inquiry</button>
+                    <p id="form-status" style="font-size:12.5px; margin-top:4px;"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer id="footer">
+        <div class="section-inner">
+            <div class="footer-top">
+                <a href="#hero" class="footer-name">MD. Ibrahim Shake Shuvo</a>
+                <nav class="footer-nav">
+                    <a href="#hero">Home</a>
+                    <a href="#work">Work</a>
+                    <a href="#leads-samples">Leads Sample</a>
+                    <a href="#personal">Services</a>
+                    <a href="#about">About</a>
+                    <a href="mailto:ibrahimshakeshuvo100@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copy">© 2026 MD. Ibrahim Shake Shuvo. All rights reserved.</span>
+                <span class="footer-weather" id="footer-weather">
+                    <span class="fw-dot live" aria-hidden="true"></span>
+                    <span class="fw-city">Dhaka, Bangladesh</span>
+                    <span>·</span>
+                    <span>Available for Projects</span>
+                </span>
+            </div>
+        </div>
+    </footer>
+    </div><!-- /portfolio-main-view -->
+
+    <!-- ── LEADS SAMPLES PAGE VIEW ── -->
+    <div id="leads-samples-view" class="leads-samples-view" style="display:none;" aria-hidden="true">
+        <div class="leads-page-inner">
+            <!-- Top Controls Bar -->
+            <div class="leads-topbar">
+                <div class="leads-topbar-left">
+                    <a href="#hero" class="btn-back-portfolio" id="btn-back-portfolio">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Back to Portfolio</span>
+                    </a>
+                    <div class="leads-breadcrumb">
+                        <span>Portfolio</span>
+                        <span class="leads-breadcrumb-sep">/</span>
+                        <span class="leads-breadcrumb-current">Leads Sample</span>
+                    </div>
+                </div>
+
+                <div class="leads-topbar-right">
+                    <!-- Guest View: Admin Login Trigger -->
+                    <div id="admin-guest-bar">
+                        <button type="button" class="btn-admin-pill" id="btn-open-admin-login" aria-label="Open Admin Login">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>Admin Login</span>
+                        </button>
+                    </div>
+
+                    <!-- Authenticated Admin Bar -->
+                    <div id="admin-authenticated-bar" style="display:none;">
+                        <span class="admin-badge-indicator">
+                            <span class="admin-live-pulse" aria-hidden="true"></span>
+                            <span>Admin: MD. Ibrahim Shake Shuvo</span>
+                        </span>
+                        <button type="button" class="btn-add-sample" id="btn-open-add-sample">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span>+ Add Lead Sample</span>
+                        </button>
+                        <button type="button" class="btn-admin-logout" id="btn-admin-logout" title="Sign out of Admin Mode">
+                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Showcase Hero -->
+            <header class="leads-header">
+                <p class="leads-eyebrow">
+                    <span class="leads-eyebrow-dot" aria-hidden="true"></span>
+                    <span>Delivered Client Datasets &amp; Verified Prospect Samples</span>
+                </p>
+                <h1 class="leads-title">B2B Leads Sample Showcase</h1>
+                <p class="leads-description">
+                    Review live extracted datasets, targeted decision-maker contact lists, and directory extractions verified for zero-bounce deliverability across diverse global industries.
+                </p>
+                <div class="leads-stat-chips">
+                    <span class="leads-stat-chip">✓ 100% Zero-Bounce Guarantee</span>
+                    <span class="leads-stat-chip">✓ Verified Business Emails &amp; Direct Phone</span>
+                    <span class="leads-stat-chip">✓ Delivered in Excel (.xlsx) &amp; CSV</span>
+                    <span class="leads-stat-chip">✓ Custom Scraped with Python &amp; Playwright</span>
+                </div>
+            </header>
+
+            <!-- Search and Filter Bar -->
+            <div class="leads-controls-bar">
+                <div class="leads-search-wrap">
+                    <svg class="leads-search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="leads-search-input" class="leads-search-input" placeholder="Search by leads title, location, type, or quality..." aria-label="Search lead samples" />
+                    <button type="button" id="leads-search-clear" class="leads-search-clear" style="display:none;" aria-label="Clear search">&times;</button>
+                </div>
+
+                <div class="leads-filter-pills" id="leads-filter-pills" role="tablist" aria-label="Filter lead samples by category">
+                    <button type="button" class="filter-pill active" data-filter="all">All Types</button>
+                    <button type="button" class="filter-pill" data-filter="B2B Lead Generation">B2B Lead Gen</button>
+                    <button type="button" class="filter-pill" data-filter="Google Maps Leads">Google Maps</button>
+                    <button type="button" class="filter-pill" data-filter="LinkedIn Decision Makers">LinkedIn Leads</button>
+                    <button type="button" class="filter-pill" data-filter="Real Estate Prospecting">Real Estate</button>
+                    <button type="button" class="filter-pill" data-filter="E-Commerce & DTC Brands">E-Commerce</button>
+                    <button type="button" class="filter-pill" data-filter="Healthcare & Medical Clinics">Healthcare</button>
+                </div>
+            </div>
+
+            <!-- Active Results Status -->
+            <div class="leads-results-count">
+                <span id="leads-count-text">Showing 4 verified lead samples</span>
+                <span id="leads-admin-banner-pill" class="leads-admin-active-hint" style="display:none;">Admin editing enabled: Click "+ Add Lead Sample" or use "Edit" on cards below.</span>
+            </div>
+
+            <!-- Leads Sample Cards Grid -->
+            <div class="leads-grid" id="leads-grid">
+                <!-- Dynamically populated via main.js with fallback content -->
+            </div>
+
+            <!-- Bottom CTA Banner inside Leads Sample Page -->
+            <div class="leads-cta-banner">
+                <div class="leads-cta-content">
+                    <h3>Need a custom-scraped lead dataset for your specific market?</h3>
+                    <p>I build custom target prospect lists tailored to your exact industry, job titles, geolocations, and required data fields.</p>
+                </div>
+                <a href="#contact" class="hero-cta" id="btn-leads-order-custom">
+                    <span>Order Custom Lead List</span>
+                    <span class="hero-cta-arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── ADMIN LOGIN MODAL ── -->
+    <div class="modal-backdrop" id="admin-login-modal" role="dialog" aria-modal="true" aria-labelledby="admin-login-heading" style="display:none;">
+        <div class="modal-dialog modal-dialog--auth">
+            <button class="modal-close" id="btn-close-admin-login" type="button" aria-label="Close Admin Login">&times;</button>
+            <div class="auth-modal-header">
+                <div class="auth-badge-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h2 id="admin-login-heading" class="auth-title">Admin Sign In</h2>
+                <p class="auth-subtitle">Sign in to add, edit, or manage verified leads sample datasets.</p>
+            </div>
+
+            <form id="admin-login-form" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="admin-email-input">Admin Email</label>
+                    <input type="email" id="admin-email-input" class="form-input" value="ibrahimshakeshuvo100@gmail.com" required autocomplete="username" />
+                </div>
+
+                <div class="form-group">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <label class="form-label" for="admin-password-input" style="margin-bottom:0;">Password</label>
+                        <button type="button" id="btn-quick-fill-admin" class="btn-text-link" title="Click to quickly fill demo admin password">Quick Fill (admin123)</button>
+                    </div>
+                    <div class="password-input-wrap">
+                        <input type="password" id="admin-password-input" class="form-input" placeholder="Enter admin password" required autocomplete="current-password" />
+                        <button type="button" id="btn-toggle-password-visibility" class="btn-password-toggle" aria-label="Toggle password visibility">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="form-hint">Default password is <strong>admin123</strong> for management demonstration.</p>
+                </div>
+
+                <div id="admin-login-error" class="auth-error-msg" style="display:none;" role="alert"></div>
+
+                <div class="auth-actions">
+                    <button type="submit" class="form-submit" id="btn-submit-admin-login">Sign In to Lead Manager</button>
+                    <button type="button" class="hero-cta hero-cta--quiet" id="btn-cancel-admin-login">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ── ADD / EDIT LEAD SAMPLE MODAL ── -->
+    <div class="modal-backdrop" id="sample-editor-modal" role="dialog" aria-modal="true" aria-labelledby="sample-editor-heading" style="display:none;">
+        <div class="modal-dialog modal-dialog--editor">
+            <button class="modal-close" id="btn-close-sample-editor" type="button" aria-label="Close Sample Editor">&times;</button>
+            <div class="editor-modal-header">
+                <span class="editor-eyebrow" id="sample-editor-eyebrow">ADMIN WORKFLOW</span>
+                <h2 id="sample-editor-heading" class="editor-title">Add New Lead Sample</h2>
+                <p class="editor-subtitle">Fill in the sample details: Leads Title, Photo, Leads Type, Location, and Lead Quality.</p>
+            </div>
+
+            <form id="sample-editor-form" class="editor-form">
+                <input type="hidden" id="editor-sample-id" value="" />
+
+                <!-- 1. Leads Title -->
+                <div class="form-group">
+                    <label class="form-label" for="editor-sample-title">Leads Title <span class="required-star">*</span></label>
+                    <input type="text" id="editor-sample-title" class="form-input" placeholder="e.g., US Dental Practice Owners &amp; Clinic Directors" required />
+                    <p class="form-hint">A clear, descriptive title naming the target industry and prospect niche.</p>
+                </div>
+
+                <!-- 2. Photo (Upload or URL or Presets) -->
+                <div class="form-group">
+                    <label class="form-label">Photo / Dataset Graphic <span class="required-star">*</span></label>
+                    <div class="photo-source-tabs">
+                        <button type="button" class="photo-tab active" id="tab-photo-presets">Sample Presets</button>
+                        <button type="button" class="photo-tab" id="tab-photo-upload">Upload Image</button>
+                        <button type="button" class="photo-tab" id="tab-photo-url">Image URL</button>
+                    </div>
+
+                    <!-- Preset Options -->
+                    <div id="panel-photo-presets" class="photo-panel">
+                        <div class="photo-preset-grid">
+                            <button type="button" class="preset-choice-btn active" data-src="/assets/b2b_lead_gen_graphic.jpg">
+                                <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Lead Gen Graphic Preset" />
+                                <span>B2B Lead Graphic</span>
+                            </button>
+                            <button type="button" class="preset-choice-btn" data-src="/assets/gmaps_scraping.jpg">
+                                <img src="/assets/gmaps_scraping.jpg" alt="Google Maps Scraping Preset" />
+                                <span>Google Maps Scrape</span>
+                            </button>
+                            <button type="button" class="preset-choice-btn" data-src="/assets/b2b_dashboard.jpg">
+                                <img src="/assets/b2b_dashboard.jpg" alt="B2B Dataset Dashboard Preset" />
+                                <span>Dataset Dashboard</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Upload Image Option -->
+                    <div id="panel-photo-upload" class="photo-panel" style="display:none;">
+                        <label for="editor-file-input" class="photo-dropzone" id="photo-dropzone">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <span class="dropzone-text">Click to choose image or drag &amp; drop here</span>
+                            <span class="dropzone-sub">PNG, JPG, WEBP, or SVG</span>
+                            <input type="file" id="editor-file-input" accept="image/*" style="display:none;" />
+                        </label>
+                    </div>
+
+                    <!-- URL Option -->
+                    <div id="panel-photo-url" class="photo-panel" style="display:none;">
+                        <input type="url" id="editor-photo-url" class="form-input" placeholder="https://example.com/lead-sample-preview.jpg" />
+                    </div>
+
+                    <!-- Live Photo Preview -->
+                    <div class="photo-preview-wrap">
+                        <span class="preview-label">Selected Preview:</span>
+                        <div class="photo-preview-box">
+                            <img id="editor-photo-preview" src="/assets/b2b_lead_gen_graphic.jpg" alt="Preview" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2-Column Row: Leads Type & Location -->
+                <div class="form-row-2">
+                    <!-- 3. Leads Type -->
+                    <div class="form-group">
+                        <label class="form-label" for="editor-sample-type">Leads Type <span class="required-star">*</span></label>
+                        <select id="editor-sample-type" class="form-select" required>
+                            <option value="B2B Lead Generation">B2B Lead Generation</option>
+                            <option value="Google Maps Leads">Google Maps Leads</option>
+                            <option value="LinkedIn Decision Makers">LinkedIn Decision Makers</option>
+                            <option value="Real Estate Prospecting">Real Estate Prospecting</option>
+                            <option value="E-Commerce & DTC Brands">E-Commerce &amp; DTC Brands</option>
+                            <option value="Healthcare & Medical Clinics">Healthcare &amp; Medical Clinics</option>
+                            <option value="SaaS & Technology Founders">SaaS &amp; Technology Founders</option>
+                            <option value="Local Business Directory Scrape">Local Business Directory Scrape</option>
+                            <option value="Custom Industry Prospecting">Custom Industry Prospecting</option>
+                        </select>
+                    </div>
+
+                    <!-- 4. Location -->
+                    <div class="form-group">
+                        <label class="form-label" for="editor-sample-location">Location <span class="required-star">*</span></label>
+                        <input type="text" id="editor-sample-location" class="form-input" placeholder="e.g., California, Texas &amp; Florida, USA" required />
+                    </div>
+                </div>
+
+                <!-- 5. Lead Quality -->
+                <div class="form-group">
+                    <label class="form-label" for="editor-sample-quality">Lead Quality <span class="required-star">*</span></label>
+                    <select id="editor-sample-quality" class="form-select" required>
+                        <option value="100% Verified & Zero-Bounce (NeverBounce Tested)">100% Verified &amp; Zero-Bounce (NeverBounce Tested)</option>
+                        <option value="99.8% Email Deliverability & Direct Dial Phone">99.8% Email Deliverability &amp; Direct Dial Phone</option>
+                        <option value="Tier-1 C-Suite Decision Makers Only (CEO, Founder, VP)">Tier-1 C-Suite Decision Makers Only (CEO, Founder, VP)</option>
+                        <option value="Deep Custom Scraped with Playwright & Python">Deep Custom Scraped with Playwright &amp; Python</option>
+                        <option value="100% Active Physical Locations & Verified Phone">100% Active Physical Locations &amp; Verified Phone</option>
+                        <option value="Triple-Checked Clean & Deduplicated Dataset">Triple-Checked Clean &amp; Deduplicated Dataset</option>
+                    </select>
+                    <input type="text" id="editor-sample-quality-custom" class="form-input" placeholder="Or type a custom quality guarantee..." style="margin-top:8px; display:none;" />
+                </div>
+
+                <!-- 6. Additional Deliverable Details (Records count & Fields) -->
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label class="form-label" for="editor-sample-records">Delivered Record Count</label>
+                        <input type="text" id="editor-sample-records" class="form-input" placeholder="e.g., 5,000+ Verified Records" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editor-sample-format">Delivery Format</label>
+                        <input type="text" id="editor-sample-format" class="form-input" placeholder="e.g., Excel (.xlsx), CSV, Google Sheets" value="Excel (.xlsx), CSV, Google Sheets" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="editor-sample-fields">Included Data Fields</label>
+                    <input type="text" id="editor-sample-fields" class="form-input" placeholder="e.g., Full Name, Job Title, Work Email, Phone, Company, LinkedIn, Website, Revenue" value="Full Name, Job Title, Work Email, Direct Phone, Company, LinkedIn, Website" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="editor-sample-sheet-url">Google Sheet / Dataset Link</label>
+                    <input type="url" id="editor-sample-sheet-url" class="form-input" placeholder="e.g., https://docs.google.com/spreadsheets/d/... or /assets/leads_sample_dataset.csv" />
+                    <span class="dropzone-sub" style="margin-top:5px; display:block;">Paste a Google Sheets share link or leave empty to use Ibrahim's verified zero-bounce CSV/Sheet dataset.</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="editor-actions">
+                    <button type="submit" class="form-submit" id="btn-save-sample">Publish Lead Sample</button>
+                    <button type="button" class="hero-cta hero-cta--quiet" id="btn-cancel-sample-editor">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ── DATASET SAMPLE PREVIEW MODAL ── -->
+    <div class="modal-backdrop" id="dataset-preview-modal" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title" style="display:none;">
+        <div class="modal-dialog modal-dialog--preview">
+            <button class="modal-close" id="btn-close-dataset-preview" type="button" aria-label="Close Sample Preview">&times;</button>
+            <div class="dataset-preview-header">
+                <span class="preview-badge-pill" id="preview-modal-type">B2B LEAD GENERATION</span>
+                <h2 id="preview-modal-title" class="preview-title">Dataset Preview</h2>
+                <div class="preview-meta-row">
+                    <span class="preview-meta-item" id="preview-modal-location">📍 Location</span>
+                    <span class="preview-meta-item preview-meta-item--quality" id="preview-modal-quality">✓ Quality Guarantee</span>
+                    <span class="preview-meta-item" id="preview-modal-count">📊 Record Count</span>
+                    <span class="preview-meta-item" style="color:var(--accent); font-weight:600;">📑 Google Sheet Verified</span>
+                </div>
+            </div>
+
+            <!-- Image visual banner -->
+            <div class="preview-visual-box">
+                <img id="preview-modal-img" src="/assets/b2b_lead_gen_graphic.jpg" alt="Dataset Preview" />
+            </div>
+
+            <!-- Sample Table Grid -->
+            <div class="preview-table-section">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <h4 class="preview-section-title" style="margin-bottom:0;">Verified Data Columns Sample</h4>
+                    <span style="font-size:12px; color:var(--ink-2);">120+ Live Verified Records Available</span>
+                </div>
+                <div class="preview-table-wrap">
+                    <table class="preview-table" id="preview-sample-table">
+                        <thead>
+                            <tr>
+                                <th>Contact / Brand</th>
+                                <th>Type / Role</th>
+                                <th>Company / Domain</th>
+                                <th>Work Email</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="preview-table-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="preview-footer-actions">
+                <button type="button" class="btn-preview-download-sheet" id="btn-preview-download-sheet" title="Download Google Sheet / CSV spreadsheet">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Download Google Sheet (.csv)</span>
+                </button>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button type="button" class="hero-cta" id="btn-preview-request-dataset">
+                        <span>Order Custom List</span>
+                        <span class="hero-cta-arrow" aria-hidden="true">→</span>
+                    </button>
+                    <button type="button" class="hero-cta hero-cta--quiet" id="btn-preview-close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── CASE STUDY MODAL ── -->
+    <div class="modal-backdrop" id="case-study-modal" role="dialog" aria-modal="true">
+        <div class="modal-dialog" id="modal-dialog">
+            <button class="modal-close" id="modal-close-btn" type="button" aria-label="Close Case Study">&times;</button>
+            <p id="modal-category" style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--accent); letter-spacing:0.08em; margin-bottom:8px;"></p>
+            <h2 id="modal-title" style="font-size:clamp(20px, 2.5vw, 28px); font-weight:700; color:var(--ink); line-height:1.25; margin-bottom:16px;"></h2>
+            
+            <div style="margin-bottom:20px;">
+                <h4 style="font-size:12.5px; font-weight:700; text-transform:uppercase; color:var(--ink-2); margin-bottom:6px;">Project Objective</h4>
+                <p id="modal-objective" style="font-size:14px; color:var(--ink); line-height:1.6;"></p>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <h4 style="font-size:12.5px; font-weight:700; text-transform:uppercase; color:var(--ink-2); margin-bottom:6px;">Research Source</h4>
+                <p id="modal-source" style="font-size:14px; color:var(--ink-2); line-height:1.5;"></p>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <h4 style="font-size:12.5px; font-weight:700; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px;">Data Fields Collected</h4>
+                <div id="modal-fields" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+            </div>
+
+            <div style="margin-bottom:24px;">
+                <h4 style="font-size:12.5px; font-weight:700; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px;">Execution Process</h4>
+                <ul id="modal-process" style="padding-left:18px; font-size:13.5px;"></ul>
+            </div>
+
+            <div style="margin-bottom:24px;">
+                <h4 style="font-size:12.5px; font-weight:700; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px;">Sample Dataset Structure</h4>
+                <div id="modal-table-container" style="overflow-x:auto;"></div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:12px; border-top:1px solid var(--border); padding-top:16px;">
+                <button type="button" class="hero-cta" id="modal-request-similar">Request Similar Dataset →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js?v=2" defer></script>
+</body>
+
+</html>
