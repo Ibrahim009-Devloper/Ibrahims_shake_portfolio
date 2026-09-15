@@ -30,7 +30,7 @@
         <div class="nav-inner">
             <a href="#hero" class="nav-logo">
                 <span class="nav-logo-status" title="Available for projects"></span>
-                <span>MD. Ibrahim Shake Shuvo</span>
+                <span id="site-nav-name">MD. Ibrahim Shake Shuvo</span>
             </a>
             <div class="nav-actions">
                 <ul class="nav-links" role="list">
@@ -51,6 +51,13 @@
                         <path d="M12 2.8v2M12 19.2v2M4.8 12h-2M21.2 12h-2M6.9 6.9 5.5 5.5M18.5 18.5l-1.4-1.4M17.1 6.9l1.4-1.4M5.5 18.5l1.4-1.4" />
                     </svg>
                 </button>
+                <button id="mobile-menu-toggle" class="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" title="Toggle menu">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="5" r="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <circle cx="12" cy="19" r="2" />
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -62,18 +69,18 @@
         <div class="hero-inner">
             <div class="hero-content">
                 <p class="hero-badge">
-                    <span class="hero-badge-role">B2B Lead Generation</span>
+                    <span class="hero-badge-role" id="site-badge-role1">B2B Lead Generation</span>
                     <span class="hero-badge-at">&amp;</span>
-                    <span class="hero-badge-role">Web Scraping</span>
-                    <span class="hero-badge-loc">Dhaka, Bangladesh</span>
+                    <span class="hero-badge-role" id="site-badge-role2">Web Scraping</span>
+                    <span class="hero-badge-loc" id="site-badge-loc">Dhaka, Bangladesh</span>
                 </p>
 
                 <h1 class="hero-h1">
-                    <span class="hero-h1-line">Turning raw web data</span>
-                    <span class="hero-h1-line">into <span class="hero-mark">qualified leads<svg class="hero-mark-stroke" viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" vector-effect="non-scaling-stroke" d="M4 11.4c36-6.4 89-8.6 137-5.9 26 1.5 51 4.4 75 8.1" /></svg></span></span>
+                    <span class="hero-h1-line" id="site-hero-line1">Turning raw web data</span>
+                    <span class="hero-h1-line">into <span class="hero-mark"><span id="site-hero-mark">qualified leads</span><svg class="hero-mark-stroke" viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" vector-effect="non-scaling-stroke" d="M4 11.4c36-6.4 89-8.6 137-5.9 26 1.5 51 4.4 75 8.1" /></svg></span></span>
                 </h1>
 
-                <p class="hero-lead">
+                <p class="hero-lead" id="site-hero-lead">
                     Specialist in building targeted prospect lists, scraping local business directories, and delivering clean, ready-to-use B2B datasets powered by Python, Playwright, and Selenium.
                 </p>
 
@@ -90,7 +97,7 @@
                         <span class="hero-cta-arrow" aria-hidden="true">→</span>
                     </a>
                     <a class="hero-cta hero-cta--quiet" href="#contact">Get a custom lead list</a>
-                    <a class="hero-cta hero-cta--linkedin" href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" aria-label="See LinkedIn profile of MD. Ibrahim Shake Shuvo">
+                    <a class="hero-cta hero-cta--linkedin" id="hero-cta-linkedin" href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" aria-label="See LinkedIn profile of MD. Ibrahim Shake Shuvo">
                         <svg class="hero-linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45c-.9 0-1.63.73-1.63 1.63 0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63Z" />
                         </svg>
@@ -99,7 +106,7 @@
                     </a>
                 </div>
 
-                <p class="hero-proof">
+                <p class="hero-proof" id="site-hero-proof">
                     <strong>Zero-bounce deliverability</strong> · Deduplicated records · Custom business fields
                 </p>
             </div>
@@ -238,7 +245,7 @@
     <section id="motion">
         <div class="section-inner">
             <p class="section-eyebrow-light reveal">Automation &amp; Tooling</p>
-            <h2 class="motion-headline reveal">Robust Pipelines Built for Scale</h2>
+            <h2 class="motion-headline reveal" id="site-pipe-headline">Robust Pipelines Built for Scale</h2>
 
             <div class="motion-bento">
                 <!-- Tile 1: Python Scraper Engine -->
@@ -246,7 +253,7 @@
                     <div>
                         <span class="mc-chip">Python Automation</span>
                         <h3 class="mc-title">Custom Scraper Engine</h3>
-                        <p class="mc-sub">
+                        <p class="mc-sub" id="site-pipe-card1-sub">
                             Custom scripts utilizing Playwright and Selenium to bypass bot detection, handle dynamic JavaScript hydration, and extract clean datasets at high speeds.
                         </p>
                     </div>
@@ -265,7 +272,7 @@
                 <div class="motion-card reveal">
                     <span class="mc-chip">Quality Control</span>
                     <h3 class="mc-title">Data Cleaning &amp; Deduplication</h3>
-                    <p class="mc-sub">
+                    <p class="mc-sub" id="site-pipe-card2-sub">
                         Strict deduplication by domain and company name, standardizing phone numbers to international E.164 formats, and validating email syntax against live mail exchange records.
                     </p>
                 </div>
@@ -274,7 +281,7 @@
                 <div class="motion-card reveal">
                     <span class="mc-chip">Local Intelligence</span>
                     <h3 class="mc-title">Google Maps Extraction</h3>
-                    <p class="mc-sub">
+                    <p class="mc-sub" id="site-pipe-card3-sub">
                         Deep parsing of local business listings across specific regions, cities, and zip codes to discover direct phone numbers, business hours, and operational status.
                     </p>
                 </div>
@@ -290,7 +297,7 @@
                     <header class="pw-group-head">
                         <p class="pw-group-label">Core Specializations</p>
                     </header>
-                    <div class="pw-board">
+                    <div class="pw-board" id="site-services-board">
                         <div class="pw-pin">
                             <h3 class="pw-pin-title">B2B Lead Generation</h3>
                             <p class="pw-pin-desc">Identifying ideal prospect accounts and high-intent decision-makers matched to your ICP criteria.</p>
@@ -332,10 +339,10 @@
                 <!-- Professional Philosophy Quote Card -->
                 <section class="pw-group reveal">
                     <div class="pw-pin-media--quote">
-                        <p class="pw-pin-quote">
+                        <p class="pw-pin-quote" id="site-quote-text">
                             "Clean, verified data is the foundation of high-converting outbound sales. We eliminate bounce rates and bad contacts before they reach your CRM."
                         </p>
-                        <p class="pw-pin-quote-author">MD. Ibrahim Shake Shuvo · Lead Generation &amp; Scraping Specialist</p>
+                        <p class="pw-pin-quote-author" id="site-quote-author">MD. Ibrahim Shake Shuvo · Lead Generation &amp; Scraping Specialist</p>
                     </div>
                 </section>
             </div>
@@ -347,15 +354,34 @@
         <div class="section-inner">
             <p class="section-eyebrow reveal">About Me</p>
             <div class="about-card reveal">
-                <p class="about-text">
+                <p class="about-text" id="site-about-bio">
                     I help businesses collect targeted business and prospect data through web research, scraping, and structured data collection. I focus on delivering clean, organized, and practical datasets that can support sales and marketing research without bloated fluff or unverified contacts.
                 </p>
                 <div class="about-education">
                     <div>
-                        <p class="about-degree">Diploma in Agriculture</p>
-                        <p class="about-inst">Agriculture Training Institute, Gaibandha</p>
+                        <p class="about-degree" id="site-about-degree">Diploma in Agriculture</p>
+                        <p class="about-inst" id="site-about-inst">Agriculture Training Institute, Gaibandha</p>
                     </div>
-                    <span class="about-year">2019 – 2023</span>
+                    <span class="about-year" id="site-about-year">2019 – 2023</span>
+                </div>
+
+                <div class="about-stats-grid">
+                    <div class="about-stat-item">
+                        <span class="about-stat-num" id="site-stat-years">5+</span>
+                        <span class="about-stat-label">Years Experience</span>
+                    </div>
+                    <div class="about-stat-item">
+                        <span class="about-stat-num" id="site-stat-projects">350+</span>
+                        <span class="about-stat-label">Projects Completed</span>
+                    </div>
+                    <div class="about-stat-item">
+                        <span class="about-stat-num" id="site-stat-quality">100%</span>
+                        <span class="about-stat-label">Zero Bounce Rate</span>
+                    </div>
+                    <div class="about-stat-item">
+                        <span class="about-stat-num" id="site-stat-clients">120+</span>
+                        <span class="about-stat-label">Global Clients</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,8 +391,8 @@
     <section id="contact">
         <div class="section-inner">
             <p class="section-eyebrow reveal">Get In Touch</p>
-            <h2 class="personal-headline reveal">Let's Discuss Your Data Needs</h2>
-            <p class="personal-sub reveal">
+            <h2 class="personal-headline reveal" id="site-contact-headline">Let's Discuss Your Data Needs</h2>
+            <p class="personal-sub reveal" id="site-contact-sub">
                 Tell me about your target audience, required data fields, or the website you need extracted. I typically reply within 12 hours.
             </p>
 
@@ -502,22 +528,23 @@
     <footer id="footer">
         <div class="section-inner">
             <div class="footer-top">
-                <a href="#hero" class="footer-name">MD. Ibrahim Shake Shuvo</a>
+                <a href="#hero" class="footer-name" id="site-footer-name">MD. Ibrahim Shake Shuvo</a>
                 <nav class="footer-nav">
                     <a href="#hero">Home</a>
                     <a href="#work">Work</a>
                     <a href="#leads-samples">Leads Sample</a>
                     <a href="#personal">Services</a>
                     <a href="#about">About</a>
-                    <a href="mailto:ibrahimshakeshuvo100@gmail.com">Email</a>
-                    <a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="mailto:ibrahimshakeshuvo100@gmail.com" id="site-footer-email-link">Email</a>
+                    <a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" id="site-footer-linkedin-link">LinkedIn</a>
+                    <a href="#admin" id="footer-link-admin" title="Open Admin CMS">⚙ Admin</a>
                 </nav>
             </div>
             <div class="footer-bottom">
-                <span class="footer-copy">© 2026 MD. Ibrahim Shake Shuvo. All rights reserved.</span>
+                <span class="footer-copy" id="site-footer-copy">© 2026 MD. Ibrahim Shake Shuvo. All rights reserved.</span>
                 <span class="footer-weather" id="footer-weather">
                     <span class="fw-dot live" aria-hidden="true"></span>
-                    <span class="fw-city">Dhaka, Bangladesh</span>
+                    <span class="fw-city" id="site-footer-city">Dhaka, Bangladesh</span>
                     <span>·</span>
                     <span>Available for Projects</span>
                 </span>
@@ -537,16 +564,23 @@
                             <line x1="19" y1="12" x2="5" y2="12"></line>
                             <polyline points="12 19 5 12 12 5"></polyline>
                         </svg>
-                        <span>Back to Portfolio</span>
+                        <span>Back to Website</span>
                     </a>
                     <div class="leads-breadcrumb">
                         <span>Portfolio</span>
                         <span class="leads-breadcrumb-sep">/</span>
-                        <span class="leads-breadcrumb-current">Leads Sample</span>
+                        <span>Leads Showcase</span>
+                        <span class="leads-breadcrumb-sep">/</span>
+                        <span class="leads-breadcrumb-current">Verified Datasets</span>
                     </div>
                 </div>
 
                 <div class="leads-topbar-right">
+                    <span class="supabase-status-pill" title="Connected to Supabase Cloud Database: ormbqrbmceuyoxwboycf">
+                        <span class="db-dot"></span>
+                        <span>Supabase DB Live</span>
+                    </span>
+
                     <!-- Guest View: Admin Login Trigger -->
                     <div id="admin-guest-bar">
                         <button type="button" class="btn-admin-pill" id="btn-open-admin-login" aria-label="Open Admin Login">
@@ -554,12 +588,12 @@
                                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                             </svg>
-                            <span>Admin Login</span>
+                            <span>Admin Sign In</span>
                         </button>
                     </div>
 
                     <!-- Authenticated Admin Bar -->
-                    <div id="admin-authenticated-bar" style="display:none;">
+                    <div id="admin-authenticated-bar" style="display:none; align-items:center; gap:8px;">
                         <span class="admin-badge-indicator">
                             <span class="admin-live-pulse" aria-hidden="true"></span>
                             <span>Admin: MD. Ibrahim Shake Shuvo</span>
@@ -571,6 +605,9 @@
                             </svg>
                             <span>+ Add Lead Sample</span>
                         </button>
+                        <a href="#admin" class="btn-cms-secondary" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                            <span>⚙️ CMS Portal</span>
+                        </a>
                         <button type="button" class="btn-admin-logout" id="btn-admin-logout" title="Sign out of Admin Mode">
                             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -648,6 +685,427 @@
         </div>
     </div>
 
+    <!-- ── ADMIN CMS VIEW (FULL WEBSITE EDITOR) ── -->
+    <div id="admin-cms-view" class="admin-cms-view" style="display:none;" aria-hidden="true">
+        <!-- CMS Topbar -->
+        <div class="cms-topbar">
+            <div class="cms-topbar-left">
+                <a href="#hero" class="btn-back-portfolio" id="btn-cms-back-home">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back to Website</span>
+                </a>
+                <div class="leads-breadcrumb">
+                    <span>Admin Control Center</span>
+                    <span class="leads-breadcrumb-sep">/</span>
+                    <span class="leads-breadcrumb-current">Website Content &amp; Database CMS</span>
+                </div>
+            </div>
+
+            <div class="cms-topbar-right">
+                <span class="supabase-status-pill" id="cms-db-status-pill" title="Supabase Project: ormbqrbmceuyoxwboycf">
+                    <span class="db-dot"></span>
+                    <span id="cms-db-status-text">Supabase DB Live</span>
+                </span>
+                <button type="button" class="btn-cms-secondary" id="btn-cms-reset-defaults" title="Restore default portfolio text">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                    </svg>
+                    <span>Reset Defaults</span>
+                </button>
+                <button type="button" class="btn-cms-save" id="btn-cms-save-all">
+                    <svg id="cms-save-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    <span id="cms-save-btn-text">Save Changes to Database</span>
+                </button>
+                <button type="button" class="btn-admin-logout" id="btn-cms-logout" title="Exit Admin Mode">
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- CMS Layout Grid -->
+        <div class="cms-layout">
+            <!-- Left Sidebar Navigation -->
+            <aside class="cms-sidebar" aria-label="CMS Sections">
+                <ul class="cms-nav-list" role="tablist">
+                    <li><button type="button" class="cms-nav-btn active" data-tab="cms-tab-profile"><span>🏷️</span> Profile &amp; Header</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-hero"><span>⚡</span> Hero &amp; Puzzle Photo</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-about"><span>👤</span> About Me &amp; Stats</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-services"><span>💼</span> Services &amp; Skills</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-pipeline"><span>🔄</span> Pipeline &amp; Tooling</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-contact"><span>📬</span> Contact &amp; Socials</button></li>
+                    <li><a href="#leads-samples" class="cms-nav-btn" style="text-decoration:none;"><span>📑</span> Leads Samples Manager ↗</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Panels Container -->
+            <main class="cms-panels">
+                <form id="website-cms-form" onsubmit="event.preventDefault();">
+
+                    <!-- Panel 1: Profile & Header -->
+                    <section id="cms-tab-profile" class="cms-panel-card cms-tab-content active">
+                        <header class="cms-panel-header">
+                            <h2 class="cms-panel-title"><span>🏷️</span> Profile &amp; Header Info</h2>
+                            <p class="cms-panel-desc">Update your name, branding badges, and work status shown across the navigation header.</p>
+                        </header>
+                        <div class="cms-grid-2">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-fullname">Full Name</label>
+                                <input type="text" id="cms-input-fullname" class="form-input" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-availability">Availability Status</label>
+                                <input type="text" id="cms-input-availability" class="form-input" placeholder="e.g. Available for Projects" />
+                            </div>
+                        </div>
+                        <div class="cms-grid-3">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-role1">Badge Specialization 1</label>
+                                <input type="text" id="cms-input-role1" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-role2">Badge Specialization 2</label>
+                                <input type="text" id="cms-input-role2" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-location">Badge Location</label>
+                                <input type="text" id="cms-input-location" class="form-input" />
+                            </div>
+                        </div>
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save Profile Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Panel 2: Hero & Puzzle Photo -->
+                    <section id="cms-tab-hero" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header">
+                            <h2 class="cms-panel-title"><span>⚡</span> Hero Section &amp; Puzzle Image</h2>
+                            <p class="cms-panel-desc">Customize your hero headlines, subtitle, proof points, and the interactive puzzle visual.</p>
+                        </header>
+                        <div class="cms-grid-2">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-hero-line1">Headline Line 1</label>
+                                <input type="text" id="cms-input-hero-line1" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-hero-mark">Highlighted Keyword / Focus</label>
+                                <input type="text" id="cms-input-hero-mark" class="form-input" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cms-input-hero-lead">Hero Subtitle / Lead Paragraph</label>
+                            <textarea id="cms-input-hero-lead" class="form-input" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cms-input-hero-proof">Proof Points Summary</label>
+                            <input type="text" id="cms-input-hero-proof" class="form-input" />
+                        </div>
+
+                        <!-- Hero Puzzle Photo Settings -->
+                        <div class="cms-item-card" style="margin-top:20px;">
+                            <div class="cms-item-card-header">
+                                <span class="cms-item-card-title">🧩 Interactive Puzzle Visual Image</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-hero-photo">Image URL or Preset</label>
+                                <input type="text" id="cms-input-hero-photo" class="form-input" placeholder="/assets/b2b_lead_gen_graphic.jpg" />
+                            </div>
+                            <div class="photo-preset-grid" style="margin-top:10px;">
+                                <button type="button" class="preset-choice-btn" data-cms-hero-img="/assets/b2b_lead_gen_graphic.jpg">
+                                    <img src="/assets/b2b_lead_gen_graphic.jpg" alt="Preset 1" />
+                                    <span>B2B Graphic</span>
+                                </button>
+                                <button type="button" class="preset-choice-btn" data-cms-hero-img="/assets/gmaps_scraping.jpg">
+                                    <img src="/assets/gmaps_scraping.jpg" alt="Preset 2" />
+                                    <span>Google Maps</span>
+                                </button>
+                                <button type="button" class="preset-choice-btn" data-cms-hero-img="/assets/b2b_dashboard.jpg">
+                                    <img src="/assets/b2b_dashboard.jpg" alt="Preset 3" />
+                                    <span>Dashboard</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save Hero Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Panel 3: About Me & Stats -->
+                    <section id="cms-tab-about" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header">
+                            <h2 class="cms-panel-title"><span>👤</span> About Me &amp; Experience Stats</h2>
+                            <p class="cms-panel-desc">Edit your professional biography, credentials, and live quantitative stats counters.</p>
+                        </header>
+                        <div class="form-group">
+                            <label class="form-label" for="cms-input-about-bio">About Me Bio Text</label>
+                            <textarea id="cms-input-about-bio" class="form-input" rows="4"></textarea>
+                        </div>
+                        <div class="cms-grid-3">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-about-degree">Degree / Qualification</label>
+                                <input type="text" id="cms-input-about-degree" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-about-inst">Institution / Training</label>
+                                <input type="text" id="cms-input-about-inst" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-about-years">Education Years</label>
+                                <input type="text" id="cms-input-about-years" class="form-input" />
+                            </div>
+                        </div>
+
+                        <div class="cms-item-card" style="margin-top:16px;">
+                            <div class="cms-item-card-header">
+                                <span class="cms-item-card-title">📊 Key Metrics Counters</span>
+                            </div>
+                            <div class="cms-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="cms-input-stat-years">Experience Years Value</label>
+                                    <input type="text" id="cms-input-stat-years" class="form-input" placeholder="e.g. 5+" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="cms-input-stat-projects">Completed Projects Value</label>
+                                    <input type="text" id="cms-input-stat-projects" class="form-input" placeholder="e.g. 350+" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="cms-input-stat-quality">Zero Bounce Guarantee</label>
+                                    <input type="text" id="cms-input-stat-quality" class="form-input" placeholder="e.g. 100%" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="cms-input-stat-clients">Clients Served</label>
+                                    <input type="text" id="cms-input-stat-clients" class="form-input" placeholder="e.g. 120+" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save About &amp; Stats Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Panel 4: Services & Specializations -->
+                    <section id="cms-tab-services" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div>
+                                <h2 class="cms-panel-title"><span>💼</span> Core Specializations &amp; Services</h2>
+                                <p class="cms-panel-desc">Manage the service cards displayed in the Core Specializations section.</p>
+                            </div>
+                            <button type="button" class="btn-cms-secondary" id="btn-cms-add-service" style="padding:6px 14px; font-size:12.5px;">
+                                <span>+ Add New Service</span>
+                            </button>
+                        </header>
+                        <div id="cms-services-container">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save Services Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Panel 5: Pipeline & Tools -->
+                    <section id="cms-tab-pipeline" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header">
+                            <h2 class="cms-panel-title"><span>🔄</span> Automation Pipeline &amp; Methodologies</h2>
+                            <p class="cms-panel-desc">Edit the pipeline tiles, code sample headlines, and client quote banner.</p>
+                        </header>
+                        <div class="form-group">
+                            <label class="form-label" for="cms-input-pipe-headline">Pipeline Section Headline</label>
+                            <input type="text" id="cms-input-pipe-headline" class="form-input" />
+                        </div>
+                        <div class="cms-item-card">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-pipe-card1">Custom Scraper Engine Description</label>
+                                <textarea id="cms-input-pipe-card1" class="form-input" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-pipe-card2">Data Cleaning &amp; Deduplication Description</label>
+                                <textarea id="cms-input-pipe-card2" class="form-input" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-pipe-card3">Google Maps Extraction Description</label>
+                                <textarea id="cms-input-pipe-card3" class="form-input" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="cms-item-card" style="margin-top:16px;">
+                            <div class="cms-item-card-header">
+                                <span class="cms-item-card-title">💬 Philosophy Quote Banner</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-quote-text">Quote Text</label>
+                                <textarea id="cms-input-quote-text" class="form-input" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-quote-author">Author / Designation</label>
+                                <input type="text" id="cms-input-quote-author" class="form-input" />
+                            </div>
+                        </div>
+
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save Pipeline Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Panel 6: Contact & Social Channels -->
+                    <section id="cms-tab-contact" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header">
+                            <h2 class="cms-panel-title"><span>📬</span> Contact Channels &amp; Social Links</h2>
+                            <p class="cms-panel-desc">Update your communication channels, direct email, WhatsApp, and social profile links.</p>
+                        </header>
+                        <div class="cms-grid-2">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-headline">Contact Section Headline</label>
+                                <input type="text" id="cms-input-contact-headline" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-sub">Contact Subtitle</label>
+                                <input type="text" id="cms-input-contact-sub" class="form-input" />
+                            </div>
+                        </div>
+                        <div class="cms-grid-2">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-email">Direct Email Address</label>
+                                <input type="email" id="cms-input-contact-email" class="form-input" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-whatsapp">WhatsApp Phone Number</label>
+                                <input type="text" id="cms-input-contact-whatsapp" class="form-input" />
+                            </div>
+                        </div>
+                        <div class="cms-grid-3">
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-linkedin">LinkedIn Profile URL</label>
+                                <input type="url" id="cms-input-contact-linkedin" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-github">GitHub Profile URL</label>
+                                <input type="url" id="cms-input-contact-github" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-contact-facebook">Facebook Profile URL</label>
+                                <input type="url" id="cms-input-contact-facebook" class="form-input" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cms-input-contact-location">Location String</label>
+                            <input type="text" id="cms-input-contact-location" class="form-input" />
+                        </div>
+
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save Contact Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                </form>
+            </main>
+        </div>
+
+        <!-- Sticky Floating Quick-Save Action Bar (Always visible while editing) -->
+        <div class="cms-floating-save-bar" id="cms-floating-save-bar">
+            <div class="cms-floating-bar-inner">
+                <div class="cms-floating-bar-status">
+                    <span class="db-dot"></span>
+                    <span id="cms-floating-status-text">Supabase Cloud Database Ready</span>
+                    <span class="kbd-hint">Shortcut: <kbd>Ctrl</kbd> + <kbd>S</kbd></span>
+                </div>
+                <div class="cms-floating-bar-actions">
+                    <button type="button" class="btn-cms-secondary btn-cms-reset-trigger" id="btn-cms-floating-reset">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                            <path d="M3 3v5h5"></path>
+                        </svg>
+                        <span>Reset Defaults</span>
+                    </button>
+                    <button type="button" class="btn-cms-save btn-cms-save-trigger" id="btn-cms-floating-save">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        <span>Save All Changes to Database</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ── ADMIN LOGIN MODAL ── -->
     <div class="modal-backdrop" id="admin-login-modal" role="dialog" aria-modal="true" aria-labelledby="admin-login-heading" style="display:none;">
         <div class="modal-dialog modal-dialog--auth">
@@ -703,7 +1161,7 @@
             <div class="editor-modal-header">
                 <span class="editor-eyebrow" id="sample-editor-eyebrow">ADMIN WORKFLOW</span>
                 <h2 id="sample-editor-heading" class="editor-title">Add New Lead Sample</h2>
-                <p class="editor-subtitle">Fill in the sample details: Leads Title, Photo, Leads Type, Location, and Lead Quality.</p>
+                <p class="editor-subtitle">Add a lead title, choose or upload a photo, and attach your sample file or Google Sheet link for clients to download.</p>
             </div>
 
             <form id="sample-editor-form" class="editor-form">
@@ -711,18 +1169,17 @@
 
                 <!-- 1. Leads Title -->
                 <div class="form-group">
-                    <label class="form-label" for="editor-sample-title">Leads Title <span class="required-star">*</span></label>
-                    <input type="text" id="editor-sample-title" class="form-input" placeholder="e.g., US Dental Practice Owners &amp; Clinic Directors" required />
-                    <p class="form-hint">A clear, descriptive title naming the target industry and prospect niche.</p>
+                    <label class="form-label" for="editor-sample-title">Lead Title <span class="required-star">*</span></label>
+                    <input type="text" id="editor-sample-title" class="form-input" placeholder="e.g., California Real Estate Agents &amp; Brokers" required />
                 </div>
 
-                <!-- 2. Photo (Upload or URL or Presets) -->
+                <!-- 2. Lead Photo (Presets, Upload or URL) -->
                 <div class="form-group">
-                    <label class="form-label">Photo / Dataset Graphic <span class="required-star">*</span></label>
+                    <label class="form-label">Lead Photo <span class="required-star">*</span></label>
                     <div class="photo-source-tabs">
                         <button type="button" class="photo-tab active" id="tab-photo-presets">Sample Presets</button>
-                        <button type="button" class="photo-tab" id="tab-photo-upload">Upload Image</button>
-                        <button type="button" class="photo-tab" id="tab-photo-url">Image URL</button>
+                        <button type="button" class="photo-tab" id="tab-photo-upload">Upload Photo</button>
+                        <button type="button" class="photo-tab" id="tab-photo-url">Photo URL</button>
                     </div>
 
                     <!-- Preset Options -->
@@ -730,15 +1187,15 @@
                         <div class="photo-preset-grid">
                             <button type="button" class="preset-choice-btn active" data-src="/assets/b2b_lead_gen_graphic.jpg">
                                 <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Lead Gen Graphic Preset" />
-                                <span>B2B Lead Graphic</span>
+                                <span>B2B Leads</span>
                             </button>
                             <button type="button" class="preset-choice-btn" data-src="/assets/gmaps_scraping.jpg">
                                 <img src="/assets/gmaps_scraping.jpg" alt="Google Maps Scraping Preset" />
-                                <span>Google Maps Scrape</span>
+                                <span>Maps Scrape</span>
                             </button>
                             <button type="button" class="preset-choice-btn" data-src="/assets/b2b_dashboard.jpg">
                                 <img src="/assets/b2b_dashboard.jpg" alt="B2B Dataset Dashboard Preset" />
-                                <span>Dataset Dashboard</span>
+                                <span>Dashboard</span>
                             </button>
                         </div>
                     </div>
@@ -746,12 +1203,12 @@
                     <!-- Upload Image Option -->
                     <div id="panel-photo-upload" class="photo-panel" style="display:none;">
                         <label for="editor-file-input" class="photo-dropzone" id="photo-dropzone">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                 <polyline points="17 8 12 3 7 8"></polyline>
                                 <line x1="12" y1="3" x2="12" y2="15"></line>
                             </svg>
-                            <span class="dropzone-text">Click to choose image or drag &amp; drop here</span>
+                            <span class="dropzone-text">Click to upload photo or drag &amp; drop</span>
                             <span class="dropzone-sub">PNG, JPG, WEBP, or SVG</span>
                             <input type="file" id="editor-file-input" accept="image/*" style="display:none;" />
                         </label>
@@ -759,84 +1216,55 @@
 
                     <!-- URL Option -->
                     <div id="panel-photo-url" class="photo-panel" style="display:none;">
-                        <input type="url" id="editor-photo-url" class="form-input" placeholder="https://example.com/lead-sample-preview.jpg" />
+                        <input type="url" id="editor-photo-url" class="form-input" placeholder="https://example.com/photo.jpg" />
                     </div>
 
                     <!-- Live Photo Preview -->
-                    <div class="photo-preview-wrap">
-                        <span class="preview-label">Selected Preview:</span>
-                        <div class="photo-preview-box">
+                    <div class="photo-preview-wrap" style="margin-top:10px;">
+                        <span class="preview-label">Selected Photo:</span>
+                        <div class="photo-preview-box" style="height:64px; width:100px;">
                             <img id="editor-photo-preview" src="/assets/b2b_lead_gen_graphic.jpg" alt="Preview" />
                         </div>
                     </div>
                 </div>
 
-                <!-- 2-Column Row: Leads Type & Location -->
-                <div class="form-row-2">
-                    <!-- 3. Leads Type -->
-                    <div class="form-group">
-                        <label class="form-label" for="editor-sample-type">Leads Type <span class="required-star">*</span></label>
-                        <select id="editor-sample-type" class="form-select" required>
-                            <option value="B2B Lead Generation">B2B Lead Generation</option>
-                            <option value="Google Maps Leads">Google Maps Leads</option>
-                            <option value="LinkedIn Decision Makers">LinkedIn Decision Makers</option>
-                            <option value="Real Estate Prospecting">Real Estate Prospecting</option>
-                            <option value="E-Commerce & DTC Brands">E-Commerce &amp; DTC Brands</option>
-                            <option value="Healthcare & Medical Clinics">Healthcare &amp; Medical Clinics</option>
-                            <option value="SaaS & Technology Founders">SaaS &amp; Technology Founders</option>
-                            <option value="Local Business Directory Scrape">Local Business Directory Scrape</option>
-                            <option value="Custom Industry Prospecting">Custom Industry Prospecting</option>
-                        </select>
-                    </div>
-
-                    <!-- 4. Location -->
-                    <div class="form-group">
-                        <label class="form-label" for="editor-sample-location">Location <span class="required-star">*</span></label>
-                        <input type="text" id="editor-sample-location" class="form-input" placeholder="e.g., California, Texas &amp; Florida, USA" required />
-                    </div>
-                </div>
-
-                <!-- 5. Lead Quality -->
+                <!-- 3. Sample File (Google Sheet Link or File Upload) -->
                 <div class="form-group">
-                    <label class="form-label" for="editor-sample-quality">Lead Quality <span class="required-star">*</span></label>
-                    <select id="editor-sample-quality" class="form-select" required>
-                        <option value="100% Verified & Zero-Bounce (NeverBounce Tested)">100% Verified &amp; Zero-Bounce (NeverBounce Tested)</option>
-                        <option value="99.8% Email Deliverability & Direct Dial Phone">99.8% Email Deliverability &amp; Direct Dial Phone</option>
-                        <option value="Tier-1 C-Suite Decision Makers Only (CEO, Founder, VP)">Tier-1 C-Suite Decision Makers Only (CEO, Founder, VP)</option>
-                        <option value="Deep Custom Scraped with Playwright & Python">Deep Custom Scraped with Playwright &amp; Python</option>
-                        <option value="100% Active Physical Locations & Verified Phone">100% Active Physical Locations &amp; Verified Phone</option>
-                        <option value="Triple-Checked Clean & Deduplicated Dataset">Triple-Checked Clean &amp; Deduplicated Dataset</option>
-                    </select>
-                    <input type="text" id="editor-sample-quality-custom" class="form-input" placeholder="Or type a custom quality guarantee..." style="margin-top:8px; display:none;" />
-                </div>
-
-                <!-- 6. Additional Deliverable Details (Records count & Fields) -->
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label" for="editor-sample-records">Delivered Record Count</label>
-                        <input type="text" id="editor-sample-records" class="form-input" placeholder="e.g., 5,000+ Verified Records" />
+                    <label class="form-label">Sample File <span class="required-star">*</span></label>
+                    <div class="photo-source-tabs" style="margin-bottom:8px;">
+                        <button type="button" class="photo-tab active" id="tab-file-link">Google Sheet Link</button>
+                        <button type="button" class="photo-tab" id="tab-file-upload">Upload File (.csv / .xlsx)</button>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="editor-sample-format">Delivery Format</label>
-                        <input type="text" id="editor-sample-format" class="form-input" placeholder="e.g., Excel (.xlsx), CSV, Google Sheets" value="Excel (.xlsx), CSV, Google Sheets" />
+                    <div id="panel-file-link" class="photo-panel">
+                        <input type="url" id="editor-sample-sheet-url" class="form-input" placeholder="https://docs.google.com/spreadsheets/d/..." />
+                        <span class="dropzone-sub" style="margin-top:5px; display:block;">Paste your shared Google Sheet link (clients will download direct CSV or view sheet).</span>
+                    </div>
+
+                    <div id="panel-file-upload" class="photo-panel" style="display:none;">
+                        <label for="editor-dataset-file-input" class="photo-dropzone" id="dataset-file-dropzone" style="padding:16px;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                            <span class="dropzone-text" id="dataset-file-name-label">Click to upload CSV or Excel spreadsheet</span>
+                            <span class="dropzone-sub">.CSV, .XLSX, or .XLS</span>
+                            <input type="file" id="editor-dataset-file-input" accept=".csv,.xlsx,.xls,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display:none;" />
+                        </label>
                     </div>
                 </div>
 
+                <!-- 4. Location (Compact) -->
                 <div class="form-group">
-                    <label class="form-label" for="editor-sample-fields">Included Data Fields</label>
-                    <input type="text" id="editor-sample-fields" class="form-input" placeholder="e.g., Full Name, Job Title, Work Email, Phone, Company, LinkedIn, Website, Revenue" value="Full Name, Job Title, Work Email, Direct Phone, Company, LinkedIn, Website" />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="editor-sample-sheet-url">Google Sheet / Dataset Link</label>
-                    <input type="url" id="editor-sample-sheet-url" class="form-input" placeholder="e.g., https://docs.google.com/spreadsheets/d/... or /assets/leads_sample_dataset.csv" />
-                    <span class="dropzone-sub" style="margin-top:5px; display:block;">Paste a Google Sheets share link or leave empty to use Ibrahim's verified zero-bounce CSV/Sheet dataset.</span>
+                    <label class="form-label" for="editor-sample-location">Location</label>
+                    <input type="text" id="editor-sample-location" class="form-input" placeholder="e.g., California, USA (or Global)" value="Global / United States" />
                 </div>
 
                 <!-- Actions -->
-                <div class="editor-actions">
-                    <button type="submit" class="form-submit" id="btn-save-sample">Publish Lead Sample</button>
+                <div class="editor-actions" style="margin-top:20px;">
+                    <button type="submit" class="form-submit" id="btn-save-sample">Publish to Client Page</button>
                     <button type="button" class="hero-cta hero-cta--quiet" id="btn-cancel-sample-editor">Cancel</button>
                 </div>
             </form>
@@ -947,7 +1375,8 @@
         </div>
     </div>
 
-    <script src="/js/main.js?v=2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/main.js?v=3" defer></script>
 </body>
 
 </html>
