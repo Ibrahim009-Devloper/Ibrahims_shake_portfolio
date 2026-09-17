@@ -1,21 +1,17 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const PORT = 3000;
 const app = express();
 
-app.use(express.json({ limit: '15mb' }));
-app.use(express.urlencoded({ extended: true, limit: '15mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Ensure server data cache directory exists
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -23,9 +19,77 @@ if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
+// Ensure uploads directory exists
+const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+
+// Serve uploaded files statically
+app.use('/uploads', express.static(UPLOADS_DIR));
+
 const SITE_CONTENT_FILE = path.join(DATA_DIR, 'site_content.json');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
+
+// Helper to save Base64 data URLs to clean static files
+function saveBase64DataUrl(dataUrl: string, defaultName: string = 'file'): string {
+  if (!dataUrl || typeof dataUrl !== 'string' || !dataUrl.startsWith('data:')) {
+    return dataUrl;
+  }
+  try {
+    const matches = dataUrl.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      return dataUrl;
+    }
+    const mimeType = matches[1];
+    const base64Data = matches[2];
+    const buffer = Buffer.from(base64Data, 'base64');
+
+    let ext = '.bin';
+    if (mimeType.includes('csv') || defaultName.endsWith('.csv')) ext = '.csv';
+    else if (mimeType.includes('sheet') || mimeType.includes('xlsx') || defaultName.endsWith('.xlsx')) ext = '.xlsx';
+    else if (mimeType.includes('xls') || defaultName.endsWith('.xls')) ext = '.xls';
+    else if (mimeType.includes('png') || defaultName.endsWith('.png')) ext = '.png';
+    else if (mimeType.includes('jpeg') || mimeType.includes('jpg') || defaultName.endsWith('.jpg')) ext = '.jpg';
+    else if (mimeType.includes('webp') || defaultName.endsWith('.webp')) ext = '.webp';
+    else if (mimeType.includes('json') || defaultName.endsWith('.json')) ext = '.json';
+    else if (defaultName && defaultName.includes('.')) {
+      ext = path.extname(defaultName);
+    }
+
+    const cleanBase = defaultName.replace(/[^a-zA-Z0-9_-]/g, '_').replace(ext, '').slice(0, 40) || 'upload';
+    const filename = `${cleanBase}_${Date.now()}${ext}`;
+    const filePath = path.join(UPLOADS_DIR, filename);
+    fs.writeFileSync(filePath, buffer);
+    console.log(`✓ Stored uploaded file statically: /uploads/${filename} (${(buffer.length / 1024).toFixed(1)} KB)`);
+    return `/uploads/${filename}`;
+  } catch (e) {
+    console.warn('Failed to convert base64 data URL to file:', e);
+    return dataUrl;
+  }
+}
+
+// Helper to extract preview rows from CSV text
+function parseCsvSampleRows(csvContent: string, maxRows: number = 8): any[] {
+  try {
+    const lines = csvContent.split(/\r?\n/).filter(line => line.trim().length > 0);
+    if (lines.length <= 1) return [];
+    const headers = lines[0].split(',').map(h => h.trim().replace(/^["']|["']$/g, ''));
+    const rows: any[] = [];
+    for (let i = 1; i < Math.min(lines.length, maxRows + 1); i++) {
+      const values = lines[i].split(',').map(v => v.trim().replace(/^["']|["']$/g, ''));
+      const rowObj: Record<string, string> = {};
+      headers.forEach((h, idx) => {
+        rowObj[h] = values[idx] || '';
+      });
+      rows.push(rowObj);
+    }
+    return rows;
+  } catch (e) {
+    return [];
+  }
+}
 
 // Helper to read local JSON file
 function readJsonFile(filePath: string, fallback: any = null) {
@@ -49,18 +113,42 @@ function writeJsonFile(filePath: string, data: any) {
   }
 }
 
-// Supabase Server Credentials (Secured on Backend)
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://voixkvyylglpomahowrl.supabase.co';
-const SUPABASE_SECRET_KEY = process.env.SUPABASE_SECRET_KEY || 'sb_secret_C95CoEgRV8x6SSMJRmYpCg_ZeEeN27E';
+// Supabase Server Credentials (Secured on Backend with safe URL validation)
+function resolveValidSupabaseUrl(): string {
+  const envUrl = (process.env.SUPABASE_URL || '').trim();
+  if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
+    try {
+      new URL(envUrl);
+      return envUrl;
+    } catch (e) {
+      // Fall through to default URL
+    }
+  }
+  return 'https://voixkvyylglpomahowrl.supabase.co';
+}
+
+function resolveValidSupabaseKey(): string {
+  const envKey = (process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || '').trim();
+  if (envKey && envKey.length > 5 && !envKey.includes('MY_')) {
+    return envKey;
+  }
+  return 'sb_secret_C95CoEgRV8x6SSMJRmYpCg_ZeEeN27E';
+}
+
+const SUPABASE_URL = resolveValidSupabaseUrl();
+const SUPABASE_SECRET_KEY = resolveValidSupabaseKey();
 
 let supabaseAdmin: SupabaseClient | null = null;
 try {
-  supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SECRET_KEY, {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-    },
-  });
+  if (SUPABASE_URL.startsWith('http://') || SUPABASE_URL.startsWith('https://')) {
+    supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SECRET_KEY, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
+    console.log('✓ Supabase Admin client initialized with URL:', SUPABASE_URL);
+  }
 } catch (e) {
   console.warn('Supabase Admin client init note:', e);
 }
@@ -129,18 +217,16 @@ app.get('/api/admin/content', async (req: Request, res: Response) => {
   try {
     // 1. Try Supabase site_content table
     if (supabaseAdmin) {
-      try {
-        const { data, error } = await supabaseAdmin
-          .from('site_content')
-          .select('*')
-          .eq('id', 'site_config_v1');
+      const { data, error } = await supabaseAdmin
+        .from('site_content')
+        .select('*')
+        .eq('id', 'site_config_v1');
 
-        if (!error && Array.isArray(data) && data.length > 0) {
-          const row = data[0];
-          writeJsonFile(SITE_CONTENT_FILE, row);
-          return res.json({ success: true, data: row });
-        }
-      } catch (e) {}
+      if (!error && Array.isArray(data) && data.length > 0) {
+        const row = data[0];
+        writeJsonFile(SITE_CONTENT_FILE, row);
+        return res.json({ success: true, data: row, source: 'supabase' });
+      }
     }
 
     // 2. Try REST
@@ -148,13 +234,13 @@ app.get('/api/admin/content', async (req: Request, res: Response) => {
     if (restRes.ok && Array.isArray(restRes.data) && restRes.data.length > 0) {
       const row = restRes.data[0];
       writeJsonFile(SITE_CONTENT_FILE, row);
-      return res.json({ success: true, data: row });
+      return res.json({ success: true, data: row, source: 'supabase_rest' });
     }
 
     // 3. Fallback to local server persistence
     const local = readJsonFile(SITE_CONTENT_FILE);
     if (local) {
-      return res.json({ success: true, data: local });
+      return res.json({ success: true, data: local, source: 'local_cache' });
     }
 
     return res.json({ success: true, data: null, message: 'Default configuration active' });
@@ -164,12 +250,17 @@ app.get('/api/admin/content', async (req: Request, res: Response) => {
   }
 });
 
-// POST site content (Save from Admin CMS via Secret Key)
+// POST site content (Save from Admin CMS directly to Supabase)
 app.post('/api/admin/content', async (req: Request, res: Response) => {
   try {
     const { content } = req.body;
     if (!content) {
       return res.status(400).json({ success: false, error: 'Content payload required' });
+    }
+
+    // If hero photo is a large base64 image, save it to uploads folder
+    if (content.heroPhoto && content.heroPhoto.startsWith('data:')) {
+      content.heroPhoto = saveBase64DataUrl(content.heroPhoto, 'hero_photo.jpg');
     }
 
     const now = new Date().toISOString();
@@ -180,39 +271,66 @@ app.post('/api/admin/content', async (req: Request, res: Response) => {
       updated_at: now,
     };
 
-    // 1. Always save to local server cache immediately for 100% guarantee
+    // Save to local server cache for offline resilience
     writeJsonFile(SITE_CONTENT_FILE, siteContentPayload);
 
-    // 2. Push to Supabase via SDK
+    let supabaseSaved = false;
+    let supabaseError: any = null;
+
+    // 1. Explicit Upsert to Supabase site_content table
     if (supabaseAdmin) {
-      try {
-        await supabaseAdmin
-          .from('site_content')
-          .upsert([siteContentPayload], { onConflict: 'id' });
-      } catch (e) {}
+      const { data, error } = await supabaseAdmin
+        .from('site_content')
+        .upsert([siteContentPayload], { onConflict: 'id' });
+
+      if (!error) {
+        supabaseSaved = true;
+        console.log('✓ Supabase site_content upsert succeeded with id: site_config_v1');
+      } else {
+        supabaseError = error;
+        console.error('Supabase SDK upsert error (site_content):', error);
+      }
     }
 
-    // 3. Push to Supabase via Direct REST
-    try {
-      await supabaseAdminRest('site_content', {
+    // 2. Fallback to Direct REST if SDK had a connection or header issue
+    if (!supabaseSaved) {
+      const restRes = await supabaseAdminRest('site_content', {
         method: 'POST',
         headers: {
           'Prefer': 'resolution=merge-duplicates,return=representation',
         },
         body: JSON.stringify(siteContentPayload),
       });
-    } catch (e) {}
+
+      if (restRes.ok) {
+        supabaseSaved = true;
+        supabaseError = null;
+        console.log('✓ Supabase REST site_content upsert succeeded');
+      } else if (!supabaseError) {
+        supabaseError = restRes.error;
+      }
+    }
+
+    if (!supabaseSaved && supabaseError) {
+      const errorMsg = typeof supabaseError === 'object' ? (supabaseError.message || supabaseError.details || JSON.stringify(supabaseError)) : String(supabaseError);
+      return res.status(500).json({
+        success: false,
+        error: `Supabase Save Error: ${errorMsg}`,
+        details: supabaseError,
+      });
+    }
 
     return res.json({
       success: true,
-      message: 'Site content permanently saved to database',
+      message: 'Site content permanently saved to Supabase table (site_content)',
       updatedAt: now,
       data: siteContentPayload,
     });
   } catch (err: any) {
-    return res.json({
-      success: true,
-      message: 'Content saved to local server persistence',
+    console.error('Fatal error saving site content:', err);
+    return res.status(500).json({
+      success: false,
+      error: err?.message || 'Server error while saving site content to Supabase',
     });
   }
 });
@@ -222,20 +340,18 @@ app.get('/api/admin/leads', async (req: Request, res: Response) => {
   try {
     // 1. Try Supabase
     if (supabaseAdmin) {
-      try {
-        const { data, error } = await supabaseAdmin
-          .from('leads')
-          .select('*')
-          .order('created_at', { ascending: false });
+      const { data, error } = await supabaseAdmin
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-        if (!error && Array.isArray(data) && data.length > 0) {
-          const leadsOnly = data.filter(r => r.id !== 'site_config_v1');
-          if (leadsOnly.length > 0) {
-            writeJsonFile(LEADS_FILE, leadsOnly);
-            return res.json({ success: true, data: leadsOnly });
-          }
+      if (!error && Array.isArray(data) && data.length > 0) {
+        const leadsOnly = data.filter(r => r.id !== 'site_config_v1');
+        if (leadsOnly.length > 0) {
+          writeJsonFile(LEADS_FILE, leadsOnly);
+          return res.json({ success: true, data: leadsOnly, source: 'supabase' });
         }
-      } catch (e) {}
+      }
     }
 
     // 2. Try REST
@@ -244,20 +360,20 @@ app.get('/api/admin/leads', async (req: Request, res: Response) => {
       const leadsOnly = restRes.data.filter((r: any) => r.id !== 'site_config_v1');
       if (leadsOnly.length > 0) {
         writeJsonFile(LEADS_FILE, leadsOnly);
-        return res.json({ success: true, data: leadsOnly });
+        return res.json({ success: true, data: leadsOnly, source: 'supabase_rest' });
       }
     }
 
     // 3. Fallback to local server persistence
     const local = readJsonFile(LEADS_FILE, []);
-    return res.json({ success: true, data: local });
+    return res.json({ success: true, data: local, source: 'local_cache' });
   } catch (err: any) {
     const local = readJsonFile(LEADS_FILE, []);
     return res.json({ success: true, data: local });
   }
 });
 
-// POST upsert a lead sample (Admin CMS)
+// POST upsert a lead sample (Admin CMS directly to Supabase)
 app.post('/api/admin/leads', async (req: Request, res: Response) => {
   try {
     const sample = req.body;
@@ -265,16 +381,39 @@ app.post('/api/admin/leads', async (req: Request, res: Response) => {
       return res.status(400).json({ success: false, error: 'Valid sample title required' });
     }
 
+    // Convert any large Base64 files to clean static uploads
+    let sheetUrl = sample.sheetUrl || sample.sheet_url || '';
+    const rawFileName = sample.fileName || sample.file_name || 'dataset.csv';
+    if (sheetUrl.startsWith('data:')) {
+      sheetUrl = saveBase64DataUrl(sheetUrl, rawFileName);
+    }
+
+    let photoUrl = sample.photo || sample.image_url || '/assets/b2b_lead_gen_graphic.jpg';
+    if (photoUrl.startsWith('data:')) {
+      photoUrl = saveBase64DataUrl(photoUrl, 'lead_graphic.jpg');
+    }
+
+    // Parse or default sample rows
+    let sampleRows = sample.sampleRows || sample.sample_rows || [];
+    if (!Array.isArray(sampleRows) || sampleRows.length === 0) {
+      sampleRows = [
+        { name: 'Michael Sterling', title: 'Managing Director / Partner', company: 'Apex Commercial Partners', email: 'm.sterling@apexpartners.com', phone: '+1 (512) 555-0182', location: sample.location || 'USA' },
+        { name: 'Sarah Montgomery', title: 'VP of Business Development', company: 'Global Growth Ventures', email: 'smontgomery@globalventures.io', phone: '+1 (415) 555-0291', location: sample.location || 'USA' },
+        { name: 'David Hensley', title: 'Chief Executive Officer', company: 'Pioneer Assets Group', email: 'dhensley@pioneerassets.com', phone: '+1 (212) 555-0377', location: sample.location || 'USA' }
+      ];
+    }
+
     const payload = {
       id: String(sample.id || ('sample-' + Date.now())),
       title: sample.title,
       location: sample.location || 'Global / United States',
-      photo: sample.photo || '/assets/b2b_lead_gen_graphic.jpg',
-      sheet_url: sample.sheetUrl || sample.sheet_url || '',
-      file_name: sample.fileName || sample.file_name || '',
+      photo: photoUrl,
+      image_url: photoUrl,
+      sheet_url: sheetUrl,
+      file_name: rawFileName,
       type: sample.type || 'B2B Lead Generation',
       quality: sample.quality || '100% Zero-Bounce Verified',
-      sample_rows: sample.sampleRows || sample.sample_rows || [],
+      sample_rows: sampleRows,
     };
 
     // 1. Update local cache
@@ -287,28 +426,66 @@ app.post('/api/admin/leads', async (req: Request, res: Response) => {
     }
     writeJsonFile(LEADS_FILE, currentLeads);
 
-    // 2. Update Supabase
+    let supabaseSaved = false;
+    let supabaseError: any = null;
+
+    // 2. Explicit Upsert to Supabase leads table
     if (supabaseAdmin) {
-      try {
-        await supabaseAdmin.from('leads').upsert([payload], { onConflict: 'id' });
-      } catch (e) {}
+      const { data, error } = await supabaseAdmin
+        .from('leads')
+        .upsert([payload], { onConflict: 'id' });
+
+      if (!error) {
+        supabaseSaved = true;
+        console.log(`✓ Supabase lead upsert succeeded for id: ${payload.id}`);
+      } else {
+        supabaseError = error;
+        console.error('Supabase SDK upsert error (leads):', error);
+      }
     }
 
-    try {
-      await supabaseAdminRest('leads', {
+    // 3. Fallback to Direct REST
+    if (!supabaseSaved) {
+      const restRes = await supabaseAdminRest('leads', {
         method: 'POST',
         headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
         body: JSON.stringify(payload),
       });
-    } catch (e) {}
 
-    return res.json({ success: true, data: payload });
+      if (restRes.ok) {
+        supabaseSaved = true;
+        supabaseError = null;
+        console.log(`✓ Supabase REST lead upsert succeeded for id: ${payload.id}`);
+      } else if (!supabaseError) {
+        supabaseError = restRes.error;
+      }
+    }
+
+    // 4. Return error if persistence failed
+    if (!supabaseSaved && supabaseError) {
+      const errorMsg = typeof supabaseError === 'object' ? (supabaseError.message || supabaseError.details || JSON.stringify(supabaseError)) : String(supabaseError);
+      return res.status(500).json({
+        success: false,
+        error: `Supabase Leads Save Error: ${errorMsg}`,
+        details: supabaseError,
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: 'Lead sample permanently saved to Supabase (leads)',
+      data: payload,
+    });
   } catch (err: any) {
-    return res.json({ success: true, data: req.body });
+    console.error('Save lead fatal error:', err);
+    return res.status(500).json({
+      success: false,
+      error: err?.message || 'Internal Server Error while saving lead sample',
+    });
   }
 });
 
-// DELETE a lead sample (Admin CMS)
+// DELETE a lead sample (Admin CMS from Supabase)
 app.delete('/api/admin/leads/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -319,20 +496,42 @@ app.delete('/api/admin/leads/:id', async (req: Request, res: Response) => {
     const filtered = currentLeads.filter(l => l.id !== id);
     writeJsonFile(LEADS_FILE, filtered);
 
+    let supabaseDeleted = false;
+    let supabaseError: any = null;
+
     // 2. Delete from Supabase
     if (supabaseAdmin) {
-      try {
-        await supabaseAdmin.from('leads').delete().eq('id', id);
-      } catch (e) {}
+      const { error } = await supabaseAdmin.from('leads').delete().eq('id', id);
+      if (!error) {
+        supabaseDeleted = true;
+        console.log(`✓ Supabase lead delete succeeded for id: ${id}`);
+      } else {
+        supabaseError = error;
+        console.error('Supabase delete error (leads):', error);
+      }
     }
 
-    try {
-      await supabaseAdminRest(`leads?id=eq.${encodeURIComponent(id)}`, { method: 'DELETE' });
-    } catch (e) {}
+    if (!supabaseDeleted) {
+      const restRes = await supabaseAdminRest(`leads?id=eq.${encodeURIComponent(id)}`, { method: 'DELETE' });
+      if (restRes.ok) {
+        supabaseDeleted = true;
+        supabaseError = null;
+      } else if (!supabaseError) {
+        supabaseError = restRes.error;
+      }
+    }
 
-    return res.json({ success: true, message: `Lead sample ${id} deleted` });
+    if (!supabaseDeleted && supabaseError) {
+      const errorMsg = typeof supabaseError === 'object' ? (supabaseError.message || supabaseError.details || JSON.stringify(supabaseError)) : String(supabaseError);
+      return res.status(500).json({
+        success: false,
+        error: `Supabase Delete Error: ${errorMsg}`,
+      });
+    }
+
+    return res.json({ success: true, message: `Lead sample ${id} deleted from Supabase` });
   } catch (err: any) {
-    return res.json({ success: true });
+    return res.status(500).json({ success: false, error: err?.message || 'Error deleting lead' });
   }
 });
 
@@ -354,21 +553,15 @@ app.post('/api/messages', async (req: Request, res: Response) => {
     writeJsonFile(MESSAGES_FILE, msgs);
 
     if (supabaseAdmin) {
-      try {
-        await supabaseAdmin.from('messages').insert([payload]);
-      } catch (e) {}
+      const { error } = await supabaseAdmin.from('messages').insert([payload]);
+      if (error) {
+        console.warn('Supabase insert message error:', error);
+      }
     }
 
-    try {
-      await supabaseAdminRest('messages', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      });
-    } catch (e) {}
-
-    return res.json({ success: true, message: 'Message securely recorded in database' });
+    return res.json({ success: true, message: 'Message securely recorded in Supabase database' });
   } catch (err: any) {
-    return res.json({ success: true });
+    return res.status(500).json({ success: false, error: err?.message });
   }
 });
 

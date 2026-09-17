@@ -347,14 +347,30 @@ const CASE_STUDIES = {
             statusMsg.style.color = '#38bdf8';
         }
 
-        // Send to backend API (recorded into Supabase database via backend)
-        try {
-            fetch('/api/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, project_type: projectType, message })
-            }).catch(() => {});
-        } catch (e) {}
+        // Persist directly into Supabase 'messages' table via Supabase Cloud Client
+        if (typeof window !== 'undefined' && window.supabase) {
+            try {
+                const client = window.supabase.createClient(
+                    'https://voixkvyylglpomahowrl.supabase.co',
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvaXhrdnl5bGdscG9tYWhvd3JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNzk0NTIsImV4cCI6MjEwNDk1NTQ1Mn0.bW7gGoAuye8GnBEQpbs088pEHVkSNqBH-XqFWUim7Xw'
+                );
+                client.from('messages').insert([{
+                    name,
+                    email,
+                    project_type: projectType,
+                    message,
+                    created_at: new Date().toISOString()
+                }]).then(({ error }) => {
+                    if (error) {
+                        console.error('Supabase message insert error:', error.message);
+                    } else {
+                        console.log('✓ Inquiry recorded directly in Supabase messages table');
+                    }
+                });
+            } catch (e) {
+                console.warn('Supabase message insert exception:', e);
+            }
+        }
 
         const subject = encodeURIComponent(`B2B Data Inquiry: ${projectType} from ${name}`);
         const body = encodeURIComponent(
@@ -414,27 +430,25 @@ const CASE_STUDIES = {
 })();
 
 /* ─────────────────────────────────────
-   8. Leads Sample Showcase & Admin Portal Manager (Supabase Connected)
+   8. Leads Sample Showcase & Admin Portal Manager (Direct Supabase Cloud Connected)
 ───────────────────────────────────── */
 (function initLeadsSampleApp() {
-    const STORAGE_SAMPLES_KEY = 'ibrahim_leads_samples_v3';
     const STORAGE_AUTH_KEY = 'ibrahim_leads_admin_auth';
-    const STORAGE_SITE_CONTENT_KEY = 'ibrahim_site_config_v2';
 
-    // Supabase Cloud Database Project Configuration (Permanently Connected)
+    // Supabase Cloud Database Project Configuration (Direct Frontend to Cloud)
     const SUPABASE_CONFIG = {
         projectId: 'voixkvyylglpomahowrl',
         url: 'https://voixkvyylglpomahowrl.supabase.co',
         anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvaXhrdnl5bGdscG9tYWhvd3JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNzk0NTIsImV4cCI6MjEwNDk1NTQ1Mn0.bW7gGoAuye8GnBEQpbs088pEHVkSNqBH-XqFWUim7Xw'
     };
 
-    let supabaseClient = null;
+    let supabase = null;
     if (typeof window !== 'undefined' && window.supabase && typeof window.supabase.createClient === 'function') {
         try {
-            supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
-            console.log('✓ Supabase Client initialized successfully for project:', SUPABASE_CONFIG.projectId);
+            supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+            console.log('✓ Direct Supabase Client connected to Supabase Cloud Database:', SUPABASE_CONFIG.projectId);
         } catch (e) {
-            console.warn('Supabase JS Client notice:', e);
+            console.error('Supabase JS Client initialization error:', e);
         }
     }
 
@@ -597,33 +611,6 @@ const CASE_STUDIES = {
         }
     ];
 
-    // Helper: Direct Supabase REST Request
-    async function supabaseRest(endpoint, options = {}) {
-        const url = `${SUPABASE_CONFIG.url}/rest/v1/${endpoint}`;
-        const headers = {
-            'apikey': SUPABASE_CONFIG.anonKey,
-            'Authorization': `Bearer ${SUPABASE_CONFIG.anonKey}`,
-            'Content-Type': 'application/json',
-            ...(options.headers || {})
-        };
-        try {
-            const res = await fetch(url, { ...options, headers });
-            if (!res.ok) {
-                const text = await res.text();
-                console.warn(`Supabase REST response (${res.status}) [${endpoint}]:`, text);
-                return null;
-            }
-            const contentType = res.headers.get('content-type') || '';
-            if (contentType.includes('application/json')) {
-                return await res.json();
-            }
-            return true;
-        } catch (err) {
-            console.warn('Supabase fetch error:', err);
-            return null;
-        }
-    }
-
     // Ping Supabase Cloud Database to test real-time connectivity
     async function pingSupabaseDatabase() {
         const startTime = Date.now();
@@ -631,69 +618,49 @@ const CASE_STUDIES = {
         const statusText = document.getElementById('cms-db-status-text');
         const floatingText = document.getElementById('cms-floating-status-text');
 
-        try {
-            // First check backend admin health endpoint (which tests Supabase connection using Secret Key)
-            const backendRes = await fetch('/api/admin/health');
-            if (backendRes.ok) {
-                const data = await backendRes.json();
-                const latency = data.supabase?.latencyMs || (Date.now() - startTime);
-                if (statusText) statusText.textContent = `Supabase Backend Live (${latency}ms)`;
-                if (floatingText) floatingText.textContent = `Backend Secret Connected (${latency}ms) · voixkvyylglpomahowrl`;
-                if (statusPill) statusPill.title = `Supabase Backend Connected (${latency}ms) - Project: voixkvyylglpomahowrl (Role: Secret Key)`;
-                return { ok: true, latency };
-            }
+        if (!supabase) {
+            if (statusText) statusText.textContent = 'Supabase SDK Missing';
+            return { ok: false };
+        }
 
-            // Client direct anon key fallback
-            const res = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/`, {
-                headers: {
-                    'apikey': SUPABASE_CONFIG.anonKey,
-                    'Authorization': `Bearer ${SUPABASE_CONFIG.anonKey}`
-                }
-            });
+        try {
+            const { error } = await supabase.from('site_content').select('id').limit(1);
             const latency = Date.now() - startTime;
-            if (statusText) statusText.textContent = `Supabase DB Live (${latency}ms)`;
-            if (floatingText) floatingText.textContent = `Supabase Connected (${latency}ms) · voixkvyylglpomahowrl`;
-            if (statusPill) statusPill.title = `Supabase Connected (${latency}ms) - Project: voixkvyylglpomahowrl`;
-            return { ok: true, latency };
+            if (!error) {
+                if (statusText) statusText.textContent = `Supabase Direct (${latency}ms)`;
+                if (floatingText) floatingText.textContent = `Direct Supabase Live (${latency}ms) · voixkvyylglpomahowrl`;
+                if (statusPill) statusPill.title = `Supabase Cloud Connected (${latency}ms) - Project: voixkvyylglpomahowrl`;
+                return { ok: true, latency };
+            } else {
+                if (statusText) statusText.textContent = `Supabase: ${error.message}`;
+                if (floatingText) floatingText.textContent = `Supabase Error: ${error.message}`;
+                return { ok: false, error };
+            }
         } catch (e) {
-            if (statusText) statusText.textContent = 'Supabase Cloud (Offline/Cache)';
+            if (statusText) statusText.textContent = 'Supabase Cloud (Offline)';
             return { ok: false, error: e };
         }
     }
 
-    // Sync from Supabase Cloud Database on Load
+    // Sync Leads Dataset from Supabase Cloud Database (leads table)
     async function syncFromSupabase() {
+        if (!supabase) return;
         try {
-            let data = null;
-            let backendSucceeded = false;
+            const { data, error } = await supabase
+                .from('leads')
+                .select('*')
+                .order('created_at', { ascending: false });
 
-            // 1. Try Backend API (Secret Key)
-            try {
-                const res = await fetch('/api/admin/leads');
-                if (res.ok) {
-                    const json = await res.json();
-                    backendSucceeded = true;
-                    if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-                        data = json.data;
-                    }
-                }
-            } catch (e) {}
-
-            // 2. Try Client Supabase SDK (Anon Key) only if backend failed
-            if (!backendSucceeded && !data && supabaseClient) {
-                try {
-                    const { data: sdkData, error } = await supabaseClient.from('leads').select('*').order('created_at', { ascending: false });
-                    if (!error && Array.isArray(sdkData) && sdkData.length > 0) {
-                        data = sdkData;
-                    }
-                } catch (e) {}
+            if (error) {
+                console.error('Supabase leads query error:', error);
+                showNotificationToast(`Supabase Error: ${error.message}`);
+                return;
             }
 
-            if (data && Array.isArray(data) && data.length > 0) {
-                // Filter out non-lead sample rows (such as config row)
+            if (Array.isArray(data)) {
                 const validRows = data.filter(row => row.id !== 'site_config_v1');
                 if (validRows.length > 0) {
-                    const remoteSamples = validRows.map(row => ({
+                    inMemorySamples = validRows.map(row => ({
                         id: String(row.id || ('sample-' + Date.now())),
                         title: row.title || row.lead_title || 'Lead Sample',
                         photo: row.photo || row.image_url || '/assets/b2b_lead_gen_graphic.jpg',
@@ -702,136 +669,81 @@ const CASE_STUDIES = {
                         fileName: row.file_name || row.fileName || '',
                         type: row.type || 'B2B Lead Generation',
                         quality: row.quality || '100% Zero-Bounce Verified',
-                        sampleRows: row.sample_rows || []
+                        sampleRows: Array.isArray(row.sample_rows) ? row.sample_rows : []
                     }));
-
-                    const local = getSamples();
-                    const merged = [...remoteSamples];
-
-                    local.forEach(l => {
-                        if (!merged.some(m => m.id === l.id || m.title.trim().toLowerCase() === l.title.trim().toLowerCase())) {
-                            merged.push(l);
-                        }
-                    });
-
-                    inMemorySamples = merged;
-                    saveSamplesToLocalStorage(merged);
-                    renderSamples();
-                    console.log('✓ Synced lead samples with Database (Total:', merged.length, ')');
+                } else {
+                    inMemorySamples = [...DEFAULT_SAMPLES];
                 }
+                renderSamples();
+                console.log('✓ Lead datasets directly loaded from Supabase (Total:', inMemorySamples.length, ')');
             }
         } catch (err) {
-            console.warn('Sync notice:', err);
+            console.error('Supabase leads sync exception:', err);
+            showNotificationToast(`Sync Error: ${err.message}`);
         }
     }
 
-    // Push Lead Sample to Supabase Cloud Database via Backend Secret Key
+    // Push Lead Sample directly to Supabase Cloud Database (leads table)
     async function pushSampleToSupabase(sample, isDelete = false) {
+        if (!supabase) {
+            showNotificationToast('Database Error: Supabase client not initialized');
+            return { success: false, error: 'Supabase client not initialized' };
+        }
         try {
             if (isDelete) {
-                // 1. Delete via Backend Secret Key API
-                try {
-                    await fetch(`/api/admin/leads/${encodeURIComponent(sample.id)}`, {
-                        method: 'DELETE'
-                    });
-                } catch (e) {}
+                const { error } = await supabase
+                    .from('leads')
+                    .delete()
+                    .eq('id', sample.id);
 
-                // 2. Direct client fallback
-                if (supabaseClient) {
-                    try { await supabaseClient.from('leads').delete().eq('id', sample.id); } catch (e) {}
-                    try { await supabaseClient.from('lead_samples').delete().eq('id', sample.id); } catch (e) {}
+                if (error) {
+                    console.error('Supabase lead delete error:', error);
+                    return { success: false, error: error.message };
                 }
-                await supabaseRest(`leads?id=eq.${encodeURIComponent(sample.id)}`, { method: 'DELETE' });
-                await supabaseRest(`lead_samples?id=eq.${encodeURIComponent(sample.id)}`, { method: 'DELETE' });
+                console.log(`✓ Lead sample ${sample.id} deleted directly from Supabase`);
+                return { success: true };
             } else {
                 const payload = {
-                    id: sample.id,
+                    id: String(sample.id),
                     title: sample.title,
-                    location: sample.location,
-                    photo: sample.photo,
-                    sheet_url: sample.sheetUrl,
+                    location: sample.location || 'Global / United States',
+                    photo: sample.photo || '/assets/b2b_lead_gen_graphic.jpg',
+                    image_url: sample.photo || '/assets/b2b_lead_gen_graphic.jpg',
+                    sheet_url: sample.sheetUrl || '/assets/leads_sample_dataset.csv',
                     file_name: sample.fileName || '',
                     type: sample.type || 'B2B Lead Generation',
                     quality: sample.quality || '100% Zero-Bounce Verified',
                     sample_rows: sample.sampleRows || []
                 };
 
-                // 1. Push via Backend Secret Key API (guaranteed bypass of RLS / permissions)
-                let backendOk = false;
-                try {
-                    const res = await fetch('/api/admin/leads', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (res.ok) backendOk = true;
-                } catch (e) {}
+                const { data, error } = await supabase
+                    .from('leads')
+                    .upsert(payload, { onConflict: 'id' });
 
-                // 2. Direct client fallback
-                if (!backendOk) {
-                    if (supabaseClient) {
-                        try { await supabaseClient.from('lead_samples').upsert([payload]); } catch (e) {}
-                        try { await supabaseClient.from('leads').upsert([payload]); } catch (e) {}
-                    }
-
-                    const res = await supabaseRest('leads', {
-                        method: 'POST',
-                        headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!res) {
-                        await supabaseRest('lead_samples', {
-                            method: 'POST',
-                            headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
-                            body: JSON.stringify(payload)
-                        });
-                    }
+                if (error) {
+                    console.error('Supabase lead upsert error:', error);
+                    return { success: false, error: error.message };
                 }
+                console.log(`✓ Lead sample ${sample.id} upserted directly into Supabase`);
+                return { success: true, data };
             }
         } catch (err) {
-            console.warn('Supabase background push note:', err);
+            console.error('Supabase lead save exception:', err);
+            return { success: false, error: err.message };
         }
     }
 
-    // Read stored lead samples or initialize
+    // Direct in-memory lead samples state (pure cloud source of truth)
     function getSamples() {
         if (inMemorySamples && Array.isArray(inMemorySamples) && inMemorySamples.length > 0) {
             return inMemorySamples;
         }
-
-        try {
-            const raw = localStorage.getItem(STORAGE_SAMPLES_KEY);
-            if (raw) {
-                const parsed = JSON.parse(raw);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                    inMemorySamples = parsed.map(s => ({
-                        ...s,
-                        sheetUrl: s.sheetUrl || '/assets/leads_sample_dataset.csv'
-                    }));
-                    return inMemorySamples;
-                }
-            }
-        } catch (e) {
-            console.error('Failed to parse local lead samples:', e);
-        }
-
         inMemorySamples = [...DEFAULT_SAMPLES];
-        saveSamplesToLocalStorage(inMemorySamples);
         return inMemorySamples;
-    }
-
-    function saveSamplesToLocalStorage(samples) {
-        try {
-            localStorage.setItem(STORAGE_SAMPLES_KEY, JSON.stringify(samples));
-        } catch (e) {
-            console.warn('Local storage quota notice (handled gracefully):', e);
-        }
     }
 
     function saveSamples(samples) {
         inMemorySamples = samples;
-        saveSamplesToLocalStorage(samples);
     }
 
     // Instant Toast Notification
@@ -916,29 +828,12 @@ const CASE_STUDIES = {
     ───────────────────────────────────── */
     function getSiteContent() {
         if (inMemorySiteContent) return inMemorySiteContent;
-        try {
-            const raw = localStorage.getItem(STORAGE_SITE_CONTENT_KEY);
-            if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && typeof parsed === 'object') {
-                    inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...parsed };
-                    return inMemorySiteContent;
-                }
-            }
-        } catch (e) {
-            console.warn('Could not read local site content:', e);
-        }
         inMemorySiteContent = { ...DEFAULT_SITE_CONTENT };
         return inMemorySiteContent;
     }
 
     function saveSiteContentLocal(content) {
         inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...content };
-        try {
-            localStorage.setItem(STORAGE_SITE_CONTENT_KEY, JSON.stringify(inMemorySiteContent));
-        } catch (e) {
-            console.warn('Storage quota warning:', e);
-        }
     }
 
     // Apply Site Content to the DOM
@@ -1301,38 +1196,24 @@ const CASE_STUDIES = {
         };
     }
 
-    // Sync Site Content from Supabase Cloud Database on Startup
+    // Sync Site Content from Supabase Cloud Database (site_content table)
     async function syncSiteContentFromSupabase() {
+        if (!supabase) return;
         try {
-            let row = null;
-            let backendSucceeded = false;
+            const { data, error } = await supabase
+                .from('site_content')
+                .select('*')
+                .eq('id', 'site_config_v1')
+                .maybeSingle();
 
-            // 1. Try Backend API (Secret Key)
-            try {
-                const res = await fetch('/api/admin/content');
-                if (res.ok) {
-                    const json = await res.json();
-                    backendSucceeded = true;
-                    if (json.success && json.data) {
-                        row = [json.data];
-                    }
-                }
-            } catch (e) {}
-
-            // 2. Try Supabase Client SDK if initialized (Anon Key) only if backend failed
-            if (!backendSucceeded && !row && supabaseClient) {
-                try {
-                    const { data: sdkData, error } = await supabaseClient.from('site_content').select('*').eq('id', 'site_config_v1');
-                    if (!error && Array.isArray(sdkData) && sdkData.length > 0) {
-                        row = sdkData;
-                    }
-                } catch (e) {}
+            if (error) {
+                console.error('Supabase site_content query error:', error);
+                showNotificationToast(`Supabase Error: ${error.message}`);
+                return;
             }
 
-            if (row && Array.isArray(row) && row.length > 0) {
-                const data = row[0];
+            if (data) {
                 let remoteConfig = null;
-
                 if (data.content && typeof data.content === 'object') {
                     remoteConfig = data.content;
                 } else if (data.file_name) {
@@ -1345,83 +1226,47 @@ const CASE_STUDIES = {
                 }
 
                 if (remoteConfig && typeof remoteConfig === 'object') {
-                    const merged = { ...DEFAULT_SITE_CONTENT, ...remoteConfig };
-                    saveSiteContentLocal(merged);
-                    applySiteContentToDOM(merged);
-                    populateCmsForm(merged);
-                    console.log('✓ Site content permanently synced from Database');
+                    inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...remoteConfig };
+                    applySiteContentToDOM(inMemorySiteContent);
+                    populateCmsForm(inMemorySiteContent);
+                    console.log('✓ Site content directly synchronized from Supabase (site_content)');
                 }
             }
         } catch (err) {
-            console.warn('Site content sync notice:', err);
+            console.error('Supabase site_content sync exception:', err);
+            showNotificationToast(`Sync Error: ${err.message}`);
         }
     }
 
-    // Push Site Content to Supabase Database via Backend Secret Key
+    // Push Site Content to Supabase Database (site_content table)
     async function pushSiteContentToSupabase(content) {
+        if (!supabase) {
+            showNotificationToast('Database Error: Supabase client not initialized');
+            return { success: false, error: 'Supabase client not initialized' };
+        }
         try {
-            // 1. Send to Backend API (uses server-side Supabase Secret Key for 100% reliable upsert)
-            let backendSaved = false;
-            try {
-                const res = await fetch('/api/admin/content', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content })
-                });
-                if (res.ok) {
-                    backendSaved = true;
-                }
-            } catch (e) {}
-
             const payload = {
                 id: 'site_config_v1',
-                title: 'SITE_CONTENT_CONFIG',
-                location: content.badgeLoc || 'Dhaka, Bangladesh',
-                photo: content.heroPhoto || '/assets/b2b_lead_gen_graphic.jpg',
-                type: 'SITE_CONFIG',
-                quality: '100% Zero-Bounce Verified',
-                sheet_url: '/assets/leads_sample_dataset.csv',
+                content: content,
                 file_name: JSON.stringify(content),
-                sample_rows: [content]
+                updated_at: new Date().toISOString()
             };
 
-            // 2. Direct client fallback if backend unreachable
-            if (!backendSaved) {
-                if (supabaseClient) {
-                    try {
-                        await supabaseClient.from('site_content').upsert([{
-                            id: 'site_config_v1',
-                            content: content,
-                            file_name: JSON.stringify(content),
-                            updated_at: new Date().toISOString()
-                        }]);
-                    } catch (e) {}
-                    try {
-                        await supabaseClient.from('leads').upsert([payload]);
-                    } catch (e) {}
-                }
+            const { data, error } = await supabase
+                .from('site_content')
+                .upsert(payload, { onConflict: 'id' });
 
-                let res = await supabaseRest('site_content', {
-                    method: 'POST',
-                    headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
-                    body: JSON.stringify({
-                        id: 'site_config_v1',
-                        content: content,
-                        file_name: JSON.stringify(content),
-                        updated_at: new Date().toISOString()
-                    })
-                });
-
-                if (!res) {
-                    await supabaseRest('leads', {
-                        method: 'POST',
-                        headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
-                        body: JSON.stringify(payload)
-                    });
-                }
+            if (error) {
+                console.error('Supabase site_content save error:', error);
+                return { success: false, error: error.message };
             }
+
+            inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...content };
+            console.log('✓ Site content saved directly to Supabase site_content table');
+            return { success: true, data };
         } catch (err) {
-            console.warn('Supabase site content push notice:', err);
+            console.error('Supabase site_content save exception:', err);
+            return { success: false, error: err.message };
         }
     }
 
@@ -1562,7 +1407,7 @@ const CASE_STUDIES = {
                     <line x1="2" y1="12" x2="6" y2="12"></line>
                     <line x1="18" y1="12" x2="22" y2="12"></line>
                 </svg>
-                <span>Saving to Database...</span>
+                <span>Saving to Supabase...</span>
             `;
         });
 
@@ -1570,28 +1415,33 @@ const CASE_STUDIES = {
         saveSiteContentLocal(updated);
         applySiteContentToDOM(updated);
 
-        // Persist to Supabase Cloud Database
-        await pushSiteContentToSupabase(updated);
+        // Persist directly to Supabase Cloud Database via server API
+        const saveRes = await pushSiteContentToSupabase(updated);
+
+        allSaveBtns.forEach(btn => {
+            btn.disabled = false;
+            btn.innerHTML = saveRes.success ? `
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Saved to Supabase ✓</span>
+            ` : `
+                <span>Save Error ⚠️</span>
+            `;
+        });
+
+        if (saveRes.success) {
+            showNotificationToast('Website changes saved directly to Supabase (site_content) ✓');
+        } else {
+            showNotificationToast(`Database Error: ${saveRes.error}`);
+        }
 
         setTimeout(() => {
             allSaveBtns.forEach(btn => {
-                btn.disabled = false;
-                btn.innerHTML = `
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span>Saved & Synced ✓</span>
-                `;
+                const orig = btn.getAttribute('data-orig-html');
+                if (orig) btn.innerHTML = orig;
             });
-            showNotificationToast('Website changes saved to database successfully!');
-
-            setTimeout(() => {
-                allSaveBtns.forEach(btn => {
-                    const orig = btn.getAttribute('data-orig-html');
-                    if (orig) btn.innerHTML = orig;
-                });
-            }, 3000);
-        }, 500);
+        }, 3500);
     }
 
     // Attach click listeners to all CMS save buttons
@@ -2214,12 +2064,15 @@ const CASE_STUDIES = {
             closeModal('sample-editor-modal');
             renderSamples();
 
-            // Push to Supabase Cloud Database asynchronously
+            // Push directly to Supabase Cloud Database (leads table)
             if (targetSample) {
-                pushSampleToSupabase(targetSample, false);
+                const pushRes = await pushSampleToSupabase(targetSample, false);
+                if (pushRes && pushRes.success) {
+                    showNotificationToast(id ? 'Lead sample updated in Supabase ✓' : '✓ Lead sample saved to Supabase (leads)!');
+                } else {
+                    showNotificationToast(`Supabase Error: ${pushRes?.error || 'Save failed'}`);
+                }
             }
-
-            showNotificationToast(id ? 'Lead sample updated & synced!' : '✓ Lead sample published to client page & database!');
         });
     }
 
@@ -2248,7 +2101,7 @@ const CASE_STUDIES = {
     };
 
     // Global Action: Delete Lead Sample
-    window.deleteLeadSample = function(id, buttonEl) {
+    window.deleteLeadSample = async function(id, buttonEl) {
         const samples = getSamples();
         const sample = samples.find(s => s.id === id);
         if (!sample) return;
@@ -2256,11 +2109,15 @@ const CASE_STUDIES = {
         if (buttonEl) {
             if (buttonEl.classList.contains('confirm-delete-active')) {
                 // Second click! Execute deletion
-                const updated = samples.filter(s => s.id !== id);
-                saveSamples(updated);
-                renderSamples();
-                pushSampleToSupabase(sample, true);
-                showNotificationToast('Lead sample removed.');
+                const delRes = await pushSampleToSupabase(sample, true);
+                if (delRes && delRes.success) {
+                    const updated = samples.filter(s => s.id !== id);
+                    saveSamples(updated);
+                    renderSamples();
+                    showNotificationToast('Lead sample deleted from Supabase ✓');
+                } else {
+                    showNotificationToast(`Supabase Delete Error: ${delRes?.error || 'Failed to delete'}`);
+                }
             } else {
                 // First click! Mark it as confirming
                 buttonEl.classList.add('confirm-delete-active');
@@ -2285,11 +2142,15 @@ const CASE_STUDIES = {
             }
         } else {
             // Fallback
-            const updated = samples.filter(s => s.id !== id);
-            saveSamples(updated);
-            renderSamples();
-            pushSampleToSupabase(sample, true);
-            showNotificationToast('Lead sample removed.');
+            const delRes = await pushSampleToSupabase(sample, true);
+            if (delRes && delRes.success) {
+                const updated = samples.filter(s => s.id !== id);
+                saveSamples(updated);
+                renderSamples();
+                showNotificationToast('Lead sample deleted from Supabase ✓');
+            } else {
+                showNotificationToast(`Supabase Delete Error: ${delRes?.error || 'Failed to delete'}`);
+            }
         }
     };
 
