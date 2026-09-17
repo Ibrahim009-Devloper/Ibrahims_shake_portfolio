@@ -245,36 +245,36 @@
 /* ── 5. Case Study Modal Data & Handlers ── */
 const CASE_STUDIES = {
     'b2b-leads': {
-        title: 'B2B Decision Maker Prospect List',
-        category: 'B2B Lead Generation · Outbound Sales',
-        objective: 'Build a targeted list of 500+ verified decision-makers (Founders, VP of Sales, Operations Directors) for a B2B SaaS outreach campaign.',
-        source: 'LinkedIn Sales Navigator, Apollo, Crunchbase, Company About & Team pages.',
+        title: 'Targeted B2B Decision-Maker Prospect List [Sample Dataset]',
+        category: 'B2B Lead Generation · Outbound Sales · Sample Dataset',
+        objective: 'Build a targeted demonstration list of verified decision-makers (Founders, VP of Sales, Operations Directors) for a B2B SaaS outreach campaign.',
+        source: 'LinkedIn Sales Navigator, Apollo, Crunchbase, Company Team pages.',
         fields: ['Full Name', 'Job Title', 'Work Email', 'Company Name', 'Website', 'Headcount', 'HQ Location', 'LinkedIn Profile URL', 'Verification Status'],
         process: [
             'Filter target companies by ICP (B2B SaaS, 15–200 employees, US/UK/Canada).',
             'Identify primary and secondary decision-makers per company.',
             'Extract direct work emails using syntax lookup & MX pattern matching.',
-            'Run SMTP ping verification to guarantee 0% bounce rate.',
-            'Format and clean data into ready-to-import CSV/Excel.'
+            'Perform domain MX validation and syntax verification to minimize bounce rates.',
+            'Format and clean data into ready-to-import CSV/Excel (.xlsx).'
         ],
-        tools: ['Python', 'Apollo', 'NeverBounce', 'Excel / CSV'],
+        tools: ['Python', 'Apollo', 'Email Syntax & MX Verifier', 'Excel (.xlsx) / CSV'],
         sampleRows: [
-            { name: 'Alex Henderson', title: 'VP of Sales', company: 'NovaScale Media', email: 'alex@novascale.io', loc: 'Austin, TX', status: 'Verified Deliverable' },
-            { name: 'Sarah Miller', title: 'Co-Founder & COO', company: 'Vanguard Logistics', email: 'sarah.m@vanguard.co', loc: 'Chicago, IL', status: 'Verified Deliverable' },
-            { name: 'David Zhao', title: 'Head of Growth', company: 'CloudPulse Tech', email: 'dzhao@cloudpulse.net', loc: 'San Francisco, CA', status: 'Verified Deliverable' },
-            { name: 'Elena Rostova', title: 'Director of RevOps', company: 'OmniFlow Solutions', email: 'elena@omniflow.com', loc: 'New York, NY', status: 'Verified Deliverable' }
+            { name: 'Alex Henderson', title: 'VP of Sales', company: 'NovaScale Media', email: 'alex@novascale.io', loc: 'Austin, TX', status: 'Deliverable (MX Valid)' },
+            { name: 'Sarah Miller', title: 'Co-Founder & COO', company: 'Vanguard Logistics', email: 'sarah.m@vanguard.co', loc: 'Chicago, IL', status: 'Deliverable (MX Valid)' },
+            { name: 'David Zhao', title: 'Head of Growth', company: 'CloudPulse Tech', email: 'dzhao@cloudpulse.net', loc: 'San Francisco, CA', status: 'Deliverable (MX Valid)' },
+            { name: 'Elena Rostova', title: 'Director of RevOps', company: 'OmniFlow Solutions', email: 'elena@omniflow.com', loc: 'New York, NY', status: 'Deliverable (MX Valid)' }
         ]
     },
     'gmaps-leads': {
-        title: 'Google Maps Commercial Business Directory',
-        category: 'Google Maps Lead Gen · Python & Playwright',
-        objective: 'Extract comprehensive local business contact data across 10 major metropolitan counties for localized B2B service outreach.',
-        source: 'Google Maps Places directory and individual company landing pages.',
+        title: 'Google Maps Commercial Business Directory [Sample Dataset]',
+        category: 'Google Maps Lead Gen · Python & Playwright · Sample Dataset',
+        objective: 'Extract comprehensive local business contact data across designated commercial regions for localized B2B service outreach.',
+        source: 'Google Maps Places directory and public company websites.',
         fields: ['Business Name', 'Category / Niche', 'Direct Phone Number', 'Full Street Address', 'Rating', 'Total Reviews', 'Website URL', 'Contact Email'],
         process: [
             'Construct automated Playwright scraper targeting designated geo-coordinates.',
             'Extract place cards with infinite scrolling & dynamic DOM rendering.',
-            'Crawl discovered company websites to locate contact email and contact forms.',
+            'Crawl discovered company websites to locate contact emails and public touchpoints.',
             'Standardize phone numbers into clean international E.164 format.',
             'Deduplicate by place ID and domain.'
         ],
@@ -286,19 +286,19 @@ const CASE_STUDIES = {
         ]
     },
     'ecommerce-scraping': {
-        title: 'E-commerce Catalog & Multi-Variant Scraping',
-        category: 'Web Scraping · Selenium & Python',
-        objective: 'Extract over 10,000 product SKUs across deep nested categories with pricing, inventory levels, and specifications.',
-        source: 'Target e-commerce retail portal with heavy dynamic JavaScript rendering.',
+        title: 'E-commerce Catalog & Multi-Variant Scraping [Sample Dataset]',
+        category: 'Web Scraping · Selenium & Python · Sample Dataset',
+        objective: 'Extract product SKUs across deep nested categories with pricing, inventory levels, and specifications for catalog benchmarking.',
+        source: 'Public e-commerce retail catalogs with dynamic JavaScript rendering.',
         fields: ['SKU / Product ID', 'Product Title', 'Current Price', 'MSRP / Original Price', 'Category Hierarchy', 'Availability Status', 'Image URL'],
         process: [
             'Configure Selenium webdriver with stealth headers to bypass bot blocks.',
             'Traverse recursive category navigation and paginated infinite lists.',
-            'Parse structured schema.org JSON-LD microdata for 100% attribute fidelity.',
+            'Parse structured schema.org JSON-LD microdata for attribute fidelity.',
             'Clean currency formatting and separate brand vs. product descriptors.',
-            'Deliver structured JSON and relational CSV tables.'
+            'Deliver structured JSON and relational CSV / Excel tables.'
         ],
-        tools: ['Python', 'Selenium', 'Regex', 'JSON / CSV'],
+        tools: ['Python', 'Selenium', 'Regex', 'JSON / CSV / Excel'],
         sampleRows: [
             { sku: 'PROD-88219', title: 'Industrial Ergonomic Task Chair', price: '$289.00', msrp: '$349.00', cat: 'Office Furniture > Seating', status: 'In Stock' },
             { sku: 'PROD-88224', title: 'Dual-Motor Standing Desk 60"', price: '$499.00', msrp: '$599.00', cat: 'Office Furniture > Desks', status: 'In Stock' },
@@ -616,7 +616,7 @@ const CASE_STUDIES = {
         {
             title: 'B2B Lead Generation',
             desc: 'Identifying ideal prospect accounts and high-intent decision-makers matched to your ICP criteria.',
-            tags: 'Verified Emails · Targeted Personas · Zero Bounces'
+            tags: 'Validated Contacts · Targeted Personas · CRM Ready'
         },
         {
             title: 'Business & Prospect List Building',
@@ -641,7 +641,7 @@ const CASE_STUDIES = {
         {
             title: 'Data Cleaning & Organization',
             desc: 'Deduplication, formatting, phone number normalization, and verification into clean, readable Excel / CSV files.',
-            tags: 'Deduplication · E.164 Formatting · Excel / CSV'
+            tags: 'Deduplication · E.164 Formatting · Excel & CSV Formats'
         }
     ];
 
@@ -655,23 +655,23 @@ const CASE_STUDIES = {
         heroLine1: 'Turning raw web data',
         heroMark: 'qualified leads',
         heroLead: 'Specialist in building targeted prospect lists, scraping local business directories, and delivering clean, ready-to-use B2B datasets powered by Python, Playwright, and Selenium.',
-        heroProof: 'Zero-bounce deliverability · Deduplicated records · Custom business fields',
+        heroProof: 'Domain & MX verification · Deduplicated records · CRM-ready Excel & CSV',
         heroPhoto: '/assets/b2b_lead_gen_graphic.jpg',
-        aboutBio: 'I help businesses collect targeted business and prospect data through web research, scraping, and structured data collection. I focus on delivering clean, organized, and practical datasets that can support sales and marketing research without bloated fluff or unverified contacts.',
+        aboutBio: 'I help businesses collect targeted prospect data and build high-quality contact lists through systematic web research, custom web scraping, and structured data collection. I focus on delivering clean, organized, and practical datasets ready for cold email campaigns, outbound SDR workflows, and CRM imports without unverified contacts or bloated fluff.',
         aboutDegree: 'Diploma in Agriculture',
         aboutInst: 'Agriculture Training Institute, Gaibandha',
         aboutEduYears: '2019 – 2023',
-        statYears: '5+',
-        statProjects: '350+',
-        statQuality: '100%',
-        statClients: '120+',
+        statYears: 'Custom ICP',
+        statProjects: 'Clean & Deduped',
+        statQuality: 'CRM-Ready',
+        statClients: 'Python Powered',
         services: DEFAULT_SERVICES,
         pipeHeadline: 'Robust Pipelines Built for Scale',
         pipeCard1Sub: 'Custom scripts utilizing Playwright and Selenium to bypass bot detection, handle dynamic JavaScript hydration, and extract clean datasets at high speeds.',
         pipeCard2Sub: 'Strict deduplication by domain and company name, standardizing phone numbers to international E.164 formats, and validating email syntax against live mail exchange records.',
         pipeCard3Sub: 'Deep parsing of local business listings across specific regions, cities, and zip codes to discover direct phone numbers, business hours, and operational status.',
-        quoteText: '"Clean, verified data is the foundation of high-converting outbound sales. We eliminate bounce rates and bad contacts before they reach your CRM."',
-        quoteAuthor: 'MD. Ibrahim Shake Shuvo · Lead Generation & Scraping Specialist',
+        quoteText: '"Clean, structured data is the foundation of effective outbound outreach. I focus on custom targeting, rigorous deduplication, and ready-to-use delivery so sales teams can focus on conversations."',
+        quoteAuthor: 'MD. Ibrahim Shake Shuvo · B2B Lead Generation & Web Scraping Specialist',
         contactHeadline: "Let's Discuss Your Data Needs",
         contactSub: 'Tell me about your target audience, required data fields, or the website you need extracted. I typically reply within 12 hours.',
         contactEmail: 'ibrahimshakeshuvo100@gmail.com',
@@ -683,13 +683,13 @@ const CASE_STUDIES = {
 
         // Work Projects & Featured Images
         workP1Img: '/assets/b2b_lead_gen_graphic.jpg',
-        workP1Title: 'Targeted B2B Decision-Maker Prospect List for Outbound Sales',
-        workP1Summary: 'Researched, verified, and structured high-intent decision-makers across B2B technology companies. Every email address is verified via SMTP ping to eliminate campaign bounces.',
+        workP1Title: 'Targeted B2B Decision-Maker Prospect List for Outbound Sales [Sample Dataset]',
+        workP1Summary: 'Researched, verified, and structured high-intent decision-makers across B2B technology companies. Every email address undergoes syntax and MX validation to minimize campaign bounce risks.',
         workP2Img: '/assets/gmaps_scraping.jpg',
-        workP2Title: 'Automated Google Maps Local Business Directory Extraction',
+        workP2Title: 'Automated Google Maps Local Business Directory Extraction [Sample Dataset]',
         workP2Summary: 'Deployed headless browser automation using Playwright to extract localized company profiles, phone numbers, ratings, and websites across commercial metropolitan centers.',
         workP3Img: '/assets/b2b_dashboard.jpg',
-        workP3Title: 'E-commerce Multi-Category Catalog & Pricing Extraction',
+        workP3Title: 'E-commerce Multi-Category Catalog & Pricing Extraction [Sample Dataset]',
         workP3Summary: 'Automated deep pagination across dynamic JavaScript pages to scrape thousands of product SKUs, regular and discounted pricing, availability flags, and category hierarchies.'
     };
 
@@ -697,16 +697,16 @@ const CASE_STUDIES = {
     const DEFAULT_SAMPLES = [
         {
             id: 'lead-sample-1',
-            title: 'High-Quality B2B Decision Maker Prospect List',
+            title: 'Targeted B2B Decision Maker Prospect List [Sample Dataset]',
             photo: '/assets/b2b_lead_gen_graphic.jpg',
             type: 'B2B Lead Generation',
             location: 'United States & Canada (Global)',
-            quality: '100% Verified & Zero-Bounce (NeverBounce Tested)',
-            records: '5,000+ Verified Contacts',
+            quality: 'Sample Dataset · Syntax & MX Validated',
+            records: '5,000+ Sample Records',
             format: 'Excel (.xlsx), CSV, Google Sheets',
             fields: 'Full Name, Job Title, Work Email, Direct Phone, Company, LinkedIn, Website, Revenue',
             sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'B2B_Decision_Makers_5000_Verified.csv',
+            fileName: 'B2B_Decision_Makers_5000_Sample.csv',
             sampleRows: [
                 { name: 'David Miller', title: 'VP of Commercial Sales', company: 'Apex Energy Systems', email: 'd.miller@apexenergy.com', phone: '+1 (512) 488-2910', location: 'Austin, TX, USA' },
                 { name: 'Sarah Jenkins', title: 'Chief Executive Officer', company: 'Solstice Power Corp', email: 'sjenkins@solsticepower.io', phone: '+1 (415) 670-3841', location: 'San Francisco, CA, USA' },
@@ -717,16 +717,16 @@ const CASE_STUDIES = {
         },
         {
             id: 'lead-sample-2',
-            title: 'Google Maps Local Business Directory Extraction',
+            title: 'Google Maps Local Business Directory Extraction [Sample Dataset]',
             photo: '/assets/gmaps_scraping.jpg',
             type: 'Google Maps Leads',
             location: 'New York, Texas & Florida, USA',
-            quality: '99.8% Email Deliverability & Direct Dial Phone',
-            records: '12,400+ Business Profiles',
+            quality: 'Sample Dataset · Public Directory Extraction',
+            records: '12,400+ Sample Profiles',
             format: 'Excel (.xlsx), CSV, Google Sheets',
             fields: 'Business Name, Category, Street Address, Rating, Reviews Count, Direct Phone, Website, Email',
             sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'Google_Maps_US_Dental_Practices.csv',
+            fileName: 'Google_Maps_US_Dental_Sample.csv',
             sampleRows: [
                 { name: 'Empire State Orthodontics', title: 'Practice Owner / Head Dentist', company: 'Empire Ortho NY', email: 'contact@empireorthony.com', phone: '+1 (212) 555-0192', location: 'Manhattan, NY, USA' },
                 { name: 'Lonestar Dental Group', title: 'Managing Director', company: 'Lonestar Dental Care', email: 'info@lonestardental.org', phone: '+1 (713) 555-0844', location: 'Houston, TX, USA' },
@@ -736,16 +736,16 @@ const CASE_STUDIES = {
         },
         {
             id: 'lead-sample-3',
-            title: 'LinkedIn C-Suite & VP Tech Executives Dataset',
+            title: 'Tech Executives Decision Makers Dataset [Sample Dataset]',
             photo: '/assets/b2b_dashboard.jpg',
             type: 'LinkedIn Decision Makers',
             location: 'London & Manchester, United Kingdom',
-            quality: 'Tier-1 C-Suite Decision Makers Only (CEO, Founder, VP)',
-            records: '3,200+ Verified Profiles',
+            quality: 'Sample Dataset · C-Suite & VP Personas',
+            records: '3,200+ Sample Profiles',
             format: 'Excel (.xlsx), CSV, Google Sheets',
-            fields: 'Executive Name, Headline, Verified Work Email, Direct Mobile, Company Size, LinkedIn Profile',
+            fields: 'Executive Name, Headline, Work Email, Direct Mobile, Company Size, LinkedIn Profile',
             sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'UK_Tech_Execs_Decision_Makers.csv',
+            fileName: 'UK_Tech_Execs_Sample.csv',
             sampleRows: [
                 { name: 'Oliver Wright', title: 'Chief Technology Officer', company: 'FinPulse Systems UK', email: 'o.wright@finpulse.co.uk', phone: '+44 20 7946 0912', location: 'London, UK' },
                 { name: 'Emma Watson-Reid', title: 'VP of Product Engineering', company: 'CloudNexus AI', email: 'emma@cloudnexus.io', phone: '+44 161 496 0381', location: 'Manchester, UK' },
@@ -755,16 +755,16 @@ const CASE_STUDIES = {
         },
         {
             id: 'lead-sample-4',
-            title: 'Shopify DTC E-Commerce Founders & Marketing Leads',
+            title: 'Shopify DTC E-Commerce Founders & Marketing Leads [Sample Dataset]',
             photo: '/assets/b2b_lead_gen_graphic.jpg',
             type: 'E-Commerce & DTC Brands',
             location: 'USA, Canada & Australia',
-            quality: '100% Active Physical Locations & Verified Phone',
-            records: '1,850+ Verified Brand Owners',
+            quality: 'Sample Dataset · Brand Directory Research',
+            records: '1,850+ Sample Records',
             format: 'Excel (.xlsx), CSV, Google Sheets',
             fields: 'Brand Name, Store URL, Business Email, Direct Phone, Location, Instagram, Meta Ads Status',
             sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'DTC_ECommerce_Founders_Dataset.csv',
+            fileName: 'DTC_ECommerce_Founders_Sample.csv',
             sampleRows: [
                 { name: "'47 Brand (Apparel)", title: 'Store Owner / Brand Team', company: '47brand.myshopify.com', email: 'templ@e-product.css', phone: '+1 (394) 225-3045', location: 'USA' },
                 { name: '100% PURE (Beauty)', title: 'Founder & Operations Lead', company: '100percentpure.com', email: 'info@puritycosmetics.com', phone: '+1 (415) 814-9988', location: 'San Jose, CA, USA' },
@@ -832,7 +832,7 @@ const CASE_STUDIES = {
                         sheetUrl: row.sheet_url || row.sample_file || row.sheetUrl || '/assets/leads_sample_dataset.csv',
                         fileName: row.file_name || row.fileName || '',
                         type: row.type || 'B2B Lead Generation',
-                        quality: row.quality || '100% Zero-Bounce Verified',
+                        quality: row.quality || 'Sample Dataset · Syntax & MX Validated',
                         sampleRows: Array.isArray(row.sample_rows) ? row.sample_rows : []
                     }));
                 } else {
@@ -876,7 +876,7 @@ const CASE_STUDIES = {
                     sheet_url: sample.sheetUrl || '/assets/leads_sample_dataset.csv',
                     file_name: sample.fileName || '',
                     type: sample.type || 'B2B Lead Generation',
-                    quality: sample.quality || '100% Zero-Bounce Verified',
+                    quality: sample.quality || 'Sample Dataset · Syntax & MX Validated',
                     sample_rows: sample.sampleRows || []
                 };
 
@@ -1170,6 +1170,117 @@ const CASE_STUDIES = {
         if (Array.isArray(content.services) && content.services.length > 0) {
             renderServicesBoard(content.services);
         }
+
+        // Technical SEO Sync: Connect meta tags and structured schema to Admin-managed data
+        updateDynamicSeoMetadata(content);
+    }
+
+    // Technical SEO: Dynamically synchronize document title, meta tags, Open Graph, and JSON-LD schema with Admin-managed CMS data
+    function updateDynamicSeoMetadata(content) {
+        if (!content || typeof document === 'undefined') return;
+
+        try {
+            // 1. Title Tag
+            const fullName = content.fullName || 'MD. Ibrahim Shake Shuvo';
+            const role1 = content.badgeRole1 || 'B2B Lead Generation';
+            const role2 = content.badgeRole2 || 'Web Scraping';
+            const pageTitle = `${fullName} | ${role1} & ${role2} Specialist`;
+            if (document.title !== pageTitle) {
+                document.title = pageTitle;
+            }
+
+            // 2. Meta Tags (Description, Open Graph, Twitter)
+            const metaDesc = content.heroLead 
+                ? `${content.heroLead} High-accuracy prospect lists, business directories, and web data pipelines.` 
+                : 'B2B Lead Generation and Web Scraping Specialist. High-accuracy prospect lists, business directories, Google Maps extraction, and automated data pipelines using Python and Playwright.';
+
+            function setMetaTag(attributeName, attributeValue, contentValue) {
+                if (!contentValue) return;
+                let meta = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
+                if (!meta) {
+                    meta = document.createElement('meta');
+                    meta.setAttribute(attributeName, attributeValue);
+                    document.head.appendChild(meta);
+                }
+                meta.setAttribute('content', contentValue);
+            }
+
+            setMetaTag('name', 'description', metaDesc);
+            setMetaTag('property', 'og:title', pageTitle);
+            setMetaTag('property', 'og:description', metaDesc);
+            setMetaTag('name', 'twitter:title', pageTitle);
+            setMetaTag('name', 'twitter:description', metaDesc);
+
+            // Canonical Link & Open Graph URL
+            const canonicalHref = (window.location && window.location.origin) ? `${window.location.origin}/` : 'https://ibrahimshake.com/';
+            let canonicalLink = document.querySelector('link[rel="canonical"]');
+            if (canonicalLink) {
+                canonicalLink.setAttribute('href', canonicalHref);
+            }
+            setMetaTag('property', 'og:url', canonicalHref);
+
+            // Images
+            if (content.heroPhoto) {
+                const absolutePhoto = content.heroPhoto.startsWith('http') 
+                    ? content.heroPhoto 
+                    : ((window.location && window.location.origin) ? `${window.location.origin}${content.heroPhoto}` : `https://ibrahimshake.com${content.heroPhoto}`);
+                setMetaTag('property', 'og:image', absolutePhoto);
+                setMetaTag('name', 'twitter:image', absolutePhoto);
+            }
+
+            // 3. Schema.org JSON-LD Structured Data
+            const jsonLdScript = document.getElementById('structured-data-jsonld');
+            if (jsonLdScript) {
+                const schemaText = jsonLdScript.textContent || '{}';
+                const schemaData = JSON.parse(schemaText);
+                if (schemaData && Array.isArray(schemaData['@graph'])) {
+                    schemaData['@graph'].forEach(node => {
+                        if (node['@type'] === 'Person') {
+                            if (content.fullName) node.name = content.fullName;
+                            node.jobTitle = `${role1} & ${role2} Specialist`;
+                            if (content.contactEmail) node.email = `mailto:${content.contactEmail}`;
+                            if (content.contactWhatsapp) node.telephone = content.contactWhatsapp;
+                            if (content.contactLocation && node.address) {
+                                node.address.addressLocality = content.contactLocation;
+                            }
+                            const socials = [content.contactLinkedin, content.contactGithub, content.contactFacebook].filter(Boolean);
+                            if (socials.length > 0) node.sameAs = socials;
+                            if (content.heroPhoto) {
+                                node.image = content.heroPhoto.startsWith('http') 
+                                    ? content.heroPhoto 
+                                    : ((window.location && window.location.origin) ? `${window.location.origin}${content.heroPhoto}` : `https://ibrahimshake.com${content.heroPhoto}`);
+                            }
+                        } else if (node['@type'] === 'ProfessionalService') {
+                            if (content.fullName) node.name = `${content.fullName} - Lead Generation & Web Scraping Services`;
+                            if (content.contactEmail) node.email = content.contactEmail;
+                            if (content.contactWhatsapp) node.telephone = content.contactWhatsapp;
+                            if (content.contactLocation && node.address) {
+                                node.address.addressLocality = content.contactLocation;
+                            }
+                            if (Array.isArray(content.services) && content.services.length > 0) {
+                                node.hasOfferCatalog = {
+                                    '@type': 'OfferCatalog',
+                                    'name': 'B2B Lead Generation & Web Scraping Services',
+                                    'itemListElement': content.services.map(s => ({
+                                        '@type': 'Offer',
+                                        'itemOffered': {
+                                            '@type': 'Service',
+                                            'name': s.title,
+                                            'description': s.desc
+                                        }
+                                    }))
+                                };
+                            }
+                        } else if (node['@type'] === 'WebSite') {
+                            if (content.fullName) node.name = `${content.fullName} Portfolio`;
+                        }
+                    });
+                    jsonLdScript.textContent = JSON.stringify(schemaData, null, 2);
+                }
+            }
+        } catch (seoErr) {
+            console.warn('SEO dynamic metadata synchronization note:', seoErr);
+        }
     }
 
     // Render Services board on the main site
@@ -1288,7 +1399,7 @@ const CASE_STUDIES = {
                 </div>
                 <div class="form-group">
                     <label class="form-label" style="font-size:11px;">Feature Tags (separated by ·)</label>
-                    <input type="text" class="form-input cms-srv-tags" value="${escapeHtml(s.tags || '')}" placeholder="Verified Emails · Targeted Personas · Zero Bounces" />
+                    <input type="text" class="form-input cms-srv-tags" value="${escapeHtml(s.tags || '')}" placeholder="Validated Contacts · Targeted Personas · CRM Ready" />
                 </div>
             </div>
         `).join('');
@@ -1872,7 +1983,7 @@ const CASE_STUDIES = {
             return `
                 <article class="lead-sample-card" data-id="${escapeHtml(sample.id)}">
                     <div class="lead-card-media" onclick="window.inspectSamplePreview('${escapeHtml(sample.id)}')">
-                        <img class="lead-card-img" src="${escapeHtml(sample.photo || '/assets/b2b_lead_gen_graphic.jpg')}" alt="${escapeHtml(sample.title)}" loading="lazy" onerror="this.src='/assets/b2b_lead_gen_graphic.jpg'" />
+                        <img class="lead-card-img" src="${escapeHtml(sample.photo || '/assets/b2b_lead_gen_graphic.jpg')}" alt="${escapeHtml(sample.title)} - Sample dataset preview" loading="lazy" decoding="async" onerror="this.src='/assets/b2b_lead_gen_graphic.jpg'" />
                         <div class="lead-card-overlay"></div>
                         <div class="lead-card-badges">
                             <span class="lead-type-badge">${escapeHtml(sample.type || 'B2B Leads')}</span>
@@ -1880,7 +1991,7 @@ const CASE_STUDIES = {
                                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span>Verified</span>
+                                <span>Sample Dataset</span>
                             </span>
                         </div>
                     </div>
@@ -1897,13 +2008,13 @@ const CASE_STUDIES = {
                         <h3 class="lead-card-title">${escapeHtml(sample.title)}</h3>
 
                         <div class="lead-card-footer">
-                            <button type="button" class="btn-lead-download" onclick="window.downloadLeadSheet('${escapeHtml(sample.id)}')" title="Download spreadsheet for ${escapeHtml(sample.title)}">
+                            <button type="button" class="btn-lead-download" onclick="window.downloadLeadSheet('${escapeHtml(sample.id)}')" title="Download sample spreadsheet for ${escapeHtml(sample.title)}">
                                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                     <polyline points="7 10 12 15 17 10"></polyline>
                                     <line x1="12" y1="15" x2="12" y2="3"></line>
                                 </svg>
-                                <span>Download Sample Sheet</span>
+                                <span>Download Sample (.csv / .xlsx)</span>
                             </button>
 
                             ${isAdmin ? `
@@ -2306,7 +2417,7 @@ const CASE_STUDIES = {
                     title,
                     type: 'B2B Lead Generation',
                     location: location || 'Global / United States',
-                    quality: '100% Zero-Bounce Verified',
+                    quality: 'Sample Dataset · Syntax & MX Validated',
                     sheetUrl,
                     fileName: fileName || `${title.replace(/[^a-zA-Z0-9_-]/g, '_')}_dataset.csv`,
                     photo,
@@ -2446,8 +2557,8 @@ const CASE_STUDIES = {
         if (titleEl) titleEl.textContent = sample.title;
         if (typeEl) typeEl.textContent = sample.type || 'B2B LEAD GENERATION';
         if (locEl) locEl.textContent = `📍 ${sample.location || 'Global'}`;
-        if (qualEl) qualEl.textContent = `✓ ${sample.quality || '100% Zero-Bounce'}`;
-        if (countEl) countEl.textContent = `📊 ${sample.records || 'Verified Dataset'}`;
+        if (qualEl) qualEl.textContent = `✓ ${sample.quality || 'Sample Quality'}`;
+        if (countEl) countEl.textContent = `📊 ${sample.records || 'Sample Records'}`;
         if (imgEl) imgEl.src = sample.photo || '/assets/b2b_lead_gen_graphic.jpg';
 
         const rows = sample.sampleRows || [
@@ -3066,4 +3177,309 @@ const CASE_STUDIES = {
     syncSiteContentFromSupabase();
     window.addEventListener('hashchange', handleRouting);
     handleRouting();
+})();
+
+/* ─────────────────────────────────────────────────────────────
+   9. Gemini AI Assistant Chatbot Widget (Floating Right-Side Trigger)
+   ───────────────────────────────────────────────────────────── */
+(function initAiChatWidget() {
+    const launcherBtn = document.getElementById('ai-chat-toggle-btn');
+    const chatWindow = document.getElementById('ai-chat-window');
+    const messagesContainer = document.getElementById('ai-chat-messages');
+    const chatForm = document.getElementById('ai-chat-form');
+    const chatInput = document.getElementById('ai-chat-input');
+    const sendBtn = document.getElementById('ai-chat-send-btn');
+    const closeBtn = document.getElementById('ai-chat-close-btn');
+    const resetBtn = document.getElementById('ai-chat-reset-btn');
+    const iconOpen = document.getElementById('ai-chat-icon-open');
+    const iconClose = document.getElementById('ai-chat-icon-close');
+    const suggestionsContainer = document.getElementById('ai-chat-suggestions');
+
+    if (!launcherBtn || !chatWindow || !messagesContainer || !chatForm || !chatInput) {
+        return;
+    }
+
+    let conversationHistory = [];
+    let isChatOpen = false;
+    let isWaitingForResponse = false;
+
+    // Format Markdown / line breaks / phone links into clean HTML
+    function formatMessageContent(rawText) {
+        if (!rawText) return '';
+        
+        let text = rawText
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        // Bold formatting
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Links [Label](URL)
+        text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|tel:[^\s)]+|mailto:[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+        // Split paragraphs or bullet points
+        const lines = text.split('\n');
+        let html = '';
+        let inList = false;
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) {
+                if (inList) {
+                    html += '</ul>';
+                    inList = false;
+                }
+                continue;
+            }
+
+            if (line.startsWith('• ') || line.startsWith('- ') || line.startsWith('* ')) {
+                if (!inList) {
+                    html += '<ul>';
+                    inList = true;
+                }
+                html += `<li>${line.substring(2)}</li>`;
+            } else {
+                if (inList) {
+                    html += '</ul>';
+                    inList = false;
+                }
+                html += `<p>${line}</p>`;
+            }
+        }
+        if (inList) {
+            html += '</ul>';
+        }
+
+        return html;
+    }
+
+    // Check if phone or contact handoff is present to render action buttons
+    function createContactActionButtons(phone, email) {
+        const cleanPhone = (phone || '+880 1744-868938').trim();
+        const telDigits = cleanPhone.replace(/[^0-9+]/g, '');
+        const waDigits = cleanPhone.replace(/[^0-9]/g, '');
+        const cleanEmail = (email || 'ibrahimshakeshuvo100@gmail.com').trim();
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'ai-contact-actions';
+        actionsDiv.innerHTML = `
+            <a href="tel:${telDigits}" class="ai-contact-btn call-btn" title="Call directly">
+                📞 Call Ibrahim (${cleanPhone})
+            </a>
+            <a href="https://wa.me/${waDigits}" target="_blank" rel="noopener noreferrer" class="ai-contact-btn whatsapp-btn" title="Chat on WhatsApp">
+                💬 WhatsApp Message
+            </a>
+            <a href="mailto:${cleanEmail}?subject=B2B%20Lead%20Generation%20Inquiry" class="ai-contact-btn email-btn" title="Send Email">
+                ✉️ Email Inquiry
+            </a>
+        `;
+        return actionsDiv;
+    }
+
+    // Render Initial Welcome Message
+    function renderWelcomeMessage() {
+        messagesContainer.innerHTML = '';
+        const welcomeRow = document.createElement('div');
+        welcomeRow.className = 'ai-msg-row assistant';
+        
+        const bubble = document.createElement('div');
+        bubble.className = 'ai-msg-bubble';
+        bubble.innerHTML = `
+            <p>👋 Hello! I am <strong>MD. Ibrahim's official AI assistant</strong>.</p>
+            <p>I can help answer your questions about Ibrahim's <strong>B2B Lead Generation</strong>, <strong>Python Web Scraping</strong>, <strong>Google Maps Extraction</strong>, and custom prospect list building.</p>
+            <p style="font-size:12px; color:#94a3b8; margin-top:6px;">Whenever you're satisfied or ready to discuss your project, I can provide his direct phone number to call or message immediately.</p>
+        `;
+        welcomeRow.appendChild(bubble);
+        messagesContainer.appendChild(welcomeRow);
+
+        if (suggestionsContainer) {
+            suggestionsContainer.style.display = 'flex';
+        }
+        conversationHistory = [];
+    }
+
+    // Toggle Chat Window
+    function toggleChat(forceOpen) {
+        isChatOpen = typeof forceOpen === 'boolean' ? forceOpen : !isChatOpen;
+
+        if (isChatOpen) {
+            chatWindow.style.display = 'flex';
+            // Force reflow for animation
+            chatWindow.offsetHeight;
+            chatWindow.classList.add('ai-chat-open');
+            chatWindow.setAttribute('aria-hidden', 'false');
+            if (iconOpen) iconOpen.style.display = 'none';
+            if (iconClose) iconClose.style.display = 'flex';
+            setTimeout(() => chatInput.focus(), 150);
+
+            // If empty, render welcome message
+            if (messagesContainer.children.length === 0) {
+                renderWelcomeMessage();
+            }
+        } else {
+            chatWindow.classList.remove('ai-chat-open');
+            chatWindow.setAttribute('aria-hidden', 'true');
+            if (iconOpen) iconOpen.style.display = 'flex';
+            if (iconClose) iconClose.style.display = 'none';
+            setTimeout(() => {
+                if (!isChatOpen) chatWindow.style.display = 'none';
+            }, 250);
+        }
+    }
+
+    // Append Message to UI
+    function appendMessage(role, text, contactData) {
+        const row = document.createElement('div');
+        row.className = `ai-msg-row ${role === 'user' ? 'user' : 'assistant'}`;
+
+        const bubble = document.createElement('div');
+        bubble.className = 'ai-msg-bubble';
+        bubble.innerHTML = formatMessageContent(text);
+
+        // If assistant message includes phone or contact invitation, attach interactive call/WhatsApp buttons
+        if (role === 'assistant') {
+            const hasPhone = text.includes('+880') || text.toLowerCase().includes('phone') || text.toLowerCase().includes('whatsapp') || text.toLowerCase().includes('call directly');
+            if (hasPhone || contactData?.phone) {
+                const phoneVal = contactData?.phone || '+880 1744-868938';
+                const emailVal = contactData?.email || 'ibrahimshakeshuvo100@gmail.com';
+                bubble.appendChild(createContactActionButtons(phoneVal, emailVal));
+            }
+        }
+
+        row.appendChild(bubble);
+        messagesContainer.appendChild(row);
+        messagesContainer.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    }
+
+    // Show / Hide Typing Indicator
+    let typingIndicatorEl = null;
+    function showTypingIndicator() {
+        if (typingIndicatorEl) return;
+        typingIndicatorEl = document.createElement('div');
+        typingIndicatorEl.className = 'ai-msg-row assistant';
+        typingIndicatorEl.innerHTML = `
+            <div class="ai-typing-indicator">
+                <span class="ai-typing-dot"></span>
+                <span class="ai-typing-dot"></span>
+                <span class="ai-typing-dot"></span>
+            </div>
+        `;
+        messagesContainer.appendChild(typingIndicatorEl);
+        messagesContainer.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    }
+
+    function removeTypingIndicator() {
+        if (typingIndicatorEl && typingIndicatorEl.parentNode) {
+            typingIndicatorEl.parentNode.removeChild(typingIndicatorEl);
+        }
+        typingIndicatorEl = null;
+    }
+
+    // Send Message Handler
+    async function handleSendMessage(promptText) {
+        const message = (promptText || chatInput.value || '').trim();
+        if (!message || isWaitingForResponse) return;
+
+        chatInput.value = '';
+        appendMessage('user', message);
+        conversationHistory.push({ role: 'user', text: message });
+
+        isWaitingForResponse = true;
+        sendBtn.disabled = true;
+        chatInput.disabled = true;
+        showTypingIndicator();
+
+        // Get latest contact info from DOM or default
+        const phoneElem = document.getElementById('site-contact-whatsapp-val');
+        const emailElem = document.getElementById('site-contact-email-val');
+        const locElem = document.getElementById('site-badge-loc');
+
+        const contactInfo = {
+            phone: phoneElem?.textContent?.trim() || '+880 1744-868938',
+            email: emailElem?.textContent?.trim() || 'ibrahimshakeshuvo100@gmail.com',
+            location: locElem?.textContent?.trim() || 'Dhaka, Bangladesh',
+        };
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message,
+                    history: conversationHistory,
+                    contactInfo,
+                }),
+            });
+
+            const data = await res.json();
+            removeTypingIndicator();
+
+            if (data && data.success && data.reply) {
+                appendMessage('assistant', data.reply, { phone: data.phone, email: data.email });
+                conversationHistory.push({ role: 'model', text: data.reply });
+            } else {
+                appendMessage('assistant', `You can reach MD. Ibrahim directly to discuss your project requirements:\n\n📞 **Phone / WhatsApp**: **${contactInfo.phone}** (Call or WhatsApp message)\n✉️ **Email**: **${contactInfo.email}**`, contactInfo);
+            }
+        } catch (err) {
+            console.error('Chat request error:', err);
+            removeTypingIndicator();
+            appendMessage('assistant', `You can reach MD. Ibrahim directly:\n\n📞 **Phone / WhatsApp**: **${contactInfo.phone}** (Call or WhatsApp message)\n✉️ **Email**: **${contactInfo.email}**`, contactInfo);
+        } finally {
+            isWaitingForResponse = false;
+            sendBtn.disabled = false;
+            chatInput.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    // Event Listeners
+    launcherBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleChat();
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleChat(false);
+    });
+
+    resetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        renderWelcomeMessage();
+    });
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleSendMessage();
+    });
+
+    // Suggestion chips click handler
+    if (suggestionsContainer) {
+        suggestionsContainer.addEventListener('click', (e) => {
+            const chip = e.target.closest('.ai-chat-chip');
+            if (!chip) return;
+            const prompt = chip.getAttribute('data-prompt');
+            if (prompt) {
+                handleSendMessage(prompt);
+            }
+        });
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isChatOpen) {
+            toggleChat(false);
+        }
+    });
+
+    // Close when clicking outside if clicked elsewhere
+    document.addEventListener('click', (e) => {
+        if (isChatOpen && !chatWindow.contains(e.target) && !launcherBtn.contains(e.target)) {
+            toggleChat(false);
+        }
+    });
+
+    // Pre-render welcome message
+    renderWelcomeMessage();
 })();

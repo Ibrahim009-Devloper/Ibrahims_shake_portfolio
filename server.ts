@@ -4,11 +4,33 @@ import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
+import { GoogleGenAI } from '@google/genai';
 
 dotenv.config();
 
 const PORT = 3000;
 const app = express();
+
+// Lazy initialization for Gemini AI client using server-side GEMINI_API_KEY
+let geminiClient: GoogleGenAI | null = null;
+function getGeminiClient(): GoogleGenAI | null {
+  const rawKey = (process.env.GEMINI_API_KEY || '').trim();
+  const apiKey = rawKey.replace(/^["']|["']$/g, '').trim();
+  if (!apiKey || apiKey === 'MY_GEMINI_API_KEY') {
+    return null;
+  }
+  if (!geminiClient) {
+    geminiClient = new GoogleGenAI({
+      apiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build',
+        },
+      },
+    });
+  }
+  return geminiClient;
+}
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -412,7 +434,7 @@ app.post('/api/admin/leads', async (req: Request, res: Response) => {
       sheet_url: sheetUrl,
       file_name: rawFileName,
       type: sample.type || 'B2B Lead Generation',
-      quality: sample.quality || '100% Zero-Bounce Verified',
+      quality: sample.quality || 'Sample Dataset · Syntax & MX Validated',
       sample_rows: sampleRows,
     };
 
@@ -562,6 +584,177 @@ app.post('/api/messages', async (req: Request, res: Response) => {
     return res.json({ success: true, message: 'Message securely recorded in Supabase database' });
   } catch (err: any) {
     return res.status(500).json({ success: false, error: err?.message });
+  }
+});
+
+// ==========================================
+// GEMINI AI SERVICE CHATBOT ENDPOINT
+// ==========================================
+app.post('/api/chat', async (req: Request, res: Response) => {
+  try {
+    const { message, history = [], contactInfo } = req.body;
+    if (!message || typeof message !== 'string' || !message.trim()) {
+      return res.status(400).json({ success: false, error: 'Message text is required' });
+    }
+
+    const trimmedMsg = message.trim();
+    const directPhone = contactInfo?.phone || '+880 1744-868938';
+    const directEmail = contactInfo?.email || 'ibrahimshakeshuvo100@gmail.com';
+    const location = contactInfo?.location || 'Dhaka, Bangladesh';
+
+    const ai = getGeminiClient();
+
+    // If GEMINI_API_KEY is not configured or in placeholder mode, provide an intelligent direct response
+    if (!ai) {
+      const lower = trimmedMsg.toLowerCase();
+      let answer = '';
+
+      const isAskingContact = lower.includes('phone') || lower.includes('call') || lower.includes('whatsapp') || lower.includes('message') || lower.includes('number') || lower.includes('contact') || lower.includes('reach') || lower.includes('hire') || lower.includes('quote') || lower.includes('price') || lower.includes('cost') || lower.includes('start') || lower.includes('satisfy') || lower.includes('ready');
+
+      if (lower.includes('service') || lower.includes('what do you') || lower.includes('provide') || lower.includes('offer') || lower.includes('help')) {
+        answer = `• B2B Lead Generation: Targeted decision-makers (CEOs, Founders, VPs) with syntax-validated business emails and LinkedIn profiles.\n• Web Scraping: Custom Python, Playwright, and Selenium scrapers with anti-bot bypassing for dynamic sites.\n• Google Maps Scraping: Local business directory extractions with direct phone numbers and websites.\n• Data Cleaning: Strict domain deduplication and E.164 phone formatting.`;
+      } else if (isAskingContact) {
+        answer = `Project scope must be reviewed for a custom quote. You can connect with Ibrahim directly:\n\n📞 Call/WhatsApp: ${directPhone}\n✉️ Email: ${directEmail}`;
+      } else if (lower.includes('sample') || lower.includes('preview') || lower.includes('csv') || lower.includes('excel')) {
+        answer = `Verified sample datasets (B2B Tech, Google Maps, Shopify DTC) are available for instant inspection and download directly in the "Verified Lead Samples" section above.`;
+      } else if (lower.includes('price') || lower.includes('rate') || lower.includes('cost') || lower.includes('deadline')) {
+        answer = `No fixed pricing or deadlines are quoted upfront. Project scope must be reviewed for a custom quote.`;
+      } else {
+        answer = `Ibrahim specializes in Python web scraping, B2B lead generation, Google Maps extraction, and data cleaning. How can I assist with your data requirements?`;
+      }
+
+      return res.json({
+        success: true,
+        reply: answer,
+        phone: isAskingContact ? directPhone : null,
+        email: isAskingContact ? directEmail : null,
+        isFallback: true,
+      });
+    }
+
+    const systemInstruction = `You are the official AI Assistant for MD. Ibrahim Shake Shuvo based on his verified resume/LinkedIn profile data.
+
+STRICT DATA BOUNDARY (VERY IMPORTANT):
+- ONLY answer questions based on Ibrahim's verified profile data:
+  * Name: MD. Ibrahim Shake Shuvo
+  * Location: Dhaka, Bangladesh
+  * Title: B2B Lead Generation & Web Scraping Specialist
+  * Top Skills: Web-based Research, B2B Lead Generation, E-commerce scraping, Python, Playwright, Selenium
+  * Services: B2B Lead Generation, Business & Prospect List Building, Web Research, Google Maps Lead Generation, Web Scraping & Data Extraction, Data Cleaning & Organization
+  * Experience: B2B Lead Generation & Web Scraping Specialist (January 2025 - Present)
+  * Education: Diploma in Agriculture, Agriculture training institute, Gaibandha (August 2019 - December 2023)
+- DO NOT invent, assume, or provide any service details, skills, or information that is NOT explicitly mentioned above.
+- If a user asks something about Ibrahim or his services that is not in the records, state strictly: "I don't have that specific information in my records. Please reach out to Ibrahim directly to discuss this."
+
+STRICT RESPONSE STYLE:
+1. Ultra-Concise: Keep replies under 2-3 sentences maximum (or 2-3 short bullet points).
+2. No Fluff: Zero conversational filler, meta-introductions, or generic greetings. Jump straight to the answer.
+3. No Price Quotes: Never mention static prices or timelines. State that project scope needs to be reviewed for a custom quote.
+
+STRICT CONTACT REVEAL LOGIC:
+- ABSOLUTELY DO NOT include phone number, WhatsApp, or email address in general replies, greetings, or service overviews.
+- ONLY provide contact details if the user explicitly asks for contact information (e.g., "give me his number", "how to contact him?", "share email") OR explicitly states they want to hire him/start a project immediately.
+
+CONTACT DETAILS (Only when triggered by the rule above):
+📞 Phone / WhatsApp: ${directPhone}
+✉️ Email: ${directEmail}`;
+
+    // Map conversation history
+    const contents: any[] = [];
+    if (Array.isArray(history)) {
+      for (const item of history.slice(-6)) {
+        const role = (item.role === 'model' || item.role === 'assistant') ? 'model' : 'user';
+        const text = String(item.text || item.content || '').trim();
+        if (text) {
+          contents.push({
+            role,
+            parts: [{ text }],
+          });
+        }
+      }
+    }
+
+    contents.push({
+      role: 'user',
+      parts: [{ text: trimmedMsg }],
+    });
+
+    let response;
+    try {
+      response = await ai.models.generateContent({
+        model: 'gemini-3.8-flash',
+        contents,
+        config: {
+          systemInstruction,
+          temperature: 0.6,
+        },
+      });
+    } catch (primaryErr: any) {
+      // Fallback to gemini-2.5-flash if primary model is experiencing high demand (503)
+      response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents,
+        config: {
+          systemInstruction,
+          temperature: 0.6,
+        },
+      });
+    }
+
+    const reply = response.text || `I'm here to help with MD. Ibrahim's B2B lead generation and web scraping services. Please feel free to ask your question or reach Ibrahim directly at ${directPhone}.`;
+
+    return res.json({
+      success: true,
+      reply,
+      phone: directPhone,
+      email: directEmail,
+    });
+  } catch (err: any) {
+    console.error('Gemini chat error (falling back to expert answers):', err?.message || err);
+    const phone = req.body?.contactInfo?.phone || '+880 1744-868938';
+    const email = req.body?.contactInfo?.email || 'ibrahimshakeshuvo100@gmail.com';
+    const trimmedMsg = String(req.body?.message || '').toLowerCase();
+    const isAskingContact = trimmedMsg.includes('phone') || trimmedMsg.includes('call') || trimmedMsg.includes('whatsapp') || trimmedMsg.includes('message') || trimmedMsg.includes('number') || trimmedMsg.includes('contact') || trimmedMsg.includes('reach') || trimmedMsg.includes('hire') || trimmedMsg.includes('quote') || trimmedMsg.includes('price') || trimmedMsg.includes('cost') || trimmedMsg.includes('start') || trimmedMsg.includes('satisfy') || trimmedMsg.includes('ready');
+
+    let fallbackReply = '';
+    if (trimmedMsg.includes('service') || trimmedMsg.includes('what do you') || trimmedMsg.includes('provide') || trimmedMsg.includes('offer') || trimmedMsg.includes('help')) {
+      fallbackReply = `• B2B Lead Generation: Targeted decision-makers (CEOs, Founders, VPs) with syntax-validated business emails and LinkedIn profiles.\n• Web Scraping: Custom Python, Playwright, and Selenium scrapers with anti-bot bypassing for dynamic sites.\n• Google Maps Scraping: Local business directory extractions with direct phone numbers and websites.\n• Data Cleaning: Strict domain deduplication and E.164 phone formatting.`;
+    } else if (isAskingContact) {
+      fallbackReply = `Project scope must be reviewed for a custom quote. You can connect with Ibrahim directly:\n\n📞 Call/WhatsApp: ${phone}\n✉️ Email: ${email}`;
+    } else if (trimmedMsg.includes('sample') || trimmedMsg.includes('preview') || trimmedMsg.includes('csv') || trimmedMsg.includes('excel')) {
+      fallbackReply = `Verified sample datasets (B2B Tech, Google Maps, Shopify DTC) are available for instant inspection and download directly in the "Verified Lead Samples" section above.`;
+    } else if (trimmedMsg.includes('price') || trimmedMsg.includes('rate') || trimmedMsg.includes('cost') || trimmedMsg.includes('deadline')) {
+      fallbackReply = `No fixed pricing or deadlines are quoted upfront. Project scope must be reviewed for a custom quote.`;
+    } else {
+      fallbackReply = `Ibrahim specializes in Python web scraping, B2B lead generation, Google Maps extraction, and data cleaning. How can I assist with your data requirements?`;
+    }
+
+    return res.json({
+      success: true,
+      reply: fallbackReply,
+      phone: isAskingContact ? phone : null,
+      email: isAskingContact ? email : null,
+      isFallback: true,
+    });
+  }
+});
+
+// Robots.txt and Sitemap.xml SEO endpoints
+app.get('/robots.txt', (req: Request, res: Response) => {
+  const robotsPath = path.join(process.cwd(), 'public', 'robots.txt');
+  if (fs.existsSync(robotsPath)) {
+    res.type('text/plain').sendFile(robotsPath);
+  } else {
+    res.type('text/plain').send("User-agent: *\nAllow: /\nDisallow: /api/admin/\nSitemap: https://ibrahimshake.com/sitemap.xml\n");
+  }
+});
+
+app.get('/sitemap.xml', (req: Request, res: Response) => {
+  const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
+  if (fs.existsSync(sitemapPath)) {
+    res.type('application/xml').sendFile(sitemapPath);
+  } else {
+    res.status(404).send('Sitemap not found');
   }
 });
 

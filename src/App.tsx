@@ -18,6 +18,7 @@ import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/layout/Footer';
 import { ProjectCaseStudyModal } from './components/modals/ProjectCaseStudyModal';
 import { AdminDashboardModal } from './admin/AdminDashboardModal';
+import { FadeInSection } from './components/common/FadeInSection';
 
 export default function App() {
   return (
@@ -29,31 +30,49 @@ export default function App() {
         {/* Main Content Sections */}
         <main className="flex-1">
           {/* 1. Hero Section */}
-          <HeroSection />
+          <FadeInSection direction="fade">
+            <HeroSection />
+          </FadeInSection>
 
           {/* 2. Trust / Capabilities Strip */}
-          <TrustStrip />
+          <FadeInSection delay={100}>
+            <TrustStrip />
+          </FadeInSection>
 
           {/* 3. Services Section */}
-          <ServicesSection />
+          <FadeInSection delay={100}>
+            <ServicesSection />
+          </FadeInSection>
 
           {/* 4. How I Work Section */}
-          <HowIWorkSection />
+          <FadeInSection delay={100}>
+            <HowIWorkSection />
+          </FadeInSection>
 
           {/* 5. Selected Work / Portfolio Section */}
-          <PortfolioSection />
+          <FadeInSection delay={100}>
+            <PortfolioSection />
+          </FadeInSection>
 
           {/* 6. Tools & Technology Section */}
-          <ToolsSection />
+          <FadeInSection delay={100}>
+            <ToolsSection />
+          </FadeInSection>
 
           {/* 7. About Section */}
-          <AboutSection />
+          <FadeInSection delay={100}>
+            <AboutSection />
+          </FadeInSection>
 
           {/* 8. Call To Action Section */}
-          <CtaSection />
+          <FadeInSection delay={100}>
+            <CtaSection />
+          </FadeInSection>
 
           {/* 9. Contact Section */}
-          <ContactSection />
+          <FadeInSection delay={100}>
+            <ContactSection />
+          </FadeInSection>
         </main>
 
         {/* Footer */}
