@@ -34,8 +34,8 @@
             </a>
             <div class="nav-actions">
                 <ul class="nav-links" role="list">
-                    <li><a href="#work"><span>Work</span></a></li>
-                    <li><a href="#leads-samples" id="nav-link-leads-samples"><span>Leads Sample</span></a></li>
+                    <li><a href="#hero"><span>Home</span></a></li>
+                    <li><a href="#leads-samples" id="nav-link-leads-samples"><span>Work</span></a></li>
                     <li><a href="#motion"><span>Pipeline</span></a></li>
                     <li><a href="#personal"><span>Services</span></a></li>
                     <li><a href="#about"><span>About</span></a></li>
@@ -52,14 +52,19 @@
                     </svg>
                 </button>
                 <button id="mobile-menu-toggle" class="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" title="Toggle menu">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <circle cx="12" cy="5" r="2" />
-                        <circle cx="12" cy="12" r="2" />
-                        <circle cx="12" cy="19" r="2" />
-                    </svg>
+                    <span class="mobile-toggle-line"></span>
+                    <span class="mobile-toggle-line"></span>
+                    <span class="mobile-toggle-line"></span>
                 </button>
             </div>
         </div>
+
+        <!-- Floating 3-Line Corner Menu Trigger (Appears when scrolled or navigating) -->
+        <button id="nav-floating-toggle" class="nav-floating-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" title="Open Navigation Menu">
+            <span class="floating-line line-top"></span>
+            <span class="floating-line line-mid"></span>
+            <span class="floating-line line-bot"></span>
+        </button>
     </nav>
 
     <!-- ── PORTFOLIO MAIN VIEW ── -->
@@ -138,13 +143,13 @@
             <!-- Project 1 -->
             <div class="project-card reveal" data-case-study="b2b-leads" role="button" tabindex="0">
                 <div class="project-visual">
-                    <img class="project-visual-media" src="/assets/b2b_lead_gen_graphic.jpg" alt="High-Quality B2B Leads for Your Business Growth - Targeted Leads from LinkedIn, Google Maps, Yelp, Apollo, Bing delivered in Excel and CSV" loading="lazy" referrerPolicy="no-referrer" />
+                    <img class="project-visual-media" id="work-project-1-img" src="/assets/b2b_lead_gen_graphic.jpg" alt="High-Quality B2B Leads for Your Business Growth - Targeted Leads from LinkedIn, Google Maps, Yelp, Apollo, Bing delivered in Excel and CSV" loading="lazy" referrerPolicy="no-referrer" />
                 </div>
                 <div class="project-body">
                     <div class="project-copy">
                         <p class="project-meta">B2B Lead Generation · Decision Makers · 2026</p>
-                        <h2 class="project-title">Targeted B2B Decision-Maker Prospect List for Outbound Sales</h2>
-                        <p class="project-summary">
+                        <h2 class="project-title" id="work-project-1-title">Targeted B2B Decision-Maker Prospect List for Outbound Sales</h2>
+                        <p class="project-summary" id="work-project-1-summary">
                             Researched, verified, and structured high-intent decision-makers across B2B technology companies. Every email address is verified via SMTP ping to eliminate campaign bounces.
                         </p>
                         <div class="project-metrics">
@@ -161,13 +166,13 @@
             <!-- Project 2 -->
             <div class="project-card reveal" data-case-study="gmaps-leads" role="button" tabindex="0">
                 <div class="project-visual">
-                    <img class="project-visual-media" src="/assets/gmaps_scraping.jpg" alt="Google Maps Commercial Directory Scraping with Playwright" loading="lazy" />
+                    <img class="project-visual-media" id="work-project-2-img" src="/assets/gmaps_scraping.jpg" alt="Google Maps Commercial Directory Scraping with Playwright" loading="lazy" />
                 </div>
                 <div class="project-body">
                     <div class="project-copy">
                         <p class="project-meta">Google Maps Research · Python &amp; Playwright · 2026</p>
-                        <h2 class="project-title">Automated Google Maps Local Business Directory Extraction</h2>
-                        <p class="project-summary">
+                        <h2 class="project-title" id="work-project-2-title">Automated Google Maps Local Business Directory Extraction</h2>
+                        <p class="project-summary" id="work-project-2-summary">
                             Deployed headless browser automation using Playwright to extract localized company profiles, phone numbers, ratings, and websites across commercial metropolitan centers.
                         </p>
                         <div class="project-metrics">
@@ -183,11 +188,14 @@
 
             <!-- Project 3 -->
             <div class="project-card reveal" data-case-study="ecommerce-scraping" role="button" tabindex="0">
+                <div class="project-visual">
+                    <img class="project-visual-media" id="work-project-3-img" src="/assets/b2b_dashboard.jpg" alt="E-commerce Multi-Category Catalog &amp; Pricing Extraction" loading="lazy" />
+                </div>
                 <div class="project-body">
                     <div class="project-copy">
                         <p class="project-meta">Web Scraping · Selenium &amp; Python · 2026</p>
-                        <h2 class="project-title">E-commerce Multi-Category Catalog &amp; Pricing Extraction</h2>
-                        <p class="project-summary">
+                        <h2 class="project-title" id="work-project-3-title">E-commerce Multi-Category Catalog &amp; Pricing Extraction</h2>
+                        <p class="project-summary" id="work-project-3-summary">
                             Automated deep pagination across dynamic JavaScript pages to scrape thousands of product SKUs, regular and discounted pricing, availability flags, and category hierarchies.
                         </p>
                         <div class="project-metrics">
@@ -480,8 +488,11 @@
                         <textarea id="form-message" class="form-textarea" rows="4" placeholder="Describe your target niche, location, fields required, or target site URL..." required></textarea>
                     </div>
 
-                    <button type="submit" class="form-submit">Send Inquiry</button>
-                    <p id="form-status" style="font-size:12.5px; margin-top:4px;"></p>
+                    <button type="submit" class="form-submit" id="btn-submit-contact">Send Inquiry</button>
+                    <div id="form-database-feedback" class="form-db-message-card" style="display:none;" role="alert"></div>
+                    <div class="form-security-note" style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-3); margin-top:8px;">
+                        <span style="color:#10b981;">●</span> Inquiries are securely recorded into Supabase Cloud Database.
+                    </div>
                 </form>
             </div>
         </div>
@@ -494,8 +505,7 @@
                 <a href="#hero" class="footer-name" id="site-footer-name">MD. Ibrahim Shake Shuvo</a>
                 <nav class="footer-nav">
                     <a href="#hero">Home</a>
-                    <a href="#work">Work</a>
-                    <a href="#leads-samples">Leads Sample</a>
+                    <a href="#leads-samples">Work</a>
                     <a href="#personal">Services</a>
                     <a href="#about">About</a>
                     <a href="mailto:ibrahimshakeshuvo100@gmail.com" id="site-footer-email-link">Email</a>
@@ -539,22 +549,6 @@
                 </div>
 
                 <div class="leads-topbar-right">
-                    <span class="supabase-status-pill" title="Connected to Supabase Cloud Database: ormbqrbmceuyoxwboycf">
-                        <span class="db-dot"></span>
-                        <span>Supabase DB Live</span>
-                    </span>
-
-                    <!-- Guest View: Admin Login Trigger -->
-                    <div id="admin-guest-bar">
-                        <button type="button" class="btn-admin-pill" id="btn-open-admin-login" aria-label="Open Admin Login">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                            <span>Admin Sign In</span>
-                        </button>
-                    </div>
-
                     <!-- Authenticated Admin Bar -->
                     <div id="admin-authenticated-bar" style="display:none; align-items:center; gap:8px;">
                         <span class="admin-badge-indicator">
@@ -585,20 +579,7 @@
 
             <!-- Header Showcase Hero -->
             <header class="leads-header">
-                <p class="leads-eyebrow">
-                    <span class="leads-eyebrow-dot" aria-hidden="true"></span>
-                    <span>Delivered Client Datasets &amp; Verified Prospect Samples</span>
-                </p>
-                <h1 class="leads-title">B2B Leads Sample Showcase</h1>
-                <p class="leads-description">
-                    Review live extracted datasets, targeted decision-maker contact lists, and directory extractions verified for zero-bounce deliverability across diverse global industries.
-                </p>
-                <div class="leads-stat-chips">
-                    <span class="leads-stat-chip">✓ 100% Zero-Bounce Guarantee</span>
-                    <span class="leads-stat-chip">✓ Verified Business Emails &amp; Direct Phone</span>
-                    <span class="leads-stat-chip">✓ Delivered in Excel (.xlsx) &amp; CSV</span>
-                    <span class="leads-stat-chip">✓ Custom Scraped with Python &amp; Playwright</span>
-                </div>
+                <h1 class="leads-title" style="margin-bottom: 0;">Leads Sample Showcase</h1>
             </header>
 
             <!-- Search and Filter Bar -->
@@ -700,10 +681,12 @@
                 <ul class="cms-nav-list" role="tablist">
                     <li><button type="button" class="cms-nav-btn active" data-tab="cms-tab-profile"><span>🏷️</span> Profile &amp; Header</button></li>
                     <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-hero"><span>⚡</span> Hero &amp; Puzzle Photo</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-work"><span>📂</span> Work Projects &amp; Images</button></li>
                     <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-about"><span>👤</span> About Me &amp; Stats</button></li>
                     <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-services"><span>💼</span> Services &amp; Skills</button></li>
                     <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-pipeline"><span>🔄</span> Pipeline &amp; Tooling</button></li>
                     <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-contact"><span>📬</span> Contact &amp; Socials</button></li>
+                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-inbox"><span>💬</span> Client Inquiries (Database) <span id="cms-inbox-counter-badge" class="badge-pill" style="display:none; margin-left:6px; background:#10b981; color:#fff; font-size:11px; padding:2px 7px; border-radius:10px;">0</span></button></li>
                     <li><a href="#leads-samples" class="cms-nav-btn" style="text-decoration:none;"><span>📑</span> Leads Samples Manager ↗</a></li>
                 </ul>
             </aside>
@@ -820,6 +803,173 @@
                                     <polyline points="7 3 7 8 15 8"></polyline>
                                 </svg>
                                 <span>Save Hero Changes</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Panel: Work Projects & Images -->
+                    <section id="cms-tab-work" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header">
+                            <h2 class="cms-panel-title"><span>📂</span> Work Projects &amp; Images</h2>
+                            <p class="cms-panel-desc">Customize project case studies, visual media graphics, titles, and descriptions shown in the Work section.</p>
+                        </header>
+
+                        <!-- Project 1 Visual & Details -->
+                        <div class="cms-item-card" style="margin-bottom:20px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
+                            <div class="cms-item-card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span class="cms-item-card-title" style="font-weight:700; font-size:15px; color:var(--ink);">🖼️ Project 1: Targeted B2B Prospecting</span>
+                                <span class="badge-pill" style="background:rgba(56,189,248,0.12); color:#38bdf8; font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;">Work Card 1</span>
+                            </div>
+                            <div class="cms-grid-2" style="align-items:start; margin-top:12px;">
+                                <div>
+                                    <label class="form-label" for="cms-input-work-p1-img">Project 1 Image URL or Upload</label>
+                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
+                                        <input type="text" id="cms-input-work-p1-img" class="form-input" placeholder="/assets/b2b_lead_gen_graphic.jpg" />
+                                        <label class="btn-cms-secondary" style="white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:0 12px; min-height:42px;">
+                                            📁 Upload
+                                            <input type="file" id="cms-file-work-p1-img" accept="image/*" style="display:none;" />
+                                        </label>
+                                    </div>
+                                    <div class="photo-preset-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;">
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img1="/assets/b2b_lead_gen_graphic.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Graphic" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">B2B Graphic</span>
+                                        </button>
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img1="/assets/gmaps_scraping.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/gmaps_scraping.jpg" alt="Google Maps" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Google Maps</span>
+                                        </button>
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img1="/assets/b2b_dashboard.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/b2b_dashboard.jpg" alt="Dashboard" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Dashboard</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Current Image Preview</label>
+                                    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); height:140px; background:var(--bg-2); display:grid; place-items:center;">
+                                        <img id="cms-preview-work-p1-img" src="/assets/b2b_lead_gen_graphic.jpg" alt="Project 1 Preview" style="width:100%; height:140px; object-fit:cover;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:14px;">
+                                <label class="form-label" for="cms-input-work-p1-title">Project 1 Headline</label>
+                                <input type="text" id="cms-input-work-p1-title" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-work-p1-summary">Project 1 Summary</label>
+                                <textarea id="cms-input-work-p1-summary" class="form-input" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 Visual & Details -->
+                        <div class="cms-item-card" style="margin-bottom:20px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
+                            <div class="cms-item-card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span class="cms-item-card-title" style="font-weight:700; font-size:15px; color:var(--ink);">🖼️ Project 2: Google Maps Extraction</span>
+                                <span class="badge-pill" style="background:rgba(56,189,248,0.12); color:#38bdf8; font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;">Work Card 2</span>
+                            </div>
+                            <div class="cms-grid-2" style="align-items:start; margin-top:12px;">
+                                <div>
+                                    <label class="form-label" for="cms-input-work-p2-img">Project 2 Image URL or Upload</label>
+                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
+                                        <input type="text" id="cms-input-work-p2-img" class="form-input" placeholder="/assets/gmaps_scraping.jpg" />
+                                        <label class="btn-cms-secondary" style="white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:0 12px; min-height:42px;">
+                                            📁 Upload
+                                            <input type="file" id="cms-file-work-p2-img" accept="image/*" style="display:none;" />
+                                        </label>
+                                    </div>
+                                    <div class="photo-preset-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;">
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img2="/assets/gmaps_scraping.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/gmaps_scraping.jpg" alt="Google Maps" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Google Maps</span>
+                                        </button>
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img2="/assets/b2b_lead_gen_graphic.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Graphic" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">B2B Graphic</span>
+                                        </button>
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img2="/assets/b2b_dashboard.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/b2b_dashboard.jpg" alt="Dashboard" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Dashboard</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Current Image Preview</label>
+                                    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); height:140px; background:var(--bg-2); display:grid; place-items:center;">
+                                        <img id="cms-preview-work-p2-img" src="/assets/gmaps_scraping.jpg" alt="Project 2 Preview" style="width:100%; height:140px; object-fit:cover;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:14px;">
+                                <label class="form-label" for="cms-input-work-p2-title">Project 2 Headline</label>
+                                <input type="text" id="cms-input-work-p2-title" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-work-p2-summary">Project 2 Summary</label>
+                                <textarea id="cms-input-work-p2-summary" class="form-input" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 Visual & Details -->
+                        <div class="cms-item-card" style="margin-bottom:20px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
+                            <div class="cms-item-card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span class="cms-item-card-title" style="font-weight:700; font-size:15px; color:var(--ink);">🖼️ Project 3: E-commerce Scraping</span>
+                                <span class="badge-pill" style="background:rgba(56,189,248,0.12); color:#38bdf8; font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;">Work Card 3</span>
+                            </div>
+                            <div class="cms-grid-2" style="align-items:start; margin-top:12px;">
+                                <div>
+                                    <label class="form-label" for="cms-input-work-p3-img">Project 3 Image URL or Upload</label>
+                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
+                                        <input type="text" id="cms-input-work-p3-img" class="form-input" placeholder="/assets/b2b_dashboard.jpg" />
+                                        <label class="btn-cms-secondary" style="white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:0 12px; min-height:42px;">
+                                            📁 Upload
+                                            <input type="file" id="cms-file-work-p3-img" accept="image/*" style="display:none;" />
+                                        </label>
+                                    </div>
+                                    <div class="photo-preset-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;">
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img3="/assets/b2b_dashboard.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/b2b_dashboard.jpg" alt="Dashboard" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Dashboard</span>
+                                        </button>
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img3="/assets/b2b_lead_gen_graphic.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Graphic" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">B2B Graphic</span>
+                                        </button>
+                                        <button type="button" class="preset-choice-btn" data-cms-work-img3="/assets/gmaps_scraping.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
+                                            <img src="/assets/gmaps_scraping.jpg" alt="Google Maps" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
+                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Google Maps</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Current Image Preview</label>
+                                    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); height:140px; background:var(--bg-2); display:grid; place-items:center;">
+                                        <img id="cms-preview-work-p3-img" src="/assets/b2b_dashboard.jpg" alt="Project 3 Preview" style="width:100%; height:140px; object-fit:cover;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:14px;">
+                                <label class="form-label" for="cms-input-work-p3-title">Project 3 Headline</label>
+                                <input type="text" id="cms-input-work-p3-title" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cms-input-work-p3-summary">Project 3 Summary</label>
+                                <textarea id="cms-input-work-p3-summary" class="form-input" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="cms-panel-footer">
+                            <div class="cms-panel-footer-info">
+                                <span class="cms-pulse-dot"></span>
+                                <span>Changes sync live to Supabase Cloud Database</span>
+                            </div>
+                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                                <span>Save Work Changes</span>
                             </button>
                         </div>
                     </section>
@@ -1036,6 +1186,50 @@
                         </div>
                     </section>
 
+                    <!-- Panel: Client Inquiries & Database Messages -->
+                    <section id="cms-tab-inbox" class="cms-panel-card cms-tab-content">
+                        <header class="cms-panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div>
+                                <h2 class="cms-panel-title"><span>💬</span> Client Inquiries (Database Storage)</h2>
+                                <p class="cms-panel-desc">Every inquiry sent via the Contact Form is stored in the database. Review leads, query descriptions, and client contact information.</p>
+                            </div>
+                            <div style="display:flex; gap:8px;">
+                                <button type="button" class="btn-cms-secondary" id="btn-export-inbox-csv" style="padding:7px 14px; font-size:12.5px; display:inline-flex; align-items:center; gap:6px;" title="Export all database inquiries to Excel (.xlsx) file">
+                                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#10b981;">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="8" y1="13" x2="16" y2="13"></line>
+                                        <line x1="8" y1="17" x2="16" y2="17"></line>
+                                        <polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                    <span>Export XLSX</span>
+                                </button>
+                                <button type="button" class="btn-cms-secondary" id="btn-refresh-inbox" style="padding:7px 14px; font-size:12.5px; display:inline-flex; align-items:center; gap:6px;">
+                                    🔄 Refresh
+                                </button>
+                            </div>
+                        </header>
+
+                        <div class="cms-inbox-header-stats">
+                            <div class="cms-stat-chip">
+                                <span style="color:#10b981;">●</span>
+                                <span>Storage Engine: <strong>Supabase + Local Sync</strong></span>
+                            </div>
+                            <div class="cms-stat-chip">
+                                <span>Total Queries: <strong id="cms-inbox-total-count">0</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Inbox items list container -->
+                        <div id="cms-inbox-list-container" class="cms-inbox-grid">
+                            <div class="cms-inbox-empty">
+                                <div class="cms-inbox-empty-icon">📬</div>
+                                <p style="font-size:14px; font-weight:600; color:var(--ink); margin-bottom:4px;">No inquiries stored yet</p>
+                                <p style="font-size:12.5px; color:var(--ink-3);">When visitors submit project queries on the Contact Form, they will be logged into the database and shown here.</p>
+                            </div>
+                        </div>
+                    </section>
+
                 </form>
             </main>
         </div>
@@ -1091,10 +1285,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <label class="form-label" for="admin-password-input" style="margin-bottom:0;">Password</label>
-                        <button type="button" id="btn-quick-fill-admin" class="btn-text-link" title="Click to quickly fill demo admin password">Quick Fill (admin123)</button>
-                    </div>
+                    <label class="form-label" for="admin-password-input">Password</label>
                     <div class="password-input-wrap">
                         <input type="password" id="admin-password-input" class="form-input" placeholder="Enter admin password" required autocomplete="current-password" />
                         <button type="button" id="btn-toggle-password-visibility" class="btn-password-toggle" aria-label="Toggle password visibility">
@@ -1104,7 +1295,6 @@
                             </svg>
                         </button>
                     </div>
-                    <p class="form-hint">Default password is <strong>admin123</strong> for management demonstration.</p>
                 </div>
 
                 <div id="admin-login-error" class="auth-error-msg" style="display:none;" role="alert"></div>
@@ -1339,6 +1529,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="/js/main.js?v=3" defer></script>
 </body>
 

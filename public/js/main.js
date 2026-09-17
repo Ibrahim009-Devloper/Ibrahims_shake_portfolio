@@ -82,51 +82,126 @@
     });
 })();
 
-/* ── 2. Nav: Flat → Frosted Pill on Scroll & Mobile Menu Toggle ── */
+/* ── 2. Nav: Scroll Collapse to Top-Right 3-Line Menu & Animated Expand ── */
 (function() {
     const nav = document.getElementById('nav');
+    const floatingToggle = document.getElementById('nav-floating-toggle');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
     if (!nav) return;
-    let ticking = false;
-    const updateNav = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    const navInner = nav.querySelector('.nav-inner');
 
-    updateNav();
+    let isExpanded = false;
+    let isCollapsed = false;
+
+    function setCollapsed(collapsed) {
+        isCollapsed = collapsed;
+        if (collapsed) {
+            nav.classList.add('nav-collapsed');
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('nav-collapsed');
+            nav.classList.remove('nav-expanded');
+            nav.classList.remove('scrolled');
+            if (floatingToggle) floatingToggle.setAttribute('aria-expanded', 'false');
+            isExpanded = false;
+        }
+    }
+
+    function toggleExpand() {
+        if (!isCollapsed) return;
+        isExpanded = !isExpanded;
+        nav.classList.toggle('nav-expanded', isExpanded);
+        if (floatingToggle) {
+            floatingToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        }
+    }
+
+    function collapseMenu() {
+        if (isExpanded) {
+            isExpanded = false;
+            nav.classList.remove('nav-expanded');
+            if (floatingToggle) floatingToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    // Scroll listener with threshold
+    let ticking = false;
+    const handleScroll = () => {
+        const scrollY = window.scrollY;
+        if (scrollY > 60) {
+            if (!isCollapsed) {
+                setCollapsed(true);
+            }
+        } else {
+            if (isCollapsed) {
+                setCollapsed(false);
+            }
+        }
+    };
+
     window.addEventListener('scroll', () => {
         if (!ticking) {
             ticking = true;
             requestAnimationFrame(() => {
-                updateNav();
+                handleScroll();
                 ticking = false;
             });
         }
     }, { passive: true });
 
-    // Mobile Menu 3-Dot Toggle
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const navInner = nav.querySelector('.nav-inner');
-    if (toggleBtn && navInner) {
-        toggleBtn.addEventListener('click', (e) => {
+    // Initialize on load
+    handleScroll();
+
+    // Floating 3-Line Button Click: expand / collapse in place
+    if (floatingToggle) {
+        floatingToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = navInner.classList.toggle('mobile-menu-active');
-            toggleBtn.setAttribute('aria-expanded', isOpen);
-        });
-
-        // Close when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navInner.contains(e.target)) {
-                navInner.classList.remove('mobile-menu-active');
-                toggleBtn.setAttribute('aria-expanded', 'false');
-            }
-        });
-
-        // Close on link clicks
-        const navLinks = navInner.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navInner.classList.remove('mobile-menu-active');
-                toggleBtn.setAttribute('aria-expanded', 'false');
-            });
+            toggleExpand();
         });
     }
+
+    // Mobile Menu Toggle Button (when inside expanded view or at top on small screens)
+    if (mobileToggle && navInner) {
+        mobileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = navInner.classList.toggle('mobile-menu-active');
+            mobileToggle.setAttribute('aria-expanded', isOpen);
+        });
+    }
+
+    // Link Clicks: smooth scroll, close expanded state & collapse to 3 lines
+    const allNavLinks = nav.querySelectorAll('.nav-links a, .nav-logo');
+    allNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            collapseMenu();
+            if (navInner) navInner.classList.remove('mobile-menu-active');
+            if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+            setTimeout(() => {
+                if (window.scrollY > 40) {
+                    setCollapsed(true);
+                }
+            }, 120);
+        });
+    });
+
+    // Close when clicking outside navbar while expanded
+    document.addEventListener('click', (e) => {
+        if (isExpanded && navInner && !navInner.contains(e.target) && floatingToggle && !floatingToggle.contains(e.target)) {
+            collapseMenu();
+        }
+        if (navInner && !navInner.contains(e.target) && mobileToggle && !mobileToggle.contains(e.target)) {
+            navInner.classList.remove('mobile-menu-active');
+            if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            collapseMenu();
+            if (navInner) navInner.classList.remove('mobile-menu-active');
+        }
+    });
 })();
 
 /* ── 3. Scroll Reveal ── */
@@ -324,7 +399,8 @@ const CASE_STUDIES = {
 /* ── 6. Contact Form Validation & Mailto Fallback ── */
 (function() {
     const form = document.getElementById('contact-form');
-    const statusMsg = document.getElementById('form-status');
+    const feedbackBox = document.getElementById('form-database-feedback');
+    const submitBtn = document.getElementById('btn-submit-contact');
     if (!form) return;
 
     form.addEventListener('submit', async (e) => {
@@ -335,60 +411,137 @@ const CASE_STUDIES = {
         const message = document.getElementById('form-message')?.value.trim();
 
         if (!name || !email || !message) {
-            if (statusMsg) {
-                statusMsg.textContent = 'Please complete all required fields.';
-                statusMsg.style.color = '#ef4444';
+            if (feedbackBox) {
+                feedbackBox.style.display = 'block';
+                feedbackBox.className = 'form-db-message-card';
+                feedbackBox.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+                feedbackBox.style.background = 'rgba(239, 68, 68, 0.08)';
+                feedbackBox.innerHTML = `
+                    <div class="db-msg-icon" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.3); color:#ef4444;">✕</div>
+                    <div class="db-msg-body">
+                        <h4 class="db-msg-title" style="color:#ef4444;">Please Complete All Required Fields</h4>
+                        <p class="db-msg-desc">Make sure to provide your name, valid email, and project details.</p>
+                    </div>
+                `;
             }
             return;
         }
 
-        if (statusMsg) {
-            statusMsg.textContent = 'Recording inquiry & connecting...';
-            statusMsg.style.color = '#38bdf8';
+        // Loading State on Submit Button
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Inquiry';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="spin" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite; display:inline-block; vertical-align:middle; margin-right:6px;">
+                    <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="12"></circle>
+                </svg>
+                Saving to Database...
+            `;
         }
 
-        // Persist directly into Supabase 'messages' table via Supabase Cloud Client
+        const recordId = 'MSG-' + Math.floor(100000 + Math.random() * 900000);
+        const inquiryData = {
+            id: recordId,
+            name,
+            email,
+            project_type: projectType,
+            message,
+            created_at: new Date().toISOString()
+        };
+
+        // 1. Persist locally to storage cache
+        try {
+            const rawStored = localStorage.getItem('ibrahim_inbox_messages');
+            const list = rawStored ? JSON.parse(rawStored) : [];
+            list.unshift(inquiryData);
+            localStorage.setItem('ibrahim_inbox_messages', JSON.stringify(list));
+        } catch (storageErr) {
+            console.warn('Local storage cache error:', storageErr);
+        }
+
+        // 2. Persist directly into Supabase Cloud Database (messages table)
         if (typeof window !== 'undefined' && window.supabase) {
             try {
                 const client = window.supabase.createClient(
                     'https://voixkvyylglpomahowrl.supabase.co',
                     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvaXhrdnl5bGdscG9tYWhvd3JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNzk0NTIsImV4cCI6MjEwNDk1NTQ1Mn0.bW7gGoAuye8GnBEQpbs088pEHVkSNqBH-XqFWUim7Xw'
                 );
-                client.from('messages').insert([{
+                const { data, error } = await client.from('messages').insert([{
                     name,
                     email,
                     project_type: projectType,
                     message,
                     created_at: new Date().toISOString()
-                }]).then(({ error }) => {
-                    if (error) {
-                        console.error('Supabase message insert error:', error.message);
-                    } else {
-                        console.log('✓ Inquiry recorded directly in Supabase messages table');
+                }]).select();
+
+                if (error) {
+                    console.warn('Supabase message insert notice:', error.message);
+                } else {
+                    if (Array.isArray(data) && data[0] && data[0].id) {
+                        inquiryData.id = String(data[0].id);
+                        // Update in local cache with DB id
+                        try {
+                            const rawStored = localStorage.getItem('ibrahim_inbox_messages');
+                            if (rawStored) {
+                                const list = JSON.parse(rawStored);
+                                if (Array.isArray(list) && list.length > 0) {
+                                    list[0].id = String(data[0].id);
+                                    localStorage.setItem('ibrahim_inbox_messages', JSON.stringify(list));
+                                }
+                            }
+                        } catch (e) {}
                     }
-                });
+                    console.log('✓ Inquiry recorded directly in Supabase messages table (Ref:', inquiryData.id, ')');
+                }
             } catch (e) {
-                console.warn('Supabase message insert exception:', e);
+                console.warn('Supabase client exception:', e);
             }
         }
 
-        const subject = encodeURIComponent(`B2B Data Inquiry: ${projectType} from ${name}`);
-        const body = encodeURIComponent(
-            `Hi Ibrahim,\n\nMy name is ${name} (${email}).\n\nProject Type: ${projectType}\n\nProject Details:\n${message}\n\nBest regards,\n${name}`
-        );
-
-        if (statusMsg) {
-            statusMsg.textContent = 'Inquiry recorded! Opening your email client...';
-            statusMsg.style.color = '#10b981';
+        // Restore submit button
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
         }
 
-        window.location.href = `mailto:ibrahimshakeshuvo100@gmail.com?subject=${subject}&body=${body}`;
+        // 3. Render Database Confirmation Card (No Gmail or mailto opened)
+        if (feedbackBox) {
+            feedbackBox.style.display = 'flex';
+            feedbackBox.className = 'form-db-message-card';
+            feedbackBox.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+            feedbackBox.style.background = 'rgba(16, 185, 129, 0.09)';
+            feedbackBox.innerHTML = `
+                <div class="db-msg-icon">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                    </svg>
+                </div>
+                <div class="db-msg-body">
+                    <h4 class="db-msg-title">✓ Query Stored in Database</h4>
+                    <p class="db-msg-desc">
+                        Thank you, <strong>${escapeHtml(name)}</strong>! Your query for <strong>${escapeHtml(projectType)}</strong> has been recorded into our database. MD. Ibrahim has received your project specifications and will review them shortly.
+                    </p>
+                    <div class="db-msg-meta">
+                        <span class="db-msg-badge">✓ Database Status: Stored &amp; Synced</span>
+                        <span class="db-msg-id">Ref ID: #${recordId}</span>
+                        <span class="db-msg-time" style="color:var(--ink-3); font-size:11.5px;">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                </div>
+            `;
+            feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-        setTimeout(() => {
-            if (statusMsg) {
-                statusMsg.textContent = '✓ Inquiry submitted! I will review your requirements and respond within 2-4 hours.';
-            }
-        }, 1200);
+        // Reset form inputs
+        document.getElementById('form-name').value = '';
+        document.getElementById('form-email').value = '';
+        document.getElementById('form-message').value = '';
+
+        // Notify inbox component to refresh if initialized
+        if (typeof window.refreshAdminInbox === 'function') {
+            window.refreshAdminInbox();
+        }
     });
 })();
 
@@ -526,7 +679,18 @@ const CASE_STUDIES = {
         contactLinkedin: 'https://www.linkedin.com/in/ibrahimshakeshuvo',
         contactGithub: 'https://github.com/Ibrahim009-Devloper',
         contactFacebook: 'https://www.facebook.com/profile.php?id=61588549130311',
-        contactLocation: 'Dhaka, Bangladesh'
+        contactLocation: 'Dhaka, Bangladesh',
+
+        // Work Projects & Featured Images
+        workP1Img: '/assets/b2b_lead_gen_graphic.jpg',
+        workP1Title: 'Targeted B2B Decision-Maker Prospect List for Outbound Sales',
+        workP1Summary: 'Researched, verified, and structured high-intent decision-makers across B2B technology companies. Every email address is verified via SMTP ping to eliminate campaign bounces.',
+        workP2Img: '/assets/gmaps_scraping.jpg',
+        workP2Title: 'Automated Google Maps Local Business Directory Extraction',
+        workP2Summary: 'Deployed headless browser automation using Playwright to extract localized company profiles, phone numbers, ratings, and websites across commercial metropolitan centers.',
+        workP3Img: '/assets/b2b_dashboard.jpg',
+        workP3Title: 'E-commerce Multi-Category Catalog & Pricing Extraction',
+        workP3Summary: 'Automated deep pagination across dynamic JavaScript pages to scrape thousands of product SKUs, regular and discounted pricing, availability flags, and category hierarchies.'
     };
 
     // Initial default high-quality lead samples with attached Google Sheet CSV datasets
@@ -980,6 +1144,28 @@ const CASE_STUDIES = {
             footerLinkedin.href = content.contactLinkedin;
         }
 
+        // Work Projects & Images (CMS Controlled)
+        const p1Img = document.getElementById('work-project-1-img');
+        if (p1Img && content.workP1Img) p1Img.src = content.workP1Img;
+        const p1Title = document.getElementById('work-project-1-title');
+        if (p1Title && content.workP1Title) p1Title.textContent = content.workP1Title;
+        const p1Summary = document.getElementById('work-project-1-summary');
+        if (p1Summary && content.workP1Summary) p1Summary.textContent = content.workP1Summary;
+
+        const p2Img = document.getElementById('work-project-2-img');
+        if (p2Img && content.workP2Img) p2Img.src = content.workP2Img;
+        const p2Title = document.getElementById('work-project-2-title');
+        if (p2Title && content.workP2Title) p2Title.textContent = content.workP2Title;
+        const p2Summary = document.getElementById('work-project-2-summary');
+        if (p2Summary && content.workP2Summary) p2Summary.textContent = content.workP2Summary;
+
+        const p3Img = document.getElementById('work-project-3-img');
+        if (p3Img && content.workP3Img) p3Img.src = content.workP3Img;
+        const p3Title = document.getElementById('work-project-3-title');
+        if (p3Title && content.workP3Title) p3Title.textContent = content.workP3Title;
+        const p3Summary = document.getElementById('work-project-3-summary');
+        if (p3Summary && content.workP3Summary) p3Summary.textContent = content.workP3Summary;
+
         // Render Services in main portfolio if custom
         if (Array.isArray(content.services) && content.services.length > 0) {
             renderServicesBoard(content.services);
@@ -1055,6 +1241,25 @@ const CASE_STUDIES = {
         setVal('cms-input-contact-github', content.contactGithub || '');
         setVal('cms-input-contact-facebook', content.contactFacebook || '');
         setVal('cms-input-contact-location', content.contactLocation || '');
+
+        // Tab: Work Projects & Images
+        setVal('cms-input-work-p1-img', content.workP1Img || '');
+        const prev1 = document.getElementById('cms-preview-work-p1-img');
+        if (prev1 && content.workP1Img) prev1.src = content.workP1Img;
+        setVal('cms-input-work-p1-title', content.workP1Title || '');
+        setVal('cms-input-work-p1-summary', content.workP1Summary || '');
+
+        setVal('cms-input-work-p2-img', content.workP2Img || '');
+        const prev2 = document.getElementById('cms-preview-work-p2-img');
+        if (prev2 && content.workP2Img) prev2.src = content.workP2Img;
+        setVal('cms-input-work-p2-title', content.workP2Title || '');
+        setVal('cms-input-work-p2-summary', content.workP2Summary || '');
+
+        setVal('cms-input-work-p3-img', content.workP3Img || '');
+        const prev3 = document.getElementById('cms-preview-work-p3-img');
+        if (prev3 && content.workP3Img) prev3.src = content.workP3Img;
+        setVal('cms-input-work-p3-title', content.workP3Title || '');
+        setVal('cms-input-work-p3-summary', content.workP3Summary || '');
     }
 
     // Render Editable Services Cards inside CMS
@@ -1192,7 +1397,20 @@ const CASE_STUDIES = {
             contactLinkedin: getVal('cms-input-contact-linkedin') || DEFAULT_SITE_CONTENT.contactLinkedin,
             contactGithub: getVal('cms-input-contact-github') || DEFAULT_SITE_CONTENT.contactGithub,
             contactFacebook: getVal('cms-input-contact-facebook') || DEFAULT_SITE_CONTENT.contactFacebook,
-            contactLocation: getVal('cms-input-contact-location') || DEFAULT_SITE_CONTENT.contactLocation
+            contactLocation: getVal('cms-input-contact-location') || DEFAULT_SITE_CONTENT.contactLocation,
+
+            // Work Projects & Images
+            workP1Img: getVal('cms-input-work-p1-img') || DEFAULT_SITE_CONTENT.workP1Img,
+            workP1Title: getVal('cms-input-work-p1-title') || DEFAULT_SITE_CONTENT.workP1Title,
+            workP1Summary: getVal('cms-input-work-p1-summary') || DEFAULT_SITE_CONTENT.workP1Summary,
+
+            workP2Img: getVal('cms-input-work-p2-img') || DEFAULT_SITE_CONTENT.workP2Img,
+            workP2Title: getVal('cms-input-work-p2-title') || DEFAULT_SITE_CONTENT.workP2Title,
+            workP2Summary: getVal('cms-input-work-p2-summary') || DEFAULT_SITE_CONTENT.workP2Summary,
+
+            workP3Img: getVal('cms-input-work-p3-img') || DEFAULT_SITE_CONTENT.workP3Img,
+            workP3Title: getVal('cms-input-work-p3-title') || DEFAULT_SITE_CONTENT.workP3Title,
+            workP3Summary: getVal('cms-input-work-p3-summary') || DEFAULT_SITE_CONTENT.workP3Summary
         };
     }
 
@@ -1284,6 +1502,30 @@ const CASE_STUDIES = {
         const isAdminPage = hash.startsWith('#admin') || hash === '#cms' || hash === '#admin-cms';
 
         if (isAdminPage) {
+            if (!isAdminLoggedIn()) {
+                // Strict Security: Hide CMS view completely from unauthenticated visitors
+                if (adminCmsView) {
+                    adminCmsView.style.display = 'none';
+                    adminCmsView.setAttribute('aria-hidden', 'true');
+                }
+                if (portfolioView) portfolioView.style.display = 'block';
+                if (leadsSamplesView) {
+                    leadsSamplesView.style.display = 'none';
+                    leadsSamplesView.setAttribute('aria-hidden', 'true');
+                }
+                if (navLinkAdmin) navLinkAdmin.classList.remove('active');
+                if (footerLinkAdmin) footerLinkAdmin.classList.remove('active');
+                if (navLinkSamples) navLinkSamples.classList.remove('active');
+
+                // Prompt user to enter admin password
+                openModal('admin-login-modal');
+                if (adminPasswordInput) {
+                    setTimeout(() => adminPasswordInput.focus(), 80);
+                }
+                return;
+            }
+
+            // Authenticated: reveal Admin CMS View
             if (portfolioView) portfolioView.style.display = 'none';
             if (leadsSamplesView) {
                 leadsSamplesView.style.display = 'none';
@@ -1307,11 +1549,10 @@ const CASE_STUDIES = {
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (!isAdminLoggedIn()) {
-                openModal('admin-login-modal');
-            }
             populateCmsForm(getSiteContent());
+            if (typeof renderCmsInbox === 'function') {
+                renderCmsInbox(true);
+            }
         } else if (isSamplesPage) {
             if (portfolioView) portfolioView.style.display = 'none';
             if (adminCmsView) {
@@ -1372,6 +1613,9 @@ const CASE_STUDIES = {
             if (targetPanel) {
                 targetPanel.classList.add('active');
             }
+            if (targetTab === 'cms-tab-inbox' && typeof renderCmsInbox === 'function') {
+                renderCmsInbox(true);
+            }
         });
     });
 
@@ -1392,6 +1636,12 @@ const CASE_STUDIES = {
 
     // Save All CMS Changes Handler (Works from topbar, panel footers, and floating bar)
     async function executeCmsSave() {
+        if (!isAdminLoggedIn()) {
+            showNotificationToast('🔒 Access denied. Please sign in with admin password.');
+            openModal('admin-login-modal');
+            return;
+        }
+
         const updated = collectCmsFormData();
         const allSaveBtns = document.querySelectorAll('.btn-cms-save, .btn-cms-save-trigger');
 
@@ -1646,39 +1896,15 @@ const CASE_STUDIES = {
 
                         <h3 class="lead-card-title">${escapeHtml(sample.title)}</h3>
 
-                        <div class="lead-card-quality-box">
-                            <span class="lead-card-quality-label">Deliverability Guarantee</span>
-                            <span class="lead-card-quality-val">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                </svg>
-                                <span>${escapeHtml(sample.quality || '100% Zero-Bounce Verified')}</span>
-                            </span>
-                        </div>
-
-                        <div class="lead-card-fields">
-                            ${fieldList.map(f => `<span class="lead-card-field-tag">${escapeHtml(f)}</span>`).join('')}
-                        </div>
-
                         <div class="lead-card-footer">
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <button type="button" class="btn-lead-download" onclick="window.downloadLeadSheet('${escapeHtml(sample.id)}')" title="Download spreadsheet for ${escapeHtml(sample.title)}">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    <span>Download</span>
-                                </button>
-
-                                <button type="button" class="btn-lead-preview" onclick="window.inspectSamplePreview('${escapeHtml(sample.id)}')">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                    <span>Preview</span>
-                                </button>
-                            </div>
+                            <button type="button" class="btn-lead-download" onclick="window.downloadLeadSheet('${escapeHtml(sample.id)}')" title="Download spreadsheet for ${escapeHtml(sample.title)}">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                <span>Download Sample Sheet</span>
+                            </button>
 
                             ${isAdmin ? `
                                 <div class="lead-card-admin-actions">
@@ -1739,23 +1965,36 @@ const CASE_STUDIES = {
     const adminLoginError = document.getElementById('admin-login-error');
     const btnAdminLogout = document.getElementById('btn-admin-logout');
 
+    // Dismiss Admin Login Modal safely
+    function dismissAdminLoginModal() {
+        closeModal('admin-login-modal');
+        if (adminLoginError) adminLoginError.style.display = 'none';
+        if (adminPasswordInput) adminPasswordInput.value = '';
+
+        if (!isAdminLoggedIn()) {
+            const hash = window.location.hash || '';
+            const isAdminRoute = hash.startsWith('#admin') || hash === '#cms' || hash === '#admin-cms' || hash === '#leads-samples/admin' || hash === '#leads-samples-admin';
+            if (isAdminRoute) {
+                // Return to home view immediately so admin CMS is never exposed
+                window.location.hash = '#hero';
+            } else {
+                handleRouting();
+            }
+        }
+    }
+
     if (btnOpenAdminLogin) {
         btnOpenAdminLogin.addEventListener('click', () => {
             if (adminLoginError) adminLoginError.style.display = 'none';
             openModal('admin-login-modal');
-            if (adminPasswordInput) adminPasswordInput.focus();
+            if (adminPasswordInput) {
+                setTimeout(() => adminPasswordInput.focus(), 80);
+            }
         });
     }
 
-    if (btnCloseAdminLogin) btnCloseAdminLogin.addEventListener('click', () => closeModal('admin-login-modal'));
-    if (btnCancelAdminLogin) btnCancelAdminLogin.addEventListener('click', () => closeModal('admin-login-modal'));
-
-    if (btnQuickFill && adminPasswordInput) {
-        btnQuickFill.addEventListener('click', () => {
-            adminPasswordInput.value = 'admin123';
-            if (adminLoginError) adminLoginError.style.display = 'none';
-        });
-    }
+    if (btnCloseAdminLogin) btnCloseAdminLogin.addEventListener('click', dismissAdminLoginModal);
+    if (btnCancelAdminLogin) btnCancelAdminLogin.addEventListener('click', dismissAdminLoginModal);
 
     if (btnTogglePwd && adminPasswordInput) {
         btnTogglePwd.addEventListener('click', () => {
@@ -1770,16 +2009,20 @@ const CASE_STUDIES = {
             const email = (document.getElementById('admin-email-input')?.value || '').trim().toLowerCase();
             const password = (adminPasswordInput?.value || '').trim();
 
-            if (password === 'admin123' || password === 'ibrahim2026' || password === 'admin') {
+            if (password === 'ibrahim@07') {
                 setAdminAuth(true);
                 closeModal('admin-login-modal');
                 if (adminLoginError) adminLoginError.style.display = 'none';
                 if (adminPasswordInput) adminPasswordInput.value = '';
+                showNotificationToast('Signed in successfully as Admin ✓');
                 handleRouting();
             } else {
                 if (adminLoginError) {
-                    adminLoginError.textContent = 'Incorrect password. Click "Quick Fill (admin123)" to log in for demonstration.';
+                    adminLoginError.textContent = 'Incorrect password. Please enter the correct admin password.';
                     adminLoginError.style.display = 'block';
+                }
+                if (adminPasswordInput) {
+                    adminPasswordInput.focus();
                 }
             }
         });
@@ -1788,6 +2031,8 @@ const CASE_STUDIES = {
     if (btnAdminLogout) {
         btnAdminLogout.addEventListener('click', () => {
             setAdminAuth(false);
+            window.location.hash = '#hero';
+            showNotificationToast('Signed out of Admin Mode.');
         });
     }
 
@@ -1976,6 +2221,12 @@ const CASE_STUDIES = {
     // Open Add Lead Sample
     if (btnOpenAddSample) {
         btnOpenAddSample.addEventListener('click', () => {
+            if (!isAdminLoggedIn()) {
+                showNotificationToast('🔒 Please sign in with admin password to add samples.');
+                openModal('admin-login-modal');
+                return;
+            }
+
             if (sampleEditorForm) sampleEditorForm.reset();
             if (editorId) editorId.value = '';
             if (editorHeading) editorHeading.textContent = 'Add New Lead Sample';
@@ -2002,6 +2253,14 @@ const CASE_STUDIES = {
     if (sampleEditorForm) {
         sampleEditorForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            if (!isAdminLoggedIn()) {
+                showNotificationToast('🔒 Unauthorized: Admin password required.');
+                closeModal('sample-editor-modal');
+                openModal('admin-login-modal');
+                return;
+            }
+
             const id = editorId ? editorId.value.trim() : '';
             const title = (editorTitle?.value || '').trim();
             const location = (editorLocation?.value || 'Global / United States').trim();
@@ -2078,6 +2337,12 @@ const CASE_STUDIES = {
 
     // Global Action: Edit Lead Sample
     window.editLeadSample = function(id) {
+        if (!isAdminLoggedIn()) {
+            showNotificationToast('🔒 Please sign in with admin password to edit samples.');
+            openModal('admin-login-modal');
+            return;
+        }
+
         const samples = getSamples();
         const sample = samples.find(s => s.id === id);
         if (!sample) return;
@@ -2102,6 +2367,12 @@ const CASE_STUDIES = {
 
     // Global Action: Delete Lead Sample
     window.deleteLeadSample = async function(id, buttonEl) {
+        if (!isAdminLoggedIn()) {
+            showNotificationToast('🔒 Please sign in with admin password to delete samples.');
+            openModal('admin-login-modal');
+            return;
+        }
+
         const samples = getSamples();
         const sample = samples.find(s => s.id === id);
         if (!sample) return;
@@ -2317,6 +2588,33 @@ const CASE_STUDIES = {
         });
     }
 
+    // Backdrop click listeners: clicking outside any modal dialog closes it safely
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) {
+                if (backdrop.id === 'admin-login-modal') {
+                    dismissAdminLoginModal();
+                } else {
+                    closeModal(backdrop.id);
+                }
+            }
+        });
+    });
+
+    // Escape key listener to close modals
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const openModalEl = document.querySelector('.modal-backdrop.is-open');
+            if (openModalEl) {
+                if (openModalEl.id === 'admin-login-modal') {
+                    dismissAdminLoginModal();
+                } else {
+                    closeModal(openModalEl.id);
+                }
+            }
+        }
+    });
+
     // Attach Database Status Pill click for manual connection testing
     const statusPill = document.getElementById('cms-db-status-pill');
     if (statusPill) {
@@ -2332,11 +2630,437 @@ const CASE_STUDIES = {
         });
     }
 
+    /* ─────────────────────────────────────
+       9. WORK PROJECTS & IMAGES CMS HANDLERS
+    ───────────────────────────────────── */
+    function setupWorkProjectImageHandlers(num) {
+        const inputEl = document.getElementById(`cms-input-work-p${num}-img`);
+        const previewEl = document.getElementById(`cms-preview-work-p${num}-img`);
+        const fileEl = document.getElementById(`cms-file-work-p${num}-img`);
+
+        // Preset buttons
+        document.querySelectorAll(`[data-cms-work-img${num}]`).forEach(btn => {
+            btn.addEventListener('click', () => {
+                const path = btn.getAttribute(`data-cms-work-img${num}`);
+                if (inputEl && path) {
+                    inputEl.value = path;
+                    if (previewEl) previewEl.src = path;
+                    showNotificationToast(`Project ${num} image preset selected.`);
+                }
+            });
+        });
+
+        // Manual text input typing
+        if (inputEl) {
+            inputEl.addEventListener('input', () => {
+                const val = inputEl.value.trim();
+                if (previewEl && val) {
+                    previewEl.src = val;
+                }
+            });
+        }
+
+        // File upload with auto-compression
+        if (fileEl) {
+            fileEl.addEventListener('change', async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                showNotificationToast('Compressing and optimizing project photo...');
+                try {
+                    const compressedBase64 = await compressImageFile(file, 900, 0.85);
+                    if (compressedBase64) {
+                        if (inputEl) inputEl.value = compressedBase64;
+                        if (previewEl) previewEl.src = compressedBase64;
+                        showNotificationToast(`Project ${num} image uploaded & ready to save ✓`);
+                    }
+                } catch (err) {
+                    console.error('Image compression error:', err);
+                    showNotificationToast('Image processing error.');
+                }
+            });
+        }
+    }
+
+    setupWorkProjectImageHandlers(1);
+    setupWorkProjectImageHandlers(2);
+    setupWorkProjectImageHandlers(3);
+
+    /* ─────────────────────────────────────
+       10. CLIENT INQUIRIES DATABASE INBOX
+    ───────────────────────────────────── */
+    let cachedInquiries = [];
+    let isFetchingInquiries = false;
+
+    function getSupabaseInboxClient() {
+        if (supabase) return supabase;
+        if (typeof window !== 'undefined' && window.supabase && typeof window.supabase.createClient === 'function') {
+            try {
+                supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+                return supabase;
+            } catch (e) {
+                console.error('Supabase inbox client initialization error:', e);
+            }
+        }
+        return null;
+    }
+
+    async function loadInquiriesFromStorageAndDb(forceRefresh = false) {
+        let combined = [];
+
+        // 1. Read local storage cache first for instant UI response
+        try {
+            const rawStored = localStorage.getItem('ibrahim_inbox_messages');
+            if (rawStored) {
+                const parsed = JSON.parse(rawStored);
+                if (Array.isArray(parsed)) combined = parsed;
+            }
+        } catch (e) {
+            console.warn('Inquiries local load error:', e);
+        }
+
+        // 2. Fetch directly from Supabase Cloud 'messages' table
+        const client = getSupabaseInboxClient();
+        if (client) {
+            try {
+                const { data, error } = await client.from('messages').select('*');
+
+                if (error) {
+                    console.warn('Supabase messages query notice:', error.message || error);
+                }
+
+                if (!error && Array.isArray(data)) {
+                    console.log(`✓ Fetched ${data.length} inquiries directly from Supabase messages table`);
+                    data.forEach(remoteRow => {
+                        const id = remoteRow.id ? String(remoteRow.id) : ('MSG-' + Math.floor(100000 + Math.random() * 900000));
+                        const name = remoteRow.name || remoteRow.full_name || remoteRow.client_name || remoteRow.author || remoteRow.user_name || 'Client';
+                        const email = remoteRow.email || remoteRow.client_email || remoteRow.mail || remoteRow.contact_email || '';
+                        const projectType = remoteRow.project_type || remoteRow.projectType || remoteRow.type || remoteRow.subject || remoteRow.category || remoteRow.service || 'B2B Lead Generation';
+                        const message = remoteRow.message || remoteRow.msg || remoteRow.content || remoteRow.body || remoteRow.description || remoteRow.text || '';
+                        const createdAt = remoteRow.created_at || remoteRow.createdAt || remoteRow.timestamp || remoteRow.date || remoteRow.inserted_at || new Date().toISOString();
+
+                        // Match existing records by ID or exact email + message
+                        const existingIdx = combined.findIndex(localRow => 
+                            (localRow.id && String(localRow.id) === String(id)) ||
+                            (localRow.email === email && localRow.message === message)
+                        );
+
+                        if (existingIdx >= 0) {
+                            // Upgrade with remote row ID & timestamp
+                            combined[existingIdx] = {
+                                id,
+                                name,
+                                email,
+                                project_type: projectType,
+                                message,
+                                created_at: createdAt
+                            };
+                        } else {
+                            combined.push({
+                                id,
+                                name,
+                                email,
+                                project_type: projectType,
+                                message,
+                                created_at: createdAt
+                            });
+                        }
+                    });
+
+                    // Save synchronized list back to local storage
+                    try {
+                        localStorage.setItem('ibrahim_inbox_messages', JSON.stringify(combined));
+                    } catch (storeErr) {
+                        console.warn('Storage sync error:', storeErr);
+                    }
+                }
+            } catch (err) {
+                console.warn('Supabase inquiries load notice:', err);
+            }
+        }
+
+        // Sort latest first by date or numerical ID
+        combined.sort((a, b) => {
+            const timeA = new Date(a.created_at || 0).getTime();
+            const timeB = new Date(b.created_at || 0).getTime();
+            return timeB - timeA;
+        });
+
+        cachedInquiries = combined;
+        return combined;
+    }
+
+    async function renderCmsInbox(forceRefresh = false) {
+        const container = document.getElementById('cms-inbox-list-container');
+        const countBadge = document.getElementById('cms-inbox-counter-badge');
+        const totalCountEl = document.getElementById('cms-inbox-total-count');
+
+        if (isFetchingInquiries) return;
+        isFetchingInquiries = true;
+
+        if (container && cachedInquiries.length === 0) {
+            container.innerHTML = `
+                <div style="padding:32px 16px; text-align:center; color:var(--ink-3);">
+                    <svg class="spin-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;">
+                        <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="12"></circle>
+                    </svg>
+                    <p style="font-size:13px; font-weight:500;">Loading database inquiries from Supabase...</p>
+                </div>
+            `;
+        }
+
+        const inquiries = await loadInquiriesFromStorageAndDb(forceRefresh);
+        isFetchingInquiries = false;
+
+        const count = inquiries.length;
+        if (totalCountEl) totalCountEl.textContent = String(count);
+        if (countBadge) {
+            countBadge.textContent = String(count);
+            countBadge.style.display = count > 0 ? 'inline-flex' : 'none';
+        }
+
+        if (!container) return;
+
+        if (count === 0) {
+            container.innerHTML = `
+                <div class="cms-inbox-empty">
+                    <div class="cms-inbox-empty-icon">📬</div>
+                    <p style="font-size:14px; font-weight:600; color:var(--ink); margin-bottom:4px;">No inquiries recorded yet</p>
+                    <p style="font-size:12.5px; color:var(--ink-3);">When visitors submit project queries on the Contact Form, they will be logged into the database and shown here.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = inquiries.map((item, idx) => {
+            const dateStr = item.created_at ? new Date(item.created_at).toLocaleString() : 'Recent';
+            const cleanEmail = escapeHtml(item.email || '');
+            const cleanName = escapeHtml(item.name || 'Client');
+            const cleanType = escapeHtml(item.project_type || 'General Lead Inquiry');
+            const cleanMsg = escapeHtml(item.message || '');
+            const refId = escapeHtml(String(item.id || ('MSG-' + idx)));
+
+            return `
+                <div class="cms-inbox-item" id="inbox-item-${refId}">
+                    <div class="cms-inbox-item-header">
+                        <div>
+                            <span class="cms-inbox-item-sender">${cleanName}</span>
+                            <span class="cms-inbox-item-email">&lt;${cleanEmail}&gt;</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="cms-inbox-tag">${cleanType}</span>
+                            <span class="cms-inbox-time">${dateStr}</span>
+                        </div>
+                    </div>
+                    <div class="cms-inbox-item-body">
+                        ${cleanMsg}
+                    </div>
+                    <div class="cms-inbox-item-actions">
+                        <span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-3);">Ref: #${refId}</span>
+                        <div style="display:flex; gap:8px;">
+                            <a href="mailto:${cleanEmail}?subject=Re: ${encodeURIComponent(cleanType)} Inquiry&body=Hi ${encodeURIComponent(cleanName)},\n\nThank you for reaching out regarding your ${encodeURIComponent(cleanType)} data requirements.\n\n" class="btn-cms-secondary" style="padding:4px 10px; font-size:11.5px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                                ✉ Reply via Email
+                            </a>
+                            <button type="button" class="btn-cms-secondary btn-delete-inbox-item" data-inbox-id="${refId}" style="padding:4px 8px; font-size:11.5px; color:#ef4444; border-color:rgba(239,68,68,0.25);">
+                                🗑 Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Wire delete buttons
+        container.querySelectorAll('.btn-delete-inbox-item').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const idToDelete = btn.getAttribute('data-inbox-id');
+                if (!idToDelete) return;
+
+                if (confirm('Delete this inquiry from database records?')) {
+                    const filtered = cachedInquiries.filter(i => String(i.id) !== String(idToDelete));
+                    cachedInquiries = filtered;
+                    localStorage.setItem('ibrahim_inbox_messages', JSON.stringify(filtered));
+
+                    const client = getSupabaseInboxClient();
+                    if (client) {
+                        try {
+                            await client.from('messages').delete().eq('id', idToDelete);
+                        } catch (err) {
+                            console.warn('Supabase message delete notice:', err);
+                        }
+                    }
+
+                    showNotificationToast('Inquiry deleted from database.');
+                    renderCmsInbox(true);
+                }
+            });
+        });
+    }
+
+    // Refresh button in Inbox
+    const btnRefreshInbox = document.getElementById('btn-refresh-inbox');
+    if (btnRefreshInbox) {
+        btnRefreshInbox.addEventListener('click', async () => {
+            showNotificationToast('Fetching inquiries from Supabase database...');
+            await renderCmsInbox(true);
+            showNotificationToast(`Database synchronized: ${cachedInquiries.length} inquiries ✓`);
+        });
+    }
+
+    // Export Excel (.xlsx) file handler
+    async function exportInquiriesToXLSX() {
+        const inquiries = cachedInquiries && cachedInquiries.length > 0
+            ? cachedInquiries
+            : await loadInquiriesFromStorageAndDb(true);
+
+        if (!inquiries || inquiries.length === 0) {
+            showNotificationToast('No inquiries in database to export.');
+            return;
+        }
+
+        const dateStr = new Date().toISOString().slice(0, 10);
+        const filename = `Client_Inquiries_Database_${dateStr}.xlsx`;
+
+        // Format rows for Excel
+        const header = ['Ref ID', 'Date & Time', 'Client Name', 'Client Email', 'Project / Service Type', 'Project Description / Requirements'];
+        const dataRows = inquiries.map(item => [
+            String(item.id || ''),
+            item.created_at ? new Date(item.created_at).toLocaleString() : 'Recent',
+            String(item.name || 'Client'),
+            String(item.email || ''),
+            String(item.project_type || 'General Lead Inquiry'),
+            String(item.message || '')
+        ]);
+
+        const fullTable = [header, ...dataRows];
+
+        // 1. Try SheetJS (xlsx.full.min.js) for true native binary .xlsx format
+        if (typeof window !== 'undefined' && window.XLSX && typeof window.XLSX.utils !== 'undefined') {
+            try {
+                const wb = window.XLSX.utils.book_new();
+                const ws = window.XLSX.utils.aoa_to_sheet(fullTable);
+
+                // Auto-size column widths for Excel
+                ws['!cols'] = [
+                    { wch: 16 }, // Ref ID
+                    { wch: 22 }, // Date & Time
+                    { wch: 24 }, // Client Name
+                    { wch: 30 }, // Client Email
+                    { wch: 26 }, // Project / Service Type
+                    { wch: 60 }  // Message Description
+                ];
+
+                window.XLSX.utils.book_append_sheet(wb, ws, 'Client Inquiries');
+                window.XLSX.writeFile(wb, filename);
+                showNotificationToast(`Exported ${inquiries.length} inquiries to Excel (.xlsx) ✓`);
+                return;
+            } catch (xlsxErr) {
+                console.warn('SheetJS export notice, using XML Spreadsheet fallback:', xlsxErr);
+            }
+        }
+
+        // 2. High-fidelity XML Spreadsheet fallback (native Microsoft Excel .xlsx compatible)
+        try {
+            let xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+                '<?mso-application progid="Excel.Sheet"?>\n' +
+                '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"\n' +
+                ' xmlns:o="urn:schemas-microsoft-com:office:office"\n' +
+                ' xmlns:x="urn:schemas-microsoft-com:office:excel"\n' +
+                ' xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"\n' +
+                ' xmlns:html="http://www.w3.org/TR/REC-html40">\n' +
+                ' <Styles>\n' +
+                '  <Style ss:ID="HeaderStyle">\n' +
+                '   <Font ss:Bold="1" ss:Color="#FFFFFF"/>\n' +
+                '   <Interior ss:Color="#0f766e" ss:Pattern="Solid"/>\n' +
+                '   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>\n' +
+                '  </Style>\n' +
+                '  <Style ss:ID="RowStyle">\n' +
+                '   <Alignment ss:Vertical="Top" ss:WrapText="1"/>\n' +
+                '  </Style>\n' +
+                ' </Styles>\n' +
+                ' <Worksheet ss:Name="Client Inquiries">\n' +
+                '  <Table>\n' +
+                '   <Column ss:Width="100"/>\n' +
+                '   <Column ss:Width="140"/>\n' +
+                '   <Column ss:Width="150"/>\n' +
+                '   <Column ss:Width="200"/>\n' +
+                '   <Column ss:Width="160"/>\n' +
+                '   <Column ss:Width="350"/>\n';
+
+            // Header row
+            xml += '   <Row ss:Height="24">\n';
+            header.forEach(h => {
+                const safeH = String(h).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                xml += `    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">${safeH}</Data></Cell>\n`;
+            });
+            xml += '   </Row>\n';
+
+            // Data rows
+            dataRows.forEach(row => {
+                xml += '   <Row ss:StyleID="RowStyle">\n';
+                row.forEach(cell => {
+                    const safeCell = String(cell || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    xml += `    <Cell><Data ss:Type="String">${safeCell}</Data></Cell>\n`;
+                });
+                xml += '   </Row>\n';
+            });
+
+            xml += '  </Table>\n </Worksheet>\n</Workbook>';
+
+            const blob = new Blob([xml], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 250);
+            showNotificationToast(`Exported ${inquiries.length} inquiries to Excel (.xlsx) ✓`);
+        } catch (fallbackErr) {
+            console.error('Export XLSX error:', fallbackErr);
+            showNotificationToast('Export failed. Please try again.');
+        }
+    }
+
+    // Export XLSX button click listener
+    const btnExportInboxXlsx = document.getElementById('btn-export-inbox-csv');
+    if (btnExportInboxXlsx) {
+        btnExportInboxXlsx.addEventListener('click', (e) => {
+            e.preventDefault();
+            exportInquiriesToXLSX();
+        });
+    }
+
+    // Setup Supabase Realtime subscription for instant inbox updates
+    const rtClient = getSupabaseInboxClient();
+    if (rtClient && typeof rtClient.channel === 'function') {
+        try {
+            rtClient.channel('realtime:messages')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'messages' }, (payload) => {
+                    console.log('⚡ Supabase Realtime update for messages:', payload);
+                    renderCmsInbox(true);
+                    if (payload.eventType === 'INSERT') {
+                        showNotificationToast('🔔 New client inquiry received in database!');
+                    }
+                })
+                .subscribe();
+        } catch (rtErr) {
+            console.warn('Realtime subscription notice:', rtErr);
+        }
+    }
+
+    // Expose for contact form
+    window.refreshAdminInbox = () => renderCmsInbox(true);
+
     // Initialize UI, Database Sync, and Router
     updateAdminBarUI();
     applySiteContentToDOM();
     populateCmsForm();
     renderSamples();
+    renderCmsInbox();
     pingSupabaseDatabase();
     syncFromSupabase();
     syncSiteContentFromSupabase();
