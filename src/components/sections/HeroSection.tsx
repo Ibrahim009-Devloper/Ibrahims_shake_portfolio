@@ -38,7 +38,7 @@ export const HeroSection: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 mb-6 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                B2B Lead Research & Data Scraping
+                PYTHON WEB AUTOMATION &amp; WEB SCRAPING | DHAKA, BANGLADESH
               </span>
             </div>
 
@@ -103,7 +103,7 @@ export const HeroSection: React.FC = () => {
               </span>
               <span className="flex items-center gap-1.5">
                 <FileSpreadsheet className="w-4 h-4 text-cyan-400" />
-                <span>Excel & CSV Ready Formats</span>
+                <span>Google Sheets &amp; CSV Formats</span>
               </span>
             </div>
           </div>

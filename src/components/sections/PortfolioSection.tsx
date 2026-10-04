@@ -86,7 +86,7 @@ export const PortfolioSection: React.FC = () => {
                   </span>
                   {project.isDemoSample && (
                     <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/60">
-                      Sample Dataset
+                      Automation Demo
                     </span>
                   )}
                 </div>

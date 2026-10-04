@@ -20,7 +20,7 @@ export const HowIWorkSection: React.FC = () => {
             How I Work
           </h2>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-            A clear, 4-step process ensuring every dataset delivered is accurate, formatted, and immediately usable.
+            A clear, 4-step process ensuring every automated workflow is reliable, error-handled, and production-ready.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export const HowIWorkSection: React.FC = () => {
                     <ArrowRight className="w-3 h-3" />
                   </span>
                 ) : (
-                  <span className="text-emerald-400/90 font-medium">Ready for Outreach</span>
+                  <span className="text-emerald-400/90 font-medium">Auto-Synced &amp; Ready</span>
                 )}
               </div>
             </div>

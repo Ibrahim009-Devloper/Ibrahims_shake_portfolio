@@ -81,7 +81,7 @@ export const ProjectCaseStudyModal: React.FC = () => {
               </span>
               {selectedProject.isDemoSample && (
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">
-                  Sample Dataset Demonstration
+                  Automation Workflow Demo
                 </span>
               )}
               <span className="px-2.5 py-0.5 rounded-full text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800">
@@ -294,7 +294,7 @@ export const ProjectCaseStudyModal: React.FC = () => {
         {/* Modal Footer */}
         <div className="p-5 border-t border-slate-800/80 bg-slate-900/60 flex items-center justify-between flex-wrap gap-3">
           <div className="text-xs text-slate-400">
-            Need a custom dataset like this tailored to your market?
+            Need a custom automation bot or scraper tailored to your workflow?
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -307,7 +307,7 @@ export const ProjectCaseStudyModal: React.FC = () => {
               onClick={handleRequestSimilar}
               className="px-4 py-2 text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors cursor-pointer shadow-sm shadow-cyan-400/20"
             >
-              Request Similar Lead List
+              Discuss Similar Project
             </button>
           </div>
         </div>

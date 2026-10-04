@@ -612,15 +612,15 @@ app.post('/api/chat', async (req: Request, res: Response) => {
       const isAskingContact = lower.includes('phone') || lower.includes('call') || lower.includes('whatsapp') || lower.includes('message') || lower.includes('number') || lower.includes('contact') || lower.includes('reach') || lower.includes('hire') || lower.includes('quote') || lower.includes('price') || lower.includes('cost') || lower.includes('start') || lower.includes('satisfy') || lower.includes('ready');
 
       if (lower.includes('service') || lower.includes('what do you') || lower.includes('provide') || lower.includes('offer') || lower.includes('help')) {
-        answer = `• B2B Lead Generation: Targeted decision-makers (CEOs, Founders, VPs) with syntax-validated business emails and LinkedIn profiles.\n• Web Scraping: Custom Python, Playwright, and Selenium scrapers with anti-bot bypassing for dynamic sites.\n• Google Maps Scraping: Local business directory extractions with direct phone numbers and websites.\n• Data Cleaning: Strict domain deduplication and E.164 phone formatting.`;
+        answer = `• Custom Browser Automation Bots: Python bots (Playwright / SeleniumBase) for login, clicks, forms, and downloads.\n• Web Workflow & Task Automation: End-to-end automation of repetitive web tasks with logging.\n• Web Scraping & Data Extraction: Structured data delivered as CSV, Excel, or Google Sheets.\n• AI-Assisted Automation: LLM calls inside workflows to classify, summarize, or clean data.\n• Google Sheets & Docs Automation: Scripts that read, write, and update Google Sheets and Docs automatically.\n• Lead Discovery Automation: Automated B2B lead finding as one use case of automation tools.`;
       } else if (isAskingContact) {
         answer = `Project scope must be reviewed for a custom quote. You can connect with Ibrahim directly:\n\n📞 Call/WhatsApp: ${directPhone}\n✉️ Email: ${directEmail}`;
-      } else if (lower.includes('sample') || lower.includes('preview') || lower.includes('csv') || lower.includes('excel')) {
-        answer = `Verified sample datasets (B2B Tech, Google Maps, Shopify DTC) are available for instant inspection and download directly in the "Verified Lead Samples" section above.`;
+      } else if (lower.includes('project') || lower.includes('github') || lower.includes('demo') || lower.includes('video')) {
+        answer = `Dynamic automation projects with demo videos and GitHub repositories are showcased in the Projects section above.`;
       } else if (lower.includes('price') || lower.includes('rate') || lower.includes('cost') || lower.includes('deadline')) {
         answer = `No fixed pricing or deadlines are quoted upfront. Project scope must be reviewed for a custom quote.`;
       } else {
-        answer = `Ibrahim specializes in Python web scraping, B2B lead generation, Google Maps extraction, and data cleaning. How can I assist with your data requirements?`;
+        answer = `Ibrahim is a Python Web Automation Developer building browser bots, web workflow automation, web scraping, and AI-assisted automation systems. How can I assist with your project?`;
       }
 
       return res.json({
@@ -632,17 +632,29 @@ app.post('/api/chat', async (req: Request, res: Response) => {
       });
     }
 
-    const systemInstruction = `You are the official AI Assistant for MD. Ibrahim Shake Shuvo based on his verified resume/LinkedIn profile data.
+    const systemInstruction = `You are the official AI Assistant for MD. Ibrahim Shake Shuvo based on his verified profile data.
 
 STRICT DATA BOUNDARY (VERY IMPORTANT):
 - ONLY answer questions based on Ibrahim's verified profile data:
   * Name: MD. Ibrahim Shake Shuvo
   * Location: Dhaka, Bangladesh
-  * Title: B2B Lead Generation & Web Scraping Specialist
-  * Top Skills: Web-based Research, B2B Lead Generation, E-commerce scraping, Python, Playwright, Selenium
-  * Services: B2B Lead Generation, Business & Prospect List Building, Web Research, Google Maps Lead Generation, Web Scraping & Data Extraction, Data Cleaning & Organization
-  * Experience: B2B Lead Generation & Web Scraping Specialist (January 2025 - Present)
-  * Education: Diploma in Agriculture, Agriculture training institute, Gaibandha (August 2019 - December 2023)
+  * Title: Python Web Automation Developer
+  * Core Tech Stack:
+    - Language: Python
+    - Browser automation: Playwright, SeleniumBase
+    - Scraping and parsing: Requests, BeautifulSoup
+    - Data: pandas
+    - AI: LLM API calling
+    - Integrations: Google Sheets and Google Docs updating
+  * Services:
+    1. Custom Browser Automation Bots: Python bots (Playwright / SeleniumBase) that work on websites without an API: login, clicks, forms, downloads.
+    2. Web Workflow & Task Automation: End-to-end automation of repetitive web tasks, with logging and error handling.
+    3. Web Scraping & Data Extraction: Structured data from static and JavaScript-heavy websites, delivered as CSV, Excel or Google Sheets.
+    4. AI-Assisted Automation: LLM calls inside the workflow to classify, score, summarize or clean collected data.
+    5. Google Sheets & Docs Automation: Scripts that read, write and update Google Sheets and Docs automatically.
+    6. Lead Discovery Automation: Automated B2B lead finding, as one small use case of the automation tools above.
+  * Experience / Bio: I am a Python Web Automation Developer. I build systems that do repetitive work on websites for you: browser automation, form filling, web scraping, AI-assisted processing with LLMs, and syncing results to Google Sheets and Docs. Lead generation is one of the things I build with these tools, not the only one. My focus is clean, reliable Python code that saves real working hours.
+  * Education: Diploma in Agriculture, Agriculture Training Institute, Gaibandha (August 2019 - December 2023)
 - DO NOT invent, assume, or provide any service details, skills, or information that is NOT explicitly mentioned above.
 - If a user asks something about Ibrahim or his services that is not in the records, state strictly: "I don't have that specific information in my records. Please reach out to Ibrahim directly to discuss this."
 
@@ -701,7 +713,7 @@ CONTACT DETAILS (Only when triggered by the rule above):
       });
     }
 
-    const reply = response.text || `I'm here to help with MD. Ibrahim's B2B lead generation and web scraping services. Please feel free to ask your question or reach Ibrahim directly at ${directPhone}.`;
+    const reply = response.text || `I am here to assist with MD. Ibrahim's Python web automation, browser bots, web scraping, and workflow automation services. Please reach out to Ibrahim directly at ${directPhone} or via email.`;
 
     return res.json({
       success: true,
@@ -718,15 +730,15 @@ CONTACT DETAILS (Only when triggered by the rule above):
 
     let fallbackReply = '';
     if (trimmedMsg.includes('service') || trimmedMsg.includes('what do you') || trimmedMsg.includes('provide') || trimmedMsg.includes('offer') || trimmedMsg.includes('help')) {
-      fallbackReply = `• B2B Lead Generation: Targeted decision-makers (CEOs, Founders, VPs) with syntax-validated business emails and LinkedIn profiles.\n• Web Scraping: Custom Python, Playwright, and Selenium scrapers with anti-bot bypassing for dynamic sites.\n• Google Maps Scraping: Local business directory extractions with direct phone numbers and websites.\n• Data Cleaning: Strict domain deduplication and E.164 phone formatting.`;
+      fallbackReply = `• Custom Browser Automation Bots: Python bots (Playwright / SeleniumBase) for login, clicks, forms, and downloads.\n• Web Workflow & Task Automation: End-to-end automation of repetitive web tasks with logging.\n• Web Scraping & Data Extraction: Structured data delivered as CSV, Excel, or Google Sheets.\n• AI-Assisted Automation: LLM calls inside workflows to classify, summarize, or clean data.\n• Google Sheets & Docs Automation: Scripts that read, write, and update Google Sheets and Docs automatically.\n• Lead Discovery Automation: Automated B2B lead finding as one use case of automation tools.`;
     } else if (isAskingContact) {
       fallbackReply = `Project scope must be reviewed for a custom quote. You can connect with Ibrahim directly:\n\n📞 Call/WhatsApp: ${phone}\n✉️ Email: ${email}`;
-    } else if (trimmedMsg.includes('sample') || trimmedMsg.includes('preview') || trimmedMsg.includes('csv') || trimmedMsg.includes('excel')) {
-      fallbackReply = `Verified sample datasets (B2B Tech, Google Maps, Shopify DTC) are available for instant inspection and download directly in the "Verified Lead Samples" section above.`;
+    } else if (trimmedMsg.includes('project') || trimmedMsg.includes('github') || trimmedMsg.includes('demo') || trimmedMsg.includes('video')) {
+      fallbackReply = `Dynamic automation projects with demo videos and GitHub repositories are showcased in the Projects section above.`;
     } else if (trimmedMsg.includes('price') || trimmedMsg.includes('rate') || trimmedMsg.includes('cost') || trimmedMsg.includes('deadline')) {
       fallbackReply = `No fixed pricing or deadlines are quoted upfront. Project scope must be reviewed for a custom quote.`;
     } else {
-      fallbackReply = `Ibrahim specializes in Python web scraping, B2B lead generation, Google Maps extraction, and data cleaning. How can I assist with your data requirements?`;
+      fallbackReply = `Ibrahim is a Python Web Automation Developer building browser bots, web workflow automation, web scraping, and AI-assisted automation systems. How can I assist with your project?`;
     }
 
     return res.json({

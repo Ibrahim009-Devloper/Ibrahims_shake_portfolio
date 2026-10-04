@@ -63,10 +63,10 @@ export const AdminDashboardModal: React.FC = () => {
   const [projectFormData, setProjectFormData] = useState<Omit<ProjectItem, 'id'>>({
     title: '',
     shortDescription: '',
-    category: 'B2B Business Lead List',
+    category: 'Custom Browser Automation Bot',
     dataCollected: '',
-    tools: ['Python', 'Web Research'],
-    outputFormat: 'Excel (.xlsx) / CSV',
+    tools: ['Python', 'Playwright'],
+    outputFormat: 'Google Sheets / CSV',
     isDemoSample: true,
     caseStudy: {
       overview: '',
@@ -549,7 +549,7 @@ export const AdminDashboardModal: React.FC = () => {
                         type="text"
                         value={serviceFormData.title}
                         onChange={(e) => setServiceFormData({ ...serviceFormData, title: e.target.value })}
-                        placeholder="e.g. B2B Lead Generation"
+                        placeholder="e.g. Custom Browser Automation Bots"
                         className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs"
                       />
                     </div>
@@ -560,7 +560,7 @@ export const AdminDashboardModal: React.FC = () => {
                         onChange={(e) => setServiceFormData({ ...serviceFormData, iconName: e.target.value as any })}
                         className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs"
                       >
-                        <option value="Target">Target (Lead Gen)</option>
+                        <option value="Target">Target (Browser Bots)</option>
                         <option value="Building2">Building2 (Company List)</option>
                         <option value="Search">Search (Web Research)</option>
                         <option value="MapPin">MapPin (Google Maps)</option>
@@ -729,19 +729,19 @@ export const AdminDashboardModal: React.FC = () => {
                       setProjectFormData({
                         title: '',
                         shortDescription: '',
-                        category: 'B2B Business Lead List',
-                        dataCollected: 'Company Name, Contact Person, Verified Email',
-                        tools: ['Python', 'Web Research'],
-                        outputFormat: 'Excel (.xlsx) / CSV',
+                        category: 'Custom Browser Automation Bot',
+                        dataCollected: 'Transaction ID, Status, Timestamp',
+                        tools: ['Python', 'Playwright'],
+                        outputFormat: 'Google Sheets / CSV',
                         isDemoSample: true,
                         caseStudy: {
                           overview: 'Detailed project overview...',
                           objective: 'Project objective...',
-                          researchSource: 'Public directories & websites',
-                          dataFields: ['Company Name', 'Contact Person', 'Email'],
-                          process: ['Step 1', 'Step 2'],
-                          toolsUsed: ['Python'],
-                          finalOutput: 'Clean Excel spreadsheet'
+                          researchSource: 'Target portal & web interface',
+                          dataFields: ['Transaction ID', 'Portal Account', 'Status'],
+                          process: ['Launch browser session', 'Execute workflow steps', 'Sync results to Google Sheets'],
+                          toolsUsed: ['Python', 'Playwright'],
+                          finalOutput: 'Live Google Sheet & structured CSV'
                         }
                       });
                     }}
@@ -767,7 +767,7 @@ export const AdminDashboardModal: React.FC = () => {
                         type="text"
                         value={projectFormData.title}
                         onChange={(e) => setProjectFormData({ ...projectFormData, title: e.target.value })}
-                        placeholder="e.g. B2B Business Lead List"
+                        placeholder="e.g. Dynamic Website Form Filler Bot"
                         className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs"
                       />
                     </div>
@@ -777,7 +777,7 @@ export const AdminDashboardModal: React.FC = () => {
                         type="text"
                         value={projectFormData.category}
                         onChange={(e) => setProjectFormData({ ...projectFormData, category: e.target.value })}
-                        placeholder="e.g. B2B Business Lead List, Google Maps Business Leads"
+                        placeholder="e.g. Browser Automation, Web Scraping"
                         className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs"
                       />
                     </div>
@@ -801,7 +801,7 @@ export const AdminDashboardModal: React.FC = () => {
                         type="text"
                         value={projectFormData.dataCollected}
                         onChange={(e) => setProjectFormData({ ...projectFormData, dataCollected: e.target.value })}
-                        placeholder="e.g. Company Name, Contact Person, Title, Email, LinkedIn"
+                        placeholder="e.g. Transaction ID, Portal Account, Status, Timestamp"
                         className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs"
                       />
                     </div>
@@ -811,7 +811,7 @@ export const AdminDashboardModal: React.FC = () => {
                         type="text"
                         value={projectFormData.outputFormat}
                         onChange={(e) => setProjectFormData({ ...projectFormData, outputFormat: e.target.value })}
-                        placeholder="e.g. Excel (.xlsx) / CSV"
+                        placeholder="e.g. Google Sheets / CSV"
                         className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs"
                       />
                     </div>

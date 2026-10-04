@@ -66,7 +66,7 @@ export const ServicesSection: React.FC = () => {
             How I Can Help
           </h2>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-            I specialize in gathering targeted prospect intelligence and structured web data. Every dataset is custom-extracted, verified, and delivered in clean spreadsheet format.
+            I build robust Python automation systems that navigate complex websites, fill forms, extract web data, and sync results seamlessly to Google Sheets and Docs.
           </p>
         </div>
 

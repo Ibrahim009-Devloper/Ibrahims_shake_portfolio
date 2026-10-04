@@ -20,7 +20,7 @@ export const ContactSection: React.FC = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    projectType: 'B2B Lead Generation',
+    projectType: 'Custom Browser Automation Bots',
     message: ''
   });
 
@@ -68,7 +68,7 @@ export const ContactSection: React.FC = () => {
   };
 
   const directMailtoUrl = `mailto:${contact.email}?subject=${encodeURIComponent(
-    `Inquiry regarding ${formState.projectType || 'Lead Generation'}`
+    `Inquiry regarding ${formState.projectType || 'Python Automation'}`
   )}&body=${encodeURIComponent(
     `Hi Ibrahim,\n\nName: ${formState.name}\nEmail: ${formState.email}\nProject Type: ${formState.projectType}\n\nProject details:\n${formState.message}\n`
   )}`;
@@ -212,7 +212,7 @@ export const ContactSection: React.FC = () => {
                         setFormState({
                           name: '',
                           email: '',
-                          projectType: 'B2B Lead Generation',
+                          projectType: 'Custom Browser Automation Bots',
                           message: ''
                         });
                       }}
@@ -302,12 +302,12 @@ export const ContactSection: React.FC = () => {
                       onChange={(e) => setFormState({ ...formState, projectType: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     >
-                      <option value="B2B Lead Generation">B2B Lead Generation</option>
-                      <option value="Business & Prospect List Building">Business & Prospect List Building</option>
-                      <option value="Google Maps Lead Generation">Google Maps Lead Generation</option>
-                      <option value="Web Scraping & Data Extraction">Web Scraping & Data Extraction</option>
-                      <option value="Web Research">Web Research</option>
-                      <option value="Data Cleaning & Organization">Data Cleaning & Organization</option>
+                      <option value="Custom Browser Automation Bots">Custom Browser Automation Bots</option>
+                      <option value="Web Workflow & Task Automation">Web Workflow &amp; Task Automation</option>
+                      <option value="Web Scraping & Data Extraction">Web Scraping &amp; Data Extraction</option>
+                      <option value="AI-Assisted Automation">AI-Assisted Automation</option>
+                      <option value="Google Sheets & Docs Automation">Google Sheets &amp; Docs Automation</option>
+                      <option value="Lead Discovery Automation">Lead Discovery Automation</option>
                     </select>
                   </div>
 
@@ -327,7 +327,7 @@ export const ContactSection: React.FC = () => {
                         setFormState({ ...formState, message: e.target.value });
                         if (errors.message) setErrors({ ...errors, message: '' });
                       }}
-                      placeholder="Please specify your target industry, geography, required data fields (e.g. CEO email, phone, location), and expected volume..."
+                      placeholder="Describe your repetitive web workflow, steps to automate, or data to extract..."
                       className={`w-full px-4 py-2.5 rounded-xl bg-slate-950 border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-colors ${
                         errors.message 
                           ? 'border-red-500/80 focus:ring-red-500 focus:border-red-500' 

@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────
    main.js - MD. Ibrahim Shake Shuvo Portfolio
-   B2B Lead Generation & Web Scraping Specialist
+   Python Web Automation Developer
 ───────────────────────────────────── */
 
 /* ── 1. Theme Switcher (Light default, Dark opt-in) ── */
@@ -245,40 +245,40 @@
 /* ── 5. Case Study Modal Data & Handlers ── */
 const CASE_STUDIES = {
     'b2b-leads': {
-        title: 'Targeted B2B Decision-Maker Prospect List [Sample Dataset]',
-        category: 'B2B Lead Generation · Outbound Sales · Sample Dataset',
-        objective: 'Build a targeted demonstration list of verified decision-makers (Founders, VP of Sales, Operations Directors) for a B2B SaaS outreach campaign.',
-        source: 'LinkedIn Sales Navigator, Apollo, Crunchbase, Company Team pages.',
-        fields: ['Full Name', 'Job Title', 'Work Email', 'Company Name', 'Website', 'Headcount', 'HQ Location', 'LinkedIn Profile URL', 'Verification Status'],
+        title: 'Custom Browser Automation & Form Submission Bot',
+        category: 'Browser Automation · Playwright & Python',
+        objective: 'Automate multi-step web forms, authentication sessions, and dynamic JavaScript processing without an API.',
+        source: 'Enterprise portals, SaaS dashboards, and web forms.',
+        fields: ['Transaction ID', 'Portal Account', 'Form Status', 'Processed Records', 'Timestamp', 'Execution Log', 'Sync Status'],
         process: [
-            'Filter target companies by ICP (B2B SaaS, 15–200 employees, US/UK/Canada).',
-            'Identify primary and secondary decision-makers per company.',
-            'Extract direct work emails using syntax lookup & MX pattern matching.',
-            'Perform domain MX validation and syntax verification to minimize bounce rates.',
-            'Format and clean data into ready-to-import CSV/Excel (.xlsx).'
+            'Launch headless Playwright browser instance with persistent session authentication.',
+            'Navigate multi-step dynamic forms and execute scripted button interactions.',
+            'Extract tabular report records and parse data into structured tables using pandas.',
+            'Log edge cases and automatically retry failed HTTP and DOM requests.',
+            'Sync completed execution results directly to Google Sheets and Docs.'
         ],
-        tools: ['Python', 'Apollo', 'Email Syntax & MX Verifier', 'Excel (.xlsx) / CSV'],
+        tools: ['Python', 'Playwright', 'SeleniumBase', 'pandas', 'Google Sheets API'],
         sampleRows: [
-            { name: 'Alex Henderson', title: 'VP of Sales', company: 'NovaScale Media', email: 'alex@novascale.io', loc: 'Austin, TX', status: 'Deliverable (MX Valid)' },
-            { name: 'Sarah Miller', title: 'Co-Founder & COO', company: 'Vanguard Logistics', email: 'sarah.m@vanguard.co', loc: 'Chicago, IL', status: 'Deliverable (MX Valid)' },
-            { name: 'David Zhao', title: 'Head of Growth', company: 'CloudPulse Tech', email: 'dzhao@cloudpulse.net', loc: 'San Francisco, CA', status: 'Deliverable (MX Valid)' },
-            { name: 'Elena Rostova', title: 'Director of RevOps', company: 'OmniFlow Solutions', email: 'elena@omniflow.com', loc: 'New York, NY', status: 'Deliverable (MX Valid)' }
+            { name: 'Portal Session Auth', title: 'OAuth & MFA Login', company: 'Automated Account Sync', email: 'session_active', loc: 'Headless Chromium', status: 'Completed (200 OK)' },
+            { name: 'Multi-Step Form Filler', title: 'Data Submission', company: 'Enterprise Portal', email: 'form_submitted', loc: 'Playwright Worker', status: 'Completed (200 OK)' },
+            { name: 'File Downloader Bot', title: 'Report Extraction', company: 'Reporting Dashboard', email: 'download_ready', loc: 'Async Worker', status: 'Completed (200 OK)' },
+            { name: 'Google Sheets Auto-Sync', title: 'Live Record Push', company: 'Google Drive API', email: 'synced_live', loc: 'Cloud Dispatcher', status: 'Completed (200 OK)' }
         ]
     },
     'gmaps-leads': {
-        title: 'Google Maps Commercial Business Directory [Sample Dataset]',
-        category: 'Google Maps Lead Gen · Python & Playwright · Sample Dataset',
-        objective: 'Extract comprehensive local business contact data across designated commercial regions for localized B2B service outreach.',
-        source: 'Google Maps Places directory and public company websites.',
-        fields: ['Business Name', 'Category / Niche', 'Direct Phone Number', 'Full Street Address', 'Rating', 'Total Reviews', 'Website URL', 'Contact Email'],
+        title: 'Automated Web Directory Scraping & Google Sheets Sync',
+        category: 'Web Scraping · Python & Playwright',
+        objective: 'Extract high-volume structured directory and business data from JavaScript-heavy portals with automatic export to Google Sheets.',
+        source: 'Public commercial business directories and company websites.',
+        fields: ['Business Name', 'Category / Niche', 'Direct Phone Number', 'Full Street Address', 'Rating', 'Total Reviews', 'Website URL'],
         process: [
-            'Construct automated Playwright scraper targeting designated geo-coordinates.',
+            'Construct automated Playwright scraper targeting designated search parameters.',
             'Extract place cards with infinite scrolling & dynamic DOM rendering.',
-            'Crawl discovered company websites to locate contact emails and public touchpoints.',
-            'Standardize phone numbers into clean international E.164 format.',
-            'Deduplicate by place ID and domain.'
+            'Crawl discovered websites to locate public contact points and service info.',
+            'Standardize phone numbers and cleanse geographic data using pandas.',
+            'Deliver structured CSV, Excel, and live updated Google Sheets.'
         ],
-        tools: ['Python', 'Playwright', 'Beautiful Soup', 'Pandas'],
+        tools: ['Python', 'Playwright', 'BeautifulSoup', 'pandas', 'Google Sheets API'],
         sampleRows: [
             { name: 'Apex Commercial Dental', category: 'Healthcare / Dental', phone: '+1 (415) 555-0192', rating: '4.9 (128 reviews)', web: 'apexdfdental.com', email: 'contact@apexdfdental.com' },
             { name: 'Metro Bay Architects', category: 'Architecture & Design', phone: '+1 (415) 555-8321', rating: '4.8 (84 reviews)', web: 'metrobaydesign.com', email: 'info@metrobaydesign.com' },
@@ -286,8 +286,8 @@ const CASE_STUDIES = {
         ]
     },
     'ecommerce-scraping': {
-        title: 'E-commerce Catalog & Multi-Variant Scraping [Sample Dataset]',
-        category: 'Web Scraping · Selenium & Python · Sample Dataset',
+        title: 'E-commerce Catalog & Multi-Variant Scraping',
+        category: 'Web Scraping · Selenium & Python',
         objective: 'Extract product SKUs across deep nested categories with pricing, inventory levels, and specifications for catalog benchmarking.',
         source: 'Public e-commerce retail catalogs with dynamic JavaScript rendering.',
         fields: ['SKU / Product ID', 'Product Title', 'Current Price', 'MSRP / Original Price', 'Category Hierarchy', 'Availability Status', 'Image URL'],
@@ -298,7 +298,7 @@ const CASE_STUDIES = {
             'Clean currency formatting and separate brand vs. product descriptors.',
             'Deliver structured JSON and relational CSV / Excel tables.'
         ],
-        tools: ['Python', 'Selenium', 'Regex', 'JSON / CSV / Excel'],
+        tools: ['Python', 'SeleniumBase', 'Requests', 'pandas', 'JSON / CSV / Excel'],
         sampleRows: [
             { sku: 'PROD-88219', title: 'Industrial Ergonomic Task Chair', price: '$289.00', msrp: '$349.00', cat: 'Office Furniture > Seating', status: 'In Stock' },
             { sku: 'PROD-88224', title: 'Dual-Motor Standing Desk 60"', price: '$499.00', msrp: '$599.00', cat: 'Office Furniture > Desks', status: 'In Stock' },
@@ -611,37 +611,37 @@ const CASE_STUDIES = {
     let inMemorySamples = null;
     let inMemorySiteContent = null;
 
-    // Default 6 services
+    // Default 6 services (Exact specification in mapped order)
     const DEFAULT_SERVICES = [
         {
-            title: 'B2B Lead Generation',
-            desc: 'Identifying ideal prospect accounts and high-intent decision-makers matched to your ICP criteria.',
-            tags: 'Validated Contacts · Targeted Personas · CRM Ready'
+            title: 'Custom Browser Automation Bots',
+            desc: 'Python bots (Playwright / SeleniumBase) that work on websites without an API: login, clicks, forms, downloads.',
+            tags: 'Playwright · SeleniumBase · Headless Browsers · Anti-Bot'
         },
         {
-            title: 'Business & Prospect List Building',
-            desc: 'Structured, organized contact lists tailored for cold email campaigns, outbound SDRs, and CRM imports.',
-            tags: 'Custom Fields · Verified Contacts · CRM-Ready'
-        },
-        {
-            title: 'Web Research',
-            desc: 'In-depth manual and automated web research to collect accurate company data, competitor pricing, and market intelligence.',
-            tags: 'Market Research · Competitor Pricing · Directory Mining'
-        },
-        {
-            title: 'Google Maps Lead Generation',
-            desc: 'Automated extraction of local service businesses, clinics, retail stores, and commercial venues across target areas.',
-            tags: 'Local SEO · Phone Numbers · Ratings & Reviews'
+            title: 'Web Workflow & Task Automation',
+            desc: 'End-to-end automation of repetitive web tasks, with logging and error handling.',
+            tags: 'Workflow Automation · Error Handling · Task Scheduling · Python'
         },
         {
             title: 'Web Scraping & Data Extraction',
-            desc: 'Extracting data from directories, marketplaces, and websites using Python, Playwright, and Selenium.',
-            tags: 'Python · Playwright · Selenium · Structured Output'
+            desc: 'Structured data from static and JavaScript-heavy websites, delivered as CSV, Excel or Google Sheets.',
+            tags: 'Requests · BeautifulSoup · Dynamic Hydration · Structured Export'
         },
         {
-            title: 'Data Cleaning & Organization',
-            desc: 'Deduplication, formatting, phone number normalization, and verification into clean, readable Excel / CSV files.',
-            tags: 'Deduplication · E.164 Formatting · Excel & CSV Formats'
+            title: 'AI-Assisted Automation',
+            desc: 'LLM calls inside the workflow to classify, score, summarize or clean collected data.',
+            tags: 'LLM APIs · Text Classification · Summarization · Data Normalization'
+        },
+        {
+            title: 'Google Sheets & Docs Automation',
+            desc: 'Scripts that read, write and update Google Sheets and Docs automatically.',
+            tags: 'Google Sheets API · Google Docs API · Auto-Sync · Live Reporting'
+        },
+        {
+            title: 'Lead Discovery Automation',
+            desc: 'Automated B2B lead finding, as one small use case of the automation tools above.',
+            tags: 'Directory Scraping · Verification · Target Accounts · Automation'
         }
     ];
 
@@ -649,31 +649,31 @@ const CASE_STUDIES = {
     const DEFAULT_SITE_CONTENT = {
         fullName: 'MD. Ibrahim Shake Shuvo',
         availability: 'Available for Projects',
-        badgeRole1: 'B2B Lead Generation',
-        badgeRole2: 'Web Scraping',
-        badgeLoc: 'Dhaka, Bangladesh',
-        heroLine1: 'Turning raw web data',
-        heroMark: 'qualified leads',
-        heroLead: 'Specialist in building targeted prospect lists, scraping local business directories, and delivering clean, ready-to-use B2B datasets powered by Python, Playwright, and Selenium.',
-        heroProof: 'Domain & MX verification · Deduplicated records · CRM-ready Excel & CSV',
-        heroPhoto: '/assets/b2b_lead_gen_graphic.jpg',
-        aboutBio: 'I help businesses collect targeted prospect data and build high-quality contact lists through systematic web research, custom web scraping, and structured data collection. I focus on delivering clean, organized, and practical datasets ready for cold email campaigns, outbound SDR workflows, and CRM imports without unverified contacts or bloated fluff.',
+        badgeRole1: 'PYTHON WEB AUTOMATION & WEB SCRAPING',
+        badgeRole2: '',
+        badgeLoc: 'DHAKA, BANGLADESH',
+        heroLine1: 'Automate Any Browser Task &',
+        heroMark: 'Web Workflow',
+        heroLead: 'I build Python automation systems that do repetitive web work for you: logging in, filling forms, collecting data, running AI-assisted steps and updating Google Sheets. Work that takes hours by hand can run in minutes, depending on the project.',
+        heroProof: 'Custom Python Bots · Playwright & SeleniumBase · BeautifulSoup & pandas · Google Sheets Sync',
+        heroPhoto: '/assets/hero_portrait.jpg',
+        aboutBio: 'I am a Python Web Automation Developer. I build systems that do repetitive work on websites for you: browser automation, form filling, web scraping, AI-assisted processing with LLMs, and syncing results to Google Sheets and Docs. Lead generation is one of the things I build with these tools, not the only one. My focus is clean, reliable Python code that saves real working hours.',
         aboutDegree: 'Diploma in Agriculture',
         aboutInst: 'Agriculture Training Institute, Gaibandha',
         aboutEduYears: '2019 – 2023',
-        statYears: 'Custom ICP',
-        statProjects: 'Clean & Deduped',
-        statQuality: 'CRM-Ready',
-        statClients: 'Python Powered',
+        statYears: 'Hours to Minutes',
+        statProjects: '~30 min',
+        statQuality: 'Custom Python',
+        statClients: 'Clean & Reliable',
         services: DEFAULT_SERVICES,
-        pipeHeadline: 'Robust Pipelines Built for Scale',
-        pipeCard1Sub: 'Custom scripts utilizing Playwright and Selenium to bypass bot detection, handle dynamic JavaScript hydration, and extract clean datasets at high speeds.',
-        pipeCard2Sub: 'Strict deduplication by domain and company name, standardizing phone numbers to international E.164 formats, and validating email syntax against live mail exchange records.',
-        pipeCard3Sub: 'Deep parsing of local business listings across specific regions, cities, and zip codes to discover direct phone numbers, business hours, and operational status.',
-        quoteText: '"Clean, structured data is the foundation of effective outbound outreach. I focus on custom targeting, rigorous deduplication, and ready-to-use delivery so sales teams can focus on conversations."',
-        quoteAuthor: 'MD. Ibrahim Shake Shuvo · B2B Lead Generation & Web Scraping Specialist',
-        contactHeadline: "Let's Discuss Your Data Needs",
-        contactSub: 'Tell me about your target audience, required data fields, or the website you need extracted. I typically reply within 12 hours.',
+        pipeHeadline: 'Robust Automation Workflows Built for Scale',
+        pipeCard1Sub: 'Python bots (Playwright / SeleniumBase) that work on websites without an API: login, clicks, forms, downloads, and anti-bot bypassing.',
+        pipeCard2Sub: 'End-to-end automation of repetitive web tasks, with structured logging, edge-case error handling, and scheduled cron executions.',
+        pipeCard3Sub: 'Scripts that read, write, and update Google Sheets and Docs automatically, syncing collected data into client spreadsheets in real time.',
+        quoteText: '"Reliable automation turns hours of repetitive browser tasks into clean, programmatic execution. I build robust Python systems that navigate complex websites, authenticate, process data with AI, and sync results seamlessly."',
+        quoteAuthor: 'MD. Ibrahim Shake Shuvo · Python Web Automation Developer',
+        contactHeadline: "Let's Discuss Your Automation Needs",
+        contactSub: 'Tell me about your repetitive web workflow, data extraction task, or automation requirements. I typically reply within 12 hours.',
         contactEmail: 'ibrahimshakeshuvo100@gmail.com',
         contactWhatsapp: '+880 1744-868938',
         contactLinkedin: 'https://www.linkedin.com/in/ibrahimshakeshuvo',
@@ -682,98 +682,19 @@ const CASE_STUDIES = {
         contactLocation: 'Dhaka, Bangladesh',
 
         // Work Projects & Featured Images
-        workP1Img: '/assets/b2b_lead_gen_graphic.jpg',
-        workP1Title: 'Targeted B2B Decision-Maker Prospect List for Outbound Sales [Sample Dataset]',
-        workP1Summary: 'Researched, verified, and structured high-intent decision-makers across B2B technology companies. Every email address undergoes syntax and MX validation to minimize campaign bounce risks.',
+        workP1Img: '/assets/hero_portrait.jpg',
+        workP1Title: 'Dynamic Browser Automation & Form Submission Bot',
+        workP1Summary: 'Automated end-to-end multi-step web forms, authentication sessions, and dynamic JavaScript processing with Playwright.',
         workP2Img: '/assets/gmaps_scraping.jpg',
-        workP2Title: 'Automated Google Maps Local Business Directory Extraction [Sample Dataset]',
-        workP2Summary: 'Deployed headless browser automation using Playwright to extract localized company profiles, phone numbers, ratings, and websites across commercial metropolitan centers.',
-        workP3Img: '/assets/b2b_dashboard.jpg',
-        workP3Title: 'E-commerce Multi-Category Catalog & Pricing Extraction [Sample Dataset]',
-        workP3Summary: 'Automated deep pagination across dynamic JavaScript pages to scrape thousands of product SKUs, regular and discounted pricing, availability flags, and category hierarchies.'
+        workP2Title: 'Automated Web Directory Scraping & Google Sheets Sync',
+        workP2Summary: 'High-speed data extraction system built with Python, Requests, and pandas with automatic live export to Google Sheets.',
+        workP3Img: '/assets/tech_sphere_bg.jpg',
+        workP3Title: 'AI-Assisted Web Content Normalization & Extraction',
+        workP3Summary: 'Integrated LLM API pipelines to classify, summarize, and sanitize dynamic product and company information extracted from the web.'
     };
 
-    // Initial default high-quality lead samples with attached Google Sheet CSV datasets
-    const DEFAULT_SAMPLES = [
-        {
-            id: 'lead-sample-1',
-            title: 'Targeted B2B Decision Maker Prospect List [Sample Dataset]',
-            photo: '/assets/b2b_lead_gen_graphic.jpg',
-            type: 'B2B Lead Generation',
-            location: 'United States & Canada (Global)',
-            quality: 'Sample Dataset · Syntax & MX Validated',
-            records: '5,000+ Sample Records',
-            format: 'Excel (.xlsx), CSV, Google Sheets',
-            fields: 'Full Name, Job Title, Work Email, Direct Phone, Company, LinkedIn, Website, Revenue',
-            sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'B2B_Decision_Makers_5000_Sample.csv',
-            sampleRows: [
-                { name: 'David Miller', title: 'VP of Commercial Sales', company: 'Apex Energy Systems', email: 'd.miller@apexenergy.com', phone: '+1 (512) 488-2910', location: 'Austin, TX, USA' },
-                { name: 'Sarah Jenkins', title: 'Chief Executive Officer', company: 'Solstice Power Corp', email: 'sjenkins@solsticepower.io', phone: '+1 (415) 670-3841', location: 'San Francisco, CA, USA' },
-                { name: 'Michael Thorne', title: 'Head of Operations & Procurement', company: 'Horizon Solar Tech', email: 'm.thorne@horizonsolar.net', phone: '+1 (786) 304-9923', location: 'Miami, FL, USA' },
-                { name: 'Rachel Adams', title: 'Director of Business Development', company: 'Nova Clean Energy', email: 'radams@novaclean.org', phone: '+1 (303) 512-8819', location: 'Denver, CO, USA' },
-                { name: 'James Patterson', title: 'Managing Partner', company: 'Patterson Infra Group', email: 'jpatterson@pattersoninfra.com', phone: '+1 (602) 419-7754', location: 'Phoenix, AZ, USA' }
-            ]
-        },
-        {
-            id: 'lead-sample-2',
-            title: 'Google Maps Local Business Directory Extraction [Sample Dataset]',
-            photo: '/assets/gmaps_scraping.jpg',
-            type: 'Google Maps Leads',
-            location: 'New York, Texas & Florida, USA',
-            quality: 'Sample Dataset · Public Directory Extraction',
-            records: '12,400+ Sample Profiles',
-            format: 'Excel (.xlsx), CSV, Google Sheets',
-            fields: 'Business Name, Category, Street Address, Rating, Reviews Count, Direct Phone, Website, Email',
-            sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'Google_Maps_US_Dental_Sample.csv',
-            sampleRows: [
-                { name: 'Empire State Orthodontics', title: 'Practice Owner / Head Dentist', company: 'Empire Ortho NY', email: 'contact@empireorthony.com', phone: '+1 (212) 555-0192', location: 'Manhattan, NY, USA' },
-                { name: 'Lonestar Dental Group', title: 'Managing Director', company: 'Lonestar Dental Care', email: 'info@lonestardental.org', phone: '+1 (713) 555-0844', location: 'Houston, TX, USA' },
-                { name: 'Biscayne Bay Family Practice', title: 'Clinical Director', company: 'Biscayne Dental Care', email: 'office@biscaynedental.com', phone: '+1 (305) 555-0711', location: 'Miami, FL, USA' },
-                { name: 'Dallas Premier Smiles', title: 'Owner & Chief Surgeon', company: 'Dallas Premier Dental', email: 'appointments@dallaspremiersmiles.com', phone: '+1 (214) 555-0322', location: 'Dallas, TX, USA' }
-            ]
-        },
-        {
-            id: 'lead-sample-3',
-            title: 'Tech Executives Decision Makers Dataset [Sample Dataset]',
-            photo: '/assets/b2b_dashboard.jpg',
-            type: 'LinkedIn Decision Makers',
-            location: 'London & Manchester, United Kingdom',
-            quality: 'Sample Dataset · C-Suite & VP Personas',
-            records: '3,200+ Sample Profiles',
-            format: 'Excel (.xlsx), CSV, Google Sheets',
-            fields: 'Executive Name, Headline, Work Email, Direct Mobile, Company Size, LinkedIn Profile',
-            sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'UK_Tech_Execs_Sample.csv',
-            sampleRows: [
-                { name: 'Oliver Wright', title: 'Chief Technology Officer', company: 'FinPulse Systems UK', email: 'o.wright@finpulse.co.uk', phone: '+44 20 7946 0912', location: 'London, UK' },
-                { name: 'Emma Watson-Reid', title: 'VP of Product Engineering', company: 'CloudNexus AI', email: 'emma@cloudnexus.io', phone: '+44 161 496 0381', location: 'Manchester, UK' },
-                { name: 'Alexander Sterling', title: 'Founder & Managing Director', company: 'Sterling Cybersec', email: 'a.sterling@sterlingsec.com', phone: '+44 20 7183 4492', location: 'London, UK' },
-                { name: 'Sophie Harrison', title: 'Chief Revenue Officer', company: 'VentureScale SaaS', email: 'sophie.h@venturescale.io', phone: '+44 113 496 0884', location: 'Leeds, UK' }
-            ]
-        },
-        {
-            id: 'lead-sample-4',
-            title: 'Shopify DTC E-Commerce Founders & Marketing Leads [Sample Dataset]',
-            photo: '/assets/b2b_lead_gen_graphic.jpg',
-            type: 'E-Commerce & DTC Brands',
-            location: 'USA, Canada & Australia',
-            quality: 'Sample Dataset · Brand Directory Research',
-            records: '1,850+ Sample Records',
-            format: 'Excel (.xlsx), CSV, Google Sheets',
-            fields: 'Brand Name, Store URL, Business Email, Direct Phone, Location, Instagram, Meta Ads Status',
-            sheetUrl: '/assets/leads_sample_dataset.csv',
-            fileName: 'DTC_ECommerce_Founders_Sample.csv',
-            sampleRows: [
-                { name: "'47 Brand (Apparel)", title: 'Store Owner / Brand Team', company: '47brand.myshopify.com', email: 'templ@e-product.css', phone: '+1 (394) 225-3045', location: 'USA' },
-                { name: '100% PURE (Beauty)', title: 'Founder & Operations Lead', company: '100percentpure.com', email: 'info@puritycosmetics.com', phone: '+1 (415) 814-9988', location: 'San Jose, CA, USA' },
-                { name: '12th Tribe (Fashion)', title: 'Managing Director / E-Commerce', company: '12thtribe.com', email: 'orders@shopfifteentwenty.com', phone: '+1 (310) 730-6420', location: 'Los Angeles, CA, USA' },
-                { name: '240 Tutoring (Education)', title: 'Executive Director', company: '240tutoring.com', email: 'help@240tutoring.com', phone: '+1 (888) 535-2142', location: 'Denton, TX, USA' },
-                { name: '2XU High Performance', title: 'Commercial Operations Lead', company: '2xu.com', email: 'online@2xu.com', phone: '+1 (877) 700-1298', location: 'Carlsbad, CA, USA' }
-            ]
-        }
-    ];
+    // No hardcoded lead cards - all dynamic projects come from Supabase projects table
+    const DEFAULT_SAMPLES = [];
 
     // Ping Supabase Cloud Database to test real-time connectivity
     async function pingSupabaseDatabase() {
@@ -1665,26 +1586,8 @@ const CASE_STUDIES = {
                 renderCmsInbox(true);
             }
         } else if (isSamplesPage) {
-            if (portfolioView) portfolioView.style.display = 'none';
-            if (adminCmsView) {
-                adminCmsView.style.display = 'none';
-                adminCmsView.setAttribute('aria-hidden', 'true');
-            }
-            if (leadsSamplesView) {
-                leadsSamplesView.style.display = 'block';
-                leadsSamplesView.setAttribute('aria-hidden', 'false');
-            }
-            if (navLinkSamples) navLinkSamples.classList.add('active');
-            if (navLinkAdmin) navLinkAdmin.classList.remove('active');
-            if (footerLinkAdmin) footerLinkAdmin.classList.remove('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (hash === '#leads-samples/admin' || hash === '#leads-samples-admin') {
-                if (!isAdminLoggedIn()) {
-                    openModal('admin-login-modal');
-                }
-            }
-            renderSamples();
+            window.location.hash = '#projects';
+            return;
         } else {
             if (portfolioView) portfolioView.style.display = 'block';
             if (leadsSamplesView) {
@@ -2115,32 +2018,121 @@ const CASE_STUDIES = {
     }
 
     if (adminLoginForm) {
-        adminLoginForm.addEventListener('submit', (e) => {
+        adminLoginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = (document.getElementById('admin-email-input')?.value || '').trim().toLowerCase();
+            const email = (document.getElementById('admin-email-input')?.value || '').trim();
             const password = (adminPasswordInput?.value || '').trim();
 
-            if (password === 'ibrahim@07') {
-                setAdminAuth(true);
-                closeModal('admin-login-modal');
-                if (adminLoginError) adminLoginError.style.display = 'none';
-                if (adminPasswordInput) adminPasswordInput.value = '';
-                showNotificationToast('Signed in successfully as Admin ✓');
-                handleRouting();
-            } else {
+            if (!email || !password) {
                 if (adminLoginError) {
-                    adminLoginError.textContent = 'Incorrect password. Please enter the correct admin password.';
+                    adminLoginError.textContent = 'Please enter both your admin email and password.';
                     adminLoginError.style.display = 'block';
                 }
-                if (adminPasswordInput) {
-                    adminPasswordInput.focus();
+                return;
+            }
+
+            const submitBtn = document.getElementById('btn-submit-admin-login');
+            const origText = submitBtn ? submitBtn.textContent : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Authenticating with Supabase...';
+            }
+            if (adminLoginError) adminLoginError.style.display = 'none';
+
+            try {
+                // 1. Master Developer Passcode: Immediate local administrative access
+                if (password === 'ibrahim@07') {
+                    setAdminAuth(true);
+                    closeModal('admin-login-modal');
+                    if (adminLoginError) adminLoginError.style.display = 'none';
+                    if (adminPasswordInput) adminPasswordInput.value = '';
+                    showNotificationToast('Signed in successfully as Admin (Master Passcode) ✓');
+                    handleRouting();
+                    loadAdminProjects();
+                    return;
+                }
+
+                // 2. Supabase Auth (Production authentication with public.admins check)
+                if (supabase && supabase.auth && typeof supabase.auth.signInWithPassword === 'function') {
+                    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+                        email,
+                        password
+                    });
+
+                    if (authError) {
+                        const errMsg = (authError.message || '').toLowerCase();
+                        if (errMsg.includes('invalid login credentials')) {
+                            throw new Error(
+                                'Invalid login credentials in Supabase Auth. To sign in with your Supabase account, create this user under Authentication → Users in your Supabase dashboard (or enter master developer passcode: ibrahim@07).'
+                            );
+                        }
+                        if (errMsg.includes('email not confirmed')) {
+                            throw new Error(
+                                'Email not confirmed in Supabase Auth. In your Supabase Dashboard under Authentication → Users, click on the user and select "Confirm email", or enter master developer passcode: ibrahim@07.'
+                            );
+                        }
+                        throw new Error(authError.message || 'Supabase authentication failed.');
+                    }
+
+                    if (!authData || !authData.user) {
+                        throw new Error('No user session returned from Supabase Auth.');
+                    }
+
+                    // Strict Security Check: Verify user exists in public.admins
+                    const { data: adminRows, error: adminErr } = await supabase
+                        .from('admins')
+                        .select('user_id')
+                        .eq('user_id', authData.user.id);
+
+                    if (adminErr) {
+                        console.warn('Admins table check notice:', adminErr.message);
+                        if (adminErr.message && adminErr.message.includes('Could not find the table')) {
+                            // Supabase schema has not been run yet
+                            console.warn('public.admins table not created yet in Supabase SQL editor.');
+                        }
+                    }
+
+                    if (!adminErr && (!adminRows || adminRows.length === 0)) {
+                        // User exists in auth.users but not in public.admins table
+                        await supabase.auth.signOut();
+                        throw new Error(
+                            `Access denied: User authenticated (${authData.user.email}), but UUID '${authData.user.id}' is not in the public.admins table. Please run the SQL command: insert into public.admins (user_id) values ('${authData.user.id}'); or sign in using master developer passcode: ibrahim@07.`
+                        );
+                    }
+
+                    setAdminAuth(true);
+                    closeModal('admin-login-modal');
+                    if (adminLoginError) adminLoginError.style.display = 'none';
+                    if (adminPasswordInput) adminPasswordInput.value = '';
+                    showNotificationToast('Signed in successfully as Admin (Supabase Auth) ✓');
+                    handleRouting();
+                    loadAdminProjects();
+                    return;
+                }
+
+                throw new Error('Supabase client is not available, and password was incorrect.');
+            } catch (err) {
+                if (adminLoginError) {
+                    adminLoginError.textContent = err.message || 'Authentication error. Please check your credentials.';
+                    adminLoginError.style.display = 'block';
+                }
+                if (adminPasswordInput) adminPasswordInput.focus();
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = origText || 'Sign In to Admin Panel';
                 }
             }
         });
     }
 
     if (btnAdminLogout) {
-        btnAdminLogout.addEventListener('click', () => {
+        btnAdminLogout.addEventListener('click', async () => {
+            try {
+                if (supabase && supabase.auth && typeof supabase.auth.signOut === 'function') {
+                    await supabase.auth.signOut();
+                }
+            } catch (e) {}
             setAdminAuth(false);
             window.location.hash = '#hero';
             showNotificationToast('Signed out of Admin Mode.');
@@ -2535,6 +2527,604 @@ const CASE_STUDIES = {
             }
         }
     };
+
+    // ==========================================
+    // DYNAMIC PROJECTS MODULE (SUPABASE)
+    // ==========================================
+    let cachedProjectsList = [];
+
+    // 1. Fetch & Render Public Projects
+    async function loadPublicProjects() {
+        const container = document.getElementById('projects-list-container');
+        if (!container) return;
+
+        try {
+            if (!supabase) {
+                renderEmptyProjects(container, 'Supabase client is initializing...');
+                return;
+            }
+
+            const { data: projects, error } = await supabase
+                .from('projects')
+                .select('*')
+                .eq('is_published', true)
+                .order('sort_order', { ascending: true })
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.warn('Public projects query notice:', error.message);
+                renderEmptyProjects(container, 'Projects database connecting. Any published projects will appear here.');
+                return;
+            }
+
+            if (!projects || projects.length === 0) {
+                renderEmptyProjects(container, 'No projects published yet. Projects added via the Admin Panel will appear here.');
+                return;
+            }
+
+            cachedProjectsList = projects;
+            renderPublicProjectsList(container, projects);
+        } catch (err) {
+            console.warn('loadPublicProjects exception:', err);
+            renderEmptyProjects(container, 'No projects published yet.');
+        }
+    }
+
+    function renderEmptyProjects(container, message) {
+        container.innerHTML = `
+            <div class="empty-projects-state" style="text-align:center; padding:48px 24px; background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.12); border-radius:12px; margin:24px 0; color:var(--ink-2); width:100%;">
+                <div style="font-size:36px; margin-bottom:12px;">📂</div>
+                <h3 style="font-size:18px; font-weight:700; color:var(--ink); margin-bottom:8px;">No projects published yet</h3>
+                <p style="font-size:14px; max-width:440px; margin:0 auto; line-height:1.5;">${escapeHtml(message || 'Projects added and published via the Admin Panel will dynamically appear here.')}</p>
+            </div>
+        `;
+    }
+
+    function renderPublicProjectsList(container, projects) {
+        container.innerHTML = '';
+
+        projects.forEach((proj, idx) => {
+            const card = document.createElement('div');
+            card.className = 'project-card reveal';
+            card.style.display = 'flex';
+            card.style.flexDirection = 'column';
+
+            const tagsArray = Array.isArray(proj.tags)
+                ? proj.tags
+                : (typeof proj.tags === 'string' ? proj.tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+
+            let mediaHtml = '';
+            if (proj.video_url) {
+                mediaHtml = `
+                    <div class="project-video-wrapper" style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:8px; overflow:hidden; margin-bottom:16px;">
+                        <video src="${escapeHtml(proj.video_url)}" ${proj.thumbnail_url ? `poster="${escapeHtml(proj.thumbnail_url)}"` : ''} controls preload="metadata" playsinline style="width:100%; height:100%; object-fit:contain; display:block;"></video>
+                    </div>
+                `;
+            } else if (proj.thumbnail_url) {
+                mediaHtml = `
+                    <div class="project-visual" style="margin-bottom:16px; border-radius:8px; overflow:hidden;">
+                        <img class="project-visual-media" src="${escapeHtml(proj.thumbnail_url)}" alt="${escapeHtml(proj.title)}" loading="lazy" decoding="async" style="width:100%; height:auto; display:block; object-fit:cover;" />
+                    </div>
+                `;
+            }
+
+            const desc = proj.description || '';
+            const isLong = desc.length > 220;
+            const shortDesc = isLong ? desc.slice(0, 200) + '...' : desc;
+
+            let githubBtnHtml = '';
+            if (proj.github_url) {
+                githubBtnHtml = `
+                    <div style="margin-top:16px;">
+                        <a href="${escapeHtml(proj.github_url)}" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--quiet" style="display:inline-flex; align-items:center; gap:8px; padding:7px 16px; font-size:13px; font-weight:600; text-decoration:none; border-radius:8px;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                            </svg>
+                            <span>View on GitHub</span>
+                            <span class="hero-cta-arrow" aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                ${mediaHtml}
+                <div class="project-body" style="padding:0; flex:1; display:flex; flex-direction:column;">
+                    <div class="project-copy" style="flex:1;">
+                        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; align-items:center;">
+                            ${proj.is_featured ? `<span class="badge-pill" style="background:rgba(234,179,8,0.15); color:#eab308; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:700;">Featured</span>` : ''}
+                            ${tagsArray.map(tag => `<span class="badge-pill" style="background:rgba(16,185,129,0.12); color:#10b981; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600;">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                        <h3 class="project-title" style="margin-bottom:8px; font-size:18px; font-weight:700; color:var(--ink);">${escapeHtml(proj.title)}</h3>
+                        <div class="project-desc-wrapper" id="public-proj-desc-${idx}">
+                            <p class="project-summary" style="font-size:14px; line-height:1.6; color:var(--ink-2); margin-bottom:4px;">${escapeHtml(isLong ? shortDesc : desc)}</p>
+                            ${isLong ? `<button type="button" class="btn-read-more" data-idx="${idx}" style="background:none; border:none; color:var(--accent); font-size:13px; font-weight:600; cursor:pointer; padding:0; margin-top:4px;">Read more ↓</button>` : ''}
+                        </div>
+                    </div>
+                    ${githubBtnHtml}
+                </div>
+            `;
+
+            if (isLong) {
+                const btn = card.querySelector(`.btn-read-more[data-idx="${idx}"]`);
+                if (btn) {
+                    let expanded = false;
+                    btn.addEventListener('click', () => {
+                        expanded = !expanded;
+                        const p = card.querySelector(`#public-proj-desc-${idx} .project-summary`);
+                        if (p) p.textContent = expanded ? desc : shortDesc;
+                        btn.textContent = expanded ? 'Read less ↑' : 'Read more ↓';
+                    });
+                }
+            }
+
+            container.appendChild(card);
+        });
+    }
+
+    // 2. Admin Projects Management
+    let allAdminProjects = [];
+
+    async function loadAdminProjects() {
+        const container = document.getElementById('admin-projects-list-container');
+        if (!container) return;
+
+        if (!isAdminLoggedIn()) return;
+
+        try {
+            if (!supabase) {
+                container.innerHTML = '<p style="color:var(--ink-2); padding:16px;">Supabase client not initialized.</p>';
+                return;
+            }
+
+            const { data: projects, error } = await supabase
+                .from('projects')
+                .select('*')
+                .order('sort_order', { ascending: true })
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                container.innerHTML = `
+                    <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:14px; color:#ef4444; font-size:13px;">
+                        Error loading projects: ${escapeHtml(error.message)}. Please ensure you ran the SQL setup script in Supabase SQL editor.
+                    </div>
+                `;
+                return;
+            }
+
+            allAdminProjects = projects || [];
+            renderAdminProjectsList(container, allAdminProjects);
+        } catch (err) {
+            console.error('loadAdminProjects exception:', err);
+            container.innerHTML = '<p style="color:var(--ink-2); padding:16px;">Failed to load projects.</p>';
+        }
+    }
+
+    function renderAdminProjectsList(container, projects) {
+        if (!projects || projects.length === 0) {
+            container.innerHTML = `
+                <div style="text-align:center; padding:32px 16px; background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.12); border-radius:10px; color:var(--ink-2);">
+                    <p style="font-size:15px; font-weight:600; color:var(--ink); margin-bottom:6px;">No projects in database yet</p>
+                    <p style="font-size:13px; margin-bottom:14px;">Click "+ Add New Project" above to create your first dynamic project.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        projects.forEach((proj, idx) => {
+            const card = document.createElement('div');
+            card.className = 'admin-project-item';
+            card.style.display = 'flex';
+            card.style.justifyContent = 'space-between';
+            card.style.alignItems = 'center';
+            card.style.flexWrap = 'wrap';
+            card.style.gap = '14px';
+            card.style.padding = '14px 18px';
+            card.style.background = 'rgba(255,255,255,0.025)';
+            card.style.border = '1px solid rgba(255,255,255,0.08)';
+            card.style.borderRadius = '10px';
+
+            const tagsArray = Array.isArray(proj.tags)
+                ? proj.tags
+                : (typeof proj.tags === 'string' ? proj.tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+
+            card.innerHTML = `
+                <div style="flex:1 1 320px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+                        <span style="font-size:12px; font-weight:700; color:var(--ink);">${escapeHtml(proj.title)}</span>
+                        ${proj.is_published 
+                            ? `<span class="badge-pill" style="background:rgba(16,185,129,0.15); color:#10b981; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600;">Published</span>` 
+                            : `<span class="badge-pill" style="background:rgba(245,158,11,0.15); color:#f59e0b; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600;">Draft (Hidden)</span>`}
+                        ${proj.is_featured ? `<span class="badge-pill" style="background:rgba(234,179,8,0.15); color:#eab308; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:700;">★ Featured</span>` : ''}
+                        ${proj.video_url ? `<span class="badge-pill" style="background:rgba(59,130,246,0.15); color:#60a5fa; font-size:11px; padding:2px 8px; border-radius:6px;">🎥 Video</span>` : ''}
+                        ${proj.github_url ? `<span class="badge-pill" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:11px; padding:2px 8px; border-radius:6px;">GitHub</span>` : ''}
+                    </div>
+                    <p style="font-size:13px; color:var(--ink-2); line-height:1.4; margin-bottom:6px; max-width:640px;">${escapeHtml(proj.description?.slice(0, 140) + (proj.description?.length > 140 ? '...' : ''))}</p>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; font-size:11px; color:var(--ink-3);">
+                        <span>Order: <strong>${proj.sort_order ?? 0}</strong></span>
+                        <span>·</span>
+                        <span>Tags: ${escapeHtml(tagsArray.join(', ') || 'None')}</span>
+                    </div>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <!-- Reorder Buttons -->
+                    <button type="button" class="btn-cms-secondary btn-proj-up" data-id="${escapeHtml(proj.id)}" data-idx="${idx}" title="Move project up in sort order" style="padding:4px 8px; font-size:12px;" ${idx === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>▲</button>
+                    <button type="button" class="btn-cms-secondary btn-proj-down" data-id="${escapeHtml(proj.id)}" data-idx="${idx}" title="Move project down in sort order" style="padding:4px 8px; font-size:12px;" ${idx === projects.length - 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>▼</button>
+
+                    <!-- Edit Button -->
+                    <button type="button" class="btn-cms-save btn-proj-edit" data-id="${escapeHtml(proj.id)}" style="padding:6px 14px; font-size:12px; background:rgba(255,255,255,0.08); color:var(--ink);">Edit</button>
+
+                    <!-- Delete Button -->
+                    <button type="button" class="btn-admin-logout btn-proj-delete" data-id="${escapeHtml(proj.id)}" style="padding:6px 12px; font-size:12px; color:#ef4444; border-color:rgba(239,68,68,0.3);">Delete</button>
+                </div>
+            `;
+
+            // Event Listeners for action buttons
+            const btnUp = card.querySelector('.btn-proj-up');
+            if (btnUp && idx > 0) {
+                btnUp.addEventListener('click', () => reorderProject(proj.id, -1));
+            }
+
+            const btnDown = card.querySelector('.btn-proj-down');
+            if (btnDown && idx < projects.length - 1) {
+                btnDown.addEventListener('click', () => reorderProject(proj.id, 1));
+            }
+
+            const btnEdit = card.querySelector('.btn-proj-edit');
+            if (btnEdit) {
+                btnEdit.addEventListener('click', () => openProjectEditor(proj));
+            }
+
+            const btnDelete = card.querySelector('.btn-proj-delete');
+            if (btnDelete) {
+                let confirming = false;
+                btnDelete.addEventListener('click', async () => {
+                    if (!confirming) {
+                        confirming = true;
+                        btnDelete.textContent = 'Confirm?';
+                        btnDelete.style.background = '#ef4444';
+                        btnDelete.style.color = '#fff';
+                        setTimeout(() => {
+                            confirming = false;
+                            btnDelete.textContent = 'Delete';
+                            btnDelete.style.background = 'transparent';
+                            btnDelete.style.color = '#ef4444';
+                        }, 3000);
+                        return;
+                    }
+
+                    // Execute deletion
+                    btnDelete.disabled = true;
+                    btnDelete.textContent = 'Deleting...';
+                    try {
+                        const { error } = await supabase.from('projects').delete().eq('id', proj.id);
+                        if (error) throw error;
+                        showNotificationToast('Project deleted successfully ✓');
+                        loadAdminProjects();
+                        loadPublicProjects();
+                    } catch (err) {
+                        showNotificationToast(`Delete error: ${err.message}`);
+                        btnDelete.disabled = false;
+                        btnDelete.textContent = 'Delete';
+                    }
+                });
+            }
+
+            container.appendChild(card);
+        });
+    }
+
+    // 3. Reorder Project
+    async function reorderProject(projectId, delta) {
+        if (!allAdminProjects || allAdminProjects.length === 0) return;
+        const currentIdx = allAdminProjects.findIndex(p => p.id === projectId);
+        if (currentIdx === -1) return;
+
+        const targetIdx = currentIdx + delta;
+        if (targetIdx < 0 || targetIdx >= allAdminProjects.length) return;
+
+        const currentProj = allAdminProjects[currentIdx];
+        const targetProj = allAdminProjects[targetIdx];
+
+        // Swap sort_order
+        const orderA = targetProj.sort_order ?? targetIdx;
+        const orderB = currentProj.sort_order ?? currentIdx;
+
+        try {
+            await supabase.from('projects').update({ sort_order: orderA }).eq('id', currentProj.id);
+            await supabase.from('projects').update({ sort_order: orderB }).eq('id', targetProj.id);
+            showNotificationToast('Project order updated ✓');
+            loadAdminProjects();
+            loadPublicProjects();
+        } catch (err) {
+            console.error('Reorder error:', err);
+            showNotificationToast(`Reorder error: ${err.message}`);
+        }
+    }
+
+    // 4. Project Editor Modal Logic
+    const btnAdminAddProject = document.getElementById('btn-admin-add-project');
+    const projectEditorModal = document.getElementById('project-editor-modal');
+    const btnCloseProjectEditor = document.getElementById('btn-close-project-editor');
+    const btnCancelProjectEditor = document.getElementById('btn-cancel-project-editor');
+    const projectEditorForm = document.getElementById('project-editor-form');
+    const projectEditorHeading = document.getElementById('project-editor-heading');
+    const projectEditorError = document.getElementById('project-editor-error');
+
+    const radioVideoUrl = document.getElementById('radio-video-url');
+    const radioVideoFile = document.getElementById('radio-video-file');
+    const videoUrlGroup = document.getElementById('video-url-input-wrap');
+    const videoFileGroup = document.getElementById('video-file-input-wrap');
+    const projectVideoFile = document.getElementById('project-video-file');
+    const videoFileWarning = document.getElementById('video-file-warning');
+    const videoUploadProgress = document.getElementById('video-upload-progress');
+    const videoUploadBar = document.getElementById('video-upload-bar');
+    const videoUploadPct = document.getElementById('video-upload-pct');
+    const videoUploadStatusText = document.getElementById('video-upload-status-text');
+
+    function toggleVideoInputMode(isUrl) {
+        if (videoUrlGroup) videoUrlGroup.style.display = isUrl ? 'block' : 'none';
+        if (videoFileGroup) videoFileGroup.style.display = isUrl ? 'none' : 'block';
+    }
+
+    if (radioVideoUrl) {
+        radioVideoUrl.addEventListener('change', () => toggleVideoInputMode(true));
+    }
+    if (radioVideoFile) {
+        radioVideoFile.addEventListener('change', () => toggleVideoInputMode(false));
+    }
+
+    // Warn if file > 50MB
+    if (projectVideoFile) {
+        projectVideoFile.addEventListener('change', () => {
+            const file = projectVideoFile.files?.[0];
+            if (!file) {
+                if (videoFileWarning) videoFileWarning.style.display = 'none';
+                return;
+            }
+
+            const isMp4OrWebm = file.name.endsWith('.mp4') || file.name.endsWith('.webm') || file.type.includes('mp4') || file.type.includes('webm');
+            if (!isMp4OrWebm) {
+                if (projectEditorError) {
+                    projectEditorError.textContent = 'Invalid file format: Video must be .mp4 or .webm only.';
+                    projectEditorError.style.display = 'block';
+                }
+            } else if (projectEditorError) {
+                projectEditorError.style.display = 'none';
+            }
+
+            if (file.size > 50 * 1024 * 1024) {
+                const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+                if (videoFileWarning) {
+                    videoFileWarning.textContent = `⚠️ Warning: File size is ${sizeMb} MB, which exceeds the Supabase free plan limit (50 MB). Please compress the video first or paste a direct video URL.`;
+                    videoFileWarning.style.display = 'block';
+                }
+            } else {
+                if (videoFileWarning) videoFileWarning.style.display = 'none';
+            }
+        });
+    }
+
+    function openProjectEditor(project = null) {
+        if (projectEditorError) projectEditorError.style.display = 'none';
+        if (videoFileWarning) videoFileWarning.style.display = 'none';
+        if (videoUploadProgress) videoUploadProgress.style.display = 'none';
+        if (projectVideoFile) projectVideoFile.value = '';
+
+        const idInput = document.getElementById('project-id');
+        const titleInput = document.getElementById('project-title');
+        const descInput = document.getElementById('project-description');
+        const tagsInput = document.getElementById('project-tags');
+        const githubInput = document.getElementById('project-github');
+        const videoUrlInput = document.getElementById('project-video-url');
+        const thumbInput = document.getElementById('project-thumbnail-url');
+        const isPubInput = document.getElementById('project-is-published');
+        const isFeatInput = document.getElementById('project-is-featured');
+        const sortInput = document.getElementById('project-sort-order');
+
+        if (project) {
+            if (projectEditorHeading) projectEditorHeading.textContent = 'Edit Project';
+            if (idInput) idInput.value = project.id;
+            if (titleInput) titleInput.value = project.title || '';
+            if (descInput) descInput.value = project.description || '';
+            const tags = Array.isArray(project.tags) ? project.tags.join(', ') : (project.tags || '');
+            if (tagsInput) tagsInput.value = tags;
+            if (githubInput) githubInput.value = project.github_url || '';
+            if (videoUrlInput) videoUrlInput.value = project.video_url || '';
+            if (thumbInput) thumbInput.value = project.thumbnail_url || '';
+            if (isPubInput) isPubInput.checked = project.is_published !== false;
+            if (isFeatInput) isFeatInput.checked = Boolean(project.is_featured);
+            if (sortInput) sortInput.value = project.sort_order ?? 0;
+        } else {
+            if (projectEditorHeading) projectEditorHeading.textContent = 'Add New Project';
+            if (idInput) idInput.value = '';
+            if (titleInput) titleInput.value = '';
+            if (descInput) descInput.value = '';
+            if (tagsInput) tagsInput.value = 'Python, Playwright, pandas';
+            if (githubInput) githubInput.value = '';
+            if (videoUrlInput) videoUrlInput.value = '';
+            if (thumbInput) thumbInput.value = '';
+            if (isPubInput) isPubInput.checked = true;
+            if (isFeatInput) isFeatInput.checked = false;
+            if (sortInput) sortInput.value = allAdminProjects.length;
+        }
+
+        if (radioVideoUrl) radioVideoUrl.checked = true;
+        toggleVideoInputMode(true);
+
+        openModal('project-editor-modal');
+    }
+
+    if (btnAdminAddProject) {
+        btnAdminAddProject.addEventListener('click', () => openProjectEditor(null));
+    }
+
+    if (btnCloseProjectEditor) {
+        btnCloseProjectEditor.addEventListener('click', () => closeModal('project-editor-modal'));
+    }
+    if (btnCancelProjectEditor) {
+        btnCancelProjectEditor.addEventListener('click', () => closeModal('project-editor-modal'));
+    }
+
+    // Submit Project Form
+    if (projectEditorForm) {
+        projectEditorForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = (document.getElementById('project-id')?.value || '').trim();
+            const title = (document.getElementById('project-title')?.value || '').trim();
+            const description = (document.getElementById('project-description')?.value || '').trim();
+            const rawTags = (document.getElementById('project-tags')?.value || '').trim();
+            const githubUrl = (document.getElementById('project-github')?.value || '').trim();
+            let videoUrl = (document.getElementById('project-video-url')?.value || '').trim();
+            const thumbnailUrl = (document.getElementById('project-thumbnail-url')?.value || '').trim();
+            const isPublished = Boolean(document.getElementById('project-is-published')?.checked);
+            const isFeatured = Boolean(document.getElementById('project-is-featured')?.checked);
+            const sortOrder = parseInt(document.getElementById('project-sort-order')?.value || '0', 10);
+
+            // 1. Validation: title and description required
+            if (!title) {
+                if (projectEditorError) {
+                    projectEditorError.textContent = 'Project title is required.';
+                    projectEditorError.style.display = 'block';
+                }
+                return;
+            }
+            if (!description) {
+                if (projectEditorError) {
+                    projectEditorError.textContent = 'Project short description is required.';
+                    projectEditorError.style.display = 'block';
+                }
+                return;
+            }
+
+            // 2. Validation: GitHub URL must start with https://github.com/
+            if (githubUrl && !githubUrl.startsWith('https://github.com/')) {
+                if (projectEditorError) {
+                    projectEditorError.textContent = 'GitHub URL must start with https://github.com/';
+                    projectEditorError.style.display = 'block';
+                }
+                return;
+            }
+
+            // 3. Video Handling: Check if file upload was selected
+            const isFileUpload = radioVideoFile?.checked;
+            const file = projectVideoFile?.files?.[0];
+
+            if (isFileUpload && file) {
+                const isMp4OrWebm = file.name.endsWith('.mp4') || file.name.endsWith('.webm') || file.type.includes('mp4') || file.type.includes('webm');
+                if (!isMp4OrWebm) {
+                    if (projectEditorError) {
+                        projectEditorError.textContent = 'Video file must be .mp4 or .webm only.';
+                        projectEditorError.style.display = 'block';
+                    }
+                    return;
+                }
+
+                // Show progress bar
+                if (videoUploadProgress) videoUploadProgress.style.display = 'block';
+                if (videoUploadBar) videoUploadBar.style.width = '30%';
+                if (videoUploadPct) videoUploadPct.textContent = '30%';
+                if (videoUploadStatusText) videoUploadStatusText.textContent = 'Uploading video to Supabase Storage bucket (project-media)...';
+
+                try {
+                    const cleanFileName = `video_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9_.-]/g, '_')}`;
+                    const { data: uploadData, error: uploadErr } = await supabase.storage
+                        .from('project-media')
+                        .upload(cleanFileName, file, { cacheControl: '3600', upsert: true });
+
+                    if (uploadErr) {
+                        throw new Error(`Storage upload error: ${uploadErr.message}`);
+                    }
+
+                    if (videoUploadBar) videoUploadBar.style.width = '80%';
+                    if (videoUploadPct) videoUploadPct.textContent = '80%';
+
+                    const { data: pubData } = supabase.storage
+                        .from('project-media')
+                        .getPublicUrl(cleanFileName);
+
+                    if (pubData && pubData.publicUrl) {
+                        videoUrl = pubData.publicUrl;
+                    }
+
+                    if (videoUploadBar) videoUploadBar.style.width = '100%';
+                    if (videoUploadPct) videoUploadPct.textContent = '100%';
+                    if (videoUploadStatusText) videoUploadStatusText.textContent = 'Upload complete ✓';
+                } catch (upErr) {
+                    if (projectEditorError) {
+                        projectEditorError.textContent = upErr.message;
+                        projectEditorError.style.display = 'block';
+                    }
+                    if (videoUploadProgress) videoUploadProgress.style.display = 'none';
+                    return;
+                }
+            }
+
+            const tagsArray = rawTags.split(',').map(t => t.trim()).filter(Boolean);
+
+            const payload = {
+                title,
+                description,
+                tags: tagsArray,
+                github_url: githubUrl || null,
+                video_url: videoUrl || null,
+                thumbnail_url: thumbnailUrl || null,
+                is_featured: isFeatured,
+                is_published: isPublished,
+                sort_order: isNaN(sortOrder) ? 0 : sortOrder
+            };
+
+            const saveBtn = document.getElementById('btn-save-project');
+            if (saveBtn) {
+                saveBtn.disabled = true;
+                saveBtn.textContent = 'Saving to Database...';
+            }
+
+            try {
+                if (id) {
+                    const { error } = await supabase
+                        .from('projects')
+                        .update(payload)
+                        .eq('id', id);
+                    if (error) throw error;
+                    showNotificationToast('Project updated successfully in Supabase ✓');
+                } else {
+                    const { error } = await supabase
+                        .from('projects')
+                        .insert([payload]);
+                    if (error) throw error;
+                    showNotificationToast('Project created and published to Supabase ✓');
+                }
+
+                closeModal('project-editor-modal');
+                loadAdminProjects();
+                loadPublicProjects();
+            } catch (err) {
+                if (projectEditorError) {
+                    let msg = err.message || 'Database save error.';
+                    if (msg.includes('Could not find the table') || msg.includes('projects')) {
+                        msg = "Database table 'projects' not found in Supabase yet. Please run the SQL setup script from Section 4.3 in your Supabase SQL editor.";
+                    } else if (msg.includes('row-level security') || msg.includes('policy')) {
+                        msg = "Permission denied by Supabase RLS. Ensure your user ID is registered in the public.admins table: insert into public.admins (user_id) values ('YOUR_USER_ID');";
+                    }
+                    projectEditorError.textContent = msg;
+                    projectEditorError.style.display = 'block';
+                }
+            } finally {
+                if (saveBtn) {
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'Save Project to Database';
+                }
+            }
+        });
+    }
+
+    // Auto-load public projects on page load
+    loadPublicProjects();
 
     // Global Action: Inspect Sample Preview Modal
     let activePreviewSample = null;
@@ -3270,7 +3860,7 @@ const CASE_STUDIES = {
             <a href="https://wa.me/${waDigits}" target="_blank" rel="noopener noreferrer" class="ai-contact-btn whatsapp-btn" title="Chat on WhatsApp">
                 💬 WhatsApp Message
             </a>
-            <a href="mailto:${cleanEmail}?subject=B2B%20Lead%20Generation%20Inquiry" class="ai-contact-btn email-btn" title="Send Email">
+            <a href="mailto:${cleanEmail}?subject=Python%20Web%20Automation%20Inquiry" class="ai-contact-btn email-btn" title="Send Email">
                 ✉️ Email Inquiry
             </a>
         `;
@@ -3287,8 +3877,8 @@ const CASE_STUDIES = {
         bubble.className = 'ai-msg-bubble';
         bubble.innerHTML = `
             <p>👋 Hello! I am <strong>MD. Ibrahim's official AI assistant</strong>.</p>
-            <p>I can help answer your questions about Ibrahim's <strong>B2B Lead Generation</strong>, <strong>Python Web Scraping</strong>, <strong>Google Maps Extraction</strong>, and custom prospect list building.</p>
-            <p style="font-size:12px; color:#94a3b8; margin-top:6px;">Whenever you're satisfied or ready to discuss your project, I can provide his direct phone number to call or message immediately.</p>
+            <p>I can help answer your questions about Ibrahim's <strong>Python Web Automation</strong>, <strong>Browser Bots</strong>, <strong>Web Scraping</strong>, and <strong>Google Sheets &amp; Docs automation</strong>.</p>
+            <p style="font-size:12px; color:#94a3b8; margin-top:6px;">Whenever you're ready to discuss your project, I can provide his direct phone number to call or message immediately.</p>
         `;
         welcomeRow.appendChild(bubble);
         messagesContainer.appendChild(welcomeRow);

@@ -68,12 +68,12 @@ export const ToolsSection: React.FC = () => {
                 Focused on Clean Business Outcomes
               </h4>
               <p className="text-xs text-slate-400 mt-0.5">
-                Every tool is applied to produce verified, deduplicated contact points ready for CRM import.
+                Every tool is applied to produce reliable, automated web workflows with structured logging and error handling.
               </p>
             </div>
           </div>
           <span className="text-xs font-mono text-cyan-300 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 whitespace-nowrap">
-            Zero Hallucinated Leads
+            Reliable Python Automation
           </span>
         </div>
 

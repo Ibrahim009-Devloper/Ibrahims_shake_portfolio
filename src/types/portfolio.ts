@@ -39,7 +39,7 @@ export interface ProjectItem {
 export interface ToolItem {
   id: string;
   name: string;
-  category: 'Automation Tool' | 'Core Capability';
+  category: string;
   description: string;
   highlight?: boolean;
 }

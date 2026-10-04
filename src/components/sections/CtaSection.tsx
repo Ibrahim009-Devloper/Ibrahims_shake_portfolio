@@ -31,7 +31,7 @@ export const CtaSection: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 border border-slate-700/80 mb-6">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
               <span className="text-xs font-semibold uppercase tracking-wider text-cyan-300">
-                Ready to scale your outreach?
+                Ready to automate your repetitive web tasks?
               </span>
             </div>
 
