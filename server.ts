@@ -564,7 +564,7 @@ app.post('/api/messages', async (req: Request, res: Response) => {
     const payload = {
       name: name || 'Anonymous',
       email: email || '',
-      project_type: project_type || 'B2B Leads',
+      project_type: project_type || 'Web Automation',
       message: message || '',
       created_at: new Date().toISOString(),
     };

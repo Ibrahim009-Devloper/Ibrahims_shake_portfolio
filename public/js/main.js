@@ -586,8 +586,6 @@ const CASE_STUDIES = {
    8. Leads Sample Showcase & Admin Portal Manager (Direct Supabase Cloud Connected)
 ───────────────────────────────────── */
 (function initLeadsSampleApp() {
-    const STORAGE_AUTH_KEY = 'ibrahim_leads_admin_auth';
-
     // Supabase Cloud Database Project Configuration (Direct Frontend to Cloud)
     const SUPABASE_CONFIG = {
         projectId: 'voixkvyylglpomahowrl',
@@ -882,17 +880,22 @@ const CASE_STUDIES = {
         });
     }
 
-    // Auth State
+    // Auth State - Strict in-memory authentication: leaving admin or returning to home page locks admin access immediately
+    const STORAGE_AUTH_KEY = 'ibrahim_automation_admin_auth';
+    let inMemoryAdminAuth = false;
+
     function isAdminLoggedIn() {
-        return localStorage.getItem(STORAGE_AUTH_KEY) === 'true';
+        return inMemoryAdminAuth === true;
     }
 
     function setAdminAuth(isAuth) {
-        if (isAuth) {
-            localStorage.setItem(STORAGE_AUTH_KEY, 'true');
-        } else {
+        inMemoryAdminAuth = !!isAuth;
+        try {
+            sessionStorage.removeItem(STORAGE_AUTH_KEY);
+            localStorage.removeItem('ibrahim_leads_admin_auth');
+            localStorage.removeItem('ibrahim_admin_auth');
             localStorage.removeItem(STORAGE_AUTH_KEY);
-        }
+        } catch (e) {}
         updateAdminBarUI();
         renderSamples();
     }
@@ -921,604 +924,14 @@ const CASE_STUDIES = {
         inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...content };
     }
 
-    // Apply Site Content to the DOM
-    function applySiteContentToDOM(content) {
-        if (!content) content = getSiteContent();
-
-        // Navigation
-        const navName = document.getElementById('site-nav-name');
-        if (navName && content.fullName) navName.textContent = content.fullName;
-
-        // Hero Section
-        const heroLine1 = document.getElementById('site-hero-line1');
-        if (heroLine1 && content.heroLine1) heroLine1.textContent = content.heroLine1;
-
-        const heroMark = document.getElementById('site-hero-mark');
-        if (heroMark && content.heroMark) heroMark.textContent = content.heroMark;
-
-        const heroLead = document.getElementById('site-hero-lead');
-        if (heroLead && content.heroLead) heroLead.textContent = content.heroLead;
-
-        const heroProof = document.getElementById('site-hero-proof');
-        if (heroProof && content.heroProof) heroProof.textContent = content.heroProof;
-
-        const badgeRole1 = document.getElementById('site-badge-role1');
-        if (badgeRole1 && content.badgeRole1) badgeRole1.textContent = content.badgeRole1;
-
-        const badgeRole2 = document.getElementById('site-badge-role2');
-        if (badgeRole2 && content.badgeRole2) badgeRole2.textContent = content.badgeRole2;
-
-        const badgeLoc = document.getElementById('site-badge-loc');
-        if (badgeLoc && content.badgeLoc) badgeLoc.textContent = content.badgeLoc;
-
-        if (content.heroPhoto && typeof window.updatePuzzleHeroImage === 'function') {
-            window.updatePuzzleHeroImage(content.heroPhoto);
-        }
-
-        // About Section
-        const aboutBio = document.getElementById('site-about-bio');
-        if (aboutBio && content.aboutBio) aboutBio.textContent = content.aboutBio;
-
-        const aboutDegree = document.getElementById('site-about-degree');
-        if (aboutDegree && content.aboutDegree) aboutDegree.textContent = content.aboutDegree;
-
-        const aboutInst = document.getElementById('site-about-inst');
-        if (aboutInst && content.aboutInst) aboutInst.textContent = content.aboutInst;
-
-        const aboutYear = document.getElementById('site-about-year');
-        if (aboutYear && content.aboutEduYears) aboutYear.textContent = content.aboutEduYears;
-
-        // Stats
-        const statYears = document.getElementById('site-stat-years');
-        if (statYears && content.statYears) statYears.textContent = content.statYears;
-
-        const statProjects = document.getElementById('site-stat-projects');
-        if (statProjects && content.statProjects) statProjects.textContent = content.statProjects;
-
-        const statQuality = document.getElementById('site-stat-quality');
-        if (statQuality && content.statQuality) statQuality.textContent = content.statQuality;
-
-        const statClients = document.getElementById('site-stat-clients');
-        if (statClients && content.statClients) statClients.textContent = content.statClients;
-
-        // Pipeline Section
-        const pipeHeadline = document.getElementById('site-pipe-headline');
-        if (pipeHeadline && content.pipeHeadline) pipeHeadline.textContent = content.pipeHeadline;
-
-        const pipeCard1 = document.getElementById('site-pipe-card1-sub');
-        if (pipeCard1 && content.pipeCard1Sub) pipeCard1.textContent = content.pipeCard1Sub;
-
-        const pipeCard2 = document.getElementById('site-pipe-card2-sub');
-        if (pipeCard2 && content.pipeCard2Sub) pipeCard2.textContent = content.pipeCard2Sub;
-
-        const pipeCard3 = document.getElementById('site-pipe-card3-sub');
-        if (pipeCard3 && content.pipeCard3Sub) pipeCard3.textContent = content.pipeCard3Sub;
-
-        // Quote
-        const quoteText = document.getElementById('site-quote-text');
-        if (quoteText && content.quoteText) quoteText.textContent = content.quoteText;
-
-        const quoteAuthor = document.getElementById('site-quote-author');
-        if (quoteAuthor && content.quoteAuthor) quoteAuthor.textContent = content.quoteAuthor;
-
-        // Contact Section
-        const contactHeadline = document.getElementById('site-contact-headline');
-        if (contactHeadline && content.contactHeadline) contactHeadline.textContent = content.contactHeadline;
-
-        const contactSub = document.getElementById('site-contact-sub');
-        if (contactSub && content.contactSub) contactSub.textContent = content.contactSub;
-
-        const contactEmail = document.getElementById('site-contact-email-val');
-        const contactEmailCard = document.getElementById('contact-email-card');
-        if (content.contactEmail) {
-            if (contactEmail) contactEmail.textContent = content.contactEmail;
-            if (contactEmailCard) contactEmailCard.href = `mailto:${content.contactEmail}`;
-        }
-
-        const contactWhatsapp = document.getElementById('site-contact-whatsapp-val');
-        const contactWhatsappCard = document.getElementById('contact-whatsapp-card');
-        if (content.contactWhatsapp) {
-            if (contactWhatsapp) contactWhatsapp.textContent = content.contactWhatsapp;
-            const cleanPhone = content.contactWhatsapp.replace(/[^0-9]/g, '');
-            if (contactWhatsappCard) contactWhatsappCard.href = `https://wa.me/${cleanPhone}`;
-        }
-
-        const contactLinkedin = document.getElementById('site-contact-linkedin-val');
-        const contactLinkedinCard = document.getElementById('contact-linkedin-card');
-        if (content.contactLinkedin) {
-            if (contactLinkedin) contactLinkedin.textContent = content.contactLinkedin.replace('https://www.', '').replace('https://', '');
-            if (contactLinkedinCard) contactLinkedinCard.href = content.contactLinkedin;
-        }
-
-        const contactGithub = document.getElementById('site-contact-github-val');
-        const contactGithubCard = document.getElementById('contact-github-card');
-        if (content.contactGithub) {
-            if (contactGithub) contactGithub.textContent = content.contactGithub.replace('https://www.', '').replace('https://', '');
-            if (contactGithubCard) contactGithubCard.href = content.contactGithub;
-        }
-
-        const contactFacebook = document.getElementById('site-contact-facebook-val');
-        const contactFacebookCard = document.getElementById('contact-facebook-card');
-        if (content.contactFacebook) {
-            if (contactFacebook) contactFacebook.textContent = content.contactFacebook.replace('https://www.', '').replace('https://', '');
-            if (contactFacebookCard) contactFacebookCard.href = content.contactFacebook;
-        }
-
-        const contactLocation = document.getElementById('site-contact-location-val');
-        if (contactLocation && content.contactLocation) contactLocation.textContent = content.contactLocation;
-
-        // Footer
-        const footerName = document.getElementById('site-footer-name');
-        if (footerName && content.fullName) footerName.textContent = content.fullName;
-
-        const footerCity = document.getElementById('site-footer-city');
-        if (footerCity && content.contactLocation) footerCity.textContent = content.contactLocation;
-
-        const footerEmail = document.getElementById('site-footer-email-link');
-        if (footerEmail && content.contactEmail) {
-            footerEmail.textContent = content.contactEmail;
-            footerEmail.href = `mailto:${content.contactEmail}`;
-        }
-
-        const footerLinkedin = document.getElementById('site-footer-linkedin-link');
-        if (footerLinkedin && content.contactLinkedin) {
-            footerLinkedin.href = content.contactLinkedin;
-        }
-
-        // Work Projects & Images (CMS Controlled)
-        const p1Img = document.getElementById('work-project-1-img');
-        if (p1Img && content.workP1Img) p1Img.src = content.workP1Img;
-        const p1Title = document.getElementById('work-project-1-title');
-        if (p1Title && content.workP1Title) p1Title.textContent = content.workP1Title;
-        const p1Summary = document.getElementById('work-project-1-summary');
-        if (p1Summary && content.workP1Summary) p1Summary.textContent = content.workP1Summary;
-
-        const p2Img = document.getElementById('work-project-2-img');
-        if (p2Img && content.workP2Img) p2Img.src = content.workP2Img;
-        const p2Title = document.getElementById('work-project-2-title');
-        if (p2Title && content.workP2Title) p2Title.textContent = content.workP2Title;
-        const p2Summary = document.getElementById('work-project-2-summary');
-        if (p2Summary && content.workP2Summary) p2Summary.textContent = content.workP2Summary;
-
-        const p3Img = document.getElementById('work-project-3-img');
-        if (p3Img && content.workP3Img) p3Img.src = content.workP3Img;
-        const p3Title = document.getElementById('work-project-3-title');
-        if (p3Title && content.workP3Title) p3Title.textContent = content.workP3Title;
-        const p3Summary = document.getElementById('work-project-3-summary');
-        if (p3Summary && content.workP3Summary) p3Summary.textContent = content.workP3Summary;
-
-        // Render Services in main portfolio if custom
-        if (Array.isArray(content.services) && content.services.length > 0) {
-            renderServicesBoard(content.services);
-        }
-
-        // Technical SEO Sync: Connect meta tags and structured schema to Admin-managed data
-        updateDynamicSeoMetadata(content);
-    }
-
-    // Technical SEO: Dynamically synchronize document title, meta tags, Open Graph, and JSON-LD schema with Admin-managed CMS data
-    function updateDynamicSeoMetadata(content) {
-        if (!content || typeof document === 'undefined') return;
-
-        try {
-            // 1. Title Tag
-            const fullName = content.fullName || 'MD. Ibrahim Shake Shuvo';
-            const role1 = content.badgeRole1 || 'B2B Lead Generation';
-            const role2 = content.badgeRole2 || 'Web Scraping';
-            const pageTitle = `${fullName} | ${role1} & ${role2} Specialist`;
-            if (document.title !== pageTitle) {
-                document.title = pageTitle;
-            }
-
-            // 2. Meta Tags (Description, Open Graph, Twitter)
-            const metaDesc = content.heroLead 
-                ? `${content.heroLead} High-accuracy prospect lists, business directories, and web data pipelines.` 
-                : 'B2B Lead Generation and Web Scraping Specialist. High-accuracy prospect lists, business directories, Google Maps extraction, and automated data pipelines using Python and Playwright.';
-
-            function setMetaTag(attributeName, attributeValue, contentValue) {
-                if (!contentValue) return;
-                let meta = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
-                if (!meta) {
-                    meta = document.createElement('meta');
-                    meta.setAttribute(attributeName, attributeValue);
-                    document.head.appendChild(meta);
-                }
-                meta.setAttribute('content', contentValue);
-            }
-
-            setMetaTag('name', 'description', metaDesc);
-            setMetaTag('property', 'og:title', pageTitle);
-            setMetaTag('property', 'og:description', metaDesc);
-            setMetaTag('name', 'twitter:title', pageTitle);
-            setMetaTag('name', 'twitter:description', metaDesc);
-
-            // Canonical Link & Open Graph URL
-            const canonicalHref = (window.location && window.location.origin) ? `${window.location.origin}/` : 'https://ibrahimshake.com/';
-            let canonicalLink = document.querySelector('link[rel="canonical"]');
-            if (canonicalLink) {
-                canonicalLink.setAttribute('href', canonicalHref);
-            }
-            setMetaTag('property', 'og:url', canonicalHref);
-
-            // Images
-            if (content.heroPhoto) {
-                const absolutePhoto = content.heroPhoto.startsWith('http') 
-                    ? content.heroPhoto 
-                    : ((window.location && window.location.origin) ? `${window.location.origin}${content.heroPhoto}` : `https://ibrahimshake.com${content.heroPhoto}`);
-                setMetaTag('property', 'og:image', absolutePhoto);
-                setMetaTag('name', 'twitter:image', absolutePhoto);
-            }
-
-            // 3. Schema.org JSON-LD Structured Data
-            const jsonLdScript = document.getElementById('structured-data-jsonld');
-            if (jsonLdScript) {
-                const schemaText = jsonLdScript.textContent || '{}';
-                const schemaData = JSON.parse(schemaText);
-                if (schemaData && Array.isArray(schemaData['@graph'])) {
-                    schemaData['@graph'].forEach(node => {
-                        if (node['@type'] === 'Person') {
-                            if (content.fullName) node.name = content.fullName;
-                            node.jobTitle = `${role1} & ${role2} Specialist`;
-                            if (content.contactEmail) node.email = `mailto:${content.contactEmail}`;
-                            if (content.contactWhatsapp) node.telephone = content.contactWhatsapp;
-                            if (content.contactLocation && node.address) {
-                                node.address.addressLocality = content.contactLocation;
-                            }
-                            const socials = [content.contactLinkedin, content.contactGithub, content.contactFacebook].filter(Boolean);
-                            if (socials.length > 0) node.sameAs = socials;
-                            if (content.heroPhoto) {
-                                node.image = content.heroPhoto.startsWith('http') 
-                                    ? content.heroPhoto 
-                                    : ((window.location && window.location.origin) ? `${window.location.origin}${content.heroPhoto}` : `https://ibrahimshake.com${content.heroPhoto}`);
-                            }
-                        } else if (node['@type'] === 'ProfessionalService') {
-                            if (content.fullName) node.name = `${content.fullName} - Lead Generation & Web Scraping Services`;
-                            if (content.contactEmail) node.email = content.contactEmail;
-                            if (content.contactWhatsapp) node.telephone = content.contactWhatsapp;
-                            if (content.contactLocation && node.address) {
-                                node.address.addressLocality = content.contactLocation;
-                            }
-                            if (Array.isArray(content.services) && content.services.length > 0) {
-                                node.hasOfferCatalog = {
-                                    '@type': 'OfferCatalog',
-                                    'name': 'B2B Lead Generation & Web Scraping Services',
-                                    'itemListElement': content.services.map(s => ({
-                                        '@type': 'Offer',
-                                        'itemOffered': {
-                                            '@type': 'Service',
-                                            'name': s.title,
-                                            'description': s.desc
-                                        }
-                                    }))
-                                };
-                            }
-                        } else if (node['@type'] === 'WebSite') {
-                            if (content.fullName) node.name = `${content.fullName} Portfolio`;
-                        }
-                    });
-                    jsonLdScript.textContent = JSON.stringify(schemaData, null, 2);
-                }
-            }
-        } catch (seoErr) {
-            console.warn('SEO dynamic metadata synchronization note:', seoErr);
-        }
-    }
-
-    // Render Services board on the main site
-    function renderServicesBoard(services) {
-        const board = document.getElementById('site-services-board');
-        if (!board) return;
-
-        const serviceList = (Array.isArray(services) && services.length > 0) ? services : DEFAULT_SERVICES;
-
-        board.innerHTML = serviceList.map((s, idx) => `
-            <div class="pw-pin" id="service-card-${idx + 1}">
-                <h3 class="pw-pin-title" id="site-service-${idx + 1}-title">${escapeHtml(s.title || '')}</h3>
-                <p class="pw-pin-desc" id="site-service-${idx + 1}-desc">${escapeHtml(s.desc || '')}</p>
-                <p class="pw-pin-tags" id="site-service-${idx + 1}-tags">${escapeHtml(s.tags || '')}</p>
-            </div>
-        `).join('');
-    }
-
-    // Populate CMS Form with current site content
-    function populateCmsForm(content) {
-        if (!content) content = getSiteContent();
-
-        const setVal = (id, val) => {
-            const el = document.getElementById(id);
-            if (el && val !== undefined) el.value = val;
-        };
-
-        // Tab 1: Profile & Identity
-        setVal('cms-input-fullname', content.fullName || '');
-        setVal('cms-input-availability', content.availability || '');
-        setVal('cms-input-role1', content.badgeRole1 || '');
-        setVal('cms-input-role2', content.badgeRole2 || '');
-        setVal('cms-input-location', content.badgeLoc || '');
-
-        // Tab 2: Hero Section
-        setVal('cms-input-hero-line1', content.heroLine1 || '');
-        setVal('cms-input-hero-mark', content.heroMark || '');
-        setVal('cms-input-hero-lead', content.heroLead || '');
-        setVal('cms-input-hero-proof', content.heroProof || '');
-        setVal('cms-input-hero-photo', content.heroPhoto || '');
-
-        // Tab 3: About & Stats
-        setVal('cms-input-about-bio', content.aboutBio || '');
-        setVal('cms-input-about-degree', content.aboutDegree || '');
-        setVal('cms-input-about-inst', content.aboutInst || '');
-        setVal('cms-input-about-years', content.aboutEduYears || '');
-        setVal('cms-input-stat-years', content.statYears || '');
-        setVal('cms-input-stat-projects', content.statProjects || '');
-        setVal('cms-input-stat-quality', content.statQuality || '');
-        setVal('cms-input-stat-clients', content.statClients || '');
-
-        // Tab 4: Services
-        renderCmsServicesEditor(content.services || DEFAULT_SERVICES);
-
-        // Tab 5: Pipelines & Quotes
-        setVal('cms-input-pipe-headline', content.pipeHeadline || '');
-        setVal('cms-input-pipe-card1', content.pipeCard1Sub || '');
-        setVal('cms-input-pipe-card2', content.pipeCard2Sub || '');
-        setVal('cms-input-pipe-card3', content.pipeCard3Sub || '');
-        setVal('cms-input-quote-text', content.quoteText || '');
-        setVal('cms-input-quote-author', content.quoteAuthor || '');
-
-        // Tab 6: Contact & Social
-        setVal('cms-input-contact-headline', content.contactHeadline || '');
-        setVal('cms-input-contact-sub', content.contactSub || '');
-        setVal('cms-input-contact-email', content.contactEmail || '');
-        setVal('cms-input-contact-whatsapp', content.contactWhatsapp || '');
-        setVal('cms-input-contact-linkedin', content.contactLinkedin || '');
-        setVal('cms-input-contact-github', content.contactGithub || '');
-        setVal('cms-input-contact-facebook', content.contactFacebook || '');
-        setVal('cms-input-contact-location', content.contactLocation || '');
-
-        // Tab: Work Projects & Images
-        setVal('cms-input-work-p1-img', content.workP1Img || '');
-        const prev1 = document.getElementById('cms-preview-work-p1-img');
-        if (prev1 && content.workP1Img) prev1.src = content.workP1Img;
-        setVal('cms-input-work-p1-title', content.workP1Title || '');
-        setVal('cms-input-work-p1-summary', content.workP1Summary || '');
-
-        setVal('cms-input-work-p2-img', content.workP2Img || '');
-        const prev2 = document.getElementById('cms-preview-work-p2-img');
-        if (prev2 && content.workP2Img) prev2.src = content.workP2Img;
-        setVal('cms-input-work-p2-title', content.workP2Title || '');
-        setVal('cms-input-work-p2-summary', content.workP2Summary || '');
-
-        setVal('cms-input-work-p3-img', content.workP3Img || '');
-        const prev3 = document.getElementById('cms-preview-work-p3-img');
-        if (prev3 && content.workP3Img) prev3.src = content.workP3Img;
-        setVal('cms-input-work-p3-title', content.workP3Title || '');
-        setVal('cms-input-work-p3-summary', content.workP3Summary || '');
-    }
-
-    // Render Editable Services Cards inside CMS
-    let currentCmsServices = [];
-
-    function renderCmsServicesEditor(services) {
-        currentCmsServices = Array.isArray(services) ? [...services] : [...DEFAULT_SERVICES];
-        const container = document.getElementById('cms-services-container');
-        if (!container) return;
-
-        container.innerHTML = currentCmsServices.map((s, idx) => `
-            <div class="cms-service-edit-card" data-service-idx="${idx}">
-                <div class="cms-service-edit-head">
-                    <span class="badge-service-num">Service #${idx + 1}</span>
-                    <button type="button" class="btn-remove-service" data-remove-idx="${idx}" title="Remove Service" style="background:rgba(239,68,68,0.12); color:#f87171; border:1px solid rgba(239,68,68,0.25); border-radius:6px; padding:3px 8px; font-size:11px; cursor:pointer;">
-                        ✕ Remove
-                    </button>
-                </div>
-                <div class="form-group" style="margin-bottom:8px;">
-                    <label class="form-label" style="font-size:11px;">Service Title</label>
-                    <input type="text" class="form-input cms-srv-title" value="${escapeHtml(s.title || '')}" placeholder="e.g. B2B Lead Generation" />
-                </div>
-                <div class="form-group" style="margin-bottom:8px;">
-                    <label class="form-label" style="font-size:11px;">Description</label>
-                    <textarea class="form-input cms-srv-desc" rows="2" placeholder="Describe the service outcome...">${escapeHtml(s.desc || '')}</textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" style="font-size:11px;">Feature Tags (separated by ·)</label>
-                    <input type="text" class="form-input cms-srv-tags" value="${escapeHtml(s.tags || '')}" placeholder="Validated Contacts · Targeted Personas · CRM Ready" />
-                </div>
-            </div>
-        `).join('');
-
-        // Attach remove event handlers
-        container.querySelectorAll('.btn-remove-service').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const removeIdx = parseInt(btn.getAttribute('data-remove-idx'), 10);
-                if (!isNaN(removeIdx)) {
-                    // Update from current input state before removing
-                    const updated = [];
-                    container.querySelectorAll('.cms-service-edit-card').forEach((card, i) => {
-                        if (i !== removeIdx) {
-                            updated.push({
-                                title: card.querySelector('.cms-srv-title')?.value || '',
-                                desc: card.querySelector('.cms-srv-desc')?.value || '',
-                                tags: card.querySelector('.cms-srv-tags')?.value || ''
-                            });
-                        }
-                    });
-                    renderCmsServicesEditor(updated);
-                    showNotificationToast('Service card removed.');
-                }
-            });
-        });
-    }
-
-    // Add New Service button in CMS
-    const btnCmsAddService = document.getElementById('btn-cms-add-service');
-    if (btnCmsAddService) {
-        btnCmsAddService.addEventListener('click', (e) => {
-            e.preventDefault();
-            const container = document.getElementById('cms-services-container');
-            const updated = [];
-            if (container) {
-                container.querySelectorAll('.cms-service-edit-card').forEach(card => {
-                    updated.push({
-                        title: card.querySelector('.cms-srv-title')?.value || '',
-                        desc: card.querySelector('.cms-srv-desc')?.value || '',
-                        tags: card.querySelector('.cms-srv-tags')?.value || ''
-                    });
-                });
-            }
-            updated.push({
-                title: 'New Specialized Service',
-                desc: 'High precision data intelligence, custom automation scripts, and targeted prospect delivery.',
-                tags: 'Custom Solution · Verified Quality · High Accuracy'
-            });
-            renderCmsServicesEditor(updated);
-            showNotificationToast('New service card added.');
-        });
-    }
-
-    // Collect Current Values from CMS Form
-    function collectCmsFormData() {
-        const getVal = (id) => (document.getElementById(id)?.value || '').trim();
-
-        // Collect services
-        const serviceCards = document.querySelectorAll('.cms-service-edit-card');
-        const services = [];
-        serviceCards.forEach(card => {
-            const title = (card.querySelector('.cms-srv-title')?.value || '').trim();
-            const desc = (card.querySelector('.cms-srv-desc')?.value || '').trim();
-            const tags = (card.querySelector('.cms-srv-tags')?.value || '').trim();
-            if (title || desc) {
-                services.push({ title, desc, tags });
-            }
-        });
-
-        return {
-            fullName: getVal('cms-input-fullname') || DEFAULT_SITE_CONTENT.fullName,
-            availability: getVal('cms-input-availability') || DEFAULT_SITE_CONTENT.availability,
-            badgeRole1: getVal('cms-input-role1') || DEFAULT_SITE_CONTENT.badgeRole1,
-            badgeRole2: getVal('cms-input-role2') || DEFAULT_SITE_CONTENT.badgeRole2,
-            badgeLoc: getVal('cms-input-location') || DEFAULT_SITE_CONTENT.badgeLoc,
-
-            heroLine1: getVal('cms-input-hero-line1') || DEFAULT_SITE_CONTENT.heroLine1,
-            heroMark: getVal('cms-input-hero-mark') || DEFAULT_SITE_CONTENT.heroMark,
-            heroLead: getVal('cms-input-hero-lead') || DEFAULT_SITE_CONTENT.heroLead,
-            heroProof: getVal('cms-input-hero-proof') || DEFAULT_SITE_CONTENT.heroProof,
-            heroPhoto: getVal('cms-input-hero-photo') || DEFAULT_SITE_CONTENT.heroPhoto,
-
-            aboutBio: getVal('cms-input-about-bio') || DEFAULT_SITE_CONTENT.aboutBio,
-            aboutDegree: getVal('cms-input-about-degree') || DEFAULT_SITE_CONTENT.aboutDegree,
-            aboutInst: getVal('cms-input-about-inst') || DEFAULT_SITE_CONTENT.aboutInst,
-            aboutEduYears: getVal('cms-input-about-years') || DEFAULT_SITE_CONTENT.aboutEduYears,
-            statYears: getVal('cms-input-stat-years') || DEFAULT_SITE_CONTENT.statYears,
-            statProjects: getVal('cms-input-stat-projects') || DEFAULT_SITE_CONTENT.statProjects,
-            statQuality: getVal('cms-input-stat-quality') || DEFAULT_SITE_CONTENT.statQuality,
-            statClients: getVal('cms-input-stat-clients') || DEFAULT_SITE_CONTENT.statClients,
-
-            services: services.length > 0 ? services : DEFAULT_SERVICES,
-
-            pipeHeadline: getVal('cms-input-pipe-headline') || DEFAULT_SITE_CONTENT.pipeHeadline,
-            pipeCard1Sub: getVal('cms-input-pipe-card1') || DEFAULT_SITE_CONTENT.pipeCard1Sub,
-            pipeCard2Sub: getVal('cms-input-pipe-card2') || DEFAULT_SITE_CONTENT.pipeCard2Sub,
-            pipeCard3Sub: getVal('cms-input-pipe-card3') || DEFAULT_SITE_CONTENT.pipeCard3Sub,
-            quoteText: getVal('cms-input-quote-text') || DEFAULT_SITE_CONTENT.quoteText,
-            quoteAuthor: getVal('cms-input-quote-author') || DEFAULT_SITE_CONTENT.quoteAuthor,
-
-            contactHeadline: getVal('cms-input-contact-headline') || DEFAULT_SITE_CONTENT.contactHeadline,
-            contactSub: getVal('cms-input-contact-sub') || DEFAULT_SITE_CONTENT.contactSub,
-            contactEmail: getVal('cms-input-contact-email') || DEFAULT_SITE_CONTENT.contactEmail,
-            contactWhatsapp: getVal('cms-input-contact-whatsapp') || DEFAULT_SITE_CONTENT.contactWhatsapp,
-            contactLinkedin: getVal('cms-input-contact-linkedin') || DEFAULT_SITE_CONTENT.contactLinkedin,
-            contactGithub: getVal('cms-input-contact-github') || DEFAULT_SITE_CONTENT.contactGithub,
-            contactFacebook: getVal('cms-input-contact-facebook') || DEFAULT_SITE_CONTENT.contactFacebook,
-            contactLocation: getVal('cms-input-contact-location') || DEFAULT_SITE_CONTENT.contactLocation,
-
-            // Work Projects & Images
-            workP1Img: getVal('cms-input-work-p1-img') || DEFAULT_SITE_CONTENT.workP1Img,
-            workP1Title: getVal('cms-input-work-p1-title') || DEFAULT_SITE_CONTENT.workP1Title,
-            workP1Summary: getVal('cms-input-work-p1-summary') || DEFAULT_SITE_CONTENT.workP1Summary,
-
-            workP2Img: getVal('cms-input-work-p2-img') || DEFAULT_SITE_CONTENT.workP2Img,
-            workP2Title: getVal('cms-input-work-p2-title') || DEFAULT_SITE_CONTENT.workP2Title,
-            workP2Summary: getVal('cms-input-work-p2-summary') || DEFAULT_SITE_CONTENT.workP2Summary,
-
-            workP3Img: getVal('cms-input-work-p3-img') || DEFAULT_SITE_CONTENT.workP3Img,
-            workP3Title: getVal('cms-input-work-p3-title') || DEFAULT_SITE_CONTENT.workP3Title,
-            workP3Summary: getVal('cms-input-work-p3-summary') || DEFAULT_SITE_CONTENT.workP3Summary
-        };
-    }
-
-    // Sync Site Content from Supabase Cloud Database (site_content table)
-    async function syncSiteContentFromSupabase() {
-        if (!supabase) return;
-        try {
-            const { data, error } = await supabase
-                .from('site_content')
-                .select('*')
-                .eq('id', 'site_config_v1')
-                .maybeSingle();
-
-            if (error) {
-                console.error('Supabase site_content query error:', error);
-                showNotificationToast(`Supabase Error: ${error.message}`);
-                return;
-            }
-
-            if (data) {
-                let remoteConfig = null;
-                if (data.content && typeof data.content === 'object') {
-                    remoteConfig = data.content;
-                } else if (data.file_name) {
-                    try {
-                        remoteConfig = JSON.parse(data.file_name);
-                    } catch (e) {}
-                }
-                if (!remoteConfig && Array.isArray(data.sample_rows) && data.sample_rows[0]) {
-                    remoteConfig = data.sample_rows[0];
-                }
-
-                if (remoteConfig && typeof remoteConfig === 'object') {
-                    inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...remoteConfig };
-                    applySiteContentToDOM(inMemorySiteContent);
-                    populateCmsForm(inMemorySiteContent);
-                    console.log('✓ Site content directly synchronized from Supabase (site_content)');
-                }
-            }
-        } catch (err) {
-            console.error('Supabase site_content sync exception:', err);
-            showNotificationToast(`Sync Error: ${err.message}`);
-        }
-    }
-
-    // Push Site Content to Supabase Database (site_content table)
-    async function pushSiteContentToSupabase(content) {
-        if (!supabase) {
-            showNotificationToast('Database Error: Supabase client not initialized');
-            return { success: false, error: 'Supabase client not initialized' };
-        }
-        try {
-            const payload = {
-                id: 'site_config_v1',
-                content: content,
-                file_name: JSON.stringify(content),
-                updated_at: new Date().toISOString()
-            };
-
-            const { data, error } = await supabase
-                .from('site_content')
-                .upsert(payload, { onConflict: 'id' });
-
-            if (error) {
-                console.error('Supabase site_content save error:', error);
-                return { success: false, error: error.message };
-            }
-
-            inMemorySiteContent = { ...DEFAULT_SITE_CONTENT, ...content };
-            console.log('✓ Site content saved directly to Supabase site_content table');
-            return { success: true, data };
-        } catch (err) {
-            console.error('Supabase site_content save exception:', err);
-            return { success: false, error: err.message };
-        }
-    }
+    // Website copy is statically authored in the code (index.html) and never overwritten
+    function applySiteContentToDOM() {}
+    function updateDynamicSeoMetadata() {}
+    function renderServicesBoard() {}
+    function populateCmsForm() {}
+    function collectCmsFormData() { return {}; }
+    async function syncSiteContentFromSupabase() {}
+    async function pushSiteContentToSupabase() { return { success: true }; }
 
     // Router: Switch between Main Portfolio, Leads Sample Page, and Admin CMS
     const portfolioView = document.getElementById('portfolio-main-view');
@@ -1530,26 +943,20 @@ const CASE_STUDIES = {
 
     function handleRouting() {
         const hash = window.location.hash || '';
-        const isSamplesPage = hash.startsWith('#leads-samples');
         const isAdminPage = hash.startsWith('#admin') || hash === '#cms' || hash === '#admin-cms';
 
         if (isAdminPage) {
             if (!isAdminLoggedIn()) {
-                // Strict Security: Hide CMS view completely from unauthenticated visitors
                 if (adminCmsView) {
                     adminCmsView.style.display = 'none';
                     adminCmsView.setAttribute('aria-hidden', 'true');
                 }
                 if (portfolioView) portfolioView.style.display = 'block';
-                if (leadsSamplesView) {
-                    leadsSamplesView.style.display = 'none';
-                    leadsSamplesView.setAttribute('aria-hidden', 'true');
-                }
                 if (navLinkAdmin) navLinkAdmin.classList.remove('active');
                 if (footerLinkAdmin) footerLinkAdmin.classList.remove('active');
-                if (navLinkSamples) navLinkSamples.classList.remove('active');
 
-                // Prompt user to enter admin password
+                if (adminLoginError) adminLoginError.style.display = 'none';
+                if (adminPasswordInput) adminPasswordInput.value = '';
                 openModal('admin-login-modal');
                 if (adminPasswordInput) {
                     setTimeout(() => adminPasswordInput.focus(), 80);
@@ -1559,54 +966,45 @@ const CASE_STUDIES = {
 
             // Authenticated: reveal Admin CMS View
             if (portfolioView) portfolioView.style.display = 'none';
-            if (leadsSamplesView) {
-                leadsSamplesView.style.display = 'none';
-                leadsSamplesView.setAttribute('aria-hidden', 'true');
-            }
             if (adminCmsView) {
                 adminCmsView.style.display = 'block';
                 adminCmsView.setAttribute('aria-hidden', 'false');
             }
             if (navLinkAdmin) navLinkAdmin.classList.add('active');
             if (footerLinkAdmin) footerLinkAdmin.classList.add('active');
-            if (navLinkSamples) navLinkSamples.classList.remove('active');
 
-            // Ensure an active CMS tab panel is visible
-            const activePanel = document.querySelector('.cms-tab-content.active');
-            if (!activePanel) {
-                const firstPanel = document.getElementById('cms-tab-profile');
-                if (firstPanel) firstPanel.classList.add('active');
-                const firstBtn = document.querySelector('.cms-nav-btn[data-tab="cms-tab-profile"]');
-                if (firstBtn) firstBtn.classList.add('active');
-            }
+            // Default to projects tab
+            const projectsBtn = document.querySelector('.cms-nav-btn[data-tab="cms-tab-projects"]');
+            const projectsPanel = document.getElementById('cms-tab-projects');
+            document.querySelectorAll('.cms-nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.cms-tab-content').forEach(p => p.classList.remove('active'));
+            if (projectsBtn) projectsBtn.classList.add('active');
+            if (projectsPanel) projectsPanel.classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            populateCmsForm(getSiteContent());
+            loadAdminProjects();
             if (typeof renderCmsInbox === 'function') {
                 renderCmsInbox(true);
             }
-        } else if (isSamplesPage) {
-            window.location.hash = '#projects';
-            return;
         } else {
+            // Public portfolio view - leaving admin immediately revokes authentication
+            setAdminAuth(false);
             if (portfolioView) portfolioView.style.display = 'block';
-            if (leadsSamplesView) {
-                leadsSamplesView.style.display = 'none';
-                leadsSamplesView.setAttribute('aria-hidden', 'true');
-            }
             if (adminCmsView) {
                 adminCmsView.style.display = 'none';
                 adminCmsView.setAttribute('aria-hidden', 'true');
             }
-            if (navLinkSamples) navLinkSamples.classList.remove('active');
             if (navLinkAdmin) navLinkAdmin.classList.remove('active');
             if (footerLinkAdmin) footerLinkAdmin.classList.remove('active');
 
-            if (hash && hash !== '#') {
+            if (hash && hash !== '#' && hash !== '#projects') {
                 const target = document.querySelector(hash);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
+            } else if (hash === '#projects') {
+                const projSec = document.getElementById('projects');
+                if (projSec) projSec.scrollIntoView({ behavior: 'smooth' });
             }
         }
     }
@@ -1633,116 +1031,13 @@ const CASE_STUDIES = {
         });
     });
 
-    // Preset Hero Images Buttons in CMS
-    document.querySelectorAll('[data-cms-hero-img]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const imgPath = btn.getAttribute('data-cms-hero-img');
-            const heroInput = document.getElementById('cms-input-hero-photo');
-            if (heroInput && imgPath) {
-                heroInput.value = imgPath;
-                if (typeof window.updatePuzzleHeroImage === 'function') {
-                    window.updatePuzzleHeroImage(imgPath);
-                }
-                showNotificationToast('Hero image selected.');
-            }
-        });
-    });
-
-    // Save All CMS Changes Handler (Works from topbar, panel footers, and floating bar)
-    async function executeCmsSave() {
-        if (!isAdminLoggedIn()) {
-            showNotificationToast('🔒 Access denied. Please sign in with admin password.');
-            openModal('admin-login-modal');
-            return;
-        }
-
-        const updated = collectCmsFormData();
-        const allSaveBtns = document.querySelectorAll('.btn-cms-save, .btn-cms-save-trigger');
-
-        allSaveBtns.forEach(btn => {
-            btn.disabled = true;
-            btn.setAttribute('data-orig-html', btn.innerHTML);
-            btn.innerHTML = `
-                <svg class="spin-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="2" x2="12" y2="6"></line>
-                    <line x1="12" y1="18" x2="12" y2="22"></line>
-                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                    <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                    <line x1="2" y1="12" x2="6" y2="12"></line>
-                    <line x1="18" y1="12" x2="22" y2="12"></line>
-                </svg>
-                <span>Saving to Supabase...</span>
-            `;
-        });
-
-        // Save locally & update live DOM immediately
-        saveSiteContentLocal(updated);
-        applySiteContentToDOM(updated);
-
-        // Persist directly to Supabase Cloud Database via server API
-        const saveRes = await pushSiteContentToSupabase(updated);
-
-        allSaveBtns.forEach(btn => {
-            btn.disabled = false;
-            btn.innerHTML = saveRes.success ? `
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span>Saved to Supabase ✓</span>
-            ` : `
-                <span>Save Error ⚠️</span>
-            `;
-        });
-
-        if (saveRes.success) {
-            showNotificationToast('Website changes saved directly to Supabase (site_content) ✓');
-        } else {
-            showNotificationToast(`Database Error: ${saveRes.error}`);
-        }
-
-        setTimeout(() => {
-            allSaveBtns.forEach(btn => {
-                const orig = btn.getAttribute('data-orig-html');
-                if (orig) btn.innerHTML = orig;
-            });
-        }, 3500);
+    // Topbar Add Project Button
+    const btnAdminAddProjectTop = document.getElementById('btn-admin-add-project-top');
+    if (btnAdminAddProjectTop) {
+        btnAdminAddProjectTop.addEventListener('click', () => openProjectEditor(null));
     }
 
-    // Attach click listeners to all CMS save buttons
-    document.addEventListener('click', (e) => {
-        const saveBtn = e.target.closest('#btn-cms-save-all, #btn-cms-floating-save, .btn-cms-save-trigger');
-        if (saveBtn) {
-            e.preventDefault();
-            executeCmsSave();
-            return;
-        }
-
-        const resetBtn = e.target.closest('#btn-cms-reset-defaults, #btn-cms-floating-reset, .btn-cms-reset-trigger');
-        if (resetBtn) {
-            e.preventDefault();
-            if (confirm('Are you sure you want to reset the website content back to standard default values?')) {
-                saveSiteContentLocal(DEFAULT_SITE_CONTENT);
-                applySiteContentToDOM(DEFAULT_SITE_CONTENT);
-                populateCmsForm(DEFAULT_SITE_CONTENT);
-                pushSiteContentToSupabase(DEFAULT_SITE_CONTENT);
-                showNotificationToast('Default portfolio content restored and synced.');
-            }
-        }
-    });
-
-    // Keyboard Shortcut: Ctrl + S / Cmd + S to save CMS changes
-    window.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-            const hash = window.location.hash || '';
-            const isAdminPage = hash.startsWith('#admin') || hash === '#cms' || hash === '#admin-cms';
-            if (isAdminPage) {
-                e.preventDefault();
-                executeCmsSave();
-            }
-        }
-    });
-
-    // CMS Logout Button
+    // CMS Logout Button: explicitly de-authenticate and return to home
     const btnCmsLogout = document.getElementById('btn-cms-logout');
     if (btnCmsLogout) {
         btnCmsLogout.addEventListener('click', () => {
@@ -1752,14 +1047,32 @@ const CASE_STUDIES = {
         });
     }
 
-    // CMS Back to Home Button
+    // CMS Back to Home Button: locks admin session and returns to public website
     const btnCmsBackHome = document.getElementById('btn-cms-back-home');
     if (btnCmsBackHome) {
         btnCmsBackHome.addEventListener('click', (e) => {
             e.preventDefault();
+            setAdminAuth(false);
             window.location.hash = '#hero';
+            showNotificationToast('Exited Admin Mode. Returned to website.');
         });
     }
+
+    // Explicit Admin triggers: clicking Admin ALWAYS prompts for password every time
+    document.querySelectorAll('a[href="#admin"], #footer-link-admin, #nav-link-admin').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Strictly reset authorization so password is required every single time
+            setAdminAuth(false);
+            window.location.hash = '#admin';
+            if (adminLoginError) adminLoginError.style.display = 'none';
+            if (adminPasswordInput) adminPasswordInput.value = '';
+            openModal('admin-login-modal');
+            if (adminPasswordInput) {
+                setTimeout(() => adminPasswordInput.focus(), 80);
+            }
+        });
+    });
 
     // Wire Hero button to route to #leads-samples
     const heroBtnSamples = document.getElementById('hero-btn-leads-sample');
@@ -1984,22 +1297,23 @@ const CASE_STUDIES = {
         closeModal('admin-login-modal');
         if (adminLoginError) adminLoginError.style.display = 'none';
         if (adminPasswordInput) adminPasswordInput.value = '';
+        setAdminAuth(false);
 
-        if (!isAdminLoggedIn()) {
-            const hash = window.location.hash || '';
-            const isAdminRoute = hash.startsWith('#admin') || hash === '#cms' || hash === '#admin-cms' || hash === '#leads-samples/admin' || hash === '#leads-samples-admin';
-            if (isAdminRoute) {
-                // Return to home view immediately so admin CMS is never exposed
-                window.location.hash = '#hero';
-            } else {
-                handleRouting();
-            }
+        const hash = window.location.hash || '';
+        const isAdminRoute = hash.startsWith('#admin') || hash === '#cms' || hash === '#admin-cms' || hash === '#leads-samples/admin' || hash === '#leads-samples-admin';
+        if (isAdminRoute) {
+            // Return to home view immediately so admin CMS is never exposed
+            window.location.hash = '#hero';
+        } else {
+            handleRouting();
         }
     }
 
     if (btnOpenAdminLogin) {
         btnOpenAdminLogin.addEventListener('click', () => {
+            setAdminAuth(false);
             if (adminLoginError) adminLoginError.style.display = 'none';
+            if (adminPasswordInput) adminPasswordInput.value = '';
             openModal('admin-login-modal');
             if (adminPasswordInput) {
                 setTimeout(() => adminPasswordInput.focus(), 80);
@@ -2047,6 +1361,7 @@ const CASE_STUDIES = {
                     if (adminLoginError) adminLoginError.style.display = 'none';
                     if (adminPasswordInput) adminPasswordInput.value = '';
                     showNotificationToast('Signed in successfully as Admin (Master Passcode) ✓');
+                    window.location.hash = '#admin';
                     handleRouting();
                     loadAdminProjects();
                     return;
@@ -2105,6 +1420,7 @@ const CASE_STUDIES = {
                     if (adminLoginError) adminLoginError.style.display = 'none';
                     if (adminPasswordInput) adminPasswordInput.value = '';
                     showNotificationToast('Signed in successfully as Admin (Supabase Auth) ✓');
+                    window.location.hash = '#admin';
                     handleRouting();
                     loadAdminProjects();
                     return;
@@ -2662,14 +1978,178 @@ const CASE_STUDIES = {
         });
     }
 
-    // 2. Admin Projects Management
+    // 2. Admin Projects Management & Supabase SQL Schema
+    const SUPABASE_SETUP_SQL = `-- 1. Create Projects Table (stores all automation portfolio projects)
+create table if not exists public.projects (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text not null,
+  tags text[] not null default '{}',
+  github_url text,
+  video_url text,
+  thumbnail_url text,
+  is_featured boolean not null default false,
+  is_published boolean not null default true,
+  sort_order int not null default 0,
+  created_at timestamptz not null default now()
+);
+
+-- 2. Create Admins Table
+create table if not exists public.admins (
+  user_id uuid primary key references auth.users(id) on delete cascade
+);
+
+-- 3. Create Messages Table for Client Inquiries
+create table if not exists public.messages (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  email text not null,
+  service text,
+  budget text,
+  timeline text,
+  message text not null,
+  status text not null default 'unread',
+  created_at timestamptz not null default now()
+);
+
+-- 4. Enable Row Level Security (RLS)
+alter table public.projects enable row level security;
+alter table public.admins enable row level security;
+alter table public.messages enable row level security;
+
+-- 5. Projects RLS Policies
+drop policy if exists "Public reads published projects" on public.projects;
+create policy "Public reads published projects"
+  on public.projects for select
+  using (is_published = true);
+
+drop policy if exists "Admins read all projects" on public.projects;
+create policy "Admins read all projects"
+  on public.projects for select
+  using (true);
+
+drop policy if exists "Admins manage projects" on public.projects;
+create policy "Admins manage projects"
+  on public.projects for all
+  using (true)
+  with check (true);
+
+-- 6. Admins Table Policy
+drop policy if exists "Admin reads own admin row" on public.admins;
+create policy "Admin reads own admin row"
+  on public.admins for select to authenticated
+  using (auth.uid() = user_id);
+
+-- 7. Messages Table Policies
+drop policy if exists "Allow public insert messages" on public.messages;
+create policy "Allow public insert messages"
+  on public.messages for insert
+  with check (true);
+
+drop policy if exists "Allow admin read messages" on public.messages;
+create policy "Allow admin read messages"
+  on public.messages for select
+  using (true);
+
+drop policy if exists "Allow admin update messages" on public.messages;
+create policy "Allow admin update messages"
+  on public.messages for update
+  using (true);
+
+drop policy if exists "Allow admin delete messages" on public.messages;
+create policy "Allow admin delete messages"
+  on public.messages for delete
+  using (true);
+
+-- 8. Storage Bucket for Video & Media (50 MB limit, public read)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'project-media',
+  'project-media',
+  true,
+  52428800,
+  array['video/mp4', 'video/webm', 'image/jpeg', 'image/png', 'image/webp', 'image/gif']
+)
+on conflict (id) do update set
+  public = true,
+  file_size_limit = 52428800;
+
+-- 9. Storage Policies for project-media bucket
+drop policy if exists "Public reads project media" on storage.objects;
+create policy "Public reads project media"
+  on storage.objects for select
+  using (bucket_id = 'project-media');
+
+drop policy if exists "Allow upload project media" on storage.objects;
+create policy "Allow upload project media"
+  on storage.objects for insert
+  with check (bucket_id = 'project-media');
+
+drop policy if exists "Allow manage project media" on storage.objects;
+create policy "Allow manage project media"
+  on storage.objects for all
+  using (bucket_id = 'project-media');
+
+-- 10. Refresh schema cache
+notify pgrst, 'reload schema';`;
+
     let allAdminProjects = [];
 
+    // Initialize SQL UI Helpers
+    function initSupabaseSqlHelpers() {
+        const sqlTextarea = document.getElementById('supabase-full-sql-code');
+        if (sqlTextarea && !sqlTextarea.value) {
+            sqlTextarea.value = SUPABASE_SETUP_SQL;
+        }
+
+        const copyBtn = document.getElementById('btn-copy-supabase-sql');
+        if (copyBtn && !copyBtn.dataset.bound) {
+            copyBtn.dataset.bound = 'true';
+            copyBtn.addEventListener('click', () => {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(SUPABASE_SETUP_SQL).then(() => {
+                        showNotificationToast('✓ SQL Setup Script copied to clipboard! Paste in Supabase SQL editor.');
+                    }).catch(() => {
+                        showNotificationToast('Please copy the SQL code shown in the box.');
+                    });
+                } else if (sqlTextarea) {
+                    sqlTextarea.select();
+                    document.execCommand('copy');
+                    showNotificationToast('✓ SQL Setup Script copied!');
+                }
+            });
+        }
+
+        const toggleBtn = document.getElementById('btn-toggle-sql-code');
+        const previewWrap = document.getElementById('sql-code-preview-wrap');
+        if (toggleBtn && previewWrap && !toggleBtn.dataset.bound) {
+            toggleBtn.dataset.bound = 'true';
+            toggleBtn.addEventListener('click', () => {
+                const isHidden = previewWrap.style.display === 'none' || !previewWrap.style.display;
+                previewWrap.style.display = isHidden ? 'block' : 'none';
+                toggleBtn.textContent = isHidden ? 'Hide SQL Script' : 'View SQL Script';
+            });
+        }
+
+        const checkBtn = document.getElementById('btn-check-projects-db');
+        if (checkBtn && !checkBtn.dataset.bound) {
+            checkBtn.dataset.bound = 'true';
+            checkBtn.addEventListener('click', () => {
+                showNotificationToast('Refreshing Supabase projects database...');
+                loadAdminProjects();
+            });
+        }
+    }
+
     async function loadAdminProjects() {
+        initSupabaseSqlHelpers();
         const container = document.getElementById('admin-projects-list-container');
         if (!container) return;
 
         if (!isAdminLoggedIn()) return;
+
+        const dot = document.getElementById('db-status-indicator-dot');
+        const statusText = document.getElementById('db-status-title-text');
 
         try {
             if (!supabase) {
@@ -2684,12 +2164,64 @@ const CASE_STUDIES = {
                 .order('created_at', { ascending: false });
 
             if (error) {
+                if (dot) {
+                    dot.style.background = '#ef4444';
+                    dot.style.boxShadow = '0 0 8px #ef4444';
+                }
+                if (statusText) {
+                    statusText.textContent = "Supabase Table 'projects' Not Created Yet";
+                }
+
                 container.innerHTML = `
-                    <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:14px; color:#ef4444; font-size:13px;">
-                        Error loading projects: ${escapeHtml(error.message)}. Please ensure you ran the SQL setup script in Supabase SQL editor.
+                    <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); border-radius:10px; padding:22px; color:var(--ink);">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                            <span style="font-size:20px;">⚠️</span>
+                            <h3 style="font-size:16px; font-weight:700; color:#ef4444; margin:0;">Supabase Database Table 'projects' Not Found</h3>
+                        </div>
+                        <p style="font-size:13.5px; line-height:1.6; color:var(--ink-2); margin-bottom:16px;">
+                            The project and video storage tables have not been created yet in your Supabase project (<strong>voixkvyylglpomahowrl</strong>).<br />
+                            Click <strong>"Copy SQL Setup Script"</strong> above, open the Supabase SQL Editor, paste the code, and click <strong>Run</strong>.
+                        </p>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button type="button" class="btn-cms-save" id="btn-quick-copy-sql" style="padding:8px 16px; font-size:13px; font-weight:700; background:var(--accent); color:#000;">
+                                📋 Copy SQL Setup Script
+                            </button>
+                            <a href="https://supabase.com/dashboard/project/voixkvyylglpomahowrl/sql/new" target="_blank" rel="noopener noreferrer" class="btn-cms-secondary" style="padding:8px 16px; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
+                                Open Supabase SQL Editor ↗
+                            </a>
+                            <button type="button" class="btn-cms-secondary" id="btn-quick-refresh-sql" style="padding:8px 16px; font-size:13px;">
+                                🔄 Check Connection Again
+                            </button>
+                        </div>
                     </div>
                 `;
+
+                const quickCopy = document.getElementById('btn-quick-copy-sql');
+                if (quickCopy) {
+                    quickCopy.addEventListener('click', () => {
+                        navigator.clipboard.writeText(SUPABASE_SETUP_SQL).then(() => {
+                            showNotificationToast('✓ SQL Script Copied! Paste into Supabase SQL Editor and click Run.');
+                        });
+                    });
+                }
+
+                const quickRefresh = document.getElementById('btn-quick-refresh-sql');
+                if (quickRefresh) {
+                    quickRefresh.addEventListener('click', () => {
+                        showNotificationToast('Checking database connection...');
+                        loadAdminProjects();
+                    });
+                }
                 return;
+            }
+
+            // Successfully connected
+            if (dot) {
+                dot.style.background = '#10b981';
+                dot.style.boxShadow = '0 0 8px #10b981';
+            }
+            if (statusText) {
+                statusText.textContent = `Supabase Database & Storage Connected (${(projects || []).length} projects)`;
             }
 
             allAdminProjects = projects || [];
@@ -3536,7 +3068,7 @@ const CASE_STUDIES = {
             const dateStr = item.created_at ? new Date(item.created_at).toLocaleString() : 'Recent';
             const cleanEmail = escapeHtml(item.email || '');
             const cleanName = escapeHtml(item.name || 'Client');
-            const cleanType = escapeHtml(item.project_type || 'General Lead Inquiry');
+            const cleanType = escapeHtml(item.project_type || 'General Project Inquiry');
             const cleanMsg = escapeHtml(item.message || '');
             const refId = escapeHtml(String(item.id || ('MSG-' + idx)));
 
@@ -3756,15 +3288,21 @@ const CASE_STUDIES = {
     // Expose for contact form
     window.refreshAdminInbox = () => renderCmsInbox(true);
 
-    // Initialize UI, Database Sync, and Router
+    // Initialize UI, Database Sync, and Router - Always initialize in locked state
+    try {
+        localStorage.removeItem('ibrahim_leads_site_content');
+        localStorage.removeItem('ibrahim_site_content');
+        localStorage.removeItem('ibrahim_leads_admin_auth');
+        localStorage.removeItem('ibrahim_admin_auth');
+        localStorage.removeItem('ibrahim_automation_admin_auth');
+        sessionStorage.removeItem('ibrahim_automation_admin_auth');
+        sessionStorage.removeItem('ibrahim_leads_admin_auth');
+        inMemoryAdminAuth = false;
+    } catch (e) {}
+
     updateAdminBarUI();
-    applySiteContentToDOM();
-    populateCmsForm();
-    renderSamples();
     renderCmsInbox();
     pingSupabaseDatabase();
-    syncFromSupabase();
-    syncSiteContentFromSupabase();
     window.addEventListener('hashchange', handleRouting);
     handleRouting();
 })();

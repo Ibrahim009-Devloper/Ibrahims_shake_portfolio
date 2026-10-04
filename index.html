@@ -185,7 +185,7 @@
             <div class="nav-actions">
                 <ul class="nav-links" role="list">
                     <li><a href="#hero"><span>Home</span></a></li>
-                    <li><a href="#projects" id="nav-link-leads-samples"><span>Work</span></a></li>
+                    <li><a href="#projects" id="nav-link-leads-samples"><span>Projects</span></a></li>
                     <li><a href="#motion"><span>Automation</span></a></li>
                     <li><a href="#personal"><span>Services</span></a></li>
                     <li><a href="#about"><span>About</span></a></li>
@@ -645,7 +645,7 @@
     </footer>
     </main><!-- /portfolio-main-view -->
 
-    <!-- ── ADMIN CMS VIEW (FULL WEBSITE EDITOR) ── -->
+    <!-- ── ADMIN CMS VIEW (PROJECTS & INBOX MANAGER) ── -->
     <div id="admin-cms-view" class="admin-cms-view" style="display:none;" aria-hidden="true">
         <!-- CMS Topbar -->
         <div class="cms-topbar">
@@ -660,7 +660,7 @@
                 <div class="leads-breadcrumb">
                     <span>Admin Control Center</span>
                     <span class="leads-breadcrumb-sep">/</span>
-                    <span class="leads-breadcrumb-current">Website Content &amp; Database CMS</span>
+                    <span class="leads-breadcrumb-current">Projects &amp; Inbox Manager</span>
                 </div>
             </div>
 
@@ -669,20 +669,12 @@
                     <span class="db-dot"></span>
                     <span id="cms-db-status-text">Supabase DB Live</span>
                 </span>
-                <button type="button" class="btn-cms-secondary" id="btn-cms-reset-defaults" title="Restore default portfolio text">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                        <path d="M3 3v5h5"></path>
+                <button type="button" class="btn-cms-save" id="btn-admin-add-project-top" style="background:var(--accent); color:#000; font-weight:700;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
-                    <span>Reset Defaults</span>
-                </button>
-                <button type="button" class="btn-cms-save" id="btn-cms-save-all">
-                    <svg id="cms-save-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                        <polyline points="7 3 7 8 15 8"></polyline>
-                    </svg>
-                    <span id="cms-save-btn-text">Save Changes to Database</span>
+                    <span>+ Add New Project</span>
                 </button>
                 <button type="button" class="btn-admin-logout" id="btn-cms-logout" title="Exit Admin Mode">
                     <span>Logout</span>
@@ -696,12 +688,6 @@
             <aside class="cms-sidebar" aria-label="CMS Sections">
                 <ul class="cms-nav-list" role="tablist">
                     <li><button type="button" class="cms-nav-btn active" data-tab="cms-tab-projects"><span>🚀</span> Projects Manager (Supabase)</button></li>
-                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-profile"><span>🏷️</span> Profile &amp; Header</button></li>
-                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-hero"><span>⚡</span> Hero &amp; Tech Stack</button></li>
-                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-about"><span>👤</span> About Me &amp; Stats</button></li>
-                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-services"><span>💼</span> Services &amp; Skills</button></li>
-                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-pipeline"><span>🔄</span> Automation &amp; Tooling</button></li>
-                    <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-contact"><span>📬</span> Contact &amp; Socials</button></li>
                     <li><button type="button" class="cms-nav-btn" data-tab="cms-tab-inbox"><span>💬</span> Client Inquiries (Database) <span id="cms-inbox-counter-badge" class="badge-pill" style="display:none; margin-left:6px; background:#10b981; color:#fff; font-size:11px; padding:2px 7px; border-radius:10px;">0</span></button></li>
                 </ul>
             </aside>
@@ -726,7 +712,40 @@
                             </button>
                         </header>
 
-                        <div id="admin-projects-status-banner"></div>
+                        <div id="admin-projects-status-banner">
+                            <div class="supabase-sql-setup-card" style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:10px; padding:16px 20px; margin-bottom:16px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                                    <div style="display:flex; align-items:center; gap:10px;">
+                                        <div id="db-status-indicator-dot" style="width:10px; height:10px; border-radius:50%; background:#10b981; box-shadow:0 0 8px #10b981;"></div>
+                                        <div>
+                                            <span style="font-weight:700; font-size:14px; color:var(--ink);" id="db-status-title-text">Supabase Database &amp; Storage Setup</span>
+                                            <span style="font-size:12px; color:var(--ink-2); margin-left:8px;">Project ID: <code style="color:var(--accent);">voixkvyylglpomahowrl</code></span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                        <button type="button" id="btn-copy-supabase-sql" class="btn-cms-secondary" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:6px;" title="Copy complete SQL setup script to clipboard">
+                                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                            </svg>
+                                            <span>Copy SQL Script</span>
+                                        </button>
+                                        <button type="button" id="btn-toggle-sql-code" class="btn-cms-secondary" style="padding:6px 12px; font-size:12px;">
+                                            <span>View SQL Script</span>
+                                        </button>
+                                        <button type="button" id="btn-check-projects-db" class="btn-cms-secondary" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:6px;" title="Re-check database tables">
+                                            <span>🔄 Refresh DB</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="sql-code-preview-wrap" style="display:none; margin-top:14px;">
+                                    <p style="font-size:12.5px; color:var(--ink-2); margin-bottom:8px;">
+                                        Open <strong>Supabase Dashboard &rarr; SQL Editor &rarr; New query</strong>, paste this script, and click <strong>Run</strong>:
+                                    </p>
+                                    <textarea id="supabase-full-sql-code" readonly style="width:100%; height:220px; font-family:monospace; font-size:12px; line-height:1.5; background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:#a7f3d0; padding:12px; resize:vertical;"></textarea>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Projects List in Admin -->
                         <div id="admin-projects-list-container" style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
@@ -737,503 +756,12 @@
                         </div>
                     </section>
 
-                    <!-- Panel 1: Profile & Header -->
-                    <section id="cms-tab-profile" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header">
-                            <h2 class="cms-panel-title"><span>🏷️</span> Profile &amp; Header Info</h2>
-                            <p class="cms-panel-desc">Update your name, branding badges, and work status shown across the navigation header.</p>
-                        </header>
-                        <div class="cms-grid-2">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-fullname">Full Name</label>
-                                <input type="text" id="cms-input-fullname" class="form-input" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-availability">Availability Status</label>
-                                <input type="text" id="cms-input-availability" class="form-input" placeholder="e.g. Available for Projects" />
-                            </div>
-                        </div>
-                        <div class="cms-grid-3">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-role1">Badge Specialization 1</label>
-                                <input type="text" id="cms-input-role1" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-role2">Badge Specialization 2</label>
-                                <input type="text" id="cms-input-role2" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-location">Badge Location</label>
-                                <input type="text" id="cms-input-location" class="form-input" />
-                            </div>
-                        </div>
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save Profile Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Panel 2: Hero & Puzzle Photo -->
-                    <section id="cms-tab-hero" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header">
-                            <h2 class="cms-panel-title"><span>⚡</span> Hero Section &amp; Puzzle Image</h2>
-                            <p class="cms-panel-desc">Customize your hero headlines, subtitle, proof points, and the interactive puzzle visual.</p>
-                        </header>
-                        <div class="cms-grid-2">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-hero-line1">Headline Line 1</label>
-                                <input type="text" id="cms-input-hero-line1" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-hero-mark">Highlighted Keyword / Focus</label>
-                                <input type="text" id="cms-input-hero-mark" class="form-input" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cms-input-hero-lead">Hero Subtitle / Lead Paragraph</label>
-                            <textarea id="cms-input-hero-lead" class="form-input" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cms-input-hero-proof">Proof Points Summary</label>
-                            <input type="text" id="cms-input-hero-proof" class="form-input" />
-                        </div>
-
-                        <!-- Hero Puzzle Photo Settings -->
-                        <div class="cms-item-card" style="margin-top:20px;">
-                            <div class="cms-item-card-header">
-                                <span class="cms-item-card-title">🧩 Interactive Puzzle Visual Image</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-hero-photo">Image URL or Preset</label>
-                                <input type="text" id="cms-input-hero-photo" class="form-input" placeholder="/assets/b2b_lead_gen_graphic.jpg" />
-                            </div>
-                            <div class="photo-preset-grid" style="margin-top:10px;">
-                                <button type="button" class="preset-choice-btn" data-cms-hero-img="/assets/b2b_lead_gen_graphic.jpg">
-                                    <img src="/assets/b2b_lead_gen_graphic.jpg" alt="Preset 1" />
-                                    <span>B2B Graphic</span>
-                                </button>
-                                <button type="button" class="preset-choice-btn" data-cms-hero-img="/assets/gmaps_scraping.jpg">
-                                    <img src="/assets/gmaps_scraping.jpg" alt="Preset 2" />
-                                    <span>Google Maps</span>
-                                </button>
-                                <button type="button" class="preset-choice-btn" data-cms-hero-img="/assets/b2b_dashboard.jpg">
-                                    <img src="/assets/b2b_dashboard.jpg" alt="Preset 3" />
-                                    <span>Dashboard</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save Hero Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Panel: Work Projects & Images -->
-                    <section id="cms-tab-work" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header">
-                            <h2 class="cms-panel-title"><span>📂</span> Work Projects &amp; Images</h2>
-                            <p class="cms-panel-desc">Customize project case studies, visual media graphics, titles, and descriptions shown in the Work section.</p>
-                        </header>
-
-                        <!-- Project 1 Visual & Details -->
-                        <div class="cms-item-card" style="margin-bottom:20px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
-                            <div class="cms-item-card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span class="cms-item-card-title" style="font-weight:700; font-size:15px; color:var(--ink);">🖼️ Project 1: Targeted B2B Prospecting</span>
-                                <span class="badge-pill" style="background:rgba(56,189,248,0.12); color:#38bdf8; font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;">Work Card 1</span>
-                            </div>
-                            <div class="cms-grid-2" style="align-items:start; margin-top:12px;">
-                                <div>
-                                    <label class="form-label" for="cms-input-work-p1-img">Project 1 Image URL or Upload</label>
-                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
-                                        <input type="text" id="cms-input-work-p1-img" class="form-input" placeholder="/assets/b2b_lead_gen_graphic.jpg" />
-                                        <label class="btn-cms-secondary" style="white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:0 12px; min-height:42px;">
-                                            📁 Upload
-                                            <input type="file" id="cms-file-work-p1-img" accept="image/*" style="display:none;" />
-                                        </label>
-                                    </div>
-                                    <div class="photo-preset-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;">
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img1="/assets/b2b_lead_gen_graphic.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Graphic" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">B2B Graphic</span>
-                                        </button>
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img1="/assets/gmaps_scraping.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/gmaps_scraping.jpg" alt="Google Maps" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Google Maps</span>
-                                        </button>
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img1="/assets/b2b_dashboard.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/b2b_dashboard.jpg" alt="Dashboard" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Dashboard</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="form-label">Current Image Preview</label>
-                                    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); height:140px; background:var(--bg-2); display:grid; place-items:center;">
-                                        <img id="cms-preview-work-p1-img" src="/assets/b2b_lead_gen_graphic.jpg" alt="Project 1 Preview" style="width:100%; height:140px; object-fit:cover;" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" style="margin-top:14px;">
-                                <label class="form-label" for="cms-input-work-p1-title">Project 1 Headline</label>
-                                <input type="text" id="cms-input-work-p1-title" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-work-p1-summary">Project 1 Summary</label>
-                                <textarea id="cms-input-work-p1-summary" class="form-input" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <!-- Project 2 Visual & Details -->
-                        <div class="cms-item-card" style="margin-bottom:20px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
-                            <div class="cms-item-card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span class="cms-item-card-title" style="font-weight:700; font-size:15px; color:var(--ink);">🖼️ Project 2: Google Maps Extraction</span>
-                                <span class="badge-pill" style="background:rgba(56,189,248,0.12); color:#38bdf8; font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;">Work Card 2</span>
-                            </div>
-                            <div class="cms-grid-2" style="align-items:start; margin-top:12px;">
-                                <div>
-                                    <label class="form-label" for="cms-input-work-p2-img">Project 2 Image URL or Upload</label>
-                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
-                                        <input type="text" id="cms-input-work-p2-img" class="form-input" placeholder="/assets/gmaps_scraping.jpg" />
-                                        <label class="btn-cms-secondary" style="white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:0 12px; min-height:42px;">
-                                            📁 Upload
-                                            <input type="file" id="cms-file-work-p2-img" accept="image/*" style="display:none;" />
-                                        </label>
-                                    </div>
-                                    <div class="photo-preset-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;">
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img2="/assets/gmaps_scraping.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/gmaps_scraping.jpg" alt="Google Maps" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Google Maps</span>
-                                        </button>
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img2="/assets/b2b_lead_gen_graphic.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Graphic" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">B2B Graphic</span>
-                                        </button>
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img2="/assets/b2b_dashboard.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/b2b_dashboard.jpg" alt="Dashboard" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Dashboard</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="form-label">Current Image Preview</label>
-                                    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); height:140px; background:var(--bg-2); display:grid; place-items:center;">
-                                        <img id="cms-preview-work-p2-img" src="/assets/gmaps_scraping.jpg" alt="Project 2 Preview" style="width:100%; height:140px; object-fit:cover;" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" style="margin-top:14px;">
-                                <label class="form-label" for="cms-input-work-p2-title">Project 2 Headline</label>
-                                <input type="text" id="cms-input-work-p2-title" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-work-p2-summary">Project 2 Summary</label>
-                                <textarea id="cms-input-work-p2-summary" class="form-input" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <!-- Project 3 Visual & Details -->
-                        <div class="cms-item-card" style="margin-bottom:20px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
-                            <div class="cms-item-card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span class="cms-item-card-title" style="font-weight:700; font-size:15px; color:var(--ink);">🖼️ Project 3: E-commerce Scraping</span>
-                                <span class="badge-pill" style="background:rgba(56,189,248,0.12); color:#38bdf8; font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;">Work Card 3</span>
-                            </div>
-                            <div class="cms-grid-2" style="align-items:start; margin-top:12px;">
-                                <div>
-                                    <label class="form-label" for="cms-input-work-p3-img">Project 3 Image URL or Upload</label>
-                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
-                                        <input type="text" id="cms-input-work-p3-img" class="form-input" placeholder="/assets/b2b_dashboard.jpg" />
-                                        <label class="btn-cms-secondary" style="white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:0 12px; min-height:42px;">
-                                            📁 Upload
-                                            <input type="file" id="cms-file-work-p3-img" accept="image/*" style="display:none;" />
-                                        </label>
-                                    </div>
-                                    <div class="photo-preset-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;">
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img3="/assets/b2b_dashboard.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/b2b_dashboard.jpg" alt="Dashboard" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Dashboard</span>
-                                        </button>
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img3="/assets/b2b_lead_gen_graphic.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/b2b_lead_gen_graphic.jpg" alt="B2B Graphic" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">B2B Graphic</span>
-                                        </button>
-                                        <button type="button" class="preset-choice-btn" data-cms-work-img3="/assets/gmaps_scraping.jpg" style="padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; text-align:center;">
-                                            <img src="/assets/gmaps_scraping.jpg" alt="Google Maps" style="width:100%; height:46px; object-fit:cover; border-radius:4px;" />
-                                            <span style="font-size:11px; color:var(--ink); display:block; margin-top:4px;">Google Maps</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="form-label">Current Image Preview</label>
-                                    <div style="border-radius:10px; overflow:hidden; border:1px solid var(--border); height:140px; background:var(--bg-2); display:grid; place-items:center;">
-                                        <img id="cms-preview-work-p3-img" src="/assets/b2b_dashboard.jpg" alt="Project 3 Preview" style="width:100%; height:140px; object-fit:cover;" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" style="margin-top:14px;">
-                                <label class="form-label" for="cms-input-work-p3-title">Project 3 Headline</label>
-                                <input type="text" id="cms-input-work-p3-title" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-work-p3-summary">Project 3 Summary</label>
-                                <textarea id="cms-input-work-p3-summary" class="form-input" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save Work Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Panel 3: About Me & Stats -->
-                    <section id="cms-tab-about" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header">
-                            <h2 class="cms-panel-title"><span>👤</span> About Me &amp; Experience Stats</h2>
-                            <p class="cms-panel-desc">Edit your professional biography, credentials, and live quantitative stats counters.</p>
-                        </header>
-                        <div class="form-group">
-                            <label class="form-label" for="cms-input-about-bio">About Me Bio Text</label>
-                            <textarea id="cms-input-about-bio" class="form-input" rows="4"></textarea>
-                        </div>
-                        <div class="cms-grid-3">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-about-degree">Degree / Qualification</label>
-                                <input type="text" id="cms-input-about-degree" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-about-inst">Institution / Training</label>
-                                <input type="text" id="cms-input-about-inst" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-about-years">Education Years</label>
-                                <input type="text" id="cms-input-about-years" class="form-input" />
-                            </div>
-                        </div>
-
-                        <div class="cms-item-card" style="margin-top:16px;">
-                            <div class="cms-item-card-header">
-                                <span class="cms-item-card-title">📊 Key Metrics Counters</span>
-                            </div>
-                            <div class="cms-grid-2">
-                                <div class="form-group">
-                                    <label class="form-label" for="cms-input-stat-years">Experience Years Value</label>
-                                    <input type="text" id="cms-input-stat-years" class="form-input" placeholder="e.g. 5+" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="cms-input-stat-projects">Completed Projects Value</label>
-                                    <input type="text" id="cms-input-stat-projects" class="form-input" placeholder="e.g. 350+" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="cms-input-stat-quality">Data Quality &amp; Validation Status</label>
-                                    <input type="text" id="cms-input-stat-quality" class="form-input" placeholder="e.g. CRM-Ready" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="cms-input-stat-clients">Clients Served</label>
-                                    <input type="text" id="cms-input-stat-clients" class="form-input" placeholder="e.g. 120+" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save About &amp; Stats Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Panel 4: Services & Specializations -->
-                    <section id="cms-tab-services" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                            <div>
-                                <h2 class="cms-panel-title"><span>💼</span> Core Specializations &amp; Services</h2>
-                                <p class="cms-panel-desc">Manage the service cards displayed in the Core Specializations section.</p>
-                            </div>
-                            <button type="button" class="btn-cms-secondary" id="btn-cms-add-service" style="padding:6px 14px; font-size:12.5px;">
-                                <span>+ Add New Service</span>
-                            </button>
-                        </header>
-                        <div id="cms-services-container">
-                            <!-- Populated dynamically via JS -->
-                        </div>
-
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save Services Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Panel 5: Pipeline & Tools -->
-                    <section id="cms-tab-pipeline" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header">
-                            <h2 class="cms-panel-title"><span>🔄</span> Automation Pipeline &amp; Methodologies</h2>
-                            <p class="cms-panel-desc">Edit the pipeline tiles, code sample headlines, and client quote banner.</p>
-                        </header>
-                        <div class="form-group">
-                            <label class="form-label" for="cms-input-pipe-headline">Pipeline Section Headline</label>
-                            <input type="text" id="cms-input-pipe-headline" class="form-input" />
-                        </div>
-                        <div class="cms-item-card">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-pipe-card1">Custom Scraper Engine Description</label>
-                                <textarea id="cms-input-pipe-card1" class="form-input" rows="2"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-pipe-card2">Data Cleaning &amp; Deduplication Description</label>
-                                <textarea id="cms-input-pipe-card2" class="form-input" rows="2"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-pipe-card3">Google Maps Extraction Description</label>
-                                <textarea id="cms-input-pipe-card3" class="form-input" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="cms-item-card" style="margin-top:16px;">
-                            <div class="cms-item-card-header">
-                                <span class="cms-item-card-title">💬 Philosophy Quote Banner</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-quote-text">Quote Text</label>
-                                <textarea id="cms-input-quote-text" class="form-input" rows="2"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-quote-author">Author / Designation</label>
-                                <input type="text" id="cms-input-quote-author" class="form-input" />
-                            </div>
-                        </div>
-
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save Pipeline Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Panel 6: Contact & Social Channels -->
-                    <section id="cms-tab-contact" class="cms-panel-card cms-tab-content">
-                        <header class="cms-panel-header">
-                            <h2 class="cms-panel-title"><span>📬</span> Contact Channels &amp; Social Links</h2>
-                            <p class="cms-panel-desc">Update your communication channels, direct email, WhatsApp, and social profile links.</p>
-                        </header>
-                        <div class="cms-grid-2">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-headline">Contact Section Headline</label>
-                                <input type="text" id="cms-input-contact-headline" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-sub">Contact Subtitle</label>
-                                <input type="text" id="cms-input-contact-sub" class="form-input" />
-                            </div>
-                        </div>
-                        <div class="cms-grid-2">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-email">Direct Email Address</label>
-                                <input type="email" id="cms-input-contact-email" class="form-input" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-whatsapp">WhatsApp Phone Number</label>
-                                <input type="text" id="cms-input-contact-whatsapp" class="form-input" />
-                            </div>
-                        </div>
-                        <div class="cms-grid-3">
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-linkedin">LinkedIn Profile URL</label>
-                                <input type="url" id="cms-input-contact-linkedin" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-github">GitHub Profile URL</label>
-                                <input type="url" id="cms-input-contact-github" class="form-input" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cms-input-contact-facebook">Facebook Profile URL</label>
-                                <input type="url" id="cms-input-contact-facebook" class="form-input" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cms-input-contact-location">Location String</label>
-                            <input type="text" id="cms-input-contact-location" class="form-input" />
-                        </div>
-
-                        <div class="cms-panel-footer">
-                            <div class="cms-panel-footer-info">
-                                <span class="cms-pulse-dot"></span>
-                                <span>Changes sync live to Supabase Cloud Database</span>
-                            </div>
-                            <button type="button" class="btn-cms-save btn-cms-save-trigger">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                                <span>Save Contact Changes</span>
-                            </button>
-                        </div>
-                    </section>
-
                     <!-- Panel: Client Inquiries & Database Messages -->
                     <section id="cms-tab-inbox" class="cms-panel-card cms-tab-content">
                         <header class="cms-panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                             <div>
                                 <h2 class="cms-panel-title"><span>💬</span> Client Inquiries (Database Storage)</h2>
-                                <p class="cms-panel-desc">Every inquiry sent via the Contact Form is stored in the database. Review leads, query descriptions, and client contact information.</p>
+                                <p class="cms-panel-desc">Every inquiry sent via the Contact Form is stored in the database. Review project inquiries, requirements, and client contact information.</p>
                             </div>
                             <div style="display:flex; gap:8px;">
                                 <button type="button" class="btn-cms-secondary" id="btn-export-inbox-csv" style="padding:7px 14px; font-size:12.5px; display:inline-flex; align-items:center; gap:6px;" title="Export all database inquiries to Excel (.xlsx) file">
@@ -1276,33 +804,6 @@
             </main>
         </div>
 
-        <!-- Sticky Floating Quick-Save Action Bar (Always visible while editing) -->
-        <div class="cms-floating-save-bar" id="cms-floating-save-bar">
-            <div class="cms-floating-bar-inner">
-                <div class="cms-floating-bar-status">
-                    <span class="db-dot"></span>
-                    <span id="cms-floating-status-text">Supabase Cloud Database Ready</span>
-                    <span class="kbd-hint">Shortcut: <kbd>Ctrl</kbd> + <kbd>S</kbd></span>
-                </div>
-                <div class="cms-floating-bar-actions">
-                    <button type="button" class="btn-cms-secondary btn-cms-reset-trigger" id="btn-cms-floating-reset">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                            <path d="M3 3v5h5"></path>
-                        </svg>
-                        <span>Reset Defaults</span>
-                    </button>
-                    <button type="button" class="btn-cms-save btn-cms-save-trigger" id="btn-cms-floating-save">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
-                        <span>Save All Changes to Database</span>
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- ── ADMIN LOGIN MODAL ── -->
