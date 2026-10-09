@@ -297,19 +297,396 @@
 
     <!-- ── WORK / PROJECTS SECTION ── -->
     <section id="projects">
-        <div class="section-inner">
-            <p class="section-eyebrow reveal">Selected Work</p>
-            <h2 class="section-title reveal" style="font-size:clamp(1.75rem, 3vw, 2.25rem); font-weight:700; margin-top:0.25rem; margin-bottom:0.75rem; color:var(--ink);">Projects</h2>
-            <p class="work-intro reveal">
+        <div class="section-inner" style="position:relative; z-index:10;">
+            <p class="section-eyebrow" style="color:var(--accent); font-weight:700; letter-spacing:0.12em; text-transform:uppercase; font-size:12px; margin-bottom:6px;">Selected Work</p>
+            <h2 class="section-title" id="projects-section-heading" style="font-size:clamp(1.85rem, 3.2vw, 2.5rem); font-weight:800; margin-top:0.25rem; margin-bottom:0.6rem; color:#ffffff; text-shadow:0 2px 14px rgba(0,0,0,0.7);">Projects</h2>
+            <p class="work-intro" style="color:var(--ink-2); font-size:15px; line-height:1.6; max-width:62ch; margin-bottom:24px;">
                 Production Python browser automation bots, web scraping pipelines, and AI-assisted workflows.
             </p>
         </div>
 
         <div class="project-list" id="projects-list-container">
-            <!-- Dynamic Projects loaded from Supabase public.projects table -->
-            <div id="projects-loading-spinner" style="text-align:center; padding:40px 20px; color:var(--ink-2);">
-                <div class="admin-live-pulse" style="display:inline-block; margin-bottom:10px;"></div>
-                <p style="font-size:14px;">Loading projects from database...</p>
+            <div class="project-card in" style="opacity:1; visibility:visible; transform:none;">
+                <div class="project-animated-gallery cyber-bot-deck" id="proj-gallery-0" data-proj="0">
+                    <!-- Dynamic Specular Glare & Laser Scanner -->
+                    <div class="cyber-deck-glare"></div>
+                    <div class="cyber-laser-scanner"></div>
+
+                    <!-- Cyber Deck HUD Header -->
+                    <div class="pag-header cyber-hud-bar">
+                        <div class="cyber-hud-left">
+                            <div class="cyber-status-pill">
+                                <span class="cyber-pulse-emitter">
+                                    <span class="cyber-pulse-core"></span>
+                                    <span class="cyber-pulse-ring"></span>
+                                </span>
+                                <span class="cyber-status-title">AUTOMATION ENGINE</span>
+                                <span class="cyber-status-meta">24ms · 200 OK</span>
+                            </div>
+                            <div class="pag-tabs cyber-mode-tabs">
+                                <button type="button" class="pag-tab-btn cyber-tab active" data-proj="0" data-slide="0">
+                                    <span class="pag-tab-icon">⚡</span>
+                                    <span class="pag-tab-title">Pipeline Graph</span>
+                                </button>
+                                <button type="button" class="pag-tab-btn cyber-tab" data-proj="0" data-slide="1">
+                                    <span class="pag-tab-icon">📱</span>
+                                    <span class="pag-tab-title">Telegram Alert</span>
+                                </button>
+                                <button type="button" class="pag-tab-btn cyber-tab" data-proj="0" data-slide="2">
+                                    <span class="pag-tab-icon">💻</span>
+                                    <span class="pag-tab-title">CLI Terminal</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pag-header-actions cyber-hud-actions">
+                            <button type="button" class="cyber-hud-btn cyber-btn-simulate" data-proj="0" title="Trigger Live Simulation Pulse">
+                                <span class="cyber-btn-icon">⚡</span>
+                                <span class="cyber-btn-text">Simulate</span>
+                            </button>
+                            <button type="button" class="cyber-hud-btn pag-btn-pause" data-proj="0" title="Pause/Play Auto-Rotation">
+                                <span class="pag-pause-icon">⏸</span>
+                            </button>
+                            <button type="button" class="cyber-hud-btn pag-btn-zoom" data-proj="0" title="Open Fullscreen Lightbox">
+                                <span>🔍</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3D Holographic Stage with Kinetic Perspective Transition -->
+                    <div class="pag-stage cyber-stage" id="pag-stage-0" style="--pag-glow: #10b981;">
+                        <!-- Slide 0: Live Pipeline Visualizer -->
+                        <div class="pag-slide cyber-slide active" data-proj="0" data-slide="0" data-badge-color="#10b981">
+                            <div class="cyber-pipeline-canvas pag-mockup-wrap" data-img-src="/assets/telegram_price_alert.svg" data-img-title="Autonomous Python Bot Pipeline" data-img-caption="Multi-stage autonomous pipeline: headless catalog scraping, price change detection, and instant Telegram alert dispatch." title="Click to view full screen">
+                                <div class="pipeline-graph-hud">
+                                    <div class="pipeline-node-grid">
+                                        <!-- Node 1: Target Store -->
+                                        <div class="pipeline-node node-web">
+                                            <div class="node-icon">🌐</div>
+                                            <div class="node-label">Target Store</div>
+                                            <div class="node-sub">Catalog API</div>
+                                            <div class="node-status-tag">Connected</div>
+                                        </div>
+
+                                        <!-- Connector 1 -->
+                                        <div class="pipeline-connector">
+                                            <div class="pipeline-line"></div>
+                                            <div class="pipeline-packet packet-1"></div>
+                                        </div>
+
+                                        <!-- Node 2: Python Bot Worker -->
+                                        <div class="pipeline-node node-worker active-pulse">
+                                            <div class="node-icon">🐍</div>
+                                            <div class="node-label">Playwright Bot</div>
+                                            <div class="node-sub">Headless Scraper</div>
+                                            <div class="node-status-tag tag-green">Extracting</div>
+                                        </div>
+
+                                        <!-- Connector 2 -->
+                                        <div class="pipeline-connector">
+                                            <div class="pipeline-line"></div>
+                                            <div class="pipeline-packet packet-2"></div>
+                                        </div>
+
+                                        <!-- Node 3: Telegram Alert / DB -->
+                                        <div class="pipeline-node node-alert">
+                                            <div class="node-icon">🔔</div>
+                                            <div class="node-label">Telegram API</div>
+                                            <div class="node-sub">Instant Webhook</div>
+                                            <div class="node-status-tag tag-accent">Delivered</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pipeline-live-ticker">
+                                        <span class="ticker-dot">●</span>
+                                        <span class="ticker-text" id="pipeline-ticker-0">STREAM: 48 SKUs scanned · Price drop -$25.00 (-28%) detected · Dispatched to Telegram</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pag-caption-bar cyber-caption-bar">
+                                <span class="pag-caption-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.35);">
+                                    ● LIVE PIPELINE GRAPH
+                                </span>
+                                <span class="pag-caption-text">Autonomous pipeline: Catalog Scraper → Delta Engine → Telegram Webhook.</span>
+                            </div>
+                        </div>
+
+                        <!-- Slide 1: Telegram Live Alert Mockup -->
+                        <div class="pag-slide cyber-slide" data-proj="0" data-slide="1" data-badge-color="#38bdf8">
+                            <div class="pag-mockup-wrap" data-img-src="/assets/telegram_price_alert.svg" data-img-title="Price &amp; Stock Monitor Bot" data-img-caption="Real-time price change detection and back-in-stock alerts delivered via Telegram." title="Click to view full screen">
+                                <div class="pag-phone-chassis cyber-phone-chassis">
+                                    <div class="pag-phone-island">
+                                        <span class="pag-phone-speaker"></span>
+                                        <span class="pag-phone-lens"></span>
+                                    </div>
+                                    <div class="pag-phone-screen">
+                                        <img class="pag-mockup-img is-phone" src="/assets/telegram_price_alert.svg" alt="Price &amp; Stock Monitor Bot" decoding="async" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pag-caption-bar cyber-caption-bar">
+                                <span class="pag-caption-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.35);">
+                                    ● TELEGRAM BOT CHANNEL
+                                </span>
+                                <span class="pag-caption-text">Instant price drops and back-in-stock alerts dispatched in &lt; 250ms.</span>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Python Engine & CLI -->
+                        <div class="pag-slide cyber-slide" data-proj="0" data-slide="2" data-badge-color="#a855f7">
+                            <div class="pag-mockup-wrap" data-img-src="/assets/python_monitor_terminal.svg" data-img-title="Python Engine &amp; CLI" data-img-caption="Asynchronous multi-page catalog crawling and price observations saved to SQLite / PostgreSQL." title="Click to view full screen">
+                                <div class="pag-desktop-chassis cyber-desktop-chassis">
+                                    <div class="pag-desktop-titlebar">
+                                        <div class="pag-window-controls">
+                                            <span class="pag-win-btn pag-win-close"></span>
+                                            <span class="pag-win-btn pag-win-min"></span>
+                                            <span class="pag-win-btn pag-win-max"></span>
+                                        </div>
+                                        <div class="pag-window-title">⚡ python3 monitor_engine.py --stream</div>
+                                        <div class="pag-window-tag">Playwright + SQLite</div>
+                                    </div>
+                                    <div class="pag-desktop-screen">
+                                        <img class="pag-mockup-img is-desktop" src="/assets/python_monitor_terminal.svg" alt="Python Engine &amp; CLI" loading="lazy" decoding="async" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pag-caption-bar cyber-caption-bar">
+                                <span class="pag-caption-badge" style="background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.35);">
+                                    ● ASYNC CLI RUNNER
+                                </span>
+                                <span class="pag-caption-text">Playwright headless crawling with SQLite &amp; PostgreSQL persistent sync.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Controls & Smooth Glowing Progress -->
+                    <div class="pag-controls cyber-controls">
+                        <div class="pag-dots cyber-dots">
+                            <button type="button" class="pag-dot active" data-proj="0" data-slide="0" aria-label="Go to view 1"></button>
+                            <button type="button" class="pag-dot" data-proj="0" data-slide="1" aria-label="Go to view 2"></button>
+                            <button type="button" class="pag-dot" data-proj="0" data-slide="2" aria-label="Go to view 3"></button>
+                        </div>
+                        <div class="pag-nav-arrows cyber-arrows">
+                            <button type="button" class="pag-arrow-btn pag-btn-prev" data-proj="0" aria-label="Previous view">‹</button>
+                            <button type="button" class="pag-arrow-btn pag-btn-next" data-proj="0" aria-label="Next view">›</button>
+                        </div>
+                    </div>
+
+                    <div class="pag-progress-track cyber-progress-track">
+                        <div class="pag-progress-fill cyber-progress-fill" id="pag-progress-0"></div>
+                    </div>
+                </div>
+
+                <div class="project-body project-body--clean">
+                    <div class="project-header-row">
+                        <div class="project-live-badge">
+                            <span class="live-dot-pulse"></span>
+                            <span>AUTONOMOUS PYTHON BOT</span>
+                        </div>
+                        <span class="project-stack-hint">Playwright · SQLite · Telegram API</span>
+                    </div>
+
+                    <h3 class="project-title" id="proj-title-0">Automated Competitor Price Tracking with Telegram Alerts</h3>
+
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-open-architecture" data-idx="0" aria-label="Read Full Project Architecture">
+                            <span class="btn-arch-icon">⚡</span>
+                            <span class="btn-arch-text">Read Full Project Architecture</span>
+                            <span class="btn-arch-arrow">→</span>
+                        </button>
+                        <a href="https://github.com/Ibrahim009-Devloper/Automated-Competitor-Price-Tracking-with-Telegram-Alerts.git" target="_blank" rel="noopener noreferrer" class="btn-project-github" aria-label="View on GitHub">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                            </svg>
+                            <span>View on GitHub</span>
+                            <span class="btn-github-arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Zillow Real Estate Agent Lead Scraper -->
+            <div class="project-card in" style="opacity:1; visibility:visible; transform:none;">
+                <div class="project-animated-gallery cyber-bot-deck" id="proj-gallery-1" data-proj="1">
+                    <div class="cyber-deck-glare"></div>
+                    <div class="cyber-laser-scanner"></div>
+
+                    <div class="pag-header cyber-hud-bar">
+                        <div class="cyber-hud-left">
+                            <div class="cyber-status-pill">
+                                <span class="cyber-pulse-emitter">
+                                    <span class="cyber-pulse-core"></span>
+                                    <span class="cyber-pulse-ring"></span>
+                                </span>
+                                <span class="cyber-status-title">AUTOMATION ENGINE</span>
+                                <span class="cyber-status-meta">24ms · 200 OK</span>
+                            </div>
+                            <div class="pag-tabs cyber-mode-tabs">
+                                <button type="button" class="pag-tab-btn cyber-tab active" data-proj="1" data-slide="0">
+                                    <span class="pag-tab-icon">⚡</span>
+                                    <span class="pag-tab-title">Pipeline Graph</span>
+                                </button>
+                                <button type="button" class="pag-tab-btn cyber-tab" data-proj="1" data-slide="1">
+                                    <span class="pag-tab-icon">🏠</span>
+                                    <span class="pag-tab-title">Agent Scraper &amp; AI</span>
+                                </button>
+                                <button type="button" class="pag-tab-btn cyber-tab" data-proj="1" data-slide="2">
+                                    <span class="pag-tab-icon">📊</span>
+                                    <span class="pag-tab-title">Google Sheets Sync</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pag-header-actions cyber-hud-actions">
+                            <button type="button" class="cyber-hud-btn cyber-btn-simulate" data-proj="1" title="Trigger Live Simulation Pulse">
+                                <span class="cyber-btn-icon">⚡</span>
+                                <span class="cyber-btn-text">Simulate</span>
+                            </button>
+                            <button type="button" class="cyber-hud-btn pag-btn-pause" data-proj="1" title="Pause/Play Auto-Rotation">
+                                <span class="pag-pause-icon">⏸</span>
+                            </button>
+                            <button type="button" class="cyber-hud-btn pag-btn-zoom" data-proj="1" title="Open Fullscreen Lightbox">
+                                <span>🔍</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pag-stage cyber-stage" id="pag-stage-1">
+                        <!-- Slide 0: Pipeline -->
+                        <div class="pag-slide cyber-slide active" data-proj="1" data-slide="0" data-badge-color="#10b981">
+                            <div class="cyber-pipeline-canvas pag-mockup-wrap" data-img-src="/assets/zillow_agent_scraper.svg" data-img-title="Pipeline Graph" data-img-caption="Autonomous pipeline: Zillow Directory → SeleniumBase UC → AI Scorer → Google Sheets API." title="Click to view full screen">
+                                <div class="pipeline-graph-hud">
+                                    <div class="pipeline-node-grid">
+                                        <div class="pipeline-node node-web">
+                                            <div class="node-icon">🏠</div>
+                                            <div class="node-label">Zillow Directory</div>
+                                            <div class="node-sub">Target Location Search</div>
+                                            <div class="node-status-tag">Targeting</div>
+                                        </div>
+                                        <div class="pipeline-connector">
+                                            <div class="pipeline-line"></div>
+                                            <div class="pipeline-packet packet-1"></div>
+                                        </div>
+                                        <div class="pipeline-node node-worker active-pulse">
+                                            <div class="node-icon">🐍</div>
+                                            <div class="node-label">SeleniumBase UC</div>
+                                            <div class="node-sub">Anti-Bot Scraper</div>
+                                            <div class="node-status-tag tag-green">Extracting</div>
+                                        </div>
+                                        <div class="pipeline-connector">
+                                            <div class="pipeline-line"></div>
+                                            <div class="pipeline-packet packet-2"></div>
+                                        </div>
+                                        <div class="pipeline-node node-alert">
+                                            <div class="node-icon">📊</div>
+                                            <div class="node-label">AI &amp; Sheets Sync</div>
+                                            <div class="node-sub">Lead Scoring &amp; API</div>
+                                            <div class="node-status-tag tag-accent">Live Synced</div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-live-ticker">
+                                        <span class="ticker-dot">●</span>
+                                        <span class="ticker-text" id="pipeline-ticker-1">STREAM: Miami, FL &amp; Austin, TX agents scanned · AI qualification 98.4% · Synced to Google Sheets</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pag-caption-bar cyber-caption-bar">
+                                <span class="pag-caption-badge cyber-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.4);">
+                                    ● LIVE AGENT PIPELINE
+                                </span>
+                                <span class="pag-caption-text">Autonomous pipeline: Zillow Directory → SeleniumBase UC → AI Scorer → Google Sheets API.</span>
+                            </div>
+                        </div>
+
+                        <!-- Slide 1: Dashboard -->
+                        <div class="pag-slide cyber-slide" data-proj="1" data-slide="1" data-badge-color="#38bdf8">
+                            <div class="pag-mockup-wrap" data-img-src="/assets/zillow_agent_scraper.svg" data-img-title="Agent Scraper &amp; AI" data-img-caption="Undetected browser automation collecting agent profiles, ratings, and contact info." title="Click to view full screen">
+                                <div class="pag-desktop-chassis cyber-desktop-chassis">
+                                    <div class="pag-desktop-titlebar">
+                                        <div class="pag-window-controls">
+                                            <span class="pag-win-btn pag-win-close"></span>
+                                            <span class="pag-win-btn pag-win-min"></span>
+                                            <span class="pag-win-btn pag-win-max"></span>
+                                        </div>
+                                        <div class="pag-window-title">⚡ python3 zillow_agent_engine.py --geo "Miami, Austin"</div>
+                                        <div class="pag-window-tag">SeleniumBase UC</div>
+                                    </div>
+                                    <div class="pag-desktop-screen">
+                                        <img class="pag-mockup-img is-desktop" src="/assets/zillow_agent_scraper.svg" alt="Agent Scraper &amp; AI" loading="lazy" decoding="async" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pag-caption-bar cyber-caption-bar">
+                                <span class="pag-caption-badge cyber-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.4);">
+                                    ● SELENIUMBASE UC RUNNER
+                                </span>
+                                <span class="pag-caption-text">Undetected browser automation collecting agent profiles, ratings, and contact info.</span>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Sheets Phone -->
+                        <div class="pag-slide cyber-slide" data-proj="1" data-slide="2" data-badge-color="#10b981">
+                            <div class="pag-mockup-wrap" data-img-src="/assets/zillow_sheets_mobile.svg" data-img-title="Google Sheets Sync" data-img-caption="Real-time synchronization of AI-qualified agent leads directly into Google Sheets." title="Click to view full screen">
+                                <div class="pag-phone-chassis cyber-phone-chassis">
+                                    <div class="pag-phone-island">
+                                        <span class="pag-phone-speaker"></span>
+                                        <span class="pag-phone-lens"></span>
+                                    </div>
+                                    <div class="pag-phone-screen">
+                                        <img class="pag-mockup-img is-phone" src="/assets/zillow_sheets_mobile.svg" alt="Google Sheets Sync" loading="lazy" decoding="async" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pag-caption-bar cyber-caption-bar">
+                                <span class="pag-caption-badge cyber-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.4);">
+                                    ● LIVE GOOGLE SHEETS
+                                </span>
+                                <span class="pag-caption-text">Real-time synchronization of AI-qualified agent leads directly into Google Sheets.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pag-controls cyber-controls">
+                        <div class="pag-dots cyber-dots">
+                            <button type="button" class="pag-dot active" data-proj="1" data-slide="0" aria-label="Go to view 1"></button>
+                            <button type="button" class="pag-dot" data-proj="1" data-slide="1" aria-label="Go to view 2"></button>
+                            <button type="button" class="pag-dot" data-proj="1" data-slide="2" aria-label="Go to view 3"></button>
+                        </div>
+                        <div class="pag-nav-arrows cyber-arrows">
+                            <button type="button" class="pag-arrow-btn pag-btn-prev" data-proj="1" aria-label="Previous view">‹</button>
+                            <button type="button" class="pag-arrow-btn pag-btn-next" data-proj="1" aria-label="Next view">›</button>
+                        </div>
+                    </div>
+
+                    <div class="pag-progress-track cyber-progress-track">
+                        <div class="pag-progress-fill cyber-progress-fill" id="pag-progress-1"></div>
+                    </div>
+                </div>
+
+                <div class="project-body project-body--clean">
+                    <div class="project-header-row">
+                        <div class="project-live-badge">
+                            <span class="live-dot-pulse"></span>
+                            <span>AUTONOMOUS PYTHON BOT</span>
+                        </div>
+                        <span class="project-stack-hint">SeleniumBase · Pandas · Google Sheets</span>
+                    </div>
+
+                    <h3 class="project-title" id="proj-title-1">Zillow Real Estate Agent Lead Scraper</h3>
+
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-open-architecture" data-idx="1" aria-label="Read Full Project Architecture">
+                            <span class="btn-arch-icon">⚡</span>
+                            <span class="btn-arch-text">Read Full Project Architecture</span>
+                            <span class="btn-arch-arrow">→</span>
+                        </button>
+                        <a href="https://github.com/Ibrahim009-Devloper/Zillow_Agent_Lead_Scraper.git" target="_blank" rel="noopener noreferrer" class="btn-project-github" aria-label="View on GitHub">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                            </svg>
+                            <span>View on GitHub</span>
+                            <span class="btn-github-arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -323,40 +700,97 @@
             <div class="motion-bento">
                 <!-- Tile 1: Python Scraper Engine -->
                 <div class="motion-card mc-tile--tall reveal">
-                    <div>
-                        <span class="mc-chip">Python Automation</span>
+                    <div class="motion-card-top">
+                        <div class="mc-chip-row">
+                            <span class="mc-chip">
+                                <span class="mc-chip-dot"></span>
+                                Python Automation
+                            </span>
+                            <span class="mc-pulse-status">ACTIVE ENGINE</span>
+                        </div>
                         <h3 class="mc-title">Custom Browser Automation Bots</h3>
                         <p class="mc-sub" id="site-pipe-card1-sub">
                             Python bots (Playwright / SeleniumBase) that work on websites without an API: login, clicks, forms, downloads, and anti-bot bypassing.
                         </p>
                     </div>
                     <div class="mc-code-box">
-                        <span style="color:#64748b"># Python Web Automation Loop</span><br/>
-                        async with async_playwright() as p:<br/>
-                        &nbsp;&nbsp;browser = await p.chromium.launch()<br/>
-                        &nbsp;&nbsp;page = await browser.new_page()<br/>
-                        &nbsp;&nbsp;await page.goto(target_url)<br/>
-                        &nbsp;&nbsp;await run_workflow_steps(page)<br/>
-                        &nbsp;&nbsp;await sync_to_google_sheets(results)
+                        <div class="mc-code-header">
+                            <div class="mc-code-dots">
+                                <span class="mc-code-dot dot-red"></span>
+                                <span class="mc-code-dot dot-yellow"></span>
+                                <span class="mc-code-dot dot-green"></span>
+                            </div>
+                            <span class="mc-code-filename">bot_runtime.py</span>
+                            <span class="mc-code-tag">asyncio</span>
+                        </div>
+                        <div class="mc-code-content">
+                            <span class="code-comment"># Python Web Automation Execution</span><br/>
+                            <span class="code-kw">async with</span> <span class="code-fn">async_playwright</span>() <span class="code-kw">as</span> p:<br/>
+                            &nbsp;&nbsp;browser = <span class="code-kw">await</span> p.chromium.<span class="code-fn">launch</span>(headless=<span class="code-bool">True</span>)<br/>
+                            &nbsp;&nbsp;page = <span class="code-kw">await</span> browser.<span class="code-fn">new_page</span>()<br/>
+                            &nbsp;&nbsp;<span class="code-kw">await</span> page.<span class="code-fn">goto</span>(target_url)<br/>
+                            &nbsp;&nbsp;<span class="code-kw">await</span> <span class="code-fn">run_workflow_steps</span>(page)<br/>
+                            &nbsp;&nbsp;<span class="code-kw">await</span> <span class="code-fn">sync_to_google_sheets</span>(results)<br/>
+                            <span class="code-stream-bar"><span class="code-stream-pulse"></span> Pipeline stream synced · 0 errors</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Tile 2: Workflow & Task Automation -->
                 <div class="motion-card reveal">
-                    <span class="mc-chip">Reliable Architecture</span>
-                    <h3 class="mc-title">Web Workflow &amp; Task Automation</h3>
+                    <div class="mc-chip-row">
+                        <span class="mc-chip">
+                            <span class="mc-chip-dot"></span>
+                            Reliable Architecture
+                        </span>
+                        <span class="mc-live-signal">24/7 CRON</span>
+                    </div>
+                    <div class="mc-icon-heading">
+                        <div class="mc-glow-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="mc-title">Web Workflow &amp; Task Automation</h3>
+                    </div>
                     <p class="mc-sub" id="site-pipe-card2-sub">
                         End-to-end automation of repetitive web tasks, with structured logging, edge-case error handling, and scheduled cron executions.
                     </p>
+                    <div class="mc-footer-pills">
+                        <span class="mc-pill">Autonomous Retries</span>
+                        <span class="mc-pill">Zero Manual Clicks</span>
+                    </div>
                 </div>
 
                 <!-- Tile 3: Google Sheets & Docs Automation -->
                 <div class="motion-card reveal">
-                    <span class="mc-chip">Cloud Sync</span>
-                    <h3 class="mc-title">Google Sheets &amp; Docs Automation</h3>
+                    <div class="mc-chip-row">
+                        <span class="mc-chip">
+                            <span class="mc-chip-dot" style="background:#10b981; box-shadow:0 0 8px #10b981;"></span>
+                            Cloud Sync
+                        </span>
+                        <span class="mc-live-signal live-green">LIVE SYNC</span>
+                    </div>
+                    <div class="mc-icon-heading">
+                        <div class="mc-glow-icon icon-emerald">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="mc-title">Google Sheets &amp; Docs Automation</h3>
+                    </div>
                     <p class="mc-sub" id="site-pipe-card3-sub">
                         Scripts that read, write, and update Google Sheets and Docs automatically, syncing collected data into client spreadsheets in real time.
                     </p>
+                    <div class="mc-footer-pills">
+                        <span class="mc-pill">Google Sheets API</span>
+                        <span class="mc-pill">Instant Spreadsheet Feed</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -491,90 +925,73 @@
                     <p style="font-size:14px; color:var(--ink-2); line-height:1.6;">
                         Direct channels for quotes, sample requests, and project consultations.
                     </p>
-                    <div class="contact-info-list">
-                        <!-- Email Card -->
-                        <a href="mailto:ibrahimshakeshuvo100@gmail.com" class="contact-info-card" id="contact-email-card" aria-label="Send email to ibrahimshakeshuvo100@gmail.com">
-                            <div class="contact-card-icon contact-card-icon--email">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="contact-info-list contact-icons-bar">
+                        <!-- Email Icon Button -->
+                        <a href="mailto:ibrahimshakeshuvo100@gmail.com" class="contact-icon-bubble contact-icon-bubble--email" id="contact-email-card" aria-label="Send email: ibrahimshakeshuvo100@gmail.com" data-tooltip="Email: ibrahimshakeshuvo100@gmail.com">
+                            <span class="contact-bubble-glow" aria-hidden="true"></span>
+                            <div class="contact-bubble-inner">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                                 </svg>
                             </div>
-                            <div class="contact-card-text">
-                                <span class="contact-card-label">Email</span>
-                                <span class="contact-card-val">ibrahimshakeshuvo100@gmail.com</span>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                            <span class="contact-bubble-tooltip">Email</span>
                         </a>
 
-                        <!-- LinkedIn Card -->
-                        <a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-linkedin-card" aria-label="Connect on LinkedIn with MD. Ibrahim Shake Shuvo">
-                            <div class="contact-card-icon contact-card-icon--linkedin">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <!-- LinkedIn Icon Button -->
+                        <a href="https://www.linkedin.com/in/ibrahimshakeshuvo" target="_blank" rel="noopener noreferrer" class="contact-icon-bubble contact-icon-bubble--linkedin" id="contact-linkedin-card" aria-label="Connect on LinkedIn: MD. Ibrahim Shake Shuvo" data-tooltip="LinkedIn: MD. Ibrahim Shake Shuvo">
+                            <span class="contact-bubble-glow" aria-hidden="true"></span>
+                            <div class="contact-bubble-inner">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/>
                                 </svg>
                             </div>
-                            <div class="contact-card-text">
-                                <span class="contact-card-label">LinkedIn</span>
-                                <span class="contact-card-val">MD. Ibrahim Shake Shuvo</span>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                            <span class="contact-bubble-tooltip">LinkedIn</span>
                         </a>
 
-                        <!-- WhatsApp Card -->
-                        <a href="https://wa.me/8801744868938" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-whatsapp-card" aria-label="Chat on WhatsApp with MD. Ibrahim Shake Shuvo at 01744868938">
-                            <div class="contact-card-icon contact-card-icon--whatsapp">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <!-- WhatsApp Icon Button -->
+                        <a href="https://wa.me/8801744868938" target="_blank" rel="noopener noreferrer" class="contact-icon-bubble contact-icon-bubble--whatsapp" id="contact-whatsapp-card" aria-label="Chat on WhatsApp: +880 1744-868938" data-tooltip="WhatsApp: +880 1744-868938">
+                            <span class="contact-bubble-glow" aria-hidden="true"></span>
+                            <div class="contact-bubble-inner">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                                     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.01 2.58.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.16-.48-.28Z"/>
                                 </svg>
                             </div>
-                            <div class="contact-card-text">
-                                <span class="contact-card-label">WhatsApp</span>
-                                <span class="contact-card-val">+880 1744-868938 (BD)</span>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                            <span class="contact-bubble-tooltip">WhatsApp</span>
                         </a>
 
-                        <!-- GitHub Card -->
-                        <a href="https://github.com/Ibrahim009-Devloper" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-github-card" aria-label="Visit GitHub profile of Ibrahim009-Devloper">
-                            <div class="contact-card-icon contact-card-icon--github">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <!-- GitHub Icon Button -->
+                        <a href="https://github.com/Ibrahim009-Devloper" target="_blank" rel="noopener noreferrer" class="contact-icon-bubble contact-icon-bubble--github" id="contact-github-card" aria-label="Visit GitHub profile: Ibrahim009-Devloper" data-tooltip="GitHub: Ibrahim009-Devloper">
+                            <span class="contact-bubble-glow" aria-hidden="true"></span>
+                            <div class="contact-bubble-inner">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
                                 </svg>
                             </div>
-                            <div class="contact-card-text">
-                                <span class="contact-card-label">GitHub</span>
-                                <span class="contact-card-val">Ibrahim009-Devloper</span>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                            <span class="contact-bubble-tooltip">GitHub</span>
                         </a>
 
-                        <!-- Facebook Card -->
-                        <a href="https://www.facebook.com/profile.php?id=61588549130311" target="_blank" rel="noopener noreferrer" class="contact-info-card" id="contact-facebook-card" aria-label="Visit Facebook profile of MD. Ibrahim Shake Shuvo">
-                            <div class="contact-card-icon contact-card-icon--facebook">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <!-- Facebook Icon Button -->
+                        <a href="https://www.facebook.com/profile.php?id=61588549130311" target="_blank" rel="noopener noreferrer" class="contact-icon-bubble contact-icon-bubble--facebook" id="contact-facebook-card" aria-label="Visit Facebook profile: MD. Ibrahim Shake Shuvo" data-tooltip="Facebook Profile">
+                            <span class="contact-bubble-glow" aria-hidden="true"></span>
+                            <div class="contact-bubble-inner">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                                     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12Z"/>
                                 </svg>
                             </div>
-                            <div class="contact-card-text">
-                                <span class="contact-card-label">Facebook</span>
-                                <span class="contact-card-val">MD. Ibrahim Shake Shuvo</span>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                            <span class="contact-bubble-tooltip">Facebook</span>
                         </a>
 
-                        <!-- Location Card -->
-                        <div class="contact-info-card" id="contact-location-card">
-                            <div class="contact-card-icon contact-card-icon--location">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Location Icon Bubble -->
+                        <div class="contact-icon-bubble contact-icon-bubble--location" id="contact-location-card" role="note" aria-label="Location: Dhaka, Bangladesh (Global Clients)" data-tooltip="Dhaka, Bangladesh">
+                            <span class="contact-bubble-glow" aria-hidden="true"></span>
+                            <div class="contact-bubble-inner">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
                                     <circle cx="12" cy="10" r="3"/>
                                 </svg>
                             </div>
-                            <div class="contact-card-text">
-                                <span class="contact-card-label">Location</span>
-                                <span class="contact-card-val">Dhaka, Bangladesh (Serving Global Clients)</span>
-                            </div>
+                            <span class="contact-bubble-tooltip">Dhaka, BD</span>
                         </div>
                     </div>
                 </div>
@@ -723,13 +1140,16 @@
                                         </div>
                                     </div>
                                     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                        <button type="button" id="btn-copy-supabase-sql" class="btn-cms-secondary" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:6px;" title="Copy complete SQL setup script to clipboard">
+                                        <button type="button" id="btn-copy-supabase-sql" class="btn-cms-save" style="padding:6px 14px; font-size:12px; background:var(--accent); color:#000; font-weight:700; display:inline-flex; align-items:center; gap:6px;" title="Copy complete SQL setup script to clipboard">
                                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
                                                 <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                                             </svg>
                                             <span>Copy SQL Script</span>
                                         </button>
+                                        <a href="https://supabase.com/dashboard/project/voixkvyylglpomahowrl/sql/new" target="_blank" rel="noopener noreferrer" class="btn-cms-secondary" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:6px; text-decoration:none;" title="Open Supabase SQL Editor">
+                                            <span>Open SQL Editor ↗</span>
+                                        </a>
                                         <button type="button" id="btn-toggle-sql-code" class="btn-cms-secondary" style="padding:6px 12px; font-size:12px;">
                                             <span>View SQL Script</span>
                                         </button>
@@ -739,10 +1159,11 @@
                                     </div>
                                 </div>
                                 <div id="sql-code-preview-wrap" style="display:none; margin-top:14px;">
-                                    <p style="font-size:12.5px; color:var(--ink-2); margin-bottom:8px;">
-                                        Open <strong>Supabase Dashboard &rarr; SQL Editor &rarr; New query</strong>, paste this script, and click <strong>Run</strong>:
+                                    <p style="font-size:12.5px; color:var(--ink-2); margin-bottom:8px; line-height:1.5;">
+                                        This SQL creates the <strong>projects</strong> table (title, description, tags, github_url, video_url, thumbnail_url, media_gallery, sort_order), <strong>admins</strong> table, <strong>messages</strong> table, and <strong>project-media</strong> storage bucket for video &amp; media uploads with RLS policies.<br />
+                                        Click <strong>Copy SQL Script</strong>, open <strong>Supabase Dashboard &rarr; SQL Editor &rarr; New query</strong>, paste and click <strong>Run</strong>:
                                     </p>
-                                    <textarea id="supabase-full-sql-code" readonly style="width:100%; height:220px; font-family:monospace; font-size:12px; line-height:1.5; background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:#a7f3d0; padding:12px; resize:vertical;"></textarea>
+                                    <textarea id="supabase-full-sql-code" readonly style="width:100%; height:260px; font-family:monospace; font-size:12px; line-height:1.5; background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:#a7f3d0; padding:12px; resize:vertical;"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -1073,6 +1494,120 @@
                     </svg>
                 </button>
             </form>
+        </div>
+    </div>
+
+    <!-- ── PROJECT SCREENSHOT LIGHTBOX MODAL ── -->
+    <div class="modal-backdrop" id="project-lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" style="display:none; z-index:9999;">
+        <div class="modal-dialog modal-dialog--lightbox" style="max-width:960px; width:95vw; background:rgba(10,15,25,0.97); border:1px solid rgba(255,255,255,0.18); border-radius:16px; padding:20px; box-shadow:0 28px 70px rgba(0,0,0,0.85); backdrop-filter:blur(16px);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+                <div>
+                    <h3 id="lightbox-title" style="font-size:16px; font-weight:700; color:#fff; margin:0;">Project Showcase Preview</h3>
+                    <p id="lightbox-caption" style="font-size:12.5px; color:var(--ink-2); margin:3px 0 0;"></p>
+                </div>
+                <button type="button" class="modal-close" id="btn-close-lightbox" style="position:static; font-size:26px; color:#fff; cursor:pointer; background:rgba(255,255,255,0.06); width:36px; height:36px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; line-height:1;" aria-label="Close Preview">&times;</button>
+            </div>
+            <div style="width:100%; max-height:75vh; display:flex; justify-content:center; align-items:center; overflow:auto; border-radius:10px; background:#080c14; padding:12px;">
+                <img id="lightbox-image" src="" alt="Project Screenshot Preview" style="max-width:100%; max-height:72vh; object-fit:contain; border-radius:8px; box-shadow:0 12px 30px rgba(0,0,0,0.5);" />
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FULL PROJECT ARCHITECTURE MODAL ── -->
+    <div class="arch-modal-backdrop" id="project-architecture-modal" role="dialog" aria-modal="true" aria-labelledby="arch-modal-title" style="display:none;">
+        <div class="arch-modal-dialog">
+            <div class="arch-modal-header">
+                <div>
+                    <div class="arch-modal-badge">
+                        <span class="live-dot-pulse"></span>
+                        <span>SYSTEM ARCHITECTURE &amp; CASE STUDY</span>
+                    </div>
+                    <h3 class="arch-modal-title" id="arch-modal-title">Automated Competitor Price Tracking with Telegram Alerts</h3>
+                </div>
+                <button type="button" class="arch-modal-close" id="btn-close-arch-modal" aria-label="Close Architecture Modal">✕</button>
+            </div>
+
+            <div class="arch-modal-body" id="arch-modal-body-content">
+                <!-- Interactive Flow Diagram -->
+                <div class="arch-flow-diagram">
+                    <div class="arch-flow-label">⚡ Autonomous Execution Pipeline</div>
+                    <div class="arch-flow-grid">
+                        <div class="arch-flow-node">
+                            <div class="arch-node-icon">🌐</div>
+                            <div class="arch-node-name">Headless Scraper</div>
+                            <div class="arch-node-desc">Playwright Async Crawlers with session spoofing &amp; proxy pooling</div>
+                        </div>
+                        <div class="arch-flow-arrow">➔</div>
+                        <div class="arch-flow-node">
+                            <div class="arch-node-icon">⚡</div>
+                            <div class="arch-node-name">Delta Engine</div>
+                            <div class="arch-node-desc">Observation diff calculation &amp; historical persistence (SQLite/Postgres)</div>
+                        </div>
+                        <div class="arch-flow-arrow">➔</div>
+                        <div class="arch-flow-node">
+                            <div class="arch-node-icon">🔔</div>
+                            <div class="arch-node-name">Telegram Bot</div>
+                            <div class="arch-node-desc">Instant sub-250ms alert dispatch with markdown price delta formatting</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structured Specs Grid -->
+                <div class="arch-specs-grid">
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>⚡</span> What It Does</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item"><strong>Automated Price Tracking:</strong> Automatically extracts competitor product pricing and stock across multi-domain target stores.</li>
+                            <li class="arch-spec-item"><strong>Delta &amp; Stock Detection:</strong> Identifies price increases, markdowns, and back-in-stock events without manual checks.</li>
+                            <li class="arch-spec-item"><strong>Real-Time Telegram Alerts:</strong> Dispatches instant alert webhooks with structured product details and direct links.</li>
+                            <li class="arch-spec-item"><strong>Historical Trends:</strong> Persists all snapshots for trend analytics and competitor discount patterns.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>🔄</span> How It Works</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item"><strong>1. Target Queue:</strong> Reads monitored SKU URLs from configuration or persistent store.</li>
+                            <li class="arch-spec-item"><strong>2. Headless Collection:</strong> Playwright navigates target pages, executes dynamic scripts, and grabs clean JSON payloads.</li>
+                            <li class="arch-spec-item"><strong>3. Diff Analysis:</strong> Compares observed prices against previous records in SQLite / PostgreSQL.</li>
+                            <li class="arch-spec-item"><strong>4. Instant Dispatch:</strong> Fires structured Telegram notifications with automated error handling and retry resilience.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>💼</span> Business Benefits</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item">Eliminates 6 to 8 hours of tedious daily manual checks across competitor catalogs.</li>
+                            <li class="arch-spec-item">Immediate awareness of competitor promotions and flash sales within seconds.</li>
+                            <li class="arch-spec-item">Reliable autonomous runs without human intervention, equipped with auto-recovery health checks.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>🛠️</span> Tech Stack &amp; Infrastructure</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item"><strong>Core Language:</strong> Python 3.11+</li>
+                            <li class="arch-spec-item"><strong>Browser Automation:</strong> Playwright (Headless Chromium)</li>
+                            <li class="arch-spec-item"><strong>Data Persistence:</strong> SQLite &amp; PostgreSQL</li>
+                            <li class="arch-spec-item"><strong>Delivery:</strong> Telegram Bot API (Async Webhooks)</li>
+                            <li class="arch-spec-item"><strong>CI/CD &amp; Testing:</strong> GitHub Actions, Pytest</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arch-modal-footer">
+                <a href="https://github.com/Ibrahim009-Devloper/Automated-Competitor-Price-Tracking-with-Telegram-Alerts.git" target="_blank" rel="noopener noreferrer" class="btn-project-github" id="arch-modal-github-link">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                    <span>View Repository on GitHub</span>
+                    <span class="btn-github-arrow">↗</span>
+                </a>
+                <button type="button" class="btn-open-architecture" id="btn-footer-close-arch" style="padding:8px 18px; font-size:13px;">
+                    <span>Close Architecture ✕</span>
+                </button>
+            </div>
         </div>
     </div>
 

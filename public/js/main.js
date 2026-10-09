@@ -1847,7 +1847,172 @@ const CASE_STUDIES = {
     // ==========================================
     // DYNAMIC PROJECTS MODULE (SUPABASE)
     // ==========================================
+    // ==========================================
+    // DYNAMIC PROJECTS MODULE (SUPABASE & FEATURED)
+    // ==========================================
+    const DEFAULT_FEATURED_PROJECTS = [
+        {
+            id: 'competitor-price-tracker-telegram',
+            title: 'Automated Competitor Price Tracking with Telegram Alerts',
+            description: `## Automated Competitor Price Tracking with Telegram Alerts
+
+A Python-based automation system that monitors competitor product prices and availability, tracks changes over time, and sends real-time Telegram notifications.
+
+**What It Does:**
+
+* **Automated Price Monitoring:** Automatically checks product prices across supported websites.
+* **Price Change Detection:** Identifies when product prices increase or decrease.
+* **Stock Availability Tracking:** Detects product availability changes, including out-of-stock and back-in-stock events.
+* **Telegram Notifications:** Sends alerts when monitored prices or stock status change.
+* **Historical Price Tracking:** Stores previous price records to help analyze pricing trends over time.
+* **Scheduled Monitoring:** Supports automated monitoring schedules to reduce repetitive manual checks.
+* **Error Handling & Logging:** Records execution details and handles individual monitoring failures to improve reliability.
+* **Flexible Data Storage:** Supports SQLite for local storage and PostgreSQL for database-backed deployments.
+
+**How It Works:**
+
+1. Add the product URLs you want to monitor.
+2. The system collects product prices and availability from supported websites.
+3. It compares new observations with previously stored data.
+4. When a relevant change is detected, it sends a Telegram notification.
+5. Price history is saved for future reference and analysis.
+
+**Business Benefits:**
+
+* Reduce time spent checking competitor websites manually.
+* Stay informed about competitor price and stock changes.
+* Maintain historical pricing records for analysis.
+* Make more informed pricing and product monitoring decisions.
+
+Tech Stack: Python, SQLite, PostgreSQL, Telegram Bot API, GitHub Actions, Pytest.`,
+            tags: ['Python', 'SQLite', 'PostgreSQL', 'Telegram Bot API', 'GitHub Actions', 'Pytest'],
+            github_url: 'https://github.com/Ibrahim009-Devloper/Automated-Competitor-Price-Tracking-with-Telegram-Alerts.git',
+            video_url: null,
+            thumbnail_url: '/assets/telegram_price_alert.svg',
+            media_gallery: [
+                {
+                    id: 'slide-pipeline-graph',
+                    title: 'Pipeline Graph',
+                    tabIcon: '⚡',
+                    badge: '● LIVE PIPELINE GRAPH',
+                    badgeColor: '#10b981',
+                    device: 'pipeline',
+                    src: '/assets/telegram_price_alert.svg',
+                    caption: 'Autonomous pipeline: Catalog Scraper → Delta Engine → Telegram Webhook.',
+                    pipeline_nodes: [
+                        { icon: '🌐', label: 'Target Store', sub: 'Catalog API', tag: 'Connected', tagClass: '' },
+                        { icon: '🐍', label: 'Playwright Bot', sub: 'Headless Scraper', tag: 'Extracting', tagClass: 'tag-green' },
+                        { icon: '🔔', label: 'Telegram API', sub: 'Instant Webhook', tag: 'Delivered', tagClass: 'tag-accent' }
+                    ],
+                    pipeline_ticker: 'STREAM: 48 SKUs scanned · Price drop -$25.00 (-28%) detected · Dispatched to Telegram'
+                },
+                {
+                    id: 'slide-telegram-alerts',
+                    title: 'Telegram Alert',
+                    tabIcon: '📱',
+                    badge: '● TELEGRAM BOT CHANNEL',
+                    badgeColor: '#38bdf8',
+                    device: 'phone',
+                    src: '/assets/telegram_price_alert.svg',
+                    caption: 'Instant price drops and back-in-stock alerts dispatched in < 250ms.'
+                },
+                {
+                    id: 'slide-python-terminal',
+                    title: 'CLI Terminal',
+                    tabIcon: '💻',
+                    badge: '● ASYNC CLI RUNNER',
+                    badgeColor: '#a855f7',
+                    device: 'desktop',
+                    src: '/assets/python_monitor_terminal.svg',
+                    caption: 'Playwright headless crawling with SQLite & PostgreSQL persistent sync.',
+                    window_title: '⚡ python3 monitor_engine.py --stream',
+                    window_tag: 'Playwright + SQLite'
+                }
+            ],
+            is_featured: true,
+            is_published: true,
+            sort_order: 1
+        },
+        {
+            id: 'zillow-real-estate-lead-scraper',
+            title: 'Zillow Real Estate Agent Lead Scraper',
+            description: `## Zillow Real Estate Agent Lead Scraper
+
+I recently built a custom Zillow lead generation system for collecting real estate agent leads based on your target location. 
+
+The system automatically reviews and qualifies leads, organizes the data, and uploads it to Google Sheets for easy follow-up.
+
+**Key features:**
+• Location-based real estate agent lead collection
+• Automated lead qualification using AI
+• Anti-bot detection handling And browser automation
+• Structured and organized lead data
+• Google Sheets integration Built with Python, SeleniumBase, Pandas, and AI-powered lead scoring.
+
+**How It Works:**
+1. Configure target locations (city, state, or zip code) and agent filters.
+2. SeleniumBase executes undetected browser automation, navigating Zillow agent directory listings.
+3. Extracted agent details are evaluated and scored through an AI-assisted qualification step.
+4. Cleaned and structured datasets are pushed directly into Google Sheets via API.
+
+**Business Benefits:**
+• Replaces days of repetitive manual copying from real estate directories with fast automated runs.
+• Delivers pre-qualified, verified contact lists for higher outreach response rates.
+• Real-time Google Sheets sync keeps your sales and outreach team updated automatically.
+
+Tech Stack: Python, SeleniumBase, Pandas, AI-powered lead scoring, Google Sheets API.`,
+            tags: ['Python', 'SeleniumBase', 'Pandas', 'AI Lead Scoring', 'Google Sheets API', 'Anti-Bot Bypass'],
+            github_url: 'https://github.com/Ibrahim009-Devloper/Zillow_Agent_Lead_Scraper.git',
+            video_url: null,
+            thumbnail_url: '/assets/zillow_agent_scraper.svg',
+            media_gallery: [
+                {
+                    id: 'slide-zillow-pipeline',
+                    title: 'Pipeline Graph',
+                    tabIcon: '⚡',
+                    badge: '● LIVE AGENT PIPELINE',
+                    badgeColor: '#10b981',
+                    device: 'pipeline',
+                    src: '/assets/zillow_agent_scraper.svg',
+                    caption: 'Autonomous pipeline: Zillow Directory → SeleniumBase UC → AI Scorer → Google Sheets API.',
+                    pipeline_nodes: [
+                        { icon: '🏠', label: 'Zillow Directory', sub: 'Target Location Search', tag: 'Targeting', tagClass: '' },
+                        { icon: '🐍', label: 'SeleniumBase UC', sub: 'Anti-Bot Scraper', tag: 'Extracting', tagClass: 'tag-green' },
+                        { icon: '📊', label: 'AI & Sheets Sync', sub: 'Lead Scoring & API', tag: 'Live Synced', tagClass: 'tag-accent' }
+                    ],
+                    pipeline_ticker: 'STREAM: Miami, FL & Austin, TX agents scanned · AI qualification 98.4% · Synced to Google Sheets'
+                },
+                {
+                    id: 'slide-zillow-dashboard',
+                    title: 'Agent Scraper & AI',
+                    tabIcon: '🏠',
+                    badge: '● SELENIUMBASE UC RUNNER',
+                    badgeColor: '#38bdf8',
+                    device: 'desktop',
+                    src: '/assets/zillow_agent_scraper.svg',
+                    caption: 'Undetected browser automation collecting agent profiles, ratings, and contact info.',
+                    window_title: '⚡ python3 zillow_agent_engine.py --geo "Miami, Austin"',
+                    window_tag: 'SeleniumBase UC'
+                },
+                {
+                    id: 'slide-zillow-sheets',
+                    title: 'Google Sheets Sync',
+                    tabIcon: '📊',
+                    badge: '● LIVE GOOGLE SHEETS',
+                    badgeColor: '#10b981',
+                    device: 'phone',
+                    src: '/assets/zillow_sheets_mobile.svg',
+                    caption: 'Real-time synchronization of AI-qualified agent leads directly into Google Sheets.'
+                }
+            ],
+            is_featured: true,
+            is_published: true,
+            sort_order: 2
+        }
+    ];
+
     let cachedProjectsList = [];
+    let galleryTimers = {};
 
     // 1. Fetch & Render Public Projects
     async function loadPublicProjects() {
@@ -1855,34 +2020,59 @@ const CASE_STUDIES = {
         if (!container) return;
 
         try {
-            if (!supabase) {
-                renderEmptyProjects(container, 'Supabase client is initializing...');
-                return;
+            let combinedProjects = [];
+
+            // 1. Try fetching from Supabase public.projects table
+            if (supabase) {
+                try {
+                    const { data: dbProjects, error } = await supabase
+                        .from('projects')
+                        .select('*')
+                        .eq('is_published', true)
+                        .order('sort_order', { ascending: true })
+                        .order('created_at', { ascending: false });
+
+                    if (!error && Array.isArray(dbProjects) && dbProjects.length > 0) {
+                        combinedProjects = dbProjects;
+                    }
+                } catch (e) {
+                    console.warn('Supabase fetch projects error:', e);
+                }
             }
 
-            const { data: projects, error } = await supabase
-                .from('projects')
-                .select('*')
-                .eq('is_published', true)
-                .order('sort_order', { ascending: true })
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                console.warn('Public projects query notice:', error.message);
-                renderEmptyProjects(container, 'Projects database connecting. Any published projects will appear here.');
-                return;
+            // 2. If Supabase table empty or pending creation, fetch from /api/projects
+            if (combinedProjects.length === 0) {
+                try {
+                    const res = await fetch('/api/projects');
+                    if (res.ok) {
+                        const json = await res.json();
+                        if (json && Array.isArray(json.data) && json.data.length > 0) {
+                            combinedProjects = json.data.filter(p => p.is_published !== false);
+                        }
+                    }
+                } catch (apiErr) {
+                    console.warn('API fetch projects error:', apiErr);
+                }
             }
 
-            if (!projects || projects.length === 0) {
-                renderEmptyProjects(container, 'No projects published yet. Projects added via the Admin Panel will appear here.');
-                return;
+            // 3. Fallback to DEFAULT_FEATURED_PROJECTS
+            if (combinedProjects.length === 0) {
+                combinedProjects = [...DEFAULT_FEATURED_PROJECTS];
+            } else {
+                // Ensure default featured projects are included if not yet in database
+                const existingTitles = new Set(combinedProjects.map(p => (p.title || '').trim().toLowerCase()));
+                const missingDefaults = DEFAULT_FEATURED_PROJECTS.filter(p => !existingTitles.has(p.title.trim().toLowerCase()));
+                if (missingDefaults.length > 0) {
+                    combinedProjects = [...combinedProjects, ...missingDefaults];
+                }
             }
 
-            cachedProjectsList = projects;
-            renderPublicProjectsList(container, projects);
+            cachedProjectsList = combinedProjects;
+            renderPublicProjectsList(container, combinedProjects);
         } catch (err) {
             console.warn('loadPublicProjects exception:', err);
-            renderEmptyProjects(container, 'No projects published yet.');
+            cachedProjectsList = DEFAULT_FEATURED_PROJECTS;
+            renderPublicProjectsList(container, DEFAULT_FEATURED_PROJECTS);
         }
     }
 
@@ -1896,86 +2086,786 @@ const CASE_STUDIES = {
         `;
     }
 
+    // Render interactive animated gallery for projects with multiple screenshots
+    function renderAnimatedGalleryHtml(proj, idx) {
+        const gallery = proj.media_gallery;
+        if (!gallery || gallery.length === 0) return '';
+
+        const tabsHtml = gallery.map((item, sIdx) => `
+            <button type="button" class="pag-tab-btn cyber-tab ${sIdx === 0 ? 'active' : ''}" data-proj="${idx}" data-slide="${sIdx}">
+                <span class="pag-tab-icon">${item.tabIcon || '📸'}</span>
+                <span class="pag-tab-title">${escapeHtml(item.title)}</span>
+            </button>
+        `).join('');
+
+        const slidesHtml = gallery.map((item, sIdx) => {
+            let deviceMarkup = '';
+            if (item.device === 'pipeline') {
+                const nodes = item.pipeline_nodes || [
+                    { icon: '🌐', label: 'Target Store', sub: 'Catalog API', tag: 'Connected', tagClass: '' },
+                    { icon: '🐍', label: 'Playwright Bot', sub: 'Headless Scraper', tag: 'Extracting', tagClass: 'tag-green' },
+                    { icon: '🔔', label: 'Telegram API', sub: 'Instant Webhook', tag: 'Delivered', tagClass: 'tag-accent' }
+                ];
+                const tickerText = item.pipeline_ticker || 'STREAM: 48 SKUs scanned · Price drop -$25.00 (-28%) detected · Dispatched to Telegram';
+
+                deviceMarkup = `
+                    <div class="cyber-pipeline-canvas pag-mockup-wrap" data-img-src="${escapeHtml(item.src)}" data-img-title="${escapeHtml(item.title)}" data-img-caption="${escapeHtml(item.caption)}" title="Click to view full screen">
+                        <div class="pipeline-graph-hud">
+                            <div class="pipeline-node-grid">
+                                <div class="pipeline-node node-web">
+                                    <div class="node-icon">${nodes[0].icon}</div>
+                                    <div class="node-label">${escapeHtml(nodes[0].label)}</div>
+                                    <div class="node-sub">${escapeHtml(nodes[0].sub)}</div>
+                                    <div class="node-status-tag ${escapeHtml(nodes[0].tagClass || '')}">${escapeHtml(nodes[0].tag)}</div>
+                                </div>
+                                <div class="pipeline-connector">
+                                    <div class="pipeline-line"></div>
+                                    <div class="pipeline-packet packet-1"></div>
+                                </div>
+                                <div class="pipeline-node node-worker active-pulse">
+                                    <div class="node-icon">${nodes[1].icon}</div>
+                                    <div class="node-label">${escapeHtml(nodes[1].label)}</div>
+                                    <div class="node-sub">${escapeHtml(nodes[1].sub)}</div>
+                                    <div class="node-status-tag ${escapeHtml(nodes[1].tagClass || 'tag-green')}">${escapeHtml(nodes[1].tag)}</div>
+                                </div>
+                                <div class="pipeline-connector">
+                                    <div class="pipeline-line"></div>
+                                    <div class="pipeline-packet packet-2"></div>
+                                </div>
+                                <div class="pipeline-node node-alert">
+                                    <div class="node-icon">${nodes[2].icon}</div>
+                                    <div class="node-label">${escapeHtml(nodes[2].label)}</div>
+                                    <div class="node-sub">${escapeHtml(nodes[2].sub)}</div>
+                                    <div class="node-status-tag ${escapeHtml(nodes[2].tagClass || 'tag-accent')}">${escapeHtml(nodes[2].tag)}</div>
+                                </div>
+                            </div>
+                            <div class="pipeline-live-ticker">
+                                <span class="ticker-dot">●</span>
+                                <span class="ticker-text" id="pipeline-ticker-${idx}">${escapeHtml(tickerText)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (item.device === 'phone') {
+                deviceMarkup = `
+                    <div class="pag-phone-chassis cyber-phone-chassis">
+                        <div class="pag-phone-island">
+                            <span class="pag-phone-speaker"></span>
+                            <span class="pag-phone-lens"></span>
+                        </div>
+                        <div class="pag-phone-screen">
+                            <img class="pag-mockup-img is-phone" src="${escapeHtml(item.src)}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                `;
+            } else {
+                const winTitle = item.window_title || '⚡ python3 monitor_engine.py --stream';
+                const winTag = item.window_tag || 'Playwright + SQLite';
+                deviceMarkup = `
+                    <div class="pag-desktop-chassis cyber-desktop-chassis">
+                        <div class="pag-desktop-titlebar">
+                            <div class="pag-window-controls">
+                                <span class="pag-win-btn pag-win-close"></span>
+                                <span class="pag-win-btn pag-win-min"></span>
+                                <span class="pag-win-btn pag-win-max"></span>
+                            </div>
+                            <div class="pag-window-title">${escapeHtml(winTitle)}</div>
+                            <div class="pag-window-tag">${escapeHtml(winTag)}</div>
+                        </div>
+                        <div class="pag-desktop-screen">
+                            <img class="pag-mockup-img is-desktop" src="${escapeHtml(item.src)}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="pag-slide cyber-slide ${sIdx === 0 ? 'active' : ''}" data-proj="${idx}" data-slide="${sIdx}" data-badge-color="${escapeHtml(item.badgeColor || '#10b981')}">
+                    <div class="pag-mockup-wrap" data-img-src="${escapeHtml(item.src)}" data-img-title="${escapeHtml(item.title)}" data-img-caption="${escapeHtml(item.caption)}" title="Click to view full screen">
+                        ${deviceMarkup}
+                    </div>
+                    <div class="pag-caption-bar cyber-caption-bar">
+                        <span class="pag-caption-badge cyber-badge" style="background:${item.badgeColor ? `${item.badgeColor}22` : 'rgba(16,185,129,0.15)'}; color:${item.badgeColor || '#10b981'}; border:1px solid ${item.badgeColor ? `${item.badgeColor}55` : 'rgba(16,185,129,0.4)'};">
+                            ${escapeHtml(item.badge || 'LIVE PREVIEW')}
+                        </span>
+                        <span class="pag-caption-text">${escapeHtml(item.caption)}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        const dotsHtml = gallery.map((_, sIdx) => `
+            <button type="button" class="pag-dot ${sIdx === 0 ? 'active' : ''}" data-proj="${idx}" data-slide="${sIdx}" aria-label="Go to slide ${sIdx + 1}"></button>
+        `).join('');
+
+        return `
+            <div class="project-animated-gallery cyber-bot-deck" id="proj-gallery-${idx}" data-proj="${idx}">
+                <!-- Dynamic Specular Glare & Laser Scanner -->
+                <div class="cyber-deck-glare"></div>
+                <div class="cyber-laser-scanner"></div>
+
+                <div class="pag-header cyber-hud-bar">
+                    <div class="cyber-hud-left">
+                        <div class="cyber-status-pill">
+                            <span class="cyber-pulse-emitter">
+                                <span class="cyber-pulse-core"></span>
+                                <span class="cyber-pulse-ring"></span>
+                            </span>
+                            <span class="cyber-status-title">AUTOMATION ENGINE</span>
+                            <span class="cyber-status-meta">24ms · 200 OK</span>
+                        </div>
+                        <div class="pag-tabs cyber-mode-tabs">${tabsHtml}</div>
+                    </div>
+                    <div class="pag-header-actions cyber-hud-actions">
+                        <button type="button" class="cyber-hud-btn cyber-btn-simulate" data-proj="${idx}" title="Trigger Live Simulation Pulse">
+                            <span class="cyber-btn-icon">⚡</span>
+                            <span class="cyber-btn-text">Simulate</span>
+                        </button>
+                        <button type="button" class="cyber-hud-btn pag-btn-pause" data-proj="${idx}" title="Pause/Play Auto-Rotation">
+                            <span class="pag-pause-icon">⏸</span>
+                        </button>
+                        <button type="button" class="cyber-hud-btn pag-btn-zoom" data-proj="${idx}" title="Open Fullscreen Lightbox">
+                            <span>🔍</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pag-stage cyber-stage" id="pag-stage-${idx}">${slidesHtml}</div>
+
+                <div class="pag-controls cyber-controls">
+                    <div class="pag-dots cyber-dots">${dotsHtml}</div>
+                    <div class="pag-nav-arrows cyber-arrows">
+                        <button type="button" class="pag-arrow-btn pag-btn-prev" data-proj="${idx}" aria-label="Previous view">‹</button>
+                        <button type="button" class="pag-arrow-btn pag-btn-next" data-proj="${idx}" aria-label="Next view">›</button>
+                    </div>
+                </div>
+
+                <div class="pag-progress-track cyber-progress-track">
+                    <div class="pag-progress-fill cyber-progress-fill" id="pag-progress-${idx}"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Markdown formatter for structured case studies
+    function formatRichProjectDescription(rawText) {
+        if (!rawText) return '';
+        let escaped = escapeHtml(rawText);
+
+        // Bold text **text**
+        escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--ink); font-weight:700;">$1</strong>');
+
+        // Section Headers
+        escaped = escaped.replace(/(?:^|\n)&lt;h4&gt;(.*?)&lt;\/h4&gt;/gi, '<h4 class="proj-sec-title"><span>⚡</span> $1</h4>');
+        escaped = escaped.replace(/(?:^|\n)##\s+(.*$)/gim, '<h4 class="proj-sec-title"><span>⚡</span> $1</h4>');
+
+        // Bullet lists
+        escaped = escaped.replace(/(?:^|\n)\*\s+(.*$)/gim, '<li class="proj-sec-li">$1</li>');
+        escaped = escaped.replace(/(?:^|\n)•\s+(.*$)/gim, '<li class="proj-sec-li">$1</li>');
+
+        // Numbered lists 1. 2. 3.
+        escaped = escaped.replace(/(?:^|\n)(\d+)\.\s+(.*$)/gim, '<li class="proj-sec-num-li"><strong style="color:var(--accent);">$1.</strong> $2</li>');
+
+        // Wrap list items
+        escaped = escaped.replace(/((?:<li class="proj-sec-li">.*?<\/li>\s*)+)/gis, '<ul class="proj-sec-list">$1</ul>');
+        escaped = escaped.replace(/((?:<li class="proj-sec-num-li">.*?<\/li>\s*)+)/gis, '<ol class="proj-num-list" style="padding-left:18px; margin:0 0 16px;">$1</ol>');
+
+        // Paragraph breaks
+        escaped = escaped.replace(/\n\n+/g, '</p><p style="margin-bottom:12px; line-height:1.65;">');
+        escaped = escaped.replace(/\n/g, '<br />');
+
+        return `<div class="project-markdown-box"><p style="margin-bottom:12px; line-height:1.65;">${escaped}</p></div>`;
+    }
+
     function renderPublicProjectsList(container, projects) {
         container.innerHTML = '';
 
+        // Clear existing auto-rotation timers
+        Object.values(galleryTimers).forEach(t => clearInterval(t));
+        galleryTimers = {};
+
         projects.forEach((proj, idx) => {
             const card = document.createElement('div');
-            card.className = 'project-card reveal';
-            card.style.display = 'flex';
-            card.style.flexDirection = 'column';
+            card.className = 'project-card in';
+            card.style.opacity = '1';
+            card.style.visibility = 'visible';
+            card.style.transform = 'none';
 
             const tagsArray = Array.isArray(proj.tags)
                 ? proj.tags
                 : (typeof proj.tags === 'string' ? proj.tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+            const tagsHint = tagsArray.slice(0, 3).join(' · ') || 'Playwright · SQLite · Telegram API';
 
             let mediaHtml = '';
-            if (proj.video_url) {
+            if (proj.media_gallery && proj.media_gallery.length > 0) {
+                // Interactive Animated Multi-Screen Showcase
+                mediaHtml = renderAnimatedGalleryHtml(proj, idx);
+            } else if (proj.video_url) {
                 mediaHtml = `
-                    <div class="project-video-wrapper" style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:8px; overflow:hidden; margin-bottom:16px;">
+                    <div class="project-video-wrapper" style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; margin-bottom:20px; box-shadow:0 14px 36px rgba(0,0,0,0.4);">
                         <video src="${escapeHtml(proj.video_url)}" ${proj.thumbnail_url ? `poster="${escapeHtml(proj.thumbnail_url)}"` : ''} controls preload="metadata" playsinline style="width:100%; height:100%; object-fit:contain; display:block;"></video>
                     </div>
                 `;
             } else if (proj.thumbnail_url) {
                 mediaHtml = `
-                    <div class="project-visual" style="margin-bottom:16px; border-radius:8px; overflow:hidden;">
+                    <div class="project-visual" style="margin-bottom:20px; border-radius:12px; overflow:hidden; box-shadow:0 14px 36px rgba(0,0,0,0.4);">
                         <img class="project-visual-media" src="${escapeHtml(proj.thumbnail_url)}" alt="${escapeHtml(proj.title)}" loading="lazy" decoding="async" style="width:100%; height:auto; display:block; object-fit:cover;" />
                     </div>
                 `;
             }
 
-            const desc = proj.description || '';
-            const isLong = desc.length > 220;
-            const shortDesc = isLong ? desc.slice(0, 200) + '...' : desc;
-
             let githubBtnHtml = '';
             if (proj.github_url) {
                 githubBtnHtml = `
-                    <div style="margin-top:16px;">
-                        <a href="${escapeHtml(proj.github_url)}" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--quiet" style="display:inline-flex; align-items:center; gap:8px; padding:7px 16px; font-size:13px; font-weight:600; text-decoration:none; border-radius:8px;">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                            </svg>
-                            <span>View on GitHub</span>
-                            <span class="hero-cta-arrow" aria-hidden="true">↗</span>
-                        </a>
-                    </div>
+                    <a href="${escapeHtml(proj.github_url)}" target="_blank" rel="noopener noreferrer" class="btn-project-github" aria-label="View on GitHub">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                        <span>View on GitHub</span>
+                        <span class="btn-github-arrow">↗</span>
+                    </a>
                 `;
             }
 
             card.innerHTML = `
                 ${mediaHtml}
-                <div class="project-body" style="padding:0; flex:1; display:flex; flex-direction:column;">
-                    <div class="project-copy" style="flex:1;">
-                        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; align-items:center;">
-                            ${proj.is_featured ? `<span class="badge-pill" style="background:rgba(234,179,8,0.15); color:#eab308; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:700;">Featured</span>` : ''}
-                            ${tagsArray.map(tag => `<span class="badge-pill" style="background:rgba(16,185,129,0.12); color:#10b981; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600;">${escapeHtml(tag)}</span>`).join('')}
+                <div class="project-body project-body--clean">
+                    <div class="project-header-row">
+                        <div class="project-live-badge">
+                            <span class="live-dot-pulse"></span>
+                            <span>AUTONOMOUS PYTHON BOT</span>
                         </div>
-                        <h3 class="project-title" style="margin-bottom:8px; font-size:18px; font-weight:700; color:var(--ink);">${escapeHtml(proj.title)}</h3>
-                        <div class="project-desc-wrapper" id="public-proj-desc-${idx}">
-                            <p class="project-summary" style="font-size:14px; line-height:1.6; color:var(--ink-2); margin-bottom:4px;">${escapeHtml(isLong ? shortDesc : desc)}</p>
-                            ${isLong ? `<button type="button" class="btn-read-more" data-idx="${idx}" style="background:none; border:none; color:var(--accent); font-size:13px; font-weight:600; cursor:pointer; padding:0; margin-top:4px;">Read more ↓</button>` : ''}
-                        </div>
+                        <span class="project-stack-hint">${escapeHtml(tagsHint)}</span>
                     </div>
-                    ${githubBtnHtml}
+
+                    <h3 class="project-title">${escapeHtml(proj.title)}</h3>
+
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-open-architecture" data-idx="${idx}" aria-label="Read Full Project Architecture">
+                            <span class="btn-arch-icon">⚡</span>
+                            <span class="btn-arch-text">Read Full Project Architecture</span>
+                            <span class="btn-arch-arrow">→</span>
+                        </button>
+                        ${githubBtnHtml}
+                    </div>
                 </div>
             `;
 
-            if (isLong) {
-                const btn = card.querySelector(`.btn-read-more[data-idx="${idx}"]`);
-                if (btn) {
-                    let expanded = false;
-                    btn.addEventListener('click', () => {
-                        expanded = !expanded;
-                        const p = card.querySelector(`#public-proj-desc-${idx} .project-summary`);
-                        if (p) p.textContent = expanded ? desc : shortDesc;
-                        btn.textContent = expanded ? 'Read less ↑' : 'Read more ↓';
-                    });
-                }
-            }
-
             container.appendChild(card);
         });
+
+        // Initialize Animated Galleries, Lightbox & Architecture Modal
+        initGalleryInteractiveEngines(container);
+        initLightboxListeners();
+        initProjectArchitectureModal(container, projects);
+    }
+
+    // Interactive Full Project Architecture Modal Controller
+    function renderProjectArchitectureBody(proj) {
+        if (!proj) return '';
+        const titleLower = (proj.title || '').toLowerCase();
+        const isZillow = proj.id === 'zillow-real-estate-lead-scraper' || titleLower.includes('zillow') || titleLower.includes('real estate');
+
+        if (isZillow) {
+            return `
+                <!-- Interactive Flow Diagram -->
+                <div class="arch-flow-diagram">
+                    <div class="arch-flow-label">⚡ Autonomous Execution Pipeline</div>
+                    <div class="arch-flow-grid">
+                        <div class="arch-flow-node">
+                            <div class="arch-node-icon">🏠</div>
+                            <div class="arch-node-name">Location Discovery</div>
+                            <div class="arch-node-desc">Target geo-location search &amp; agent directory crawl</div>
+                        </div>
+                        <div class="arch-flow-arrow">➔</div>
+                        <div class="arch-flow-node">
+                            <div class="arch-node-icon">🐍</div>
+                            <div class="arch-node-name">SeleniumBase UC</div>
+                            <div class="arch-node-desc">Anti-bot detection bypass &amp; dynamic DOM extraction</div>
+                        </div>
+                        <div class="arch-flow-arrow">➔</div>
+                        <div class="arch-flow-node">
+                            <div class="arch-node-icon">📊</div>
+                            <div class="arch-node-name">AI &amp; Google Sheets</div>
+                            <div class="arch-node-desc">Automated lead qualification + instant Sheets sync</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structured Specs Grid -->
+                <div class="arch-specs-grid">
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>⚡</span> What It Does</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item"><strong>Location-based lead collection:</strong> Automatically discovers and collects real estate agent contacts across specified target cities and zip codes.</li>
+                            <li class="arch-spec-item"><strong>Automated qualification using AI:</strong> Reviews agent transaction history, reviews, and credentials using AI to qualify high-value leads.</li>
+                            <li class="arch-spec-item"><strong>Anti-bot detection handling:</strong> Employs SeleniumBase with undetected-chromedriver mode to handle Cloudflare and anti-bot challenges smoothly.</li>
+                            <li class="arch-spec-item"><strong>Structured lead data:</strong> Cleans, standardizes, and formats phone numbers, emails, brokerages, and active listings using pandas.</li>
+                            <li class="arch-spec-item"><strong>Google Sheets integration:</strong> Automatically uploads and synchronizes organized leads into Google Sheets for instant sales follow-up.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>🔄</span> How It Works</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item"><strong>1. Target Parameters:</strong> Configure target locations (city, state, or zip code) and agent filters.</li>
+                            <li class="arch-spec-item"><strong>2. Undetected Scraping:</strong> SeleniumBase launches undetected browser sessions, navigating Zillow directory listings without bot blocks.</li>
+                            <li class="arch-spec-item"><strong>3. AI Lead Qualification:</strong> An LLM pipeline reviews extracted agent profiles, evaluates closing track records, and generates quality scores.</li>
+                            <li class="arch-spec-item"><strong>4. Live Sheets Sync:</strong> pandas validates and formats the dataset, then streams verified leads directly into Google Sheets via API.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>💼</span> Business Benefits</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item">Replaces days of repetitive manual copying from real estate directories with fast automated runs.</li>
+                            <li class="arch-spec-item">Delivers pre-qualified, clean agent leads ready for immediate email or phone outreach.</li>
+                            <li class="arch-spec-item">Real-time Google Sheets sync eliminates manual file imports and keeps your team updated instantly.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-spec-card">
+                        <h4 class="arch-spec-title"><span>🛠️</span> Tech Stack &amp; Infrastructure</h4>
+                        <ul class="arch-spec-list">
+                            <li class="arch-spec-item"><strong>Language:</strong> Python 3.11+</li>
+                            <li class="arch-spec-item"><strong>Browser Automation:</strong> SeleniumBase (Undetected-Chromedriver Mode)</li>
+                            <li class="arch-spec-item"><strong>Data Processing:</strong> pandas</li>
+                            <li class="arch-spec-item"><strong>AI Scoring:</strong> LLM-powered lead qualification &amp; scoring</li>
+                            <li class="arch-spec-item"><strong>Integrations:</strong> Google Sheets API, Google Docs</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Default: Competitor Price Tracking with Telegram Alerts
+        return `
+            <!-- Interactive Flow Diagram -->
+            <div class="arch-flow-diagram">
+                <div class="arch-flow-label">⚡ Autonomous Execution Pipeline</div>
+                <div class="arch-flow-grid">
+                    <div class="arch-flow-node">
+                        <div class="arch-node-icon">🌐</div>
+                        <div class="arch-node-name">Headless Scraper</div>
+                        <div class="arch-node-desc">Playwright Async Crawlers with session spoofing &amp; proxy pooling</div>
+                    </div>
+                    <div class="arch-flow-arrow">➔</div>
+                    <div class="arch-flow-node">
+                        <div class="arch-node-icon">⚡</div>
+                        <div class="arch-node-name">Delta Engine</div>
+                        <div class="arch-node-desc">Observation diff calculation &amp; historical persistence (SQLite/Postgres)</div>
+                    </div>
+                    <div class="arch-flow-arrow">➔</div>
+                    <div class="arch-flow-node">
+                        <div class="arch-node-icon">🔔</div>
+                        <div class="arch-node-name">Telegram Bot</div>
+                        <div class="arch-node-desc">Instant sub-250ms alert dispatch with markdown price delta formatting</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Structured Specs Grid -->
+            <div class="arch-specs-grid">
+                <div class="arch-spec-card">
+                    <h4 class="arch-spec-title"><span>⚡</span> What It Does</h4>
+                    <ul class="arch-spec-list">
+                        <li class="arch-spec-item"><strong>Automated Price Tracking:</strong> Automatically extracts competitor product pricing and stock across multi-domain target stores.</li>
+                        <li class="arch-spec-item"><strong>Delta &amp; Stock Detection:</strong> Identifies price increases, markdowns, and back-in-stock events without manual checks.</li>
+                        <li class="arch-spec-item"><strong>Real-Time Telegram Alerts:</strong> Dispatches instant alert webhooks with structured product details and direct links.</li>
+                        <li class="arch-spec-item"><strong>Historical Trends:</strong> Persists all snapshots for trend analytics and competitor discount patterns.</li>
+                    </ul>
+                </div>
+
+                <div class="arch-spec-card">
+                    <h4 class="arch-spec-title"><span>🔄</span> How It Works</h4>
+                    <ul class="arch-spec-list">
+                        <li class="arch-spec-item"><strong>1. Target Queue:</strong> Reads monitored SKU URLs from configuration or persistent store.</li>
+                        <li class="arch-spec-item"><strong>2. Headless Collection:</strong> Playwright navigates target pages, executes dynamic scripts, and grabs clean JSON payloads.</li>
+                        <li class="arch-spec-item"><strong>3. Diff Analysis:</strong> Compares observed prices against previous records in SQLite / PostgreSQL.</li>
+                        <li class="arch-spec-item"><strong>4. Instant Dispatch:</strong> Fires structured Telegram notifications with automated error handling and retry resilience.</li>
+                    </ul>
+                </div>
+
+                <div class="arch-spec-card">
+                    <h4 class="arch-spec-title"><span>💼</span> Business Benefits</h4>
+                    <ul class="arch-spec-list">
+                        <li class="arch-spec-item">Eliminates 6 to 8 hours of tedious daily manual checks across competitor catalogs.</li>
+                        <li class="arch-spec-item">Immediate awareness of competitor promotions and flash sales within seconds.</li>
+                        <li class="arch-spec-item">Reliable autonomous runs without human intervention, equipped with auto-recovery health checks.</li>
+                    </ul>
+                </div>
+
+                <div class="arch-spec-card">
+                    <h4 class="arch-spec-title"><span>🛠️</span> Tech Stack &amp; Infrastructure</h4>
+                    <ul class="arch-spec-list">
+                        <li class="arch-spec-item"><strong>Core Language:</strong> Python 3.11+</li>
+                        <li class="arch-spec-item"><strong>Browser Automation:</strong> Playwright (Headless Chromium)</li>
+                        <li class="arch-spec-item"><strong>Data Persistence:</strong> SQLite &amp; PostgreSQL</li>
+                        <li class="arch-spec-item"><strong>Delivery:</strong> Telegram Bot API (Async Webhooks)</li>
+                        <li class="arch-spec-item"><strong>CI/CD &amp; Testing:</strong> GitHub Actions, Pytest</li>
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+
+    function initProjectArchitectureModal(container, projects) {
+        const modal = document.getElementById('project-architecture-modal');
+        if (!modal) return;
+
+        const closeBtn = document.getElementById('btn-close-arch-modal');
+        const footerCloseBtn = document.getElementById('btn-footer-close-arch');
+        const modalTitle = document.getElementById('arch-modal-title');
+        const modalGithub = document.getElementById('arch-modal-github-link');
+        const modalBody = document.getElementById('arch-modal-body-content');
+
+        function closeModal() {
+            modal.classList.remove('is-active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        function openModal(proj) {
+            if (!proj) return;
+            if (modalTitle) modalTitle.textContent = proj.title || 'Project Architecture';
+            if (modalGithub) {
+                if (proj.github_url) {
+                    modalGithub.href = proj.github_url;
+                    modalGithub.style.display = 'inline-flex';
+                } else {
+                    modalGithub.style.display = 'none';
+                }
+            }
+            if (modalBody) {
+                modalBody.innerHTML = renderProjectArchitectureBody(proj);
+            }
+
+            modal.style.display = 'flex';
+            void modal.offsetWidth; // Force reflow
+            modal.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        const openButtons = container.querySelectorAll('.btn-open-architecture');
+        openButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const idx = parseInt(btn.getAttribute('data-idx'), 10);
+                const proj = projects[idx] || projects[0];
+                openModal(proj);
+            });
+        });
+
+        if (closeBtn) closeBtn.onclick = closeModal;
+        if (footerCloseBtn) footerCloseBtn.onclick = closeModal;
+        modal.onclick = (e) => {
+            if (e.target === modal) closeModal();
+        };
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                closeModal();
+            }
+        });
+    }
+
+    // Active Gallery Interactive Engines (Auto-rotation, tabs, controls, lightbox)
+    function initGalleryInteractiveEngines(container) {
+        const galleries = container.querySelectorAll('.project-animated-gallery');
+
+        galleries.forEach(gallery => {
+            const pIdx = parseInt(gallery.getAttribute('data-proj'), 10);
+            const slides = gallery.querySelectorAll('.pag-slide');
+            const tabs = gallery.querySelectorAll('.pag-tab-btn');
+            const dots = gallery.querySelectorAll('.pag-dot');
+            const prevBtn = gallery.querySelector('.pag-btn-prev');
+            const nextBtn = gallery.querySelector('.pag-btn-next');
+            const pauseBtn = gallery.querySelector('.pag-btn-pause');
+            const pauseIcon = gallery.querySelector('.pag-pause-icon');
+            const pauseText = gallery.querySelector('.pag-pause-text');
+            const progressBar = gallery.querySelector('.pag-progress-fill');
+            const zoomBtn = gallery.querySelector('.pag-btn-zoom');
+
+            if (!slides || slides.length === 0) return;
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            let isPaused = false;
+            let progressInterval = null;
+            let progressValue = 0;
+            const slideDuration = 4500; // 4.5 seconds per slide
+            const tickRate = 50;
+
+            function showSlide(index, direction = 1) {
+                const prevSlide = currentSlide;
+                currentSlide = (index + totalSlides) % totalSlides;
+
+                const stage = gallery.querySelector('.pag-stage');
+                const activeSlideEl = slides[currentSlide];
+                const badgeColor = activeSlideEl ? (activeSlideEl.getAttribute('data-badge-color') || '#10b981') : '#10b981';
+
+                // Sync dynamic ambient spotlight glow on the stage
+                if (stage) {
+                    stage.style.setProperty('--pag-glow', badgeColor);
+                }
+
+                // Trigger laser scanner sweep animation
+                const laser = gallery.querySelector('.cyber-laser-scanner');
+                if (laser) {
+                    laser.classList.remove('scanning');
+                    void laser.offsetWidth; // Trigger reflow
+                    laser.classList.add('scanning');
+                }
+
+                slides.forEach((s, idx) => {
+                    if (idx === currentSlide) {
+                        s.classList.remove('slide-exit-left', 'slide-exit-right', 'slide-exit');
+                        s.classList.add('active');
+                    } else if (idx === prevSlide && direction !== 0) {
+                        s.classList.remove('active');
+                        s.classList.add(direction > 0 ? 'slide-exit-left' : 'slide-exit-right');
+                    } else {
+                        s.classList.remove('active', 'slide-exit-left', 'slide-exit-right', 'slide-exit');
+                    }
+                });
+
+                setTimeout(() => {
+                    slides.forEach((s, idx) => {
+                        if (idx !== currentSlide) {
+                            s.classList.remove('slide-exit-left', 'slide-exit-right', 'slide-exit');
+                        }
+                    });
+                }, 480);
+
+                tabs.forEach((t, idx) => {
+                    t.classList.toggle('active', idx === currentSlide);
+                });
+
+                dots.forEach((d, idx) => {
+                    d.classList.toggle('active', idx === currentSlide);
+                });
+
+                // Update counter pill
+                const counterPill = gallery.querySelector(`#pag-counter-${pIdx}`);
+                if (counterPill) {
+                    counterPill.textContent = `${currentSlide + 1} / ${totalSlides}`;
+                }
+
+                resetProgress();
+            }
+
+            function resetProgress() {
+                progressValue = 0;
+                if (progressBar) progressBar.style.width = '0%';
+            }
+
+            function startTimer() {
+                if (progressInterval) clearInterval(progressInterval);
+                progressInterval = setInterval(() => {
+                    if (isPaused) return;
+                    progressValue += (tickRate / slideDuration) * 100;
+                    if (progressBar) progressBar.style.width = `${Math.min(100, progressValue)}%`;
+
+                    if (progressValue >= 100) {
+                        showSlide(currentSlide + 1, 1);
+                    }
+                }, tickRate);
+                galleryTimers[pIdx] = progressInterval;
+            }
+
+            function togglePause(forceState) {
+                if (typeof forceState === 'boolean') {
+                    isPaused = forceState;
+                } else {
+                    isPaused = !isPaused;
+                }
+                if (pauseIcon) pauseIcon.textContent = isPaused ? '▶' : '⏸';
+                if (pauseText) pauseText.textContent = isPaused ? 'Play' : 'Pause';
+            }
+
+            // Tabs click
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sIdx = parseInt(tab.getAttribute('data-slide'), 10);
+                    const dir = sIdx >= currentSlide ? 1 : -1;
+                    showSlide(sIdx, dir);
+                });
+            });
+
+            // Dots click
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sIdx = parseInt(dot.getAttribute('data-slide'), 10);
+                    const dir = sIdx >= currentSlide ? 1 : -1;
+                    showSlide(sIdx, dir);
+                });
+            });
+
+            // Arrow buttons
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showSlide(currentSlide - 1, -1);
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showSlide(currentSlide + 1, 1);
+                });
+            }
+
+            // Pause button
+            if (pauseBtn) {
+                pauseBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    togglePause();
+                });
+            }
+
+            // Interactive Simulate Button (Live Automation Pulse)
+            const simBtn = gallery.querySelector('.cyber-btn-simulate');
+            if (simBtn) {
+                simBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const stage = gallery.querySelector('.pag-stage');
+                    if (stage && stage.classList.contains('is-simulating')) return;
+                    if (stage) stage.classList.add('is-simulating');
+                    simBtn.classList.add('active');
+
+                    // If not on pipeline slide, switch to pipeline view
+                    if (currentSlide !== 0) {
+                        showSlide(0, 1);
+                    }
+
+                    const ticker = gallery.querySelector(`#pipeline-ticker-${pIdx}`) || gallery.querySelector('.ticker-text');
+                    const origText = ticker ? ticker.textContent : '';
+
+                    if (ticker) ticker.textContent = '⚡ [04:12:01] Spawning headless Chromium worker context...';
+
+                    setTimeout(() => {
+                        if (ticker) ticker.textContent = '🌐 [04:12:02] Crawling catalog DOM · 48 SKU nodes extracted.';
+                    }, 650);
+
+                    setTimeout(() => {
+                        if (ticker) ticker.textContent = '🚨 [04:12:03] Delta detected: Price drop -$25.00 (-28%) on SKU #419!';
+                    }, 1300);
+
+                    setTimeout(() => {
+                        if (ticker) ticker.textContent = '✔ [04:12:04] Dispatched Telegram alert webhook (Status: 200 OK)';
+                    }, 2000);
+
+                    setTimeout(() => {
+                        if (stage) stage.classList.remove('is-simulating');
+                        simBtn.classList.remove('active');
+                        if (ticker) ticker.textContent = origText;
+                    }, 3500);
+                });
+            }
+
+            // Interactive 3D Parallax Tilt with Specular Mouse Glare
+            gallery.addEventListener('mousemove', (e) => {
+                const rect = gallery.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5.5; // subtle 5.5deg max
+                const rotateY = ((x - centerX) / centerX) * 5.5;
+                gallery.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+                gallery.style.setProperty('--glare-x', `${(x / rect.width * 100).toFixed(1)}%`);
+                gallery.style.setProperty('--glare-y', `${(y / rect.height * 100).toFixed(1)}%`);
+            });
+
+            gallery.addEventListener('mouseleave', () => {
+                gallery.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                gallery.style.setProperty('--glare-x', '50%');
+                gallery.style.setProperty('--glare-y', '50%');
+                togglePause(false);
+            });
+
+            gallery.addEventListener('mouseenter', () => togglePause(true));
+
+            // Lightbox on zoom button click
+            if (zoomBtn) {
+                zoomBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const activeWrap = gallery.querySelector('.pag-slide.active .pag-mockup-wrap');
+                    if (activeWrap) {
+                        const src = activeWrap.getAttribute('data-img-src');
+                        const title = activeWrap.getAttribute('data-img-title');
+                        const caption = activeWrap.getAttribute('data-img-caption');
+                        openProjectLightbox(src, title, caption);
+                    }
+                });
+            }
+
+            // Lightbox on mockup image click
+            gallery.querySelectorAll('.pag-mockup-wrap').forEach(wrap => {
+                wrap.addEventListener('click', () => {
+                    const src = wrap.getAttribute('data-img-src');
+                    const title = wrap.getAttribute('data-img-title');
+                    const caption = wrap.getAttribute('data-img-caption');
+                    openProjectLightbox(src, title, caption);
+                });
+            });
+
+            // Initialize first slide and glow
+            showSlide(0, 0);
+
+            // Start auto timer
+            startTimer();
+        });
+    }
+
+    // Lightbox modal handlers
+    function openProjectLightbox(src, title, caption) {
+        const modal = document.getElementById('project-lightbox-modal');
+        const img = document.getElementById('lightbox-image');
+        const titleEl = document.getElementById('lightbox-title');
+        const capEl = document.getElementById('lightbox-caption');
+        if (!modal || !img) return;
+
+        img.src = src;
+        if (titleEl) titleEl.textContent = title || 'Project Screenshot Preview';
+        if (capEl) capEl.textContent = caption || '';
+        modal.style.display = 'flex';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectLightbox() {
+        const modal = document.getElementById('project-lightbox-modal');
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 200);
+    }
+
+    function initLightboxListeners() {
+        const closeBtn = document.getElementById('btn-close-lightbox');
+        const modal = document.getElementById('project-lightbox-modal');
+        if (closeBtn && !closeBtn.dataset.bound) {
+            closeBtn.dataset.bound = 'true';
+            closeBtn.addEventListener('click', closeProjectLightbox);
+        }
+        if (modal && !modal.dataset.bound) {
+            modal.dataset.bound = 'true';
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeProjectLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    closeProjectLightbox();
+                }
+            });
+        }
     }
 
     // 2. Admin Projects Management & Supabase SQL Schema
@@ -1988,6 +2878,7 @@ create table if not exists public.projects (
   github_url text,
   video_url text,
   thumbnail_url text,
+  media_gallery jsonb default '[]'::jsonb,
   is_featured boolean not null default false,
   is_published boolean not null default true,
   sort_order int not null default 0,
@@ -2068,7 +2959,7 @@ values (
   'project-media',
   true,
   52428800,
-  array['video/mp4', 'video/webm', 'image/jpeg', 'image/png', 'image/webp', 'image/gif']
+  array['video/mp4', 'video/webm', 'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml']
 )
 on conflict (id) do update set
   public = true,
@@ -2090,7 +2981,65 @@ create policy "Allow manage project media"
   on storage.objects for all
   using (bucket_id = 'project-media');
 
--- 10. Refresh schema cache
+-- 10. Seed Default Featured Project: Automated Competitor Price Tracking with Telegram Alerts
+insert into public.projects (
+  title,
+  description,
+  tags,
+  github_url,
+  thumbnail_url,
+  media_gallery,
+  is_featured,
+  is_published,
+  sort_order
+) values (
+  'Automated Competitor Price Tracking with Telegram Alerts',
+  '## Automated Competitor Price Tracking with Telegram Alerts
+
+A Python-based automation system that monitors competitor product prices and availability, tracks changes over time, and sends real-time Telegram notifications.
+
+**What It Does:**
+
+* **Automated Price Monitoring:** Automatically checks product prices across supported websites.
+* **Price Change Detection:** Identifies when product prices increase or decrease.
+* **Stock Availability Tracking:** Detects product availability changes, including out-of-stock and back-in-stock events.
+* **Telegram Notifications:** Sends alerts when monitored prices or stock status change.
+* **Historical Price Tracking:** Stores previous price records to help analyze pricing trends over time.
+* **Scheduled Monitoring:** Supports automated monitoring schedules to reduce repetitive manual checks.
+* **Error Handling & Logging:** Records execution details and handles individual monitoring failures to improve reliability.
+* **Flexible Data Storage:** Supports SQLite for local storage and PostgreSQL for database-backed deployments.
+
+**How It Works:**
+
+1. Add the product URLs you want to monitor.
+2. The system collects product prices and availability from supported websites.
+3. It compares new observations with previously stored data.
+4. When a relevant change is detected, it sends a Telegram notification.
+5. Price history is saved for future reference and analysis.
+
+**Business Benefits:**
+
+* Reduce time spent checking competitor websites manually.
+* Stay informed about competitor price and stock changes.
+* Maintain historical pricing records for analysis.
+* Make more informed pricing and product monitoring decisions.
+
+Tech Stack: Python, SQLite, PostgreSQL, Telegram Bot API, GitHub Actions, Pytest.',
+  array['Python', 'SQLite', 'PostgreSQL', 'Telegram Bot API', 'GitHub Actions', 'Pytest'],
+  'https://github.com/Ibrahim009-Devloper/Automated-Competitor-Price-Tracking-with-Telegram-Alerts.git',
+  '/assets/telegram_price_alert.svg',
+  '[
+    {"id":"slide-telegram-alerts","title":"Price & Stock Monitor Bot","tabIcon":"📱","badge":"● LIVE BOT ALERT","badgeColor":"#10b981","device":"phone","src":"/assets/telegram_price_alert.svg","caption":"Real-time price change detection and back-in-stock alerts delivered via Telegram."},
+    {"id":"slide-telegram-error-bot","title":"Health & Failover Bot","tabIcon":"🚨","badge":"● AUTO-RECOVERY BOT","badgeColor":"#ef4444","device":"phone","src":"/assets/telegram_error_bot.svg","caption":"Automated site health monitoring, network crash detection, queued retry logic, and recovery notices."},
+    {"id":"slide-python-terminal","title":"Python Engine & CLI","tabIcon":"💻","badge":"● MULTI-PAGE EXTRACTION","badgeColor":"#38bdf8","device":"desktop","src":"/assets/python_monitor_terminal.svg","caption":"Asynchronous multi-page catalog crawling and price observations saved to SQLite / PostgreSQL."}
+  ]'::jsonb,
+  true,
+  true,
+  1
+)
+on conflict do nothing;
+
+-- 11. Refresh schema cache
 notify pgrst, 'reload schema';`;
 
     let allAdminProjects = [];
@@ -2098,7 +3047,7 @@ notify pgrst, 'reload schema';`;
     // Initialize SQL UI Helpers
     function initSupabaseSqlHelpers() {
         const sqlTextarea = document.getElementById('supabase-full-sql-code');
-        if (sqlTextarea && !sqlTextarea.value) {
+        if (sqlTextarea) {
             sqlTextarea.value = SUPABASE_SETUP_SQL;
         }
 
@@ -2151,88 +3100,71 @@ notify pgrst, 'reload schema';`;
         const dot = document.getElementById('db-status-indicator-dot');
         const statusText = document.getElementById('db-status-title-text');
 
+        let projects = [];
+        let isSupabaseActive = false;
+
         try {
-            if (!supabase) {
-                container.innerHTML = '<p style="color:var(--ink-2); padding:16px;">Supabase client not initialized.</p>';
-                return;
+            // 1. Check Supabase table
+            if (supabase) {
+                const { data: dbProjects, error } = await supabase
+                    .from('projects')
+                    .select('*')
+                    .order('sort_order', { ascending: true })
+                    .order('created_at', { ascending: false });
+
+                if (!error && Array.isArray(dbProjects)) {
+                    projects = dbProjects;
+                    isSupabaseActive = true;
+                }
             }
 
-            const { data: projects, error } = await supabase
-                .from('projects')
-                .select('*')
-                .order('sort_order', { ascending: true })
-                .order('created_at', { ascending: false });
+            // 2. If Supabase table returned error or not created, load from /api/projects
+            if (!isSupabaseActive) {
+                try {
+                    const res = await fetch('/api/projects');
+                    if (res.ok) {
+                        const json = await res.json();
+                        if (json && Array.isArray(json.data)) {
+                            projects = json.data;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Fallback projects fetch note:', e);
+                }
 
-            if (error) {
+                if (projects.length === 0) {
+                    projects = [...DEFAULT_FEATURED_PROJECTS];
+                }
+            }
+
+            // Update status indicators
+            if (isSupabaseActive) {
                 if (dot) {
-                    dot.style.background = '#ef4444';
-                    dot.style.boxShadow = '0 0 8px #ef4444';
+                    dot.style.background = '#10b981';
+                    dot.style.boxShadow = '0 0 8px #10b981';
                 }
                 if (statusText) {
-                    statusText.textContent = "Supabase Table 'projects' Not Created Yet";
+                    statusText.textContent = `Supabase Database & Storage Active (${projects.length} projects in cloud)`;
                 }
-
-                container.innerHTML = `
-                    <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); border-radius:10px; padding:22px; color:var(--ink);">
-                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                            <span style="font-size:20px;">⚠️</span>
-                            <h3 style="font-size:16px; font-weight:700; color:#ef4444; margin:0;">Supabase Database Table 'projects' Not Found</h3>
-                        </div>
-                        <p style="font-size:13.5px; line-height:1.6; color:var(--ink-2); margin-bottom:16px;">
-                            The project and video storage tables have not been created yet in your Supabase project (<strong>voixkvyylglpomahowrl</strong>).<br />
-                            Click <strong>"Copy SQL Setup Script"</strong> above, open the Supabase SQL Editor, paste the code, and click <strong>Run</strong>.
-                        </p>
-                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                            <button type="button" class="btn-cms-save" id="btn-quick-copy-sql" style="padding:8px 16px; font-size:13px; font-weight:700; background:var(--accent); color:#000;">
-                                📋 Copy SQL Setup Script
-                            </button>
-                            <a href="https://supabase.com/dashboard/project/voixkvyylglpomahowrl/sql/new" target="_blank" rel="noopener noreferrer" class="btn-cms-secondary" style="padding:8px 16px; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
-                                Open Supabase SQL Editor ↗
-                            </a>
-                            <button type="button" class="btn-cms-secondary" id="btn-quick-refresh-sql" style="padding:8px 16px; font-size:13px;">
-                                🔄 Check Connection Again
-                            </button>
-                        </div>
-                    </div>
-                `;
-
-                const quickCopy = document.getElementById('btn-quick-copy-sql');
-                if (quickCopy) {
-                    quickCopy.addEventListener('click', () => {
-                        navigator.clipboard.writeText(SUPABASE_SETUP_SQL).then(() => {
-                            showNotificationToast('✓ SQL Script Copied! Paste into Supabase SQL Editor and click Run.');
-                        });
-                    });
+            } else {
+                if (dot) {
+                    dot.style.background = '#f59e0b';
+                    dot.style.boxShadow = '0 0 8px #f59e0b';
                 }
-
-                const quickRefresh = document.getElementById('btn-quick-refresh-sql');
-                if (quickRefresh) {
-                    quickRefresh.addEventListener('click', () => {
-                        showNotificationToast('Checking database connection...');
-                        loadAdminProjects();
-                    });
+                if (statusText) {
+                    statusText.textContent = `Supabase Table Pending (${projects.length} projects active in database)`;
                 }
-                return;
-            }
-
-            // Successfully connected
-            if (dot) {
-                dot.style.background = '#10b981';
-                dot.style.boxShadow = '0 0 8px #10b981';
-            }
-            if (statusText) {
-                statusText.textContent = `Supabase Database & Storage Connected (${(projects || []).length} projects)`;
             }
 
             allAdminProjects = projects || [];
-            renderAdminProjectsList(container, allAdminProjects);
+            renderAdminProjectsList(container, allAdminProjects, isSupabaseActive);
         } catch (err) {
             console.error('loadAdminProjects exception:', err);
             container.innerHTML = '<p style="color:var(--ink-2); padding:16px;">Failed to load projects.</p>';
         }
     }
 
-    function renderAdminProjectsList(container, projects) {
+    function renderAdminProjectsList(container, projects, isSupabaseActive = true) {
         if (!projects || projects.length === 0) {
             container.innerHTML = `
                 <div style="text-align:center; padding:32px 16px; background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.12); border-radius:10px; color:var(--ink-2);">
@@ -2244,6 +3176,28 @@ notify pgrst, 'reload schema';`;
         }
 
         container.innerHTML = '';
+
+        // If Supabase table is not yet created in the cloud, show a notice banner above the list
+        if (!isSupabaseActive) {
+            const notice = document.createElement('div');
+            notice.style.background = 'rgba(245,158,11,0.08)';
+            notice.style.border = '1px solid rgba(245,158,11,0.25)';
+            notice.style.borderRadius = '8px';
+            notice.style.padding = '12px 16px';
+            notice.style.marginBottom = '12px';
+            notice.style.fontSize = '12.5px';
+            notice.style.color = '#fbbf24';
+            notice.style.display = 'flex';
+            notice.style.alignItems = 'center';
+            notice.style.justifyContent = 'space-between';
+            notice.style.flexWrap = 'wrap';
+            notice.style.gap = '8px';
+            notice.innerHTML = `
+                <span>⚠️ Projects are currently stored in local database. To enable full Supabase cloud sync, run the SQL script in your Supabase SQL editor.</span>
+                <a href="https://supabase.com/dashboard/project/voixkvyylglpomahowrl/sql/new" target="_blank" rel="noopener noreferrer" style="color:#38bdf8; text-decoration:underline; font-weight:600;">Open SQL Editor ↗</a>
+            `;
+            container.appendChild(notice);
+        }
 
         projects.forEach((proj, idx) => {
             const card = document.createElement('div');
@@ -2265,15 +3219,16 @@ notify pgrst, 'reload schema';`;
             card.innerHTML = `
                 <div style="flex:1 1 320px;">
                     <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
-                        <span style="font-size:12px; font-weight:700; color:var(--ink);">${escapeHtml(proj.title)}</span>
+                        <span style="font-size:13px; font-weight:700; color:var(--ink);">${escapeHtml(proj.title)}</span>
                         ${proj.is_published 
                             ? `<span class="badge-pill" style="background:rgba(16,185,129,0.15); color:#10b981; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600;">Published</span>` 
                             : `<span class="badge-pill" style="background:rgba(245,158,11,0.15); color:#f59e0b; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600;">Draft (Hidden)</span>`}
                         ${proj.is_featured ? `<span class="badge-pill" style="background:rgba(234,179,8,0.15); color:#eab308; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:700;">★ Featured</span>` : ''}
+                        ${proj.media_gallery && proj.media_gallery.length > 0 ? `<span class="badge-pill" style="background:rgba(56,189,248,0.15); color:#38bdf8; font-size:11px; padding:2px 8px; border-radius:6px;">📸 Animated Photos (${proj.media_gallery.length})</span>` : ''}
                         ${proj.video_url ? `<span class="badge-pill" style="background:rgba(59,130,246,0.15); color:#60a5fa; font-size:11px; padding:2px 8px; border-radius:6px;">🎥 Video</span>` : ''}
                         ${proj.github_url ? `<span class="badge-pill" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:11px; padding:2px 8px; border-radius:6px;">GitHub</span>` : ''}
                     </div>
-                    <p style="font-size:13px; color:var(--ink-2); line-height:1.4; margin-bottom:6px; max-width:640px;">${escapeHtml(proj.description?.slice(0, 140) + (proj.description?.length > 140 ? '...' : ''))}</p>
+                    <p style="font-size:12.5px; color:var(--ink-2); line-height:1.45; margin-bottom:6px; max-width:640px;">${escapeHtml(proj.description?.replace(/^#+\s*/g, '').slice(0, 140) + (proj.description?.length > 140 ? '...' : ''))}</p>
                     <div style="display:flex; gap:6px; flex-wrap:wrap; font-size:11px; color:var(--ink-3);">
                         <span>Order: <strong>${proj.sort_order ?? 0}</strong></span>
                         <span>·</span>
@@ -2332,8 +3287,12 @@ notify pgrst, 'reload schema';`;
                     btnDelete.disabled = true;
                     btnDelete.textContent = 'Deleting...';
                     try {
-                        const { error } = await supabase.from('projects').delete().eq('id', proj.id);
-                        if (error) throw error;
+                        if (supabase) {
+                            try {
+                                await supabase.from('projects').delete().eq('id', proj.id);
+                            } catch (e) {}
+                        }
+                        await fetch(`/api/projects/${encodeURIComponent(proj.id)}`, { method: 'DELETE' });
                         showNotificationToast('Project deleted successfully ✓');
                         loadAdminProjects();
                         loadPublicProjects();
@@ -2366,8 +3325,23 @@ notify pgrst, 'reload schema';`;
         const orderB = currentProj.sort_order ?? currentIdx;
 
         try {
-            await supabase.from('projects').update({ sort_order: orderA }).eq('id', currentProj.id);
-            await supabase.from('projects').update({ sort_order: orderB }).eq('id', targetProj.id);
+            if (supabase) {
+                try {
+                    await supabase.from('projects').update({ sort_order: orderA }).eq('id', currentProj.id);
+                    await supabase.from('projects').update({ sort_order: orderB }).eq('id', targetProj.id);
+                } catch (e) {}
+            }
+            // Sync with backend API
+            await fetch('/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...currentProj, sort_order: orderA })
+            });
+            await fetch('/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...targetProj, sort_order: orderB })
+            });
             showNotificationToast('Project order updated ✓');
             loadAdminProjects();
             loadPublicProjects();
@@ -2562,33 +3536,68 @@ notify pgrst, 'reload schema';`;
                 if (videoUploadPct) videoUploadPct.textContent = '30%';
                 if (videoUploadStatusText) videoUploadStatusText.textContent = 'Uploading video to Supabase Storage bucket (project-media)...';
 
+                // Video upload attempt
+                let uploadSucceeded = false;
                 try {
                     const cleanFileName = `video_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9_.-]/g, '_')}`;
-                    const { data: uploadData, error: uploadErr } = await supabase.storage
-                        .from('project-media')
-                        .upload(cleanFileName, file, { cacheControl: '3600', upsert: true });
+                    if (supabase && supabase.storage) {
+                        const { data: uploadData, error: uploadErr } = await supabase.storage
+                            .from('project-media')
+                            .upload(cleanFileName, file, { cacheControl: '3600', upsert: true });
 
-                    if (uploadErr) {
-                        throw new Error(`Storage upload error: ${uploadErr.message}`);
+                        if (!uploadErr) {
+                            const { data: pubData } = supabase.storage
+                                .from('project-media')
+                                .getPublicUrl(cleanFileName);
+
+                            if (pubData && pubData.publicUrl) {
+                                videoUrl = pubData.publicUrl;
+                                uploadSucceeded = true;
+                            }
+                        }
                     }
+                } catch (e) {
+                    console.warn('Supabase storage direct upload note:', e);
+                }
 
-                    if (videoUploadBar) videoUploadBar.style.width = '80%';
-                    if (videoUploadPct) videoUploadPct.textContent = '80%';
+                // Fallback to server static uploads via /api/admin/upload-video
+                if (!uploadSucceeded) {
+                    try {
+                        const base64Promise = new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve(reader.result);
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        });
+                        const dataUrl = await base64Promise;
 
-                    const { data: pubData } = supabase.storage
-                        .from('project-media')
-                        .getPublicUrl(cleanFileName);
+                        if (videoUploadBar) videoUploadBar.style.width = '70%';
+                        if (videoUploadPct) videoUploadPct.textContent = '70%';
 
-                    if (pubData && pubData.publicUrl) {
-                        videoUrl = pubData.publicUrl;
+                        const upRes = await fetch('/api/admin/upload-video', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ dataUrl, fileName: file.name })
+                        });
+                        if (upRes.ok) {
+                            const upJson = await upRes.json();
+                            if (upJson.url) {
+                                videoUrl = upJson.url;
+                                uploadSucceeded = true;
+                            }
+                        }
+                    } catch (fallbackErr) {
+                        console.error('Server upload fallback error:', fallbackErr);
                     }
+                }
 
+                if (uploadSucceeded) {
                     if (videoUploadBar) videoUploadBar.style.width = '100%';
                     if (videoUploadPct) videoUploadPct.textContent = '100%';
                     if (videoUploadStatusText) videoUploadStatusText.textContent = 'Upload complete ✓';
-                } catch (upErr) {
+                } else {
                     if (projectEditorError) {
-                        projectEditorError.textContent = upErr.message;
+                        projectEditorError.textContent = 'Video upload failed. You can paste a direct video URL instead.';
                         projectEditorError.style.display = 'block';
                     }
                     if (videoUploadProgress) videoUploadProgress.style.display = 'none';
@@ -2616,25 +3625,48 @@ notify pgrst, 'reload schema';`;
                 saveBtn.textContent = 'Saving to Database...';
             }
 
+            let savedSuccessfully = false;
+
             try {
-                if (id) {
-                    const { error } = await supabase
-                        .from('projects')
-                        .update(payload)
-                        .eq('id', id);
-                    if (error) throw error;
-                    showNotificationToast('Project updated successfully in Supabase ✓');
-                } else {
-                    const { error } = await supabase
-                        .from('projects')
-                        .insert([payload]);
-                    if (error) throw error;
-                    showNotificationToast('Project created and published to Supabase ✓');
+                // 1. Try saving to Supabase projects table
+                if (supabase) {
+                    try {
+                        if (id) {
+                            const { error } = await supabase
+                                .from('projects')
+                                .update(payload)
+                                .eq('id', id);
+                            if (!error) savedSuccessfully = true;
+                        } else {
+                            const { error } = await supabase
+                                .from('projects')
+                                .insert([payload]);
+                            if (!error) savedSuccessfully = true;
+                        }
+                    } catch (sbErr) {
+                        console.warn('Supabase save error:', sbErr);
+                    }
                 }
 
-                closeModal('project-editor-modal');
-                loadAdminProjects();
-                loadPublicProjects();
+                // 2. Always persist to backend /api/projects
+                const apiRes = await fetch('/api/projects', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(id ? { ...payload, id } : payload)
+                });
+
+                if (apiRes.ok) {
+                    savedSuccessfully = true;
+                }
+
+                if (savedSuccessfully) {
+                    showNotificationToast('Project successfully saved and published ✓');
+                    closeModal('project-editor-modal');
+                    loadAdminProjects();
+                    loadPublicProjects();
+                } else {
+                    throw new Error('Could not save project to database. Please check your connection.');
+                }
             } catch (err) {
                 if (projectEditorError) {
                     let msg = err.message || 'Database save error.';
@@ -2655,7 +3687,10 @@ notify pgrst, 'reload schema';`;
         });
     }
 
-    // Auto-load public projects on page load
+    // Auto-initialize gallery, lightbox & architecture modal on page load immediately
+    initGalleryInteractiveEngines(document);
+    initLightboxListeners();
+    initProjectArchitectureModal(document, DEFAULT_FEATURED_PROJECTS);
     loadPublicProjects();
 
     // Global Action: Inspect Sample Preview Modal

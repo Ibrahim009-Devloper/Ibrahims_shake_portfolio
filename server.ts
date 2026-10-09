@@ -49,10 +49,165 @@ if (!fs.existsSync(UPLOADS_DIR)) {
 
 // Serve uploaded files statically
 app.use('/uploads', express.static(UPLOADS_DIR));
+app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets')));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 const SITE_CONTENT_FILE = path.join(DATA_DIR, 'site_content.json');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
+const PROJECTS_FILE = path.join(DATA_DIR, 'projects.json');
+
+const INITIAL_PROJECTS = [
+  {
+    id: 'competitor-price-tracker-telegram',
+    title: 'Automated Competitor Price Tracking with Telegram Alerts',
+    description: `## Automated Competitor Price Tracking with Telegram Alerts
+
+A Python-based automation system that monitors competitor product prices and availability, tracks changes over time, and sends real-time Telegram notifications.
+
+**What It Does:**
+
+* **Automated Price Monitoring:** Automatically checks product prices across supported websites.
+* **Price Change Detection:** Identifies when product prices increase or decrease.
+* **Stock Availability Tracking:** Detects product availability changes, including out-of-stock and back-in-stock events.
+* **Telegram Notifications:** Sends alerts when monitored prices or stock status change.
+* **Historical Price Tracking:** Stores previous price records to help analyze pricing trends over time.
+* **Scheduled Monitoring:** Supports automated monitoring schedules to reduce repetitive manual checks.
+* **Error Handling & Logging:** Records execution details and handles individual monitoring failures to improve reliability.
+* **Flexible Data Storage:** Supports SQLite for local storage and PostgreSQL for database-backed deployments.
+
+**How It Works:**
+
+1. Add the product URLs you want to monitor.
+2. The system collects product prices and availability from supported websites.
+3. It compares new observations with previously stored data.
+4. When a relevant change is detected, it sends a Telegram notification.
+5. Price history is saved for future reference and analysis.
+
+**Business Benefits:**
+
+* Reduce time spent checking competitor websites manually.
+* Stay informed about competitor price and stock changes.
+* Maintain historical pricing records for analysis.
+* Make more informed pricing and product monitoring decisions.
+
+Tech Stack: Python, SQLite, PostgreSQL, Telegram Bot API, GitHub Actions, Pytest.`,
+    tags: ['Python', 'SQLite', 'PostgreSQL', 'Telegram Bot API', 'GitHub Actions', 'Pytest'],
+    github_url: 'https://github.com/Ibrahim009-Devloper/Automated-Competitor-Price-Tracking-with-Telegram-Alerts.git',
+    video_url: null,
+    thumbnail_url: '/assets/telegram_price_alert.svg',
+    media_gallery: [
+      {
+        id: 'slide-pipeline-graph',
+        title: 'Pipeline Graph',
+        tabIcon: '⚡',
+        badge: '● LIVE PIPELINE GRAPH',
+        badgeColor: '#10b981',
+        device: 'pipeline',
+        src: '/assets/telegram_price_alert.svg',
+        caption: 'Autonomous pipeline: Catalog Scraper → Delta Engine → Telegram Webhook.'
+      },
+      {
+        id: 'slide-telegram-alerts',
+        title: 'Telegram Alert',
+        tabIcon: '📱',
+        badge: '● TELEGRAM BOT CHANNEL',
+        badgeColor: '#38bdf8',
+        device: 'phone',
+        src: '/assets/telegram_price_alert.svg',
+        caption: 'Instant price drops and back-in-stock alerts dispatched in < 250ms.'
+      },
+      {
+        id: 'slide-python-terminal',
+        title: 'CLI Terminal',
+        tabIcon: '💻',
+        badge: '● ASYNC CLI RUNNER',
+        badgeColor: '#a855f7',
+        device: 'desktop',
+        src: '/assets/python_monitor_terminal.svg',
+        caption: 'Playwright headless crawling with SQLite & PostgreSQL persistent sync.'
+      }
+    ],
+    is_featured: true,
+    is_published: true,
+    sort_order: 1,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'zillow-real-estate-lead-scraper',
+    title: 'Zillow Real Estate Agent Lead Scraper',
+    description: `## Zillow Real Estate Agent Lead Scraper
+
+I recently built a custom Zillow lead generation system for collecting real estate agent leads based on your target location. 
+
+The system automatically reviews and qualifies leads, organizes the data, and uploads it to Google Sheets for easy follow-up.
+
+**Key features:**
+• Location-based real estate agent lead collection
+• Automated lead qualification using AI
+• Anti-bot detection handling And browser automation
+• Structured and organized lead data
+• Google Sheets integration Built with Python, SeleniumBase, Pandas, and AI-powered lead scoring.
+
+**How It Works:**
+1. Configure target locations (city, state, or zip code) and agent filters.
+2. SeleniumBase executes undetected browser automation, navigating Zillow agent directory listings.
+3. Extracted agent details are evaluated and scored through an AI-assisted qualification step.
+4. Cleaned and structured datasets are pushed directly into Google Sheets via API.
+
+**Business Benefits:**
+• Replaces days of repetitive manual copying from real estate directories with fast automated runs.
+• Delivers pre-qualified, verified contact lists for higher outreach response rates.
+• Real-time Google Sheets sync keeps your sales and outreach team updated automatically.
+
+Tech Stack: Python, SeleniumBase, Pandas, AI-powered lead scoring, Google Sheets API.`,
+    tags: ['Python', 'SeleniumBase', 'Pandas', 'AI Lead Scoring', 'Google Sheets API', 'Anti-Bot Bypass'],
+    github_url: 'https://github.com/Ibrahim009-Devloper/Zillow_Agent_Lead_Scraper.git',
+    video_url: null,
+    thumbnail_url: '/assets/zillow_agent_scraper.svg',
+    media_gallery: [
+      {
+        id: 'slide-zillow-pipeline',
+        title: 'Pipeline Graph',
+        tabIcon: '⚡',
+        badge: '● LIVE AGENT PIPELINE',
+        badgeColor: '#10b981',
+        device: 'pipeline',
+        src: '/assets/zillow_agent_scraper.svg',
+        caption: 'Autonomous pipeline: Zillow Directory → SeleniumBase UC → AI Scorer → Google Sheets API.'
+      },
+      {
+        id: 'slide-zillow-dashboard',
+        title: 'Agent Scraper & AI',
+        tabIcon: '🏠',
+        badge: '● SELENIUMBASE UC RUNNER',
+        badgeColor: '#38bdf8',
+        device: 'desktop',
+        src: '/assets/zillow_agent_scraper.svg',
+        caption: 'Undetected browser automation collecting agent profiles, ratings, and contact info.'
+      },
+      {
+        id: 'slide-zillow-sheets',
+        title: 'Google Sheets Sync',
+        tabIcon: '📊',
+        badge: '● LIVE GOOGLE SHEETS',
+        badgeColor: '#10b981',
+        device: 'phone',
+        src: '/assets/zillow_sheets_mobile.svg',
+        caption: 'Real-time synchronization of AI-qualified agent leads directly into Google Sheets.'
+      }
+    ],
+    is_featured: true,
+    is_published: true,
+    sort_order: 2,
+    created_at: new Date().toISOString()
+  }
+];
+
+// Seed projects cache if not present
+if (!fs.existsSync(PROJECTS_FILE)) {
+  writeJsonFile(PROJECTS_FILE, INITIAL_PROJECTS);
+}
 
 // Helper to save Base64 data URLs to clean static files
 function saveBase64DataUrl(dataUrl: string, defaultName: string = 'file'): string {
@@ -585,6 +740,213 @@ app.post('/api/messages', async (req: Request, res: Response) => {
   } catch (err: any) {
     return res.status(500).json({ success: false, error: err?.message });
   }
+});
+
+// ==========================================
+// DYNAMIC PROJECTS & VIDEO STORAGE API
+// ==========================================
+
+// GET all projects (Public & Admin)
+app.get('/api/projects', async (req: Request, res: Response) => {
+  try {
+    // 1. Try Supabase projects table
+    if (supabaseAdmin) {
+      const { data, error } = await supabaseAdmin
+        .from('projects')
+        .select('*')
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false });
+
+      if (!error && Array.isArray(data) && data.length > 0) {
+        writeJsonFile(PROJECTS_FILE, data);
+        return res.json({ success: true, data, source: 'supabase' });
+      }
+    }
+
+    // 2. Try REST
+    const restRes = await supabaseAdminRest('projects?select=*&order=sort_order.asc,created_at.desc');
+    if (restRes.ok && Array.isArray(restRes.data) && restRes.data.length > 0) {
+      writeJsonFile(PROJECTS_FILE, restRes.data);
+      return res.json({ success: true, data: restRes.data, source: 'supabase_rest' });
+    }
+
+    // 3. Fallback to local server storage
+    const local = readJsonFile(PROJECTS_FILE, INITIAL_PROJECTS);
+    return res.json({ success: true, data: local || INITIAL_PROJECTS, source: 'local_cache' });
+  } catch (err: any) {
+    const local = readJsonFile(PROJECTS_FILE, INITIAL_PROJECTS);
+    return res.json({ success: true, data: local || INITIAL_PROJECTS, fallback: true });
+  }
+});
+
+// POST upsert project (Admin CMS)
+app.post('/api/projects', async (req: Request, res: Response) => {
+  try {
+    const proj = req.body;
+    if (!proj || !proj.title) {
+      return res.status(400).json({ success: false, error: 'Project title is required' });
+    }
+    if (!proj.description) {
+      return res.status(400).json({ success: false, error: 'Project description is required' });
+    }
+
+    let videoUrl = proj.video_url || proj.videoUrl || null;
+    if (videoUrl && videoUrl.startsWith('data:')) {
+      videoUrl = saveBase64DataUrl(videoUrl, 'project_demo.mp4');
+    }
+
+    let thumbnailUrl = proj.thumbnail_url || proj.thumbnailUrl || null;
+    if (thumbnailUrl && thumbnailUrl.startsWith('data:')) {
+      thumbnailUrl = saveBase64DataUrl(thumbnailUrl, 'thumbnail.jpg');
+    }
+
+    const payload = {
+      id: String(proj.id || ('proj-' + Date.now())),
+      title: proj.title,
+      description: proj.description,
+      tags: Array.isArray(proj.tags) ? proj.tags : (typeof proj.tags === 'string' ? proj.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : []),
+      github_url: proj.github_url || proj.githubUrl || null,
+      video_url: videoUrl,
+      thumbnail_url: thumbnailUrl,
+      media_gallery: proj.media_gallery || proj.mediaGallery || [],
+      is_featured: Boolean(proj.is_featured ?? proj.isFeatured),
+      is_published: proj.is_published !== undefined ? Boolean(proj.is_published) : (proj.isPublished !== undefined ? Boolean(proj.isPublished) : true),
+      sort_order: parseInt(proj.sort_order ?? proj.sortOrder ?? 0, 10),
+      created_at: proj.created_at || new Date().toISOString(),
+    };
+
+    // Update local projects file
+    const currentList: any[] = readJsonFile(PROJECTS_FILE, [...INITIAL_PROJECTS]);
+    const idx = currentList.findIndex(p => p.id === payload.id);
+    if (idx !== -1) {
+      currentList[idx] = { ...currentList[idx], ...payload };
+    } else {
+      currentList.push(payload);
+    }
+    writeJsonFile(PROJECTS_FILE, currentList);
+
+    let supabaseSaved = false;
+    let supabaseError: any = null;
+
+    // Save to Supabase projects table
+    if (supabaseAdmin) {
+      const { data, error } = await supabaseAdmin
+        .from('projects')
+        .upsert([payload], { onConflict: 'id' });
+
+      if (!error) {
+        supabaseSaved = true;
+        console.log(`✓ Supabase project upsert succeeded for id: ${payload.id}`);
+      } else {
+        supabaseError = error;
+      }
+    }
+
+    if (!supabaseSaved) {
+      const restRes = await supabaseAdminRest('projects', {
+        method: 'POST',
+        headers: { 'Prefer': 'resolution=merge-duplicates,return=representation' },
+        body: JSON.stringify(payload),
+      });
+      if (restRes.ok) {
+        supabaseSaved = true;
+      }
+    }
+
+    return res.json({
+      success: true,
+      message: supabaseSaved ? 'Project saved to Supabase & local database ✓' : 'Project saved to local database (pending Supabase table sync) ✓',
+      savedToSupabase: supabaseSaved,
+      data: payload,
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: err?.message || 'Error saving project' });
+  }
+});
+
+// DELETE project (Admin CMS)
+app.delete('/api/projects/:id', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ success: false, error: 'Project ID required' });
+
+    // 1. Delete from local file
+    const currentList: any[] = readJsonFile(PROJECTS_FILE, [...INITIAL_PROJECTS]);
+    const filtered = currentList.filter(p => p.id !== id);
+    writeJsonFile(PROJECTS_FILE, filtered);
+
+    // 2. Delete from Supabase
+    if (supabaseAdmin) {
+      await supabaseAdmin.from('projects').delete().eq('id', id);
+    }
+    await supabaseAdminRest(`projects?id=eq.${encodeURIComponent(id)}`, { method: 'DELETE' });
+
+    return res.json({ success: true, message: `Project ${id} deleted successfully` });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: err?.message || 'Error deleting project' });
+  }
+});
+
+// POST upload video / media (Base64 or multipart)
+app.post('/api/admin/upload-video', async (req: Request, res: Response) => {
+  try {
+    const { dataUrl, fileName = 'project_demo.mp4' } = req.body;
+    if (!dataUrl || typeof dataUrl !== 'string') {
+      return res.status(400).json({ success: false, error: 'Video dataUrl is required' });
+    }
+
+    const savedUrl = saveBase64DataUrl(dataUrl, fileName);
+
+    return res.json({
+      success: true,
+      url: savedUrl,
+      fileName,
+      message: 'Video uploaded and ready for playback',
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: err?.message || 'Error uploading video' });
+  }
+});
+
+// Database & Table Diagnostics for Admin Panel
+app.get('/api/admin/check-db', async (req: Request, res: Response) => {
+  const result = {
+    supabaseConnected: false,
+    projectsTable: false,
+    adminsTable: false,
+    messagesTable: false,
+    storageBucket: false,
+    localCacheReady: fs.existsSync(PROJECTS_FILE),
+    supabaseUrl: SUPABASE_URL,
+    totalProjectsLocal: (readJsonFile(PROJECTS_FILE, []) || []).length,
+  };
+
+  try {
+    // Check projects table
+    const projCheck = await supabaseAdminRest('projects?limit=1');
+    result.projectsTable = projCheck.ok;
+    result.supabaseConnected = true;
+
+    // Check admins table
+    const adminCheck = await supabaseAdminRest('admins?limit=1');
+    result.adminsTable = adminCheck.ok;
+
+    // Check messages table
+    const msgCheck = await supabaseAdminRest('messages?limit=1');
+    result.messagesTable = msgCheck.ok;
+
+    // Check storage bucket
+    if (supabaseAdmin) {
+      const { data: buckets } = await supabaseAdmin.storage.listBuckets();
+      if (Array.isArray(buckets) && buckets.some(b => b.id === 'project-media' || b.name === 'project-media')) {
+        result.storageBucket = true;
+      }
+    }
+  } catch (e) {
+    // Supabase table checks
+  }
+
+  return res.json({ success: true, diagnostics: result });
 });
 
 // ==========================================

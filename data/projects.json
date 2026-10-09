@@ -1,0 +1,106 @@
+[
+  {
+    "id": "competitor-price-tracker-telegram",
+    "title": "Automated Competitor Price Tracking with Telegram Alerts",
+    "description": "## Automated Competitor Price Tracking with Telegram Alerts\n\nA Python-based automation system that monitors competitor product prices and availability, tracks changes over time, and sends real-time Telegram notifications.\n\n**What It Does:**\n\n* **Automated Price Monitoring:** Automatically checks product prices across supported websites.\n* **Price Change Detection:** Identifies when product prices increase or decrease.\n* **Stock Availability Tracking:** Detects product availability changes, including out-of-stock and back-in-stock events.\n* **Telegram Notifications:** Sends alerts when monitored prices or stock status change.\n* **Historical Price Tracking:** Stores previous price records to help analyze pricing trends over time.\n* **Scheduled Monitoring:** Supports automated monitoring schedules to reduce repetitive manual checks.\n* **Error Handling & Logging:** Records execution details and handles individual monitoring failures to improve reliability.\n* **Flexible Data Storage:** Supports SQLite for local storage and PostgreSQL for database-backed deployments.\n\n**How It Works:**\n\n1. Add the product URLs you want to monitor.\n2. The system collects product prices and availability from supported websites.\n3. It compares new observations with previously stored data.\n4. When a relevant change is detected, it sends a Telegram notification.\n5. Price history is saved for future reference and analysis.\n\n**Business Benefits:**\n\n* Reduce time spent checking competitor websites manually.\n* Stay informed about competitor price and stock changes.\n* Maintain historical pricing records for analysis.\n* Make more informed pricing and product monitoring decisions.\n\nTech Stack: Python, SQLite, PostgreSQL, Telegram Bot API, GitHub Actions, Pytest.",
+    "tags": [
+      "Python",
+      "SQLite",
+      "PostgreSQL",
+      "Telegram Bot API",
+      "GitHub Actions",
+      "Pytest"
+    ],
+    "github_url": "https://github.com/Ibrahim009-Devloper/Automated-Competitor-Price-Tracking-with-Telegram-Alerts.git",
+    "video_url": null,
+    "thumbnail_url": "/assets/telegram_price_alert.svg",
+    "media_gallery": [
+      {
+        "id": "slide-pipeline-graph",
+        "title": "Pipeline Graph",
+        "tabIcon": "⚡",
+        "badge": "● LIVE PIPELINE GRAPH",
+        "badgeColor": "#10b981",
+        "device": "pipeline",
+        "src": "/assets/telegram_price_alert.svg",
+        "caption": "Autonomous pipeline: Catalog Scraper → Delta Engine → Telegram Webhook."
+      },
+      {
+        "id": "slide-telegram-alerts",
+        "title": "Telegram Alert",
+        "tabIcon": "📱",
+        "badge": "● TELEGRAM BOT CHANNEL",
+        "badgeColor": "#38bdf8",
+        "device": "phone",
+        "src": "/assets/telegram_price_alert.svg",
+        "caption": "Instant price drops and back-in-stock alerts dispatched in < 250ms."
+      },
+      {
+        "id": "slide-python-terminal",
+        "title": "CLI Terminal",
+        "tabIcon": "💻",
+        "badge": "● ASYNC CLI RUNNER",
+        "badgeColor": "#a855f7",
+        "device": "desktop",
+        "src": "/assets/python_monitor_terminal.svg",
+        "caption": "Playwright headless crawling with SQLite & PostgreSQL persistent sync."
+      }
+    ],
+    "is_featured": true,
+    "is_published": true,
+    "sort_order": 1,
+    "created_at": "2026-10-09T11:46:16.653Z"
+  },
+  {
+    "id": "zillow-real-estate-lead-scraper",
+    "title": "Zillow Real Estate Agent Lead Scraper",
+    "description": "## Zillow Real Estate Agent Lead Scraper\n\nI recently built a custom Zillow lead generation system for collecting real estate agent leads based on your target location.\n\nThe system automatically reviews and qualifies leads, organizes the data, and uploads it to Google Sheets for easy follow-up.\n\n**Key features:**\n• Location-based real estate agent lead collection\n• Automated lead qualification using AI\n• Anti-bot detection handling And browser automation\n• Structured and organized lead data\n• Google Sheets integration Built with Python, SeleniumBase, Pandas, and AI-powered lead scoring.\n\n**How It Works:**\n1. Configure target locations (city, state, or zip code) and agent filters.\n2. SeleniumBase executes undetected browser automation, navigating Zillow agent directory listings.\n3. Extracted agent details are evaluated and scored through an AI-assisted qualification step.\n4. Cleaned and structured datasets are pushed directly into Google Sheets via API.\n\n**Business Benefits:**\n• Replaces days of repetitive manual copying from real estate directories with fast automated runs.\n• Delivers pre-qualified, verified contact lists for higher outreach response rates.\n• Real-time Google Sheets sync keeps your sales and outreach team updated automatically.\n\nTech Stack: Python, SeleniumBase, Pandas, AI-powered lead scoring, Google Sheets API.",
+    "tags": [
+      "Python",
+      "SeleniumBase",
+      "Pandas",
+      "AI Lead Scoring",
+      "Google Sheets API",
+      "Anti-Bot Bypass"
+    ],
+    "github_url": "https://github.com/Ibrahim009-Devloper/Zillow_Agent_Lead_Scraper.git",
+    "video_url": null,
+    "thumbnail_url": "/assets/zillow_agent_scraper.svg",
+    "media_gallery": [
+      {
+        "id": "slide-zillow-pipeline",
+        "title": "Pipeline Graph",
+        "tabIcon": "⚡",
+        "badge": "● LIVE AGENT PIPELINE",
+        "badgeColor": "#10b981",
+        "device": "pipeline",
+        "src": "/assets/zillow_agent_scraper.svg",
+        "caption": "Autonomous pipeline: Zillow Directory → SeleniumBase UC → AI Scorer → Google Sheets API."
+      },
+      {
+        "id": "slide-zillow-dashboard",
+        "title": "Agent Scraper & AI",
+        "tabIcon": "🏠",
+        "badge": "● SELENIUMBASE UC RUNNER",
+        "badgeColor": "#38bdf8",
+        "device": "desktop",
+        "src": "/assets/zillow_agent_scraper.svg",
+        "caption": "Undetected browser automation collecting agent profiles, ratings, and contact info."
+      },
+      {
+        "id": "slide-zillow-sheets",
+        "title": "Google Sheets Sync",
+        "tabIcon": "📊",
+        "badge": "● LIVE GOOGLE SHEETS",
+        "badgeColor": "#10b981",
+        "device": "phone",
+        "src": "/assets/zillow_sheets_mobile.svg",
+        "caption": "Real-time synchronization of AI-qualified agent leads directly into Google Sheets."
+      }
+    ],
+    "is_featured": true,
+    "is_published": true,
+    "sort_order": 2,
+    "created_at": "2026-10-09T13:00:00.000Z"
+  }
+]
